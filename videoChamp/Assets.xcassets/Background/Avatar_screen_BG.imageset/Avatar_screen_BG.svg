@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="380.469" height="812.002" viewBox="0 0 380.469 812.002">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.022" y1="0.011" x2="0.022" y2="0.458" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ececec"/>
+      <stop offset="1" stop-color="#c6c6c5" stop-opacity="0.847"/>
+    </linearGradient>
+  </defs>
+  <g id="Avatar_screen_BG" transform="translate(4.32)">
+    <rect id="Rectangle_17" data-name="Rectangle 17" width="380.469" height="812.002" transform="translate(-4.32)" fill="url(#linear-gradient)"/>
+    <path id="Path_30" data-name="Path 30" d="M0,0V812H380.469V0Z" transform="translate(-4.32 0.001)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg id="splash_Bg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="375" height="812.002" viewBox="0 0 375 812.002">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_1" data-name="Path 1" d="M0,0V812H375V0Z" transform="translate(0 0.001)" fill="none"/>
+    </clipPath>
+    <radialGradient id="radial-gradient" cx="0.507" cy="0.447" r="0.97" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f9b200"/>
+      <stop offset="1" stop-color="#e63b11"/>
+    </radialGradient>
+  </defs>
+  <g id="Group_1" data-name="Group 1" clip-path="url(#clip-path)">
+    <path id="Path_27" data-name="Path 27" d="M17.651,14.414l670.342-28.06L652.851,881.391l-670.341,28.06Z" transform="translate(-309.493 149.082) rotate(-25.849)" fill="url(#radial-gradient)"/>
+  </g>
+</svg>
