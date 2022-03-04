@@ -19,10 +19,14 @@ class ShareVC: UIViewController {
 
         // Do any additional setup after loading the view.
         lblHeading.text = headingText
+        
+        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+
     }
     
     override func viewDidLayoutSubviews() {
         viewCenter.layer.cornerRadius = 25.0
+        lblHeading.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
     @IBAction func onClickedBackBtn(_ sender: UIButton) {

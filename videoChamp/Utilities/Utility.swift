@@ -28,13 +28,24 @@ class Utility : NSObject {
         return ""
     }
     
-//    func checkUserTextColor() -> UIColor {
-//        
-//        if let uColor = userTextColor {
-//            return uColor
-//        }
-//        return .red
-//    }
+    
+    
+    func timeConvertor(string: String) -> String
+    {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // This formate is input formated .
+        
+        if let _ = dateFormatter.date(from: "\(string)") {
+            //date parsing succeeded, if you need to do additional logic, replace _ with some variable name i.e date
+            let formateDate = dateFormatter.date(from:"\(string)")!
+            dateFormatter.dateFormat = "hh:mm"
+            return dateFormatter.string(from: formateDate)
+        } else {
+            // Invalid date
+            return string
+        }
+    }
 }
 
 extension UserDefaults {
@@ -63,5 +74,23 @@ extension UserDefaults {
         }
 
     }
+    
+    func imageForKey(key: String) -> UIImage? {
+        var image: UIImage?
+        if let imageData = data(forKey: key) {
+            image = NSKeyedUnarchiver.unarchiveObject(with: imageData) as? UIImage
+        }
+        return image
+    }
+    func setImage(image: UIImage?, forKey key: String) {
+        var imageData: NSData?
+        if let image = image {
+            imageData = NSKeyedArchiver.archivedData(withRootObject: image) as NSData?
+        }
+        set(imageData, forKey: key)
+    }
+    
+    
+    
 
 }

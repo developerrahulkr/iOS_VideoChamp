@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 class FeedbackViewModel : NSObject {
@@ -26,36 +27,17 @@ class FeedbackViewModel : NSObject {
         return sectionData
     }()
     
-//    func getFeedbackData(){
-//        let data1 = CMNotification(title: "Network error", desc: "Banjo tote bag bicycle rights, High Life is has it ha sartorial cray craft beer whatever street art fapth.")
-//        feedbackDataSource.append(data1)
-//
-//        let data2 = CMNotification(title: "Could not connect the device", desc: "Banjo tote bag bicycle rights, High Life is has it ha sartorial cray craft beer whatever street art fapth.")
-//        feedbackDataSource.append(data2)
-//
-//        let data3 = CMNotification(title: "Network error", desc: "Banjo tote bag bicycle rights, High Life is has it ha sartorial cray craft beer whatever street art fapth.")
-//        feedbackDataSource.append(data3)
-//
-//        let data4 = CMNotification(title: "Device is not supported", desc: "Banjo tote bag bicycle rights, High Life is has it ha sartorial cray craft beer whatever street art fapth.")
-//        feedbackDataSource.append(data4)
-//
-//        let data5 = CMNotification(title: "Network error", desc: "Banjo tote bag bicycle rights, High Life is has it ha sartorial cray craft beer whatever street art fapth.")
-//        feedbackDataSource.append(data5)
-//
-//        let data6 = CMNotification(title: "Poor connection", desc: "Banjo tote bag bicycle rights, High Life is has it ha sartorial cray craft beer whatever street art fapth.")
-//        feedbackDataSource.append(data6)
-//
-//        let data7 = CMNotification(title: "Network error", desc: "Banjo tote bag bicycle rights, High Life is has it ha sartorial cray craft beer whatever street art fapth.")
-//        feedbackDataSource.append(data7)
-//
-//    }
+    lazy var getFeedbackServiceDataSource : [CMGetFeedbackServiceData] = {
+       let datasource = [CMGetFeedbackServiceData]()
+        return datasource
+    }()
     
     
     func getFeedbackData(completionHandler : @escaping(Bool, Bool) -> ()) {
-        ProgressBar.shared.showProgressbar()
+        UIApplication.topViewController()?.showActivityIndicator()
         
         APIManager.shared.getFeedback { inDict in
-            ProgressBar.shared.hideProgressBar()
+            UIApplication.topViewController()?.hideActivityIndicator()
             if inDict == nil {
                 print("Directory is Empty")
             }else {
@@ -67,7 +49,7 @@ class FeedbackViewModel : NSObject {
                 
                 if statusCode == "200"{
                     for dic in userDetail {
-                        self.getFeedbackDataSource.append(CMGetFeedbackData(title: dic["title"].stringValue , desc: dic["desc"].stringValue, time: dic["createdAt"].stringValue))
+                        self.getFeedbackDataSource.append(CMGetFeedbackData(title: dic["title"].stringValue , desc: dic["desc"].stringValue, time: dic["createdAt"].stringValue, _id: dic["_id"].stringValue))
                     }
                     print("\(msg)")
                     completionHandler(true, true)
@@ -83,21 +65,72 @@ class FeedbackViewModel : NSObject {
         }
     }
     
-    
-    
-    
     func getSection(){
         let data1 = CMFeedBack(secTitle: "Title", secTitle2: "")
         giveFeedbackSection.append(data1)
         
-        let data2 = CMFeedBack(secTitle: "Enter your email Id (Optional)", secTitle2: "")
+        let data2 = CMFeedBack(secTitle: "Enter your email Id", secTitle2: "")
         giveFeedbackSection.append(data2)
         
-        let data3 = CMFeedBack(secTitle: "Please do share your feedback", secTitle2: "0/1000")
+        let data3 = CMFeedBack(secTitle: "Please do share your feedback", secTitle2: "0/100")
         giveFeedbackSection.append(data3)
         
         let data4 = CMFeedBack(secTitle: "Attach Screenshots (Optional)", secTitle2: "")
         giveFeedbackSection.append(data4)
+        let data5 = CMFeedBack(secTitle: "", secTitle2: "")
+        giveFeedbackSection.append(data5)
+    }
+    
+//    MARK: - Uplaod Data with Image
+    func uploadFeedbackData(imageData : Data?, feedBackData : CMPostFeedbackData, completionHandler : @escaping (Bool) -> Void) {
+        
+        let parameter = ["title" : feedBackData.title ?? "", "desc" : feedBackData.desc ?? "", "email" : feedBackData.email ?? "", "image" : feedBackData.image ?? ""] as [String : Any]
+        UIApplication.topViewController()?.showActivityIndicator()
+        APIManager.shared.uploadPostData(imgData: imageData, parameter: parameter) { inDict in
+            UIApplication.topViewController()?.hideActivityIndicator()
+            if inDict == nil {
+                UIApplication.topViewController()?.showAlert(alertMessage: "Directory is Empty")
+                completionHandler(false)
+            }else{
+                let statusCode = inDict!["status"].stringValue
+                let error_msg = inDict!["message"].stringValue
+                if statusCode == "200"{
+                    print("\(error_msg)")
+                    completionHandler(true)
+                }else{
+                    completionHandler(false)
+                    print("Error Msg : \(error_msg)")
+                }
+                
+            }
+        }
+    }
+    
+    func getFeedbackListData(feedId : String, completionHandler : @escaping(Bool) -> ()) {
+        UIApplication.topViewController()?.showActivityIndicator()
+        
+        APIManager.shared.getFeedbackData(feedID: feedId) { dict in
+            UIApplication.topViewController()?.hideActivityIndicator()
+            if dict == nil {
+                UIApplication.topViewController()?.showAlert(alertMessage: "Directory is Empty")
+            }else{
+                let msg = dict!["message"].stringValue
+                let statusCode = dict!["status"].stringValue
+                let data = dict!["data"].dictionary
+                let messageData = data!["messagelisting"]!.arrayValue
+                if statusCode == "200" {
+                    for dic in messageData {
+                        self.getFeedbackServiceDataSource.append(CMGetFeedbackServiceData(message: dic["message"].stringValue, type: dic["type"].stringValue, createdAt: dic["createdAt"].stringValue))
+                    }
+                    print("\(msg)")
+                    completionHandler(true)
+                }else{
+                    print("error message : \(msg)")
+                    completionHandler(false)
+                }
+                
+            }
+        }
     }
     
 }

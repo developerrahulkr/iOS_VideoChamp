@@ -18,8 +18,9 @@ class FeedbackServiceVC: UIViewController {
     
     var lblTitleText = ""
     let cellID = "FeedbackServiceCell"
-    
+    var feed_id = ""
     let FeedbackVM = FeedbackViewModel()
+    let feedbackMessageVM = FeedbackMessageViewModel()
     
     @IBOutlet weak var onClickSendData: UIButton!
     @IBOutlet weak var tfSendData: UITextField!
@@ -32,8 +33,22 @@ class FeedbackServiceVC: UIViewController {
         
         lblFeedbackTitle.text = lblTitleText
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
-        
+        print("feed Id ::: ::: ::: :::\(feed_id)")
         openCameraAndAttatchment()
+        loadData()
+        
+    }
+    
+    
+    func loadData() {
+        self.FeedbackVM.getFeedbackServiceDataSource.removeAll()
+        FeedbackVM.getFeedbackListData(feedId: feed_id) { isSuccess in
+            if isSuccess {
+                self.tableView.reloadData()
+            }else{
+                self.showAlert(alertMessage: "Something Went Wrong!")
+            }
+        }
     }
     
     
@@ -43,12 +58,11 @@ class FeedbackServiceVC: UIViewController {
         tableView.transform = CGAffineTransform(scaleX: 1, y: 1)
         
     }
-    
-    
-    
+
     override func viewDidLayoutSubviews() {
         sendView.layer.cornerRadius = sendView.bounds.height/2
         gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+        lblFeedbackTitle.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
     @IBAction func onClickedBackBtn(_ sender: UIButton) {
@@ -57,9 +71,16 @@ class FeedbackServiceVC: UIViewController {
     }
     
     @IBAction func onClickedSendBtn(_ sender: UIButton) {
+        feedbackMessageVM.feedbackMessage(message: tfSendData.text ?? "" , feedId: feed_id) { isSuccess in
+            if isSuccess {
+                self.loadData()
+            }else{
+                self.showAlert(alertMessage: "Something went wrong!")
+            }
+            
+        }
         
-        FeedbackVM.getFeedbackDataSource.append(CMGetFeedbackData(title: "NetworkError", desc: tfSendData.text ?? "", time: ""))
-        tableView.reloadData()
+        
         
     }
     
@@ -67,9 +88,7 @@ class FeedbackServiceVC: UIViewController {
     @objc func openCamera(){
         validateForCameraAccessForPhotoVideo()
     }
-    
-    
-    
+
     private func validateForCameraAccessForPhotoVideo(){
         CameraUtilities.shared.checkCamraPermission { isGranted in
             guard isGranted else {
@@ -95,22 +114,21 @@ class FeedbackServiceVC: UIViewController {
 
 extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return FeedbackVM.getFeedbackDataSource.count
+        return FeedbackVM.getFeedbackServiceDataSource.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! FeedbackServiceCell
-        if indexPath.row % 2 == 0 {
+        if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].type == "incoming" {
+            cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
             cell.lblMsg.textColor = .white
             cell.cellView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
-            cell.lblMsg.text = FeedbackVM.getFeedbackDataSource[indexPath.row].desc
             cell.cellView.roundLeftChatCorner(cornerRadius: 16)
-            
-        }else{
+        }
+        else{
             cell.cellView.layer.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
-            cell.lblMsg.text = FeedbackVM.getFeedbackDataSource[indexPath.row].desc
+            cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
             cell.lblMsg.textColor = .black
             cell.cellView.roundRightChatCorner(cornerRadius: 16)
-            
         }
         
         return cell

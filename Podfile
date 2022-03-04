@@ -11,6 +11,10 @@ pod 'IQKeyboardManagerSwift'
 pod 'ProgressHUD'
 pod 'Alamofire'
 pod 'SwiftyJSON'
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
+pod 'NVActivityIndicatorView'
+
 
   target 'videoChampTests' do
     inherit! :search_paths

@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>We need to access Camera to taken the picture</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Allow to access</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need to access Gallary to take the picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>argentum-sans.semibold.ttf
@@ -16,6 +10,9 @@
 		<string>argentum-sans.light.ttf</string>
 		<string>argentum-sans.medium.ttf</string>
 		<string>argentum-sans.regular.ttf</string>
+		<string>argentum-sans.black.ttf</string>
+		<string>argentum-sans.bold.ttf</string>
+		<string>argentum-sans.extrabold.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -7,38 +7,45 @@
 
 import UIKit
 
+
 class GiveFeedbackVC: UIViewController {
 
+    @IBOutlet weak var lblGiveFeedback: UILabel!
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
+    
     let cellID = "GiveFeedbackCell"
     let cellID2 = "GiveFeedbackCell2"
     let cellID3 = "GiveFeedbackCell3"
+    let cellID1 = "GiveFeedbackCell1"
+    let cellID4 = "GiveFeedbackCell4"
     let giveFeedbackViewModel = FeedbackViewModel()
-    
-    
-    var headerArr = [[String : String]]()
-    
+    var isFirst = false
+    var feedbackTitle = ""
+    var email = ""
+    var desc = ""
+    var selectImage : UIImage?
+    var rightImage : UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        gradientColor(topColor: lightWhite, bottomColor: lightgrey)
-        
-        headerArr.append(["Title" : ""])
-        headerArr.append(["Enter your email Id (Optional)" :""])
-        headerArr.append(["Please do share your feedback" : "0/1000"])
-        headerArr.append(["Attach Screenshots (Optional)" : ""])
-        
         giveFeedbackViewModel.getSection()
         registerCell()
+        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+        selectImage = UIImage(named: "image_upload_icon")
+        rightImage = UIImage(named: "image_upload_icon")
+        lblGiveFeedback.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
     
     func registerCell(){
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
+        tableView.register(UINib(nibName: cellID1, bundle: nil), forCellReuseIdentifier: cellID1)
         tableView.register(UINib(nibName: cellID2, bundle: nil), forCellReuseIdentifier: cellID2)
         tableView.register(UINib(nibName: cellID3, bundle: nil), forCellReuseIdentifier: cellID3)
+        tableView.register(UINib(nibName: cellID4, bundle: nil), forCellReuseIdentifier: cellID4)
     }
     
     
@@ -51,13 +58,16 @@ class GiveFeedbackVC: UIViewController {
     @IBAction func onClickedBackBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    @IBAction func onClickedSubmitBtn(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
     
 }
 
-extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource {
+extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackDataDelegate, openPhotoLibraryDelegate {
+    
+    
+    
+    
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return giveFeedbackViewModel.giveFeedbackSection.count
     }
@@ -70,9 +80,8 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource {
         return header
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 20
     }
-    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,35 +89,154 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! GiveFeedbackCell
-            return cell
-        }else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! GiveFeedbackCell
-            cell.tfTitle.placeholder = "Anisha21diosteq@gmail.com"
+        if indexPath.section == 0  || indexPath.section == 1{
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID1, for: indexPath) as! GiveFeedbackCell1
+            
+            cell.tfTitle.placeholder = (indexPath.section == 0) ? "Enter Title" : "Email"
+            cell.callBack = {
+                val in
+                if indexPath.section == 0{
+                    cell.tfTitle.text = val
+                    print("Title : \(val)")
+                    self.feedbackTitle = val
+                }
+                else{
+                    cell.tfTitle.text = val
+                    print("email : \(val)")
+                    self.email = val
+                }
+            }
             return cell
         }else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! GiveFeedbackCell2
+            cell.callBack  = {
+                data in
+                
+                self.desc = data
+                print("desc \(self.desc)")
+            }
             return cell
             
-        }else{
+        }else if indexPath.section == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID3, for: indexPath) as! GiveFeedbackCell3
+            cell.delegate = self
+            cell.callBackForleftImg = {
+                self.isFirst = true
+               
+            }
+            cell.callBackForRightImg = {
+                self.isFirst = false
+            }
+            if isFirst{
+                cell.imgLeft.image = self.selectImage
+            
+            }
+            else{
+                cell.imgRight.image = rightImage
+            }
+            cell.imgLeftView.tag = indexPath.row
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID4, for: indexPath) as! GiveFeedbackCell4
+            cell.btnSubmit.tag = indexPath.row
+            cell.delegate = self
             return cell
         }
         
+    }
+    
+    func openLibrary2() {
+        validateForCameraAccessForPhotoVideo()
+    }
+    
+    func openLibrary() {
+        validateForCameraAccessForPhotoVideo()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 2 {
             return 130
         }else if indexPath.section == 3 {
-            return 120
+            return 100.0
+        }else if indexPath.section == 4 {
+            return 85.0
         }else{
-            return 60
+            return 60.0
+        }
+    }
+    
+    private func validateForCameraAccessForPhotoVideo(){
+        CameraUtilities.shared.checkCamraPermission { isGranted in
+            guard isGranted else {
+                return
+            }
+            
+            guard UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) else {
+                self.showAlert(alertMessage: "Camera is not build in this Device! ")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let imagePickerVC = UIImagePickerController()
+                imagePickerVC.sourceType = .photoLibrary
+                imagePickerVC.delegate = self
+                imagePickerVC.allowsEditing = true
+                self.present(imagePickerVC, animated: true)
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+    
+    }
+    
+    
+    func submitData(tag: Int) {
+        let cmFeedbackData = CMPostFeedbackData(title: feedbackTitle, desc: desc, email: email, image: "")
+        
+        giveFeedbackViewModel.uploadFeedbackData(imageData: selectImage?.pngData(), feedBackData: cmFeedbackData) { isCompleted in
+            if isCompleted {
+                NotificationCenter.default.post(name: .refreshFeedbackData, object: nil)
+                UIApplication.topViewController()?.showActivityIndicator()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    UIApplication.topViewController()?.hideActivityIndicator()
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }else{
+                if self.feedbackTitle == "" {
+                    self.showAlert(alertMessage: "Please Enter the title!")
+                }else if self.desc == "" {
+                    self.showAlert(alertMessage: "Please Enter the description!")
+                }else if self.email == ""{
+                    self.showAlert(alertMessage: "Please Enter the email!")
+                }else {
+                    self.showAlert(alertMessage: "Something Went Wrong")
+                }
+                
+            }
+        }
+    }
+}
+
+
+extension GiveFeedbackVC : UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else {return}
+        
+        print(image.size)
+        if isFirst {
+            self.selectImage = image
+        }
+        else{
+            self.rightImage = image
+        }
+        picker.dismiss(animated: true, completion: nil)
+        self.tableView.reloadData()
     }
 }

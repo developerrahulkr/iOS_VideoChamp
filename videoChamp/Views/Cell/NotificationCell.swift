@@ -34,15 +34,16 @@ class NotificationCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func updateData(inData : CMNotification) {
+    func updateData(inData : CMGetFeedbackData) {
         lblTitle.text = inData.title ?? ""
         lblMsg.text = inData.desc ?? ""
+        lblTime.text = Utility.shared.timeConvertor(string: inData.time ?? "")
     }
     
     func updateFeedbackData(inData : CMGetFeedbackData) {
         lblTitle.text = inData.title ?? ""
         lblMsg.text = inData.desc ?? ""
-        lblTime.text = inData.time ?? ""
+        lblTime.text = Utility.shared.timeConvertor(string: inData.time ?? "")
     }
     
 }

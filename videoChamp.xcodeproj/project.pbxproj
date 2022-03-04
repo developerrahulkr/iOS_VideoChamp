@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0B02F927D0C7A000599A54 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B02F827D0C7A000599A54 /* NotificationViewModel.swift */; };
 		2C172D2927C4C8F8005BA3AD /* GiveFeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C172D2727C4C8F8005BA3AD /* GiveFeedbackCell.swift */; };
 		2C172D2A27C4C8F8005BA3AD /* GiveFeedbackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C172D2827C4C8F8005BA3AD /* GiveFeedbackCell.xib */; };
 		2C172D2C27C4CA4E005BA3AD /* CMFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C172D2B27C4CA4E005BA3AD /* CMFeedBack.swift */; };
@@ -52,6 +53,9 @@
 		2C36262327BD24A200EB4CD6 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C36262127BD24A200EB4CD6 /* NotificationCell.xib */; };
 		2C36262627BD32AA00EB4CD6 /* TermsAndConditionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36262427BD32AA00EB4CD6 /* TermsAndConditionsCell.swift */; };
 		2C36262727BD32AA00EB4CD6 /* TermsAndConditionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C36262527BD32AA00EB4CD6 /* TermsAndConditionsCell.xib */; };
+		2C52B2DA27CCB115004F2A00 /* CMRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52B2D927CCB115004F2A00 /* CMRegister.swift */; };
+		2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */; };
+		2C68C7F627CCFDD600F76E8A /* GiveFeedbackCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */; };
 		2C8D43D227BF645D00C5722A /* CameraVideoShareCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D43D127BF645D00C5722A /* CameraVideoShareCodeVC.swift */; };
 		2C8D43D527BF6AA900C5722A /* CameraCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D43D327BF6AA900C5722A /* CameraCodeCell.swift */; };
 		2C8D43D627BF6AA900C5722A /* CameraCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D43D427BF6AA900C5722A /* CameraCodeCell.xib */; };
@@ -60,17 +64,20 @@
 		2C8D43DD27BF868700C5722A /* CameraCodeCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D43DB27BF868700C5722A /* CameraCodeCell3.swift */; };
 		2C8D43DE27BF868700C5722A /* CameraCodeCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D43DC27BF868700C5722A /* CameraCodeCell3.xib */; };
 		2C8D43E127BFA9F200C5722A /* GradientColorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D43E027BFA9F200C5722A /* GradientColorCode.swift */; };
-		2C8D43E427BFB16400C5722A /* argentum-sans.semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D43E327BFB16400C5722A /* argentum-sans.semibold.ttf */; };
-		2C8D43E827BFB32A00C5722A /* argentum-sans.regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D43E527BFB32A00C5722A /* argentum-sans.regular.ttf */; };
-		2C8D43E927BFB32A00C5722A /* argentum-sans.light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D43E627BFB32A00C5722A /* argentum-sans.light.ttf */; };
-		2C8D43EA27BFB32A00C5722A /* argentum-sans.medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D43E727BFB32A00C5722A /* argentum-sans.medium.ttf */; };
 		2C8D43EC27BFC02B00C5722A /* RemoteControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D43EB27BFC02B00C5722A /* RemoteControlVC.swift */; };
+		2C8E351227CF8FD9005201A9 /* GiveFeedbackCell4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E351027CF8FD9005201A9 /* GiveFeedbackCell4.swift */; };
+		2C8E351327CF8FD9005201A9 /* GiveFeedbackCell4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8E351127CF8FD9005201A9 /* GiveFeedbackCell4.xib */; };
+		2C96885527CF47BB0048145C /* CodeVerifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96885327CF47BB0048145C /* CodeVerifyCell.swift */; };
+		2C96885627CF47BB0048145C /* CodeVerifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C96885427CF47BB0048145C /* CodeVerifyCell.xib */; };
 		2CA1CF3227C6200F00BEB063 /* CameraUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1CF3127C6200F00BEB063 /* CameraUtilities.swift */; };
 		2CA1CF3527C6529300BEB063 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1CF3427C6529300BEB063 /* ProgressBar.swift */; };
 		2CA1CF3727C658C800BEB063 /* API Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1CF3627C658C800BEB063 /* API Manager.swift */; };
 		2CA1CF3927C658DD00BEB063 /* Common_url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1CF3827C658DD00BEB063 /* Common_url.swift */; };
 		2CA1CF3B27C65D0F00BEB063 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1CF3A27C65D0F00BEB063 /* UserViewModel.swift */; };
 		2CA1CF3D27C75A1D00BEB063 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1CF3C27C75A1D00BEB063 /* Utility.swift */; };
+		2CA1CF5627C8B21F00BEB063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA1CF5527C8B21F00BEB063 /* GoogleService-Info.plist */; };
+		2CA1CF5927C8BE1600BEB063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA1CF5827C8BE1600BEB063 /* GoogleService-Info.plist */; };
+		2CA56C2227D2411800152FC8 /* FeedbackMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA56C2127D2411800152FC8 /* FeedbackMessageViewModel.swift */; };
 		6FA962F5DBBF38AAD0527794 /* Pods_videoChamp_videoChampUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526E4869A0DCF02E6EEC06CA /* Pods_videoChamp_videoChampUITests.framework */; };
 		8142DA31F7DDE0C029225308 /* Pods_videoChampTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8FE09D5B7675409F991BA0 /* Pods_videoChampTests.framework */; };
 		B1F6E9D19F79E4DB3BAC13DB /* Pods_videoChamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52FEA1DE9FEC8BD9ECF5F135 /* Pods_videoChamp.framework */; };
@@ -95,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		0EC93BE3A2837525CBB51034 /* Pods-videoChamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoChamp.release.xcconfig"; path = "Target Support Files/Pods-videoChamp/Pods-videoChamp.release.xcconfig"; sourceTree = "<group>"; };
+		2C0B02F827D0C7A000599A54 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		2C172D2727C4C8F8005BA3AD /* GiveFeedbackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackCell.swift; sourceTree = "<group>"; };
 		2C172D2827C4C8F8005BA3AD /* GiveFeedbackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiveFeedbackCell.xib; sourceTree = "<group>"; };
 		2C172D2B27C4CA4E005BA3AD /* CMFeedBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMFeedBack.swift; sourceTree = "<group>"; };
@@ -144,6 +152,9 @@
 		2C36262127BD24A200EB4CD6 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		2C36262427BD32AA00EB4CD6 /* TermsAndConditionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsCell.swift; sourceTree = "<group>"; };
 		2C36262527BD32AA00EB4CD6 /* TermsAndConditionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndConditionsCell.xib; sourceTree = "<group>"; };
+		2C52B2D927CCB115004F2A00 /* CMRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRegister.swift; sourceTree = "<group>"; };
+		2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackCell1.swift; sourceTree = "<group>"; };
+		2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiveFeedbackCell1.xib; sourceTree = "<group>"; };
 		2C8D43D127BF645D00C5722A /* CameraVideoShareCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVideoShareCodeVC.swift; sourceTree = "<group>"; };
 		2C8D43D327BF6AA900C5722A /* CameraCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCodeCell.swift; sourceTree = "<group>"; };
 		2C8D43D427BF6AA900C5722A /* CameraCodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraCodeCell.xib; sourceTree = "<group>"; };
@@ -152,17 +163,28 @@
 		2C8D43DB27BF868700C5722A /* CameraCodeCell3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCodeCell3.swift; sourceTree = "<group>"; };
 		2C8D43DC27BF868700C5722A /* CameraCodeCell3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraCodeCell3.xib; sourceTree = "<group>"; };
 		2C8D43E027BFA9F200C5722A /* GradientColorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColorCode.swift; sourceTree = "<group>"; };
-		2C8D43E327BFB16400C5722A /* argentum-sans.semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.semibold.ttf"; path = "../../../../../../../../Downloads/argentum-sans.semibold.ttf"; sourceTree = "<group>"; };
-		2C8D43E527BFB32A00C5722A /* argentum-sans.regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.regular.ttf"; path = "../../../../../../../../Downloads/argentum-sans.regular.ttf"; sourceTree = "<group>"; };
-		2C8D43E627BFB32A00C5722A /* argentum-sans.light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.light.ttf"; path = "../../../../../../../../Downloads/argentum-sans.light.ttf"; sourceTree = "<group>"; };
-		2C8D43E727BFB32A00C5722A /* argentum-sans.medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.medium.ttf"; path = "../../../../../../../../Downloads/argentum-sans.medium.ttf"; sourceTree = "<group>"; };
 		2C8D43EB27BFC02B00C5722A /* RemoteControlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteControlVC.swift; sourceTree = "<group>"; };
+		2C8E351027CF8FD9005201A9 /* GiveFeedbackCell4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackCell4.swift; sourceTree = "<group>"; };
+		2C8E351127CF8FD9005201A9 /* GiveFeedbackCell4.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiveFeedbackCell4.xib; sourceTree = "<group>"; };
+		2C96885327CF47BB0048145C /* CodeVerifyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVerifyCell.swift; sourceTree = "<group>"; };
+		2C96885427CF47BB0048145C /* CodeVerifyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeVerifyCell.xib; sourceTree = "<group>"; };
 		2CA1CF3127C6200F00BEB063 /* CameraUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUtilities.swift; sourceTree = "<group>"; };
 		2CA1CF3427C6529300BEB063 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		2CA1CF3627C658C800BEB063 /* API Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Manager.swift"; sourceTree = "<group>"; };
 		2CA1CF3827C658DD00BEB063 /* Common_url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common_url.swift; sourceTree = "<group>"; };
 		2CA1CF3A27C65D0F00BEB063 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		2CA1CF3C27C75A1D00BEB063 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		2CA1CF3E27C79E4B00BEB063 /* argentum-sans.medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.medium.ttf"; path = "../../../../argentum-sans.medium.ttf"; sourceTree = "<group>"; };
+		2CA1CF3F27C79E4B00BEB063 /* argentum-sans.regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.regular.ttf"; path = "../../../../argentum-sans.regular.ttf"; sourceTree = "<group>"; };
+		2CA1CF4027C79E4B00BEB063 /* argentum-sans.semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.semibold.ttf"; path = "../../../../argentum-sans.semibold.ttf"; sourceTree = "<group>"; };
+		2CA1CF4127C79E4B00BEB063 /* argentum-sans.light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.light.ttf"; path = "../../../../argentum-sans.light.ttf"; sourceTree = "<group>"; };
+		2CA1CF5527C8B21F00BEB063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2CA1CF5727C8BBFF00BEB063 /* videoChamp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = videoChamp.entitlements; sourceTree = "<group>"; };
+		2CA1CF5827C8BE1600BEB063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2CA56C1E27D1EBFC00152FC8 /* argentum-sans.black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.black.ttf"; path = "../../../../argentum-sans.black.ttf"; sourceTree = "<group>"; };
+		2CA56C1F27D1EBFC00152FC8 /* argentum-sans.bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.bold.ttf"; path = "../../../../argentum-sans.bold.ttf"; sourceTree = "<group>"; };
+		2CA56C2027D1EBFC00152FC8 /* argentum-sans.extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.extrabold.ttf"; path = "../../../../argentum-sans.extrabold.ttf"; sourceTree = "<group>"; };
+		2CA56C2127D2411800152FC8 /* FeedbackMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMessageViewModel.swift; sourceTree = "<group>"; };
 		526E4869A0DCF02E6EEC06CA /* Pods_videoChamp_videoChampUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoChamp_videoChampUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52FEA1DE9FEC8BD9ECF5F135 /* Pods_videoChamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoChamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FDB6A7353C962CC9DFFD46 /* Pods-videoChampTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoChampTests.release.xcconfig"; path = "Target Support Files/Pods-videoChampTests/Pods-videoChampTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -236,6 +258,8 @@
 		2C3625C227BC077100EB4CD6 /* videoChamp */ = {
 			isa = PBXGroup;
 			children = (
+				2CA1CF5827C8BE1600BEB063 /* GoogleService-Info.plist */,
+				2CA1CF5727C8BBFF00BEB063 /* videoChamp.entitlements */,
 				2CA1CF3327C651AC00BEB063 /* ServiceManager */,
 				2C36261527BD136500EB4CD6 /* Extensions */,
 				2C36260B27BD083B00EB4CD6 /* Model */,
@@ -244,6 +268,7 @@
 				2C3625FB27BCB92100EB4CD6 /* Utilities */,
 				2C3625F727BC09AA00EB4CD6 /* Controllers */,
 				2C3625CF27BC077600EB4CD6 /* Assets.xcassets */,
+				2CA1CF5527C8B21F00BEB063 /* GoogleService-Info.plist */,
 				2C3625D427BC077600EB4CD6 /* Info.plist */,
 				2C3625CC27BC077200EB4CD6 /* videoChamp.xcdatamodeld */,
 			);
@@ -347,6 +372,12 @@
 				2C172D3427C4ED50005BA3AD /* GiveFeedbackCell3.xib */,
 				2C172D3B27C50097005BA3AD /* FeedbackServiceCell.swift */,
 				2C172D3C27C50097005BA3AD /* FeedbackServiceCell.xib */,
+				2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */,
+				2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */,
+				2C96885327CF47BB0048145C /* CodeVerifyCell.swift */,
+				2C96885427CF47BB0048145C /* CodeVerifyCell.xib */,
+				2C8E351027CF8FD9005201A9 /* GiveFeedbackCell4.swift */,
+				2C8E351127CF8FD9005201A9 /* GiveFeedbackCell4.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -356,6 +387,7 @@
 			children = (
 				2C36260D27BD087300EB4CD6 /* CMMenu.swift */,
 				2C172D2B27C4CA4E005BA3AD /* CMFeedBack.swift */,
+				2C52B2D927CCB115004F2A00 /* CMRegister.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -366,6 +398,8 @@
 				2C36260F27BD0A6E00EB4CD6 /* MenuViewModels.swift */,
 				2C172D2D27C4CABE005BA3AD /* FeedbackViewModel.swift */,
 				2CA1CF3A27C65D0F00BEB063 /* UserViewModel.swift */,
+				2C0B02F827D0C7A000599A54 /* NotificationViewModel.swift */,
+				2CA56C2127D2411800152FC8 /* FeedbackMessageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -381,10 +415,13 @@
 		2C8D43E227BFB14700C5722A /* Font Family */ = {
 			isa = PBXGroup;
 			children = (
-				2C8D43E627BFB32A00C5722A /* argentum-sans.light.ttf */,
-				2C8D43E727BFB32A00C5722A /* argentum-sans.medium.ttf */,
-				2C8D43E527BFB32A00C5722A /* argentum-sans.regular.ttf */,
-				2C8D43E327BFB16400C5722A /* argentum-sans.semibold.ttf */,
+				2CA56C1E27D1EBFC00152FC8 /* argentum-sans.black.ttf */,
+				2CA56C1F27D1EBFC00152FC8 /* argentum-sans.bold.ttf */,
+				2CA56C2027D1EBFC00152FC8 /* argentum-sans.extrabold.ttf */,
+				2CA1CF4127C79E4B00BEB063 /* argentum-sans.light.ttf */,
+				2CA1CF3E27C79E4B00BEB063 /* argentum-sans.medium.ttf */,
+				2CA1CF3F27C79E4B00BEB063 /* argentum-sans.regular.ttf */,
+				2CA1CF4027C79E4B00BEB063 /* argentum-sans.semibold.ttf */,
 			);
 			path = "Font Family";
 			sourceTree = "<group>";
@@ -532,20 +569,21 @@
 				2C319B4527C4C64500AAB997 /* FeedbackSectionCell.xib in Resources */,
 				2C36260227BCBB9F00EB4CD6 /* WelcomeCell.xib in Resources */,
 				2C3625D327BC077600EB4CD6 /* LaunchScreen.storyboard in Resources */,
+				2C68C7F627CCFDD600F76E8A /* GiveFeedbackCell1.xib in Resources */,
 				2C172D3627C4ED50005BA3AD /* GiveFeedbackCell3.xib in Resources */,
 				2C8D43DA27BF75F400C5722A /* CameraCodeCell2.xib in Resources */,
 				2C36262327BD24A200EB4CD6 /* NotificationCell.xib in Resources */,
 				2C172D2A27C4C8F8005BA3AD /* GiveFeedbackCell.xib in Resources */,
+				2C96885627CF47BB0048145C /* CodeVerifyCell.xib in Resources */,
 				2C36261427BD0E0700EB4CD6 /* MenuCell.xib in Resources */,
-				2C8D43E927BFB32A00C5722A /* argentum-sans.light.ttf in Resources */,
+				2C8E351327CF8FD9005201A9 /* GiveFeedbackCell4.xib in Resources */,
 				2C3625D027BC077600EB4CD6 /* Assets.xcassets in Resources */,
+				2CA1CF5627C8B21F00BEB063 /* GoogleService-Info.plist in Resources */,
 				2C36262727BD32AA00EB4CD6 /* TermsAndConditionsCell.xib in Resources */,
 				2C8D43DE27BF868700C5722A /* CameraCodeCell3.xib in Resources */,
+				2CA1CF5927C8BE1600BEB063 /* GoogleService-Info.plist in Resources */,
 				2C3625CB27BC077200EB4CD6 /* Main.storyboard in Resources */,
-				2C8D43E427BFB16400C5722A /* argentum-sans.semibold.ttf in Resources */,
-				2C8D43E827BFB32A00C5722A /* argentum-sans.regular.ttf in Resources */,
 				2C172D3E27C50097005BA3AD /* FeedbackServiceCell.xib in Resources */,
-				2C8D43EA27BFB32A00C5722A /* argentum-sans.medium.ttf in Resources */,
 				2C172D3227C4EAAD005BA3AD /* GiveFeedbackCell2.xib in Resources */,
 				2C8D43D627BF6AA900C5722A /* CameraCodeCell.xib in Resources */,
 			);
@@ -677,12 +715,14 @@
 			files = (
 				2C36261327BD0E0700EB4CD6 /* MenuCell.swift in Sources */,
 				2C36261B27BD16D600EB4CD6 /* FeedbackVC.swift in Sources */,
+				2C8E351227CF8FD9005201A9 /* GiveFeedbackCell4.swift in Sources */,
 				2C172D3D27C50097005BA3AD /* FeedbackServiceCell.swift in Sources */,
 				2C36260127BCBB9F00EB4CD6 /* WelcomeCell.swift in Sources */,
 				2C172D2E27C4CABE005BA3AD /* FeedbackViewModel.swift in Sources */,
 				2C36260827BCE67200EB4CD6 /* HomeVC.swift in Sources */,
 				2C36260427BCC4A500EB4CD6 /* AvatarVC.swift in Sources */,
 				2C172D3927C4F66C005BA3AD /* FeedbackServiceVC.swift in Sources */,
+				2C0B02F927D0C7A000599A54 /* NotificationViewModel.swift in Sources */,
 				2C172D3127C4EAAD005BA3AD /* GiveFeedbackCell2.swift in Sources */,
 				2CA1CF3227C6200F00BEB063 /* CameraUtilities.swift in Sources */,
 				2C3625C827BC077200EB4CD6 /* SplashVC.swift in Sources */,
@@ -706,6 +746,7 @@
 				2C36262627BD32AA00EB4CD6 /* TermsAndConditionsCell.swift in Sources */,
 				2C36261F27BD16FB00EB4CD6 /* ShareVC.swift in Sources */,
 				2C36260E27BD087300EB4CD6 /* CMMenu.swift in Sources */,
+				2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */,
 				2C8D43EC27BFC02B00C5722A /* RemoteControlVC.swift in Sources */,
 				2CA1CF3927C658DD00BEB063 /* Common_url.swift in Sources */,
 				2C172D2927C4C8F8005BA3AD /* GiveFeedbackCell.swift in Sources */,
@@ -716,7 +757,10 @@
 				2C8D43E127BFA9F200C5722A /* GradientColorCode.swift in Sources */,
 				2C36260A27BD034A00EB4CD6 /* SideMenuVC.swift in Sources */,
 				2C36261727BD138400EB4CD6 /* Extensions+NotificationName.swift in Sources */,
+				2C96885527CF47BB0048145C /* CodeVerifyCell.swift in Sources */,
+				2C52B2DA27CCB115004F2A00 /* CMRegister.swift in Sources */,
 				2C36261927BD169B00EB4CD6 /* NotificationVC.swift in Sources */,
+				2CA56C2227D2411800152FC8 /* FeedbackMessageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,11 +938,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = videoChamp/videoChamp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GX9ZXRM62;
+				DEVELOPMENT_TEAM = RSADBA7SVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = videoChamp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access Camera to taken the picture";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow to access";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access Gallary to take the picture";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -910,8 +959,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ripeenApps.videoChamp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ripenapps.videoChamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -924,11 +974,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = videoChamp/videoChamp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GX9ZXRM62;
+				DEVELOPMENT_TEAM = RSADBA7SVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = videoChamp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access Camera to taken the picture";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow to access";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access Gallary to take the picture";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -940,8 +995,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ripeenApps.videoChamp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ripenapps.videoChamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

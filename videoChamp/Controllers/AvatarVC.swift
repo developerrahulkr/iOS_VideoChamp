@@ -49,8 +49,6 @@ class AvatarVC: UIViewController {
         tfName.delegate = self
         changeAvatar()
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
-//        self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
-        
     }
     
     
@@ -123,14 +121,33 @@ class AvatarVC: UIViewController {
         }
         
         if tfName.text?.count != 0 && tfName.text != nil {
+            var color = UIColor()
+            var avatarImage = UIImage()
+            color = self.lblUserName1.textColor
+            
+            let colorToSetAsDefault : UIColor = self.lblUserName1.textColor
+            let data : Data = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as Data
+            UserDefaults.standard.set(data, forKey: "UserSelectedColor")
+            UserDefaults.standard.synchronize()
+            print("SET DEFAULT USER COLOR TO RED")
+            
+            avatarImage = self.img1.image!
+            UserDefaults.standard.setImage(image: avatarImage, forKey: "avatarImage")
             UserDefaults.standard.set(tfName.text ?? "", forKey: kUserNAme)
-            userViewModel.registerUser(userName: tfName.text ?? "") { [weak self] isSuccess in
+            UserDefaults.standard.set("\(String(describing: color))", forKey: "userTextColor")
+//            UserDefaults.standard.set("\(String(describing: avatarImage))", forKey: "avatarImage")
+            UserDefaults.standard.set("\(self.lblUserName1.text ?? "")", forKey: "userText")
+//            self.view.backgroundColor = 
+            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken")
+            
+            userViewModel.registerUser(userName: tfName.text ?? "", deviceToken: deviceToken!) { [weak self] isSuccess in
                 guard let self = self else {return}
                 if isSuccess {
+                    print("device Token : \(deviceToken ?? "")")
                     UserDefaults.standard.set("Register", forKey: "isUserRegister")
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-                    vc.nameTextColor = self.lblUserName1.textColor
                     UserDefaults.standard.set(self.lblUserName1.textColor, forKey: "userTextColor")
+                    
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
                     vc.shortName = self.lblUserName1.text ?? ""
                     vc.avatarImage = self.img1.image
                     self.navigationController?.pushViewController(vc, animated: true)

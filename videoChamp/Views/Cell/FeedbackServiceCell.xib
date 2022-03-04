@@ -25,20 +25,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="392" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:58 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYy-Fm-lFm">
-                        <rect key="frame" x="330.5" y="52" width="41.5" height="17"/>
-                        <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="9"/>
-                        <color key="textColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svO-ge-QZs">
-                        <rect key="frame" x="20" y="0.0" width="352" height="42"/>
+                        <rect key="frame" x="20" y="12" width="352" height="36.5"/>
                         <subviews>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="feedback_left_cell" translatesAutoresizingMaskIntoConstraints="NO" id="PpU-kY-AcT">
-                                <rect key="frame" x="0.0" y="0.0" width="352" height="42"/>
+                                <rect key="frame" x="0.0" y="0.0" width="352" height="36.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi, How can I help You ?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYM-NH-i0X">
-                                <rect key="frame" x="20" y="10" width="312" height="22"/>
+                                <rect key="frame" x="20" y="10" width="312" height="16.5"/>
                                 <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="13"/>
                                 <color key="textColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -56,6 +50,12 @@
                             <constraint firstItem="xYM-NH-i0X" firstAttribute="leading" secondItem="svO-ge-QZs" secondAttribute="leading" constant="20" id="zDy-sS-Ai4"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:58 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYy-Fm-lFm">
+                        <rect key="frame" x="330.5" y="58.5" width="41.5" height="10.5"/>
+                        <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="9"/>
+                        <color key="textColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="svO-ge-QZs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="F9k-Ln-XoC"/>
@@ -63,7 +63,7 @@
                     <constraint firstAttribute="bottom" secondItem="qYy-Fm-lFm" secondAttribute="bottom" constant="20" id="KuZ-3R-Ndt"/>
                     <constraint firstAttribute="trailing" secondItem="qYy-Fm-lFm" secondAttribute="trailing" constant="20" id="cvQ-yE-FtH"/>
                     <constraint firstAttribute="trailing" secondItem="svO-ge-QZs" secondAttribute="trailing" constant="20" id="fdz-SZ-QNa"/>
-                    <constraint firstItem="svO-ge-QZs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wRp-z3-6vU"/>
+                    <constraint firstItem="svO-ge-QZs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="wRp-z3-6vU"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -71,6 +71,7 @@
             <connections>
                 <outlet property="cellView" destination="svO-ge-QZs" id="DY7-l9-KYj"/>
                 <outlet property="lblMsg" destination="xYM-NH-i0X" id="rVz-mM-rAO"/>
+                <outlet property="lblTime" destination="qYy-Fm-lFm" id="pkt-Qk-x9l"/>
             </connections>
             <point key="canvasLocation" x="195.6521739130435" y="19.754464285714285"/>
         </tableViewCell>

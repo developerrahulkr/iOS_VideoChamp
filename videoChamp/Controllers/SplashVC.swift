@@ -40,7 +40,7 @@ class SplashVC: UIViewController {
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
             let nav_obj = UINavigationController(rootViewController: vc)
             nav_obj.isNavigationBarHidden = true
-            UIApplication.shared.windows.first?.rootViewController = nav_obj
+            UIApplication.shared.windows.first?.rootViewController = nav_obj            
         }
         
         

@@ -25,6 +25,11 @@ let topViewColor1 = UIColor(red: 156/255, green: 155/255, blue: 155/255, alpha: 
 let topViewColor2 = UIColor(red: 198/255, green: 198/255, blue: 197/255, alpha: 1)
 
 
+let topyellowColor = UIColor(red: 249/255, green: 178/255, blue: 0/255, alpha: 1)
+let bottomYellowColor = UIColor(red: 255/255, green: 236/255, blue: 0/255, alpha: 1)
+
+let topGreyColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 1)
+let bottomOrangeColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1)
 
 
 

@@ -11,14 +11,8 @@ class SideMenuVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-//    lazy var menuViewModel : MenuViewModels = {
-//       let viewModel = MenuViewModels(inViewController: self)
-//        return viewModel
-//
-//    }()
     
     let menuViewModel = MenuViewModels()
-    
     let cellID = "MenuCell"
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +21,6 @@ class SideMenuVC: UIViewController {
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         
         menuViewModel.getData()
-        
     }
 
     @IBAction func onClickedDismissBtn(_ sender: UIButton) {

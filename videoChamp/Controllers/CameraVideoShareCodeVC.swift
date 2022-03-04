@@ -9,6 +9,7 @@ import UIKit
 
 class CameraVideoShareCodeVC: UIViewController {
     
+    @IBOutlet weak var lblShareCode: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lbl: UILabel!
     
@@ -28,6 +29,8 @@ class CameraVideoShareCodeVC: UIViewController {
     override func viewDidLayoutSubviews() {
         lbl.font = UIFont(name: "ArgentumSans-Bold", size: 31.0)
         lbl.font = UIFont.systemFont(ofSize: 31.0, weight: .semibold)
+        self.gradientColor(topColor: topyellowColor, bottomColor: bottomYellowColor)
+        lblShareCode.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
     
@@ -45,6 +48,7 @@ class CameraVideoShareCodeVC: UIViewController {
     }
     
     @IBAction func onClickedCloseBtn(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -86,13 +90,18 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
         
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 80.0
+            return 60.0
         }else if indexPath.section == 1{
-            return 160.0
+            return 150.0
         }else{
-            return 180.0
+            return 165.0
         }
     }
     

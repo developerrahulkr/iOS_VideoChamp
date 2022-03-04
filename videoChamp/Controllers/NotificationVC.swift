@@ -15,18 +15,33 @@ class NotificationVC: UIViewController {
     
     let cellID = "NotificationCell"
     
-    let notificationViewModel = CameraConnectViewModel()
+    let notificationViewModel = NotificationViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         notificationTableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
-        notificationViewModel.getNotificationData()
+        loadData()
+        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+        
     }
+    
+    
+    func loadData() {
+        notificationViewModel.getNotificationData { [weak self] isRunningStatus, isNotificationEmpty in
+            guard let self = self else {return}
+            
+            if isRunningStatus && isNotificationEmpty {
+                self.notificationTableView.reloadData()
+            }
+            
+        }
+    }
+    
+    
     override func viewDidLayoutSubviews() {
-        lblNotification.font = UIFont(name: "Argentum Sans", size: 17.0)
-        lblNotification.font = UIFont.systemFont(ofSize: 17.0, weight: .medium)
+        lblNotification.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
     @IBAction func onClickedBackBTn(_ sender: UIButton) {
@@ -39,12 +54,13 @@ class NotificationVC: UIViewController {
 
 extension NotificationVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notificationViewModel.notificationDataSource.count
+        return notificationViewModel.getNotificationDataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! NotificationCell
-        cell.updateData(inData: notificationViewModel.notificationDataSource[indexPath.row])
+        cell.updateData(inData: notificationViewModel.getNotificationDataSource[indexPath.row])
+        
         return cell
     }
     
@@ -62,7 +78,7 @@ extension NotificationVC : UITableViewDelegate, UITableViewDataSource {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
 
 //            self.arr.remove(at: indexPath.row)
-            self.notificationViewModel.notificationDataSource.remove(at: indexPath.row)
+            self.notificationViewModel.getNotificationDataSource.remove(at: indexPath.row)
             self.notificationTableView.deleteRows(at: [indexPath], with: .fade)
             self.notificationTableView.reloadData()
             completionHandler(true)

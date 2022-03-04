@@ -17,6 +17,9 @@ class HomeVC: UIViewController {
     @IBOutlet weak var lblMonitorDevice: UILabel!
     @IBOutlet weak var lblControlDevice: UILabel!
     @IBOutlet weak var lblUserName: UILabel!
+    @IBOutlet weak var lblOR: UILabel!
+    
+    
     
     
     
@@ -31,6 +34,11 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+//        lblDeviceTitle.font = UIFont(name: "argentum-sans.bold", size: 14.0)
+        lblDeviceTitle.font = UIFont.systemFont(ofSize: 14.0, weight: .bold)
+        lblOR.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
 
         // Do any additional setup after loading the view.
         
@@ -39,7 +47,33 @@ class HomeVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(feedbackScreen), name: .kFeedback, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(shareScreen), name: .kShare, object: nil)
         cameraAndRemoteViewAction()
+        print("Baerer Token : \(Utility.shared.getUserAppToken())")
+        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+        
+        self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
     }
+    
+    override func viewDidLayoutSubviews() {
+        lblShortName.text = UserDefaults.standard.string(forKey: "userText")
+        if let userSelectedColorData = UserDefaults.standard.object(forKey: "UserSelectedColor") as? Data {
+            if let userSelectedColor = NSKeyedUnarchiver.unarchiveObject(with:userSelectedColorData as Data) as? UIColor {
+                print(userSelectedColor)
+                lblShortName.textColor = userSelectedColor
+            }
+        }
+        imgAvatar.image = UserDefaults.standard.imageForKey(key: "avatarImage")
+        lblUserName.text = "Hello \(UserDefaults.standard.string(forKey: kUserNAme) ?? "User Name")"
+        lblCamera.font = UIFont.systemFont(ofSize: 17.0, weight: .regular)
+        lblControlDevice.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+        
+        lblCamera.font = UIFont.systemFont(ofSize: 17.0, weight: .regular)
+        lblFindCameraDevice.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+        
+        lblMonitorDevice.font = UIFont.systemFont(ofSize: 17.0, weight: .regular)
+        lblControlDevice.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+    }
+    
+
     
     func cameraAndRemoteViewAction(){
         let gesture = UITapGestureRecognizer(target: self, action: #selector(funcCameraActivity))
@@ -92,13 +126,8 @@ class HomeVC: UIViewController {
         print("Remove NotiFication")
     }
     
-    override func viewDidLayoutSubviews() {
-        lblShortName.text = shortName
-        imgAvatar.image = avatarImage
-        lblUserName.text = "Hello \(UserDefaults.standard.string(forKey: kUserNAme) ?? "User Name")" 
-        
-        
-    }
+    
+  
     
     @IBAction func onClickedMenuBtn(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SideMenuVC") as! SideMenuVC
@@ -107,3 +136,5 @@ class HomeVC: UIViewController {
         self.present(vc, animated: false, completion: nil)
     }
 }
+
+

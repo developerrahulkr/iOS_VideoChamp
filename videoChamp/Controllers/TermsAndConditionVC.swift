@@ -20,6 +20,9 @@ class TermsAndConditionVC: UIViewController {
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.delegate = self
         tableView.dataSource = self
+        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+        
+        lblTermAndCondition.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
     @IBAction func onClickedBackBtn(_ sender: UIButton) {

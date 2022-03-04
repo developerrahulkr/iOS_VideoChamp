@@ -19,19 +19,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxw-z6-foE">
-                        <rect key="frame" x="5" y="5" width="398" height="140"/>
+                        <rect key="frame" x="20" y="5" width="368" height="140"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pF6-NZ-7uC">
-                                <rect key="frame" x="30" y="20" width="338" height="43"/>
+                                <rect key="frame" x="30" y="20" width="308" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 2 3 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFi-jT-sVQ">
-                                        <rect key="frame" x="138.5" y="9" width="61.5" height="25.5"/>
+                                        <rect key="frame" x="107.5" y="9" width="61.5" height="25.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkp-oy-Diw">
-                                        <rect key="frame" x="304" y="9.5" width="24" height="24"/>
+                                        <rect key="frame" x="274" y="9.5" width="24" height="24"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="camera_resend_code_icon"/>
                                         <connections>
@@ -45,14 +45,14 @@
                                     <constraint firstItem="QFi-jT-sVQ" firstAttribute="centerY" secondItem="pF6-NZ-7uC" secondAttribute="centerY" id="K2I-Ni-uTP"/>
                                     <constraint firstItem="fkp-oy-Diw" firstAttribute="centerY" secondItem="QFi-jT-sVQ" secondAttribute="centerY" id="KmR-o4-VuS"/>
                                     <constraint firstAttribute="height" constant="43" id="Taj-F8-v4N"/>
-                                    <constraint firstItem="QFi-jT-sVQ" firstAttribute="centerX" secondItem="pF6-NZ-7uC" secondAttribute="centerX" id="lM1-AN-WNJ"/>
+                                    <constraint firstItem="QFi-jT-sVQ" firstAttribute="centerX" secondItem="pF6-NZ-7uC" secondAttribute="centerX" constant="-16" id="lM1-AN-WNJ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vr-Me-isd">
-                                <rect key="frame" x="30" y="80" width="338" height="41"/>
+                                <rect key="frame" x="30" y="79" width="308" height="41"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hnY-cc-Agc">
-                                        <rect key="frame" x="123.5" y="9.5" width="91" height="22"/>
+                                        <rect key="frame" x="108.5" y="9.5" width="91" height="22"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHARE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-gp-OpU">
                                                 <rect key="frame" x="0.0" y="0.0" width="45.5" height="22"/>
@@ -68,7 +68,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwq-RN-cIS">
-                                        <rect key="frame" x="0.0" y="0.0" width="338" height="41"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="308" height="41"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="onClickedShareBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bhk-Ue-8rb"/>
@@ -91,18 +91,19 @@
                         <constraints>
                             <constraint firstItem="7Vr-Me-isd" firstAttribute="trailing" secondItem="pF6-NZ-7uC" secondAttribute="trailing" id="GjF-Y0-xGe"/>
                             <constraint firstItem="7Vr-Me-isd" firstAttribute="leading" secondItem="pF6-NZ-7uC" secondAttribute="leading" id="OXe-Lm-pTM"/>
+                            <constraint firstAttribute="bottom" secondItem="7Vr-Me-isd" secondAttribute="bottom" constant="20" id="SL4-kv-IkY"/>
                             <constraint firstItem="pF6-NZ-7uC" firstAttribute="leading" secondItem="gxw-z6-foE" secondAttribute="leading" constant="30" id="Sag-0t-Oja"/>
-                            <constraint firstItem="7Vr-Me-isd" firstAttribute="top" secondItem="pF6-NZ-7uC" secondAttribute="bottom" constant="17" id="f2n-zo-6BG"/>
                             <constraint firstAttribute="trailing" secondItem="pF6-NZ-7uC" secondAttribute="trailing" constant="30" id="h6r-g3-dVi"/>
+                            <constraint firstItem="7Vr-Me-isd" firstAttribute="top" secondItem="pF6-NZ-7uC" secondAttribute="bottom" constant="16" id="uir-Y3-hh4"/>
                             <constraint firstItem="pF6-NZ-7uC" firstAttribute="top" secondItem="gxw-z6-foE" secondAttribute="top" constant="20" id="xQd-95-ASA"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="gxw-z6-foE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="2OR-Y3-kpK"/>
-                    <constraint firstAttribute="trailing" secondItem="gxw-z6-foE" secondAttribute="trailing" constant="5" id="8Gm-tJ-EJX"/>
+                    <constraint firstAttribute="trailing" secondItem="gxw-z6-foE" secondAttribute="trailing" constant="20" id="8Gm-tJ-EJX"/>
                     <constraint firstAttribute="bottom" secondItem="gxw-z6-foE" secondAttribute="bottom" constant="5" id="x6f-el-Qh3"/>
-                    <constraint firstItem="gxw-z6-foE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="xmL-Tx-Lav"/>
+                    <constraint firstItem="gxw-z6-foE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xmL-Tx-Lav"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

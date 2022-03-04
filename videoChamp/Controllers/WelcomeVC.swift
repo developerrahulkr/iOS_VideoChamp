@@ -28,6 +28,7 @@ class WelcomeVC: UIViewController {
 
     override func viewDidLayoutSubviews() {
         btnGetStarted.layer.cornerRadius = btnGetStarted.bounds.height/2
+        pageController.currentPageIndicatorTintColor = .yellow
     }
     
     

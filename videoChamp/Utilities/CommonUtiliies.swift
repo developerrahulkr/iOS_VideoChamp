@@ -66,6 +66,15 @@ extension UIViewController {
         view.layer.insertSublayer(gradient, at: 0)
     }
     
+    func gradientfourColor(topColor : UIColor, mediumColor : UIColor, bottomMediumColor : UIColor, bottomColor : UIColor){
+        
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = view.bounds
+        gradient.colors = [topColor.cgColor, mediumColor.cgColor, bottomMediumColor.cgColor, bottomColor.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
+    }
+    
     
 }
 

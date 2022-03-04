@@ -75,7 +75,7 @@ class CameraConnectViewModel : NSObject {
         let data1 = CMCameraDeviceModel(name: "1- Enter Code & Connect Device", imageIcon: "remote_connect_icon")
         remoteDataSource.append(data1)
         
-        let data3 = CMCameraDeviceModel(name: "2- Start Recoring & Control", imageIcon: "camera_recording_icon")
+        let data3 = CMCameraDeviceModel(name: "2- Start Recording & Control", imageIcon: "camera_recording_icon")
         remoteDataSource.append(data3)
         
     }

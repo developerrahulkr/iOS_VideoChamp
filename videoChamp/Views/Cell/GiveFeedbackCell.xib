@@ -24,10 +24,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9uG-db-ufC">
-                        <rect key="frame" x="0.0" y="10" width="377" height="40"/>
+                        <rect key="frame" x="0.0" y="5" width="377" height="50"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Tittle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zbN-QE-W48">
-                                <rect key="frame" x="10" y="0.0" width="357" height="40"/>
+                                <rect key="frame" x="10" y="0.0" width="357" height="50"/>
                                 <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -43,8 +43,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="9uG-db-ufC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DgC-g2-jFP"/>
-                    <constraint firstAttribute="bottom" secondItem="9uG-db-ufC" secondAttribute="bottom" constant="10" id="WBs-GG-M7P"/>
-                    <constraint firstItem="9uG-db-ufC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Xd1-c0-kDd"/>
+                    <constraint firstAttribute="bottom" secondItem="9uG-db-ufC" secondAttribute="bottom" constant="5" id="WBs-GG-M7P"/>
+                    <constraint firstItem="9uG-db-ufC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Xd1-c0-kDd"/>
                     <constraint firstAttribute="trailing" secondItem="9uG-db-ufC" secondAttribute="trailing" id="h0p-xE-jCE"/>
                 </constraints>
             </tableViewCellContentView>

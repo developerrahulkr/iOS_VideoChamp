@@ -13,11 +13,12 @@ import SwiftyJSON
 class UserViewModel : NSObject {
     
     
-    func registerUser(userName : String, completionHandler : @escaping(Bool) -> Void) {
+    func registerUser(userName : String, deviceToken : String, completionHandler : @escaping(Bool) -> Void) {
         
-        ProgressBar.shared.showProgressbar()
-        APIManager.shared.getUser(userName: userName) { dict in
-            ProgressBar.shared.hideProgressBar()
+        UIApplication.topViewController()?.showActivityIndicator()
+        
+        APIManager.shared.getUser(userName: userName, deviceToken : deviceToken) { dict in
+            UIApplication.topViewController()?.hideActivityIndicator()
             
             if dict == nil {
                 print("Directory is Empty")
@@ -31,7 +32,7 @@ class UserViewModel : NSObject {
                 if statusCode == "200"{
                     print(name ?? "")
                     UserDefaults.standard.set(token ?? "", forKey: "Apptoken")
-                    print("token : \(token ?? "")")
+                    print("Baerer token : \(token ?? "")")
                     print(error_msg)
                     completionHandler(true)
                 }else{

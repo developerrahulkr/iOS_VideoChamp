@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="argentum-sans.regular.ttf">
+            <string>ArgentumSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CodeVerifyCell" rowHeight="150" id="KGk-i7-Jjw" customClass="CodeVerifyCell" customModule="videoChamp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="503" height="194"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="503" height="194"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2M-rS-kfW">
+                        <rect key="frame" x="20" y="10" width="463" height="174"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NTW-R6-rKK">
+                                <rect key="frame" x="40" y="30" width="383" height="60"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="R5c-l3-sTQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cy3-iK-UmA">
+                                                <rect key="frame" x="0.0" y="0.0" width="85.5" height="60"/>
+                                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="one-time-code"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sWV-1H-Q2f">
+                                                <rect key="frame" x="99.5" y="0.0" width="85" height="60"/>
+                                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="one-time-code"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g6A-5a-6hn">
+                                                <rect key="frame" x="198.5" y="0.0" width="85.5" height="60"/>
+                                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="one-time-code"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Mf-p4-5DT">
+                                                <rect key="frame" x="298" y="0.0" width="85" height="60"/>
+                                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="one-time-code"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.77648282049999995" green="0.77654325960000004" blue="0.77238720660000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="R5c-l3-sTQ" secondAttribute="bottom" id="0Db-nI-f4x"/>
+                                    <constraint firstItem="R5c-l3-sTQ" firstAttribute="leading" secondItem="NTW-R6-rKK" secondAttribute="leading" id="chS-Yu-f7P"/>
+                                    <constraint firstAttribute="height" constant="60" id="d7H-nh-wo9"/>
+                                    <constraint firstItem="R5c-l3-sTQ" firstAttribute="top" secondItem="NTW-R6-rKK" secondAttribute="top" id="ddr-X6-P9c"/>
+                                    <constraint firstAttribute="trailing" secondItem="R5c-l3-sTQ" secondAttribute="trailing" id="mxh-6T-DE7"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwc-0w-xeu">
+                                <rect key="frame" x="40" y="110" width="383" height="42"/>
+                                <color key="backgroundColor" red="0.22352941176470587" green="0.73333333333333328" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="qH8-RT-Bwq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="14"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="CONNECT NOW"/>
+                                <connections>
+                                    <action selector="onClickedConnectBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0a0-s6-Wmc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.77648282049999995" green="0.77654325960000004" blue="0.77238720660000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Hwc-0w-xeu" firstAttribute="top" secondItem="NTW-R6-rKK" secondAttribute="bottom" constant="20" id="7id-oh-VF4"/>
+                            <constraint firstItem="NTW-R6-rKK" firstAttribute="top" secondItem="N2M-rS-kfW" secondAttribute="top" constant="30" id="GIZ-0A-ywA"/>
+                            <constraint firstAttribute="bottom" secondItem="Hwc-0w-xeu" secondAttribute="bottom" constant="22" id="cNk-xr-cw8"/>
+                            <constraint firstItem="Hwc-0w-xeu" firstAttribute="leading" secondItem="R5c-l3-sTQ" secondAttribute="leading" id="dIE-B3-i8k"/>
+                            <constraint firstItem="Hwc-0w-xeu" firstAttribute="trailing" secondItem="R5c-l3-sTQ" secondAttribute="trailing" id="f1F-PD-FhV"/>
+                            <constraint firstAttribute="trailing" secondItem="NTW-R6-rKK" secondAttribute="trailing" constant="40" id="k8H-4G-Wfn"/>
+                            <constraint firstItem="NTW-R6-rKK" firstAttribute="leading" secondItem="N2M-rS-kfW" secondAttribute="leading" constant="40" id="lB0-kQ-c2W"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="N2M-rS-kfW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="GUw-3y-Ek9"/>
+                    <constraint firstAttribute="bottom" secondItem="N2M-rS-kfW" secondAttribute="bottom" constant="10" id="euP-XA-OgT"/>
+                    <constraint firstAttribute="trailing" secondItem="N2M-rS-kfW" secondAttribute="trailing" constant="20" id="kew-HW-SYe"/>
+                    <constraint firstItem="N2M-rS-kfW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="le3-sG-fW2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="btnConnect" destination="Hwc-0w-xeu" id="VAa-Ba-Hr0"/>
+                <outlet property="cardView" destination="N2M-rS-kfW" id="CqG-0b-9mw"/>
+                <outlet property="tf1" destination="Cy3-iK-UmA" id="1OD-bD-U0P"/>
+                <outlet property="tf2" destination="sWV-1H-Q2f" id="j7N-IF-71z"/>
+                <outlet property="tf3" destination="g6A-5a-6hn" id="gob-V9-unl"/>
+                <outlet property="tf4" destination="7Mf-p4-5DT" id="4GM-Ne-rDP"/>
+            </connections>
+            <point key="canvasLocation" x="270.28985507246381" y="97.098214285714278"/>
+        </tableViewCell>
+    </objects>
+</document>

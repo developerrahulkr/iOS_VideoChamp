@@ -10,18 +10,21 @@ import UIKit
 class RemoteControlVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var lblEnterCode: UILabel!
     
     let cameraViewModel = CameraConnectViewModel()
     
     let cellID = "CameraCodeCell"
-    let cellID2 = "CameraCodeCell2"
+    let cellID2 = "CodeVerifyCell"
     let cellId3 = "CameraCodeCell3"
+    var otpString : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.gradientColor(topColor: lightGreenColor, bottomColor: lightYellow)
         cameraViewModel.getRemoteData()
         registerCell()
+        lblEnterCode.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
     func registerCell(){
@@ -35,14 +38,13 @@ class RemoteControlVC: UIViewController {
     }
     
     @IBAction func OnClickedCloaseBtn(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
 
-
-
-extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, CameraCodeDelegate {
-    
+//MARK: - TableView  Delegate, Datasource and Verification Code Delegate
+extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCodeDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -50,7 +52,6 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, CameraCo
         }else{
             return 1
         }
-        
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -60,39 +61,38 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, CameraCo
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CameraCodeCell
             cell.updateData(inData: cameraViewModel.remoteDataSource[indexPath.row])
-            
             return cell
         }else if indexPath.section == 1{
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! CameraCodeCell2
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! CodeVerifyCell
             cell.delegate = self
-            cell.btnShare.tag = indexPath.row
-            cell.btnResend.isHidden = true
+            cell.callBack =
+            { codeData in
+                if self.otpString.count >= 4 {
+                    self.otpString = ""
+                }
+                self.otpString = self.otpString + codeData
+            }
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId3, for: indexPath) as! CameraCodeCell3
             return cell
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 80.0
+            return 60.0
         }else if indexPath.section == 1{
-            return 160.0
+            return 205.0
         }else{
-            return 180.0
+            return 165.0
         }
     }
-    
-    
-    func resendCode(tag: Int) {
-        print("resend Code : \(tag)")
-    }
-    
-    func shareCode(tag: Int) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShareVC") as! ShareVC
-        vc.headingText = "SHARE CODE"
-        self.navigationController?.pushViewController(vc, animated: true)
+    func verifyCode(tag: Int) {
+        print("Varification Code : \(otpString)")
+        if otpString.isEmpty {
+            self.showAlert(alertMessage: "Please fill the Code")
+        }
+        self.showAlert(alertMessage: "CODE IS : \(otpString)")
     }
 }

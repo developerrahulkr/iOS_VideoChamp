@@ -8,6 +8,10 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
+import FirebaseMessaging
+import Firebase
+import UserNotifications
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.resignFirstResponder()
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        
+        registerForPushNotification()
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { success, _ in
+//            guard success else {return}
+//            print("success in APNS Registry")
+//
+//        }
+//        application.registerForRemoteNotifications()
         return true
     }
 
@@ -81,4 +96,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
+
+
+//MARK: - Push notification
+
+
+extension AppDelegate : MessagingDelegate, UNUserNotificationCenterDelegate {
+    
+    private func registerForPushNotification() {
+        
+        // REGISTER FOR PUSH NOTIFICATIONS
+        let center  = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options: [.alert,.sound,.badge]) { (granted, error) in
+            // Enable or disable features based on authorization
+            print("Is Notification granted : \(granted)")
+            if granted {
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
+        
+        
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        messaging.token { token, _  in
+            guard let token = token else {
+                return
+            }
+            print("Token : \(token)")
+            UserDefaults.standard.set(token, forKey: "deviceToken")
+        }
+        
+        print("Token = \(fcmToken ?? "")")
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("Device Token: \(token)")
+        //fcmToken = token 
+        Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failted to register for notification :( \(error)")
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("Handle push from background or closed")
+        // if you set a member variable in didReceiveRemoteNotification, you  will know if this is from closed or background
+        print("\(response.notification.request.content.userInfo)")
+        
+    }
+    
+}
+
 

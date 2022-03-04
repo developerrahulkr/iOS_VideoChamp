@@ -14,6 +14,7 @@ extension Notification.Name {
     static let kFeedback = Notification.Name("kFeedback")
     static let kTermsAndConditions = Notification.Name("kTermsAndConditions")
     static let kShare = Notification.Name("kShare")
+    static let refreshFeedbackData = Notification.Name("refreshFeedbackData")
 }
 
 
