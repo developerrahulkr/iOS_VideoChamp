@@ -193,9 +193,9 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
     
     
     func submitData(tag: Int) {
-        let cmFeedbackData = CMPostFeedbackData(title: feedbackTitle, desc: desc, email: email, image: "")
+        let cmFeedbackData = CMPostFeedbackData(title: feedbackTitle, desc: desc, email: email, image: [""])
         
-        giveFeedbackViewModel.uploadFeedbackData(imageData: selectImage?.pngData(), feedBackData: cmFeedbackData) { isCompleted in
+        giveFeedbackViewModel.uploadFeedbackData(imageData: [selectImage?.pngData(), rightImage?.pngData()], feedBackData: cmFeedbackData) { isCompleted in
             if isCompleted {
                 NotificationCenter.default.post(name: .refreshFeedbackData, object: nil)
                 UIApplication.topViewController()?.showActivityIndicator()
@@ -213,7 +213,6 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
                 }else {
                     self.showAlert(alertMessage: "Something Went Wrong")
                 }
-                
             }
         }
     }

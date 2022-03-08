@@ -19,6 +19,49 @@ class CMFeedBack : NSObject {
     }
 }
 
+class CMGetNotificationData : NSObject {
+    var title : String?
+    var desc : String?
+    var time : String?
+    var _id : String?
+    var status : String?
+//    var isSelected = "true"
+    init(title : String, desc : String, time : String, _id : String, status : String) {
+        super.init()
+        self.desc = desc
+        self.title = title
+        self.time = time
+        self._id = _id
+        self.status = status
+    }
+    
+    override init(){
+        super.init()
+//        addObservers()
+        
+    }
+    
+//    func addObservers() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: .kNotificationReadSelection, object: nil)
+//    }
+//
+//    @objc func methodOfReceivedNotification(notification: Notification) {
+//        if let dataDic = notification.object as? [String:Any] {
+//            guard dataDic["list"] != nil else { return }
+//            let ids = dataDic["list"] as! [String]
+//            if ids.contains(self._id ?? "") {
+//                self.isSelected = dataDic["isSelected"] as! String == "0" ? "true" : "false"
+//            }
+//        }
+//    }
+//
+//    deinit {
+//        NotificationCenter.default.removeObserver(self, name: .kNotificationReadSelection, object: nil)
+//    }
+    
+}
+
+
 
 class CMGetFeedbackData : NSObject {
     var title : String?
@@ -52,8 +95,8 @@ class CMPostFeedbackData : NSObject {
     var title : String?
     var desc : String?
     var email : String?
-    var image : String?
-    init(title : String, desc : String, email: String, image : String){
+    var image : [String?]
+    init(title : String, desc : String, email: String, image : [String]){
 //        super.init()
         self.desc = desc
         self.title = title

@@ -12,7 +12,6 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var btnGetStarted: UIButton!
-    
     let cellID = "WelcomeCell"
     
     override func viewDidLoad() {
@@ -38,9 +37,6 @@ class WelcomeVC: UIViewController {
         
 //        self.openCamera()
     }
-    
-
-
 }
 
 // MARK: - Collection View

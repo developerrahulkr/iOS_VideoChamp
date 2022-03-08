@@ -51,6 +51,7 @@ class HomeVC: UIViewController {
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
         
         self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
+        print("View Controller : \(self.navigationController?.viewControllers)")
     }
     
     override func viewDidLayoutSubviews() {

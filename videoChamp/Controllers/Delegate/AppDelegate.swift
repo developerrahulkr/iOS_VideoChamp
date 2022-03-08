@@ -126,7 +126,7 @@ extension AppDelegate : MessagingDelegate, UNUserNotificationCenterDelegate {
             guard let token = token else {
                 return
             }
-            print("Token : \(token)")
+            print("FCM Token : \(token)")
             UserDefaults.standard.set(token, forKey: "deviceToken")
         }
         

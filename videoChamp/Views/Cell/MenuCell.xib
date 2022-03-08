@@ -8,8 +8,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="argentum-sans.light.ttf">
-            <string>ArgentumSans-Light</string>
+        <array key="argentum-sans.semibold.ttf">
+            <string>ArgentumSans-SemiBold</string>
         </array>
     </customFonts>
     <objects>
@@ -30,8 +30,8 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sc0-1q-SNU">
-                        <rect key="frame" x="50" y="17.5" width="86" height="17.5"/>
-                        <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="15"/>
+                        <rect key="frame" x="50" y="17.5" width="90.5" height="17.5"/>
+                        <fontDescription key="fontDescription" name="ArgentumSans-SemiBold" family="Argentum Sans" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>

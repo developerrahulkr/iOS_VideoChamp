@@ -12,11 +12,9 @@ import SwiftyJSON
 class APIManager : NSObject {
     
     static let shared = APIManager()
-    
-    
     func getUser(userName : String, deviceToken : String,  completionHandler : @escaping(_ dict : JSON?) -> Void) {
 //        let header : HTTPHeaders = [.contentType("application/json")]
-        let param = ["name" : userName, "deviceToken" : deviceToken]
+        let param = ["name" : userName, "deviceToken" : deviceToken, "deviceType" : "ios"]
         AF.request(register_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: nil).response {
             (response) in
             switch response.result {
@@ -31,10 +29,7 @@ class APIManager : NSObject {
             case .failure(let err) :
                 print("Error : \(err.localizedDescription)")
             }
-        
-            
         }
-        
     }
     
     
@@ -44,6 +39,52 @@ class APIManager : NSObject {
         let param = ["feedbackId" : feedbackId, "message" : message]
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
         AF.request(feedback_message_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response { (response) in
+            switch response.result {
+            case .success(let data) :
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let jsonData = try? JSON(data: response.data!)
+                    completionHandler(jsonData)
+                }catch {
+                    print(error.localizedDescription)
+                }
+            case .failure(let err) :
+                print("Error : \(err.localizedDescription)")
+            }
+        }
+    }
+    
+    //    MARK: - read Notification
+        
+    func readNotification(notificationId : String, completionHandler : @escaping(_ dict : JSON?) -> Void){
+        let param = ["notificationId" : notificationId]
+        let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
+        AF.request(read_notification_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response {
+            (response) in
+            
+            switch response.result {
+            case .success(let data) :
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let jsonData = try? JSON(data: response.data!)
+                    completionHandler(jsonData)
+                }catch {
+                    print(error.localizedDescription)
+                }
+            case .failure(let err) :
+                print("Error : \(err.localizedDescription)")
+            }
+        }
+    }
+    
+//  MARK: - delete Notification
+    
+    func deleteNotification(notificationId : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
+        let param = ["notificationId" : notificationId]
+        let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
+        AF.request(delete_notification_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response {
+            (response) in
+            
             switch response.result {
             case .success(let data) :
                 do {
@@ -93,7 +134,7 @@ class APIManager : NSObject {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
         AF.request(notification_url, method: .get, headers: header).response {
             (response) in
-            
+            print(response)
             switch response.result {
                 
             case .success(let data):
@@ -110,6 +151,9 @@ class APIManager : NSObject {
             }
         }
     }
+    
+    
+
     
     
 //    MARK: GetFeedback Message Data
@@ -143,7 +187,7 @@ class APIManager : NSObject {
     
     
     
-    func uploadPostData(imgData : Data?, parameter : [String : Any], completionHandler : ((_ inDict : JSON?) -> Void)? = nil ) {
+    func uploadPostData(imgData : [Data?], parameter : [String : Any], completionHandler : ((_ inDict : JSON?) -> Void)? = nil ) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
         
         //        var imageDataArray: [Data] = []
@@ -153,10 +197,13 @@ class APIManager : NSObject {
         //            }
         //        }
         AF.upload(multipartFormData: { MultipartFormData in
-            if imgData?.isEmpty == nil {
+            if imgData.count == 0 {
                 UIApplication.topViewController()?.showAlert(alertMessage: "Please Upload Image!")
             }else{
-                MultipartFormData.append(imgData!, withName: "image", fileName: "filename.png", mimeType: "image/png")
+                for imageData in imgData {
+                    MultipartFormData.append(imageData!, withName: "image", fileName: "filename.png", mimeType: "image/png")
+                }
+                
             }
             for (key, value) in parameter {
                 MultipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key)

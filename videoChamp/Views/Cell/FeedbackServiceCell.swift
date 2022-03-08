@@ -20,7 +20,7 @@ class FeedbackServiceCell: UITableViewCell {
 
     
     func updateData(inData : CMGetFeedbackServiceData) {
-        lblTime.text = Utility.shared.timeConvertor(string: inData.createdAt ?? "")
+        lblTime.text = Utility.shared.timeFormatConvertor(string: inData.createdAt ?? "")
         lblMsg.text = inData.message
         isType = inData.type ?? ""
     }

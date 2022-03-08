@@ -43,17 +43,17 @@ class FeedbackViewModel : NSObject {
             }else {
                 
                 let data = inDict!["data"].dictionary
-                let userDetail = data!["user"]!.arrayValue
+                let userDetail = data?["user"]!.arrayValue
                 let msg = inDict!["message"].stringValue
                 let statusCode = inDict!["status"].stringValue
                 
                 if statusCode == "200"{
-                    for dic in userDetail {
+                    for dic in userDetail! {
                         self.getFeedbackDataSource.append(CMGetFeedbackData(title: dic["title"].stringValue , desc: dic["desc"].stringValue, time: dic["createdAt"].stringValue, _id: dic["_id"].stringValue))
                     }
                     print("\(msg)")
                     completionHandler(true, true)
-                    if userDetail.isEmpty {
+                    if userDetail!.isEmpty {
                         print("User Is Empty! ")
                         completionHandler(true,false)
                     }
@@ -82,9 +82,9 @@ class FeedbackViewModel : NSObject {
     }
     
 //    MARK: - Uplaod Data with Image
-    func uploadFeedbackData(imageData : Data?, feedBackData : CMPostFeedbackData, completionHandler : @escaping (Bool) -> Void) {
+    func uploadFeedbackData(imageData : [Data?], feedBackData : CMPostFeedbackData, completionHandler : @escaping (Bool) -> Void) {
         
-        let parameter = ["title" : feedBackData.title ?? "", "desc" : feedBackData.desc ?? "", "email" : feedBackData.email ?? "", "image" : feedBackData.image ?? ""] as [String : Any]
+        let parameter = ["title" : feedBackData.title ?? "", "desc" : feedBackData.desc ?? "", "email" : feedBackData.email ?? "", "image" : feedBackData.image] as [String : Any]
         UIApplication.topViewController()?.showActivityIndicator()
         APIManager.shared.uploadPostData(imgData: imageData, parameter: parameter) { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()

@@ -10,9 +10,14 @@ import UIKit
 
 class NotificationViewModel : NSObject {
     
-    lazy var getNotificationDataSource : [CMGetFeedbackData] = {
-        let notificationData = [CMGetFeedbackData]()
+    lazy var getNotificationDataSource : [CMGetNotificationData] = {
+        let notificationData = [CMGetNotificationData]()
         return notificationData
+    }()
+
+    lazy var readDataSource : [CMReadNotificationStatus] = {
+        let readData = [CMReadNotificationStatus]()
+        return readData
     }()
     
     
@@ -28,16 +33,16 @@ class NotificationViewModel : NSObject {
                 let statusCode = inDict!["status"].stringValue
                 
                 let data = inDict!["data"].dictionary
-                let notificationList = data!["notificationList"]!.arrayValue
+                let notificationList = data?["notificationList"]!.arrayValue
                 if statusCode == "200"{
-                    for dic in notificationList {
-                        self.getNotificationDataSource.append(CMGetFeedbackData(title: dic["title"].stringValue, desc: dic["description"].stringValue, time: dic["createdAt"].stringValue, _id: dic["_id"].stringValue))
+                    for dic in notificationList! {
+                        self.getNotificationDataSource.append(CMGetNotificationData(title: dic["title"].stringValue, desc: dic["description"].stringValue, time: dic["createdAt"].stringValue, _id: dic["_id"].stringValue, status: dic["status"].stringValue))
+                        print("notification id : \(dic["_id"].stringValue)")
                         
                     }
-                    print("\(msg)")
                     self.getNotificationDataSource.reverse()
                     completionHandler(true,true)
-                    if notificationList.isEmpty {
+                    if notificationList!.isEmpty {
                         completionHandler(true, false)
                     }
                 }else{
@@ -48,4 +53,52 @@ class NotificationViewModel : NSObject {
         }
     }
     
+    
+    
+    func readNotificationData(notificationId : String, completionHandler : @escaping(Bool) -> ()) {
+        UIApplication.topViewController()?.showActivityIndicator()
+        APIManager.shared.readNotification(notificationId: notificationId) { inDict in
+            UIApplication.topViewController()?.hideActivityIndicator()
+            if inDict == nil {
+                UIApplication.topViewController()?.showAlert(alertMessage: "Directory is Empty!")
+            }else{
+                let statusCode = inDict!["status"].stringValue
+                let msg = inDict!["message"].stringValue
+                let data = inDict!["data"].dictionary
+                let notification = data!["notification"]?.dictionary
+                let read_status = notification!["status"]?.stringValue
+                
+                if statusCode == "200"{
+                    completionHandler(true)
+                    print("read Status : \(read_status ?? "")")
+                    print(msg)
+                }else{
+                    completionHandler(false)
+                }
+                
+            }
+        }
+    }
+    
+//    MARK: - Delete Notification Function 
+    
+    func deleteNotificationData(notificationId : String, completionHandler : @escaping(Bool) -> ()) {
+        UIApplication.topViewController()?.showActivityIndicator()
+        APIManager.shared.deleteNotification(notificationId: notificationId) { inDict in
+            UIApplication.topViewController()?.hideActivityIndicator()
+            if inDict == nil {
+                UIApplication.topViewController()?.showAlert(alertMessage: "Directory is Empty!")
+            }else{
+                let statusCode = inDict!["status"].stringValue
+                let msg = inDict!["message"].stringValue
+                if statusCode == "200"{
+                    completionHandler(true)
+                    print("Successfully delete the Notification.")
+                    print(msg)
+                }else{
+                    completionHandler(false)
+                }
+            }
+        }
+    }
 }

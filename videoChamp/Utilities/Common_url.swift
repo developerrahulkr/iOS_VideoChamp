@@ -15,6 +15,9 @@ let get_feedback_url = "\(base_url)/feedbacklist"
 let post_feedback_url = "\(base_url)/user/feedback"
 
 let notification_url = "\(base_url)/notificationlist"
+let read_notification_url = "\(base_url)/notificationread"
+let delete_notification_url = "\(base_url)/notificationdelete"
+
 
 let message_list_url = "\(base_url)/msglisting?FeedId="
 

@@ -15,6 +15,7 @@ class FeedbackServiceVC: UIViewController {
     @IBOutlet weak var lblFeedbackTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imgOpenCamera: UIImageView!
+    @IBOutlet weak var imgAttatchmentIcon: UIImageView!
     
     var lblTitleText = ""
     let cellID = "FeedbackServiceCell"
@@ -33,9 +34,9 @@ class FeedbackServiceVC: UIViewController {
         
         lblFeedbackTitle.text = lblTitleText
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
-        print("feed Id ::: ::: ::: :::\(feed_id)")
         openCameraAndAttatchment()
         loadData()
+        print("\(feed_id)")
         
     }
     
@@ -54,7 +55,9 @@ class FeedbackServiceVC: UIViewController {
     
     func openCameraAndAttatchment(){
         let cameraGesture = UITapGestureRecognizer(target: self, action: #selector(openCamera))
+        let attatchmentGesture = UITapGestureRecognizer(target: self, action: #selector(openGallery))
         imgOpenCamera.addGestureRecognizer(cameraGesture)
+        imgAttatchmentIcon.addGestureRecognizer(attatchmentGesture)
         tableView.transform = CGAffineTransform(scaleX: 1, y: 1)
         
     }
@@ -86,10 +89,34 @@ class FeedbackServiceVC: UIViewController {
     
     
     @objc func openCamera(){
-        validateForCameraAccessForPhotoVideo()
+        validateForCameraAccess()
+    }
+    @objc func openGallery(){
+        validateForGalleryAccess()
     }
 
-    private func validateForCameraAccessForPhotoVideo(){
+    private func validateForCameraAccess(){
+        CameraUtilities.shared.checkCamraPermission { isGranted in
+            guard isGranted else {
+                return
+            }
+            
+            guard UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) else {
+                self.showAlert(alertMessage: "Camera is not build in this Device! ")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let imagePickerVC = UIImagePickerController()
+                imagePickerVC.sourceType = .camera
+                imagePickerVC.delegate = self
+                imagePickerVC.allowsEditing = true
+                self.present(imagePickerVC, animated: true)
+            }
+        }
+    }
+    
+    private func validateForGalleryAccess(){
         CameraUtilities.shared.checkCamraPermission { isGranted in
             guard isGranted else {
                 return

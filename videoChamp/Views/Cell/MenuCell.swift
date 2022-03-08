@@ -16,7 +16,9 @@ class MenuCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        lblName.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
     }
+    
 
     
     @IBAction func onClickedArrowBtn(_ sender: UIButton) {

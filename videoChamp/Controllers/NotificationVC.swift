@@ -60,7 +60,6 @@ extension NotificationVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! NotificationCell
         cell.updateData(inData: notificationViewModel.getNotificationDataSource[indexPath.row])
-        
         return cell
     }
     
@@ -71,17 +70,28 @@ extension NotificationVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        self.notificationViewModel.readNotificationData(notificationId: notificationViewModel.getNotificationDataSource[indexPath.row]._id!) { isSuccess  in
+            if isSuccess {
+                self.notificationTableView.reloadData()
+            }else{
+                print("Wrong to read")
+            }
+        }
     }
+
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-
-//            self.arr.remove(at: indexPath.row)
-            self.notificationViewModel.getNotificationDataSource.remove(at: indexPath.row)
-            self.notificationTableView.deleteRows(at: [indexPath], with: .fade)
-            self.notificationTableView.reloadData()
-            completionHandler(true)
+            self.notificationViewModel.deleteNotificationData(notificationId: self.notificationViewModel.getNotificationDataSource[indexPath.row]._id!) {
+                isDeleted in
+                if isDeleted {
+                    self.notificationViewModel.getNotificationDataSource.remove(at: indexPath.row)
+                    self.notificationTableView.reloadData()
+                    completionHandler(true)
+                }else{
+                    print("Wrong to Delete")
+                }
+            }
         }
         deleteAction.image = UIImage(named: "trash_icon")
         deleteAction.backgroundColor = .clear

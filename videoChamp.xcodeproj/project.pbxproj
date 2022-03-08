@@ -53,6 +53,7 @@
 		2C36262327BD24A200EB4CD6 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C36262127BD24A200EB4CD6 /* NotificationCell.xib */; };
 		2C36262627BD32AA00EB4CD6 /* TermsAndConditionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36262427BD32AA00EB4CD6 /* TermsAndConditionsCell.swift */; };
 		2C36262727BD32AA00EB4CD6 /* TermsAndConditionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C36262527BD32AA00EB4CD6 /* TermsAndConditionsCell.xib */; };
+		2C40DFFD27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40DFFC27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift */; };
 		2C52B2DA27CCB115004F2A00 /* CMRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52B2D927CCB115004F2A00 /* CMRegister.swift */; };
 		2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */; };
 		2C68C7F627CCFDD600F76E8A /* GiveFeedbackCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */; };
@@ -152,6 +153,7 @@
 		2C36262127BD24A200EB4CD6 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		2C36262427BD32AA00EB4CD6 /* TermsAndConditionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsCell.swift; sourceTree = "<group>"; };
 		2C36262527BD32AA00EB4CD6 /* TermsAndConditionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndConditionsCell.xib; sourceTree = "<group>"; };
+		2C40DFFC27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMReadNotificationStatus.swift; sourceTree = "<group>"; };
 		2C52B2D927CCB115004F2A00 /* CMRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRegister.swift; sourceTree = "<group>"; };
 		2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackCell1.swift; sourceTree = "<group>"; };
 		2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiveFeedbackCell1.xib; sourceTree = "<group>"; };
@@ -174,17 +176,17 @@
 		2CA1CF3827C658DD00BEB063 /* Common_url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common_url.swift; sourceTree = "<group>"; };
 		2CA1CF3A27C65D0F00BEB063 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		2CA1CF3C27C75A1D00BEB063 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		2CA1CF3E27C79E4B00BEB063 /* argentum-sans.medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.medium.ttf"; path = "../../../../argentum-sans.medium.ttf"; sourceTree = "<group>"; };
-		2CA1CF3F27C79E4B00BEB063 /* argentum-sans.regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.regular.ttf"; path = "../../../../argentum-sans.regular.ttf"; sourceTree = "<group>"; };
-		2CA1CF4027C79E4B00BEB063 /* argentum-sans.semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.semibold.ttf"; path = "../../../../argentum-sans.semibold.ttf"; sourceTree = "<group>"; };
-		2CA1CF4127C79E4B00BEB063 /* argentum-sans.light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.light.ttf"; path = "../../../../argentum-sans.light.ttf"; sourceTree = "<group>"; };
 		2CA1CF5527C8B21F00BEB063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CA1CF5727C8BBFF00BEB063 /* videoChamp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = videoChamp.entitlements; sourceTree = "<group>"; };
 		2CA1CF5827C8BE1600BEB063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2CA56C1E27D1EBFC00152FC8 /* argentum-sans.black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.black.ttf"; path = "../../../../argentum-sans.black.ttf"; sourceTree = "<group>"; };
-		2CA56C1F27D1EBFC00152FC8 /* argentum-sans.bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.bold.ttf"; path = "../../../../argentum-sans.bold.ttf"; sourceTree = "<group>"; };
-		2CA56C2027D1EBFC00152FC8 /* argentum-sans.extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "argentum-sans.extrabold.ttf"; path = "../../../../argentum-sans.extrabold.ttf"; sourceTree = "<group>"; };
 		2CA56C2127D2411800152FC8 /* FeedbackMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMessageViewModel.swift; sourceTree = "<group>"; };
+		2CC21B0D27D7A59A0054DF4B /* argentum-sans.black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.black.ttf"; sourceTree = SOURCE_ROOT; };
+		2CC21B0E27D7A59A0054DF4B /* argentum-sans.medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.medium.ttf"; sourceTree = SOURCE_ROOT; };
+		2CC21B0F27D7A59A0054DF4B /* argentum-sans.semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.semibold.ttf"; sourceTree = SOURCE_ROOT; };
+		2CC21B1027D7A59A0054DF4B /* argentum-sans.light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.light.ttf"; sourceTree = SOURCE_ROOT; };
+		2CC21B1127D7A59A0054DF4B /* argentum-sans.extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.extrabold.ttf"; sourceTree = SOURCE_ROOT; };
+		2CC21B1227D7A59A0054DF4B /* argentum-sans.regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.regular.ttf"; sourceTree = SOURCE_ROOT; };
+		2CC21B1327D7A59A0054DF4B /* argentum-sans.bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.bold.ttf"; sourceTree = SOURCE_ROOT; };
 		526E4869A0DCF02E6EEC06CA /* Pods_videoChamp_videoChampUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoChamp_videoChampUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52FEA1DE9FEC8BD9ECF5F135 /* Pods_videoChamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoChamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FDB6A7353C962CC9DFFD46 /* Pods-videoChampTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoChampTests.release.xcconfig"; path = "Target Support Files/Pods-videoChampTests/Pods-videoChampTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				2C36260D27BD087300EB4CD6 /* CMMenu.swift */,
 				2C172D2B27C4CA4E005BA3AD /* CMFeedBack.swift */,
 				2C52B2D927CCB115004F2A00 /* CMRegister.swift */,
+				2C40DFFC27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -415,13 +418,13 @@
 		2C8D43E227BFB14700C5722A /* Font Family */ = {
 			isa = PBXGroup;
 			children = (
-				2CA56C1E27D1EBFC00152FC8 /* argentum-sans.black.ttf */,
-				2CA56C1F27D1EBFC00152FC8 /* argentum-sans.bold.ttf */,
-				2CA56C2027D1EBFC00152FC8 /* argentum-sans.extrabold.ttf */,
-				2CA1CF4127C79E4B00BEB063 /* argentum-sans.light.ttf */,
-				2CA1CF3E27C79E4B00BEB063 /* argentum-sans.medium.ttf */,
-				2CA1CF3F27C79E4B00BEB063 /* argentum-sans.regular.ttf */,
-				2CA1CF4027C79E4B00BEB063 /* argentum-sans.semibold.ttf */,
+				2CC21B0D27D7A59A0054DF4B /* argentum-sans.black.ttf */,
+				2CC21B1327D7A59A0054DF4B /* argentum-sans.bold.ttf */,
+				2CC21B1127D7A59A0054DF4B /* argentum-sans.extrabold.ttf */,
+				2CC21B1027D7A59A0054DF4B /* argentum-sans.light.ttf */,
+				2CC21B0E27D7A59A0054DF4B /* argentum-sans.medium.ttf */,
+				2CC21B1227D7A59A0054DF4B /* argentum-sans.regular.ttf */,
+				2CC21B0F27D7A59A0054DF4B /* argentum-sans.semibold.ttf */,
 			);
 			path = "Font Family";
 			sourceTree = "<group>";
@@ -746,6 +749,7 @@
 				2C36262627BD32AA00EB4CD6 /* TermsAndConditionsCell.swift in Sources */,
 				2C36261F27BD16FB00EB4CD6 /* ShareVC.swift in Sources */,
 				2C36260E27BD087300EB4CD6 /* CMMenu.swift in Sources */,
+				2C40DFFD27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift in Sources */,
 				2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */,
 				2C8D43EC27BFC02B00C5722A /* RemoteControlVC.swift in Sources */,
 				2CA1CF3927C658DD00BEB063 /* Common_url.swift in Sources */,

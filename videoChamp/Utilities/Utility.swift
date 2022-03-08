@@ -39,7 +39,25 @@ class Utility : NSObject {
         if let _ = dateFormatter.date(from: "\(string)") {
             //date parsing succeeded, if you need to do additional logic, replace _ with some variable name i.e date
             let formateDate = dateFormatter.date(from:"\(string)")!
-            dateFormatter.dateFormat = "hh:mm"
+            dateFormatter.dateFormat = "HH:mm"
+            return dateFormatter.string(from: formateDate)
+        } else {
+            // Invalid date
+            return string
+        }
+    }
+    
+    
+    func timeFormatConvertor(string: String) -> String
+    {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // This formate is input formated .
+        
+        if let _ = dateFormatter.date(from: "\(string)") {
+            //date parsing succeeded, if you need to do additional logic, replace _ with some variable name i.e date
+            let formateDate = dateFormatter.date(from:"\(string)")!
+            dateFormatter.dateFormat = "hh:mm a"
             return dateFormatter.string(from: formateDate)
         } else {
             // Invalid date
