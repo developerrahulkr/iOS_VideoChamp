@@ -14,7 +14,10 @@ class APIManager : NSObject {
     static let shared = APIManager()
     func getUser(userName : String, deviceToken : String,  completionHandler : @escaping(_ dict : JSON?) -> Void) {
 //        let header : HTTPHeaders = [.contentType("application/json")]
-        let param = ["name" : userName, "deviceToken" : deviceToken, "deviceType" : "ios"]
+        let param = ["name" : userName, "deviceToken" : deviceToken, "deviceType" : "\(UIDevice.current.systemName)", "deviceId" : "\(UIDevice.current.name)"]
+        
+        print("device Model and name : \(UIDevice.current.name) \(String(describing: UIDevice.current.model))")
+        print("\(UIDevice.current.model)")
         AF.request(register_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: nil).response {
             (response) in
             switch response.result {
@@ -35,24 +38,37 @@ class APIManager : NSObject {
     
 //    MARK: - Post feedback Message
     
-    func sendFeedbackMessage(feedbackId : String, message : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
-        let param = ["feedbackId" : feedbackId, "message" : message]
+    func postFeedbackMessageData(imgData : Data?, parameter : [String : Any], completionHandler : ((_ inDict : JSON?) -> Void)? = nil ) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
-        AF.request(feedback_message_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response { (response) in
-            switch response.result {
-            case .success(let data) :
-                do {
-                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
-                    let jsonData = try? JSON(data: response.data!)
-                    completionHandler(jsonData)
-                }catch {
-                    print(error.localizedDescription)
-                }
-            case .failure(let err) :
-                print("Error : \(err.localizedDescription)")
+
+        AF.upload(multipartFormData: { MultipartFormData in
+            if imgData?.isEmpty == nil {
+//                UIApplication.topViewController()?.showAlert(alertMessage: "Please Upload Image!")
+                print("image is Not Uploaded!")
+            }else{
+                MultipartFormData.append(imgData!, withName: "image", fileName: "filename.png", mimeType: "image/png")
+            }
+            for (key, value) in parameter {
+                MultipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key)
+            }
+        }, to: feedback_message_url, method: .post, headers: header).response { (response) in
+            print(response)
+            if let err = response.error {
+                print("error : \(err)")
+                return
+            }
+            
+            print("Successfully uploaded")
+            let json = response.data
+            if json != nil {
+                let jsonObject = JSON(json!)
+                print(jsonObject)
+                completionHandler!(jsonObject)
             }
         }
+        
     }
+
     
     //    MARK: - read Notification
         
@@ -163,12 +179,14 @@ class APIManager : NSObject {
         let feedback_list_url = "\(message_list_url)\(feedID)"
         AF.request(feedback_list_url, method: .get, parameters: nil, headers: header).response {
             (response) in
+            print(response)
             switch response.result {
                 
             case .success(let data):
                 do {
                     _ = try JSONSerialization.jsonObject(with: data!, options: [])
                     let jsonData = try? JSON(data: response.data!)
+                    print("All Data : \(jsonData)")
                     completionHandler(jsonData)
                 }catch (let err) {
                     print(err.localizedDescription)
@@ -189,13 +207,7 @@ class APIManager : NSObject {
     
     func uploadPostData(imgData : [Data?], parameter : [String : Any], completionHandler : ((_ inDict : JSON?) -> Void)? = nil ) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
-        
-        //        var imageDataArray: [Data] = []
-        //        _ = imgData.map {
-        //            if let data = $0.jpegData(compressionQuality: 0.5) {
-        //                imageDataArray.append(data)
-        //            }
-        //        }
+
         AF.upload(multipartFormData: { MultipartFormData in
             if imgData.count == 0 {
                 UIApplication.topViewController()?.showAlert(alertMessage: "Please Upload Image!")
@@ -208,12 +220,6 @@ class APIManager : NSObject {
             for (key, value) in parameter {
                 MultipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key)
             }
-            
-            //            /// APPEND Images in multipart
-            //            _ = imageDataArray.map {
-            //                MultipartFormData.append($0, withName: "image", fileName: "img.jpg", mimeType: "image/jpeg")
-            //                print("Success Front image append")
-            //            }
         }, to: post_feedback_url, method: .post, headers: header).response { (response) in
             print(response)
             
@@ -232,5 +238,6 @@ class APIManager : NSObject {
         }
         
     }
+    
     
 }

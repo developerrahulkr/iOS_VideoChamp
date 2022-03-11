@@ -10,15 +10,16 @@ import UIKit
 
 
 class FeedbackViewModel : NSObject {
-    
-//    lazy var feedbackDataSource : [CMNotification] = {
-//        let feedbackData = [CMNotification]()
-//        return feedbackData
-//    }()
+
     
     
     lazy var getFeedbackDataSource : [CMGetFeedbackData] = {
         let feedbackData = [CMGetFeedbackData]()
+        return feedbackData
+    }()
+    
+    lazy var getFeedbackDescriptionDataSource : [CMGetFeedbackDescriptionData] = {
+        let feedbackData = [CMGetFeedbackDescriptionData]()
         return feedbackData
     }()
     
@@ -72,7 +73,7 @@ class FeedbackViewModel : NSObject {
         let data2 = CMFeedBack(secTitle: "Enter your email Id", secTitle2: "")
         giveFeedbackSection.append(data2)
         
-        let data3 = CMFeedBack(secTitle: "Please do share your feedback", secTitle2: "0/100")
+        let data3 = CMFeedBack(secTitle: "", secTitle2: "")
         giveFeedbackSection.append(data3)
         
         let data4 = CMFeedBack(secTitle: "Attach Screenshots (Optional)", secTitle2: "")
@@ -118,9 +119,16 @@ class FeedbackViewModel : NSObject {
                 let statusCode = dict!["status"].stringValue
                 let data = dict!["data"].dictionary
                 let messageData = data!["messagelisting"]!.arrayValue
+                
+                let feedbackDetail = data!["feedbackDetail"]?.dictionary
+                print(feedbackDetail!["desc"]!.stringValue)
+                self.getFeedbackDescriptionDataSource.append(CMGetFeedbackDescriptionData(desc: feedbackDetail!["desc"]!.stringValue, createdAt: feedbackDetail!["createdAt"]!.stringValue))
+//                self.getFeedbackServiceDataSource.append(CMGetFeedbackServiceData(message: "", type: "", createdAt: "", image: ""))
+                
                 if statusCode == "200" {
                     for dic in messageData {
-                        self.getFeedbackServiceDataSource.append(CMGetFeedbackServiceData(message: dic["message"].stringValue, type: dic["type"].stringValue, createdAt: dic["createdAt"].stringValue))
+                        self.getFeedbackServiceDataSource.append(CMGetFeedbackServiceData(message: dic["message"].stringValue, type: dic["type"].stringValue, createdAt: dic["createdAt"].stringValue, image: dic["image"].stringValue))
+
                     }
                     print("\(msg)")
                     completionHandler(true)

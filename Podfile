@@ -14,8 +14,7 @@ pod 'SwiftyJSON'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'NVActivityIndicatorView'
-
-
+pod 'SDWebImage'
   target 'videoChampTests' do
     inherit! :search_paths
     # Pods for testing

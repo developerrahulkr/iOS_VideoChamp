@@ -37,7 +37,7 @@ class AvatarVC: UIViewController {
     @IBOutlet weak var imgAvatar5: UIImageView!
     @IBOutlet weak var imgAvatar6: UIImageView!
     @IBOutlet weak var imgAvatar7: UIImageView!
-    
+    var isSelected = false
     let userViewModel = UserViewModel()
     
     
@@ -79,31 +79,38 @@ class AvatarVC: UIViewController {
     @objc func changeImage1(){
         img1.image = imgAvatar2.image
         lblUserName1.textColor = lblUserName2.textColor
+        isSelected = true
     }
     
     @objc func changeImage2(){
         img1.image = imgAvatar3.image
         lblUserName1.textColor = lblUserName3.textColor
+        isSelected = true
     }
     
     @objc func changeImage3(){
         img1.image = imgAvatar4.image
         lblUserName1.textColor = lblUserName4.textColor
+        isSelected = true
     }
     
     @objc func changeImage4(){
         img1.image = imgAvatar5.image
         lblUserName1.textColor = lblUserName5.textColor
+        isSelected = true
     }
+    
     
     @objc func changeImage5(){
         img1.image = imgAvatar6.image
         lblUserName1.textColor = lblUserName6.textColor
+        isSelected = true
     }
     
     @objc func changeImage6(){
         img1.image = imgAvatar7.image
         lblUserName1.textColor = lblUserName7.textColor
+        isSelected = true
     }
     
     
@@ -116,11 +123,14 @@ class AvatarVC: UIViewController {
     
     
     @IBAction func onClickedSubmitButton(_ sender: UIButton) {
-        if lblUserName1.text == ""{
-            showAlert(alertMessage: "User Name  is Required!")
-        }
         
-        if tfName.text?.count != 0 && tfName.text != nil {
+        if lblUserName1.text == "" {
+            showAlert(alertMessage: "User Name  is Required!")
+        }else if !isValidName(userName: tfName.text ?? "") {
+            self.showAlert(alertMessage: "UserName is Not Valid")
+        }else if !isSelected {
+            self.showAlert(alertMessage: "Please Choose Avatar!")
+        }else if tfName.text?.count != 0 && tfName.text != nil {
             var color = UIColor()
             var avatarImage = UIImage()
             color = self.lblUserName1.textColor

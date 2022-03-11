@@ -10,6 +10,8 @@ import UIKit
 protocol openPhotoLibraryDelegate{
     func openLibrary()
     func openLibrary2()
+    func closeLeftImage(tag : Int)
+    func closeRightImage(tag : Int)
 }
 
 
@@ -19,6 +21,8 @@ class GiveFeedbackCell3: UITableViewCell {
     @IBOutlet weak var imgRightView: UIView!
     @IBOutlet weak var imgLeft: UIImageView!
     @IBOutlet weak var imgRight: UIImageView!
+    
+    
     
     var delegate : openPhotoLibraryDelegate!
     
@@ -45,6 +49,14 @@ class GiveFeedbackCell3: UITableViewCell {
     @objc func openRightPhotoLibrary(){
         delegate.openLibrary2()
         self.callBackForRightImg?()
+    }
+    
+    @IBAction func onClickedLeftImageCancel(_ sender: UIButton) {
+        delegate.closeLeftImage(tag: sender.tag)
+    }
+    
+    @IBAction func onClickedRightImageClose(_ sender: UIButton) {
+        delegate.closeRightImage(tag: sender.tag)
     }
     
     

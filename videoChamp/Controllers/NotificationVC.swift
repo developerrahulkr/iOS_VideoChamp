@@ -16,6 +16,7 @@ class NotificationVC: UIViewController {
     let cellID = "NotificationCell"
     
     let notificationViewModel = NotificationViewModel()
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +26,36 @@ class NotificationVC: UIViewController {
         loadData()
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
         
+        refreshControl.attributedTitle = NSAttributedString(string: "refresh Data")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        notificationTableView.addSubview(refreshControl)
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.notificationViewModel.getNotificationDataSource.removeAll()
+            self.loadData()
+            self.refreshControl.endRefreshing()
+        }
+        
+        
+        
+        
+    }
     
     func loadData() {
-        notificationViewModel.getNotificationData { [weak self] isRunningStatus, isNotificationEmpty in
-            guard let self = self else {return}
-            
-            if isRunningStatus && isNotificationEmpty {
-                self.notificationTableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            self.notificationViewModel.getNotificationData { [weak self] isRunningStatus, isNotificationEmpty in
+                guard let self = self else {return}
+                
+                if isRunningStatus && isNotificationEmpty {
+                    self.notificationTableView.reloadData()
+                }
+                
             }
-            
         }
+        
     }
     
     
@@ -65,14 +84,14 @@ extension NotificationVC : UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.notificationViewModel.readNotificationData(notificationId: notificationViewModel.getNotificationDataSource[indexPath.row]._id!) { isSuccess  in
             if isSuccess {
-                self.notificationTableView.reloadData()
+                self.loadData()
             }else{
                 print("Wrong to read")
             }

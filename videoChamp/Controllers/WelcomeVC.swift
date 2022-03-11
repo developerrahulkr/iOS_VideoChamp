@@ -13,6 +13,9 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var btnGetStarted: UIButton!
     let cellID = "WelcomeCell"
+    let titleArr1 = ["Tutorial Page","Tutorial Page","Tutorial Page"]
+    let titleArr2 = ["HOW","HOW","HOW"]
+    let titleArr3 = ["TO USE","TO USE","TO USE"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +23,9 @@ class WelcomeVC: UIViewController {
         collectionView.register(UINib(nibName: cellID, bundle: nil), forCellWithReuseIdentifier: cellID)
         // Do any additional setup after loading the view.
         self.gradientColor(topColor: yellowColor, bottomColor: redColor)
+        pageController.currentPage = 0
+        pageController.numberOfPages = titleArr1.count
     }
-    
-    
-    
 
     override func viewDidLayoutSubviews() {
         btnGetStarted.layer.cornerRadius = btnGetStarted.bounds.height/2
@@ -43,11 +45,13 @@ class WelcomeVC: UIViewController {
 extension WelcomeVC : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return titleArr1.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! WelcomeCell
-        
+        cell.lbl1TutorialPage.text = titleArr1[indexPath.row]
+        cell.lbl2How.text = titleArr2[indexPath.row]
+        cell.lbl3ToUse.text = titleArr3[indexPath.row]
         return cell
     }
     
@@ -62,17 +66,19 @@ extension WelcomeVC : UICollectionViewDelegate, UICollectionViewDataSource, UICo
         return CGSize(width: UIScreen.main.bounds.width, height: 230)
     }
     
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        pageController.currentPage = indexPath.item
+//        print("current Index : \(indexPath.item)")
+//    }
+
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         for cell in collectionView.visibleCells {
             let indexPath = collectionView.indexPath(for: cell)
             pageController.currentPage = indexPath?.item ?? 0
+            print("Current Page : \(pageController.currentPage)")
         }
     }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
-    }
-    
+  
     
 }

@@ -118,7 +118,18 @@ extension AppDelegate : MessagingDelegate, UNUserNotificationCenterDelegate {
             }
         }
         
+        let action1 = UNNotificationAction(identifier: "action1", title: "Action First", options: [.foreground])
+        let action2 = UNNotificationAction(identifier: "action2", title: "Action Second", options: [.foreground])
+        let category = UNNotificationCategory(identifier: "actionCategory", actions: [action1,action2], intentIdentifiers: [], options: [])
         
+        UNUserNotificationCenter.current().setNotificationCategories([category])
+        
+        
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let info = notification.request.content.userInfo
+        print(info) // the payload that is attached to the push notification
+        completionHandler([.alert,.sound, .badge])
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {

@@ -13,19 +13,20 @@ import SwiftyJSON
 
 class FeedbackMessageViewModel : NSObject {
     
-    func feedbackMessage(message : String, feedId : String, completionHandler : @escaping(Bool) -> Void) {
+    func feedbackMessageData( imageData : Data?, messageData : CMFeedbackMessageData, completionHandler : @escaping(Bool) -> Void) {
+        
+        let param = ["feedbackId" : messageData.feedbackId ?? "", "message" : messageData.message ?? "", "image" : messageData.image ?? ""] as [String : Any]
         
         UIApplication.topViewController()?.showActivityIndicator()
-        APIManager.shared.sendFeedbackMessage(feedbackId: feedId, message: message) { dict in
+        APIManager.shared.postFeedbackMessageData(imgData: imageData, parameter: param) { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
             
-            if dict == nil {
+            if inDict == nil {
                 UIApplication.topViewController()?.showAlert(alertMessage: "Directory is Empty...")
             }else{
                 
-                let statusCode = dict!["status"].stringValue
-                let error_msg = dict!["message"].stringValue
-                
+                let statusCode = inDict!["status"].stringValue
+                let error_msg = inDict!["message"].stringValue
                 if statusCode == "200"{
                     print("msg : \(error_msg)")
                     completionHandler(true)
@@ -36,7 +37,12 @@ class FeedbackMessageViewModel : NSObject {
             }
         }
         
+        
+        
     }
+    
+    
+    
     
 }
 

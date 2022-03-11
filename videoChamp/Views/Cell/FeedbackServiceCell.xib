@@ -26,13 +26,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svO-ge-QZs">
-                        <rect key="frame" x="20" y="12" width="352" height="36.5"/>
+                        <rect key="frame" x="20" y="12" width="352" height="42"/>
                         <subviews>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="feedback_left_cell" translatesAutoresizingMaskIntoConstraints="NO" id="PpU-kY-AcT">
-                                <rect key="frame" x="0.0" y="0.0" width="352" height="36.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="352" height="42"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi, How can I help You ?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYM-NH-i0X">
-                                <rect key="frame" x="20" y="10" width="312" height="16.5"/>
+                                <rect key="frame" x="20" y="10" width="312" height="22"/>
                                 <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="13"/>
                                 <color key="textColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -51,7 +51,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:58 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYy-Fm-lFm">
-                        <rect key="frame" x="330.5" y="58.5" width="41.5" height="10.5"/>
+                        <rect key="frame" x="330.5" y="64" width="41.5" height="17"/>
                         <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="9"/>
                         <color key="textColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -60,7 +60,7 @@
                 <constraints>
                     <constraint firstItem="svO-ge-QZs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="F9k-Ln-XoC"/>
                     <constraint firstItem="qYy-Fm-lFm" firstAttribute="top" secondItem="svO-ge-QZs" secondAttribute="bottom" constant="10" id="I5R-88-LCg"/>
-                    <constraint firstAttribute="bottom" secondItem="qYy-Fm-lFm" secondAttribute="bottom" constant="20" id="KuZ-3R-Ndt"/>
+                    <constraint firstAttribute="bottom" secondItem="qYy-Fm-lFm" secondAttribute="bottom" constant="8" id="KuZ-3R-Ndt"/>
                     <constraint firstAttribute="trailing" secondItem="qYy-Fm-lFm" secondAttribute="trailing" constant="20" id="cvQ-yE-FtH"/>
                     <constraint firstAttribute="trailing" secondItem="svO-ge-QZs" secondAttribute="trailing" constant="20" id="fdz-SZ-QNa"/>
                     <constraint firstItem="svO-ge-QZs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="wRp-z3-6vU"/>

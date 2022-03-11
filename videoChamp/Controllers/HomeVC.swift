@@ -39,6 +39,7 @@ class HomeVC: UIViewController {
 //        lblDeviceTitle.font = UIFont(name: "argentum-sans.bold", size: 14.0)
         lblDeviceTitle.font = UIFont.systemFont(ofSize: 14.0, weight: .bold)
         lblOR.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
+        lblUserName.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
 
         // Do any additional setup after loading the view.
         
@@ -63,7 +64,7 @@ class HomeVC: UIViewController {
             }
         }
         imgAvatar.image = UserDefaults.standard.imageForKey(key: "avatarImage")
-        lblUserName.text = "Hello \(UserDefaults.standard.string(forKey: kUserNAme) ?? "User Name")"
+        lblUserName.text = "\(UserDefaults.standard.string(forKey: kUserNAme) ?? "User Name")"
         lblCamera.font = UIFont.systemFont(ofSize: 17.0, weight: .regular)
         lblControlDevice.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
         

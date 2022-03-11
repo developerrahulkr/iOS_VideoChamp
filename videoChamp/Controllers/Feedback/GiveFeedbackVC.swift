@@ -25,6 +25,7 @@ class GiveFeedbackVC: UIViewController {
     var feedbackTitle = ""
     var email = ""
     var desc = ""
+    var wordLimit = 100
     var selectImage : UIImage?
     var rightImage : UIImage?
     override func viewDidLoad() {
@@ -63,10 +64,7 @@ class GiveFeedbackVC: UIViewController {
 
 extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackDataDelegate, openPhotoLibraryDelegate {
     
-    
-    
-    
-    
+
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return giveFeedbackViewModel.giveFeedbackSection.count
@@ -80,7 +78,12 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
         return header
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        if section == 2 {
+            return -20.0
+        }else {
+            return 20
+        }
+        
     }
     
     
@@ -109,11 +112,16 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
             return cell
         }else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! GiveFeedbackCell2
+            
             cell.callBack  = {
                 data in
-                
                 self.desc = data
                 print("desc \(self.desc)")
+            }
+            
+            cell.callBackUpdateCounting = { data in
+                cell.lblCount.text = "\(data.count+1)/100"
+                
             }
             return cell
             
@@ -193,28 +201,41 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
     
     
     func submitData(tag: Int) {
-        let cmFeedbackData = CMPostFeedbackData(title: feedbackTitle, desc: desc, email: email, image: [""])
-        
-        giveFeedbackViewModel.uploadFeedbackData(imageData: [selectImage?.pngData(), rightImage?.pngData()], feedBackData: cmFeedbackData) { isCompleted in
-            if isCompleted {
-                NotificationCenter.default.post(name: .refreshFeedbackData, object: nil)
-                UIApplication.topViewController()?.showActivityIndicator()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    UIApplication.topViewController()?.hideActivityIndicator()
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }else{
-                if self.feedbackTitle == "" {
-                    self.showAlert(alertMessage: "Please Enter the title!")
-                }else if self.desc == "" {
-                    self.showAlert(alertMessage: "Please Enter the description!")
-                }else if self.email == ""{
-                    self.showAlert(alertMessage: "Please Enter the email!")
-                }else {
-                    self.showAlert(alertMessage: "Something Went Wrong")
+        if isValidEmail(testStr: email) {
+            let cmFeedbackData = CMPostFeedbackData(title: feedbackTitle, desc: desc, email: email, image: [""])
+            giveFeedbackViewModel.uploadFeedbackData(imageData: [selectImage?.pngData(), rightImage?.pngData()], feedBackData: cmFeedbackData) { isCompleted in
+                if isCompleted {
+                    NotificationCenter.default.post(name: .refreshFeedbackData, object: nil)
+                    UIApplication.topViewController()?.showActivityIndicator()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        UIApplication.topViewController()?.hideActivityIndicator()
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }else{
+                    if self.feedbackTitle == "" {
+                        self.showAlert(alertMessage: "Please Enter the title!")
+                    }else if self.desc == "" {
+                        self.showAlert(alertMessage: "Please Enter the description!")
+                    }else if self.email == ""{
+                        self.showAlert(alertMessage: "Please Enter the email!")
+                    }else {
+                        self.showAlert(alertMessage: "Something Went Wrong")
+                    }
                 }
             }
+        }else {
+            self.showAlert(alertMessage: "email is not Valid")
         }
+        
+    }
+    
+    func closeLeftImage(tag: Int) {
+        self.selectImage = UIImage(named: "image_upload_icon")
+        tableView.reloadData()
+    }
+    
+    func closeRightImage(tag: Int) {
+        self.rightImage = UIImage(named: "image_upload_icon")
     }
 }
 
@@ -225,9 +246,12 @@ extension GiveFeedbackVC : UITextFieldDelegate, UITextViewDelegate, UIImagePicke
         return true
     }
 
+    
+    
+    
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {return}
-        
         print(image.size)
         if isFirst {
             self.selectImage = image
@@ -239,3 +263,4 @@ extension GiveFeedbackVC : UITextFieldDelegate, UITextViewDelegate, UIImagePicke
         self.tableView.reloadData()
     }
 }
+

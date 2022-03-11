@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import SDWebImage
 
 class FeedbackServiceVC: UIViewController {
     
@@ -16,16 +18,16 @@ class FeedbackServiceVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imgOpenCamera: UIImageView!
     @IBOutlet weak var imgAttatchmentIcon: UIImageView!
-    
+    let refreshControl = UIRefreshControl()
     var lblTitleText = ""
     let cellID = "FeedbackServiceCell"
+    let cellID2 = "FeedbackMsgImageCell"
     var feed_id = ""
     let FeedbackVM = FeedbackViewModel()
     let feedbackMessageVM = FeedbackMessageViewModel()
-    
     @IBOutlet weak var onClickSendData: UIButton!
     @IBOutlet weak var tfSendData: UITextField!
-    
+    var selectImage : UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +36,28 @@ class FeedbackServiceVC: UIViewController {
         
         lblFeedbackTitle.text = lblTitleText
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
+        tableView.register(UINib(nibName: cellID2, bundle: nil), forCellReuseIdentifier: cellID2)
         openCameraAndAttatchment()
         loadData()
         print("\(feed_id)")
         
+        refreshControl.attributedTitle = NSAttributedString(string: "refresh Data")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
+//        loadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.FeedbackVM.getFeedbackServiceDataSource.removeAll()
+//            self.tableView.reloadData()
+            self.loadData()
+            self.refreshControl.endRefreshing()
+        }
+        
+    }
     
     func loadData() {
         self.FeedbackVM.getFeedbackServiceDataSource.removeAll()
@@ -74,17 +92,22 @@ class FeedbackServiceVC: UIViewController {
     }
     
     @IBAction func onClickedSendBtn(_ sender: UIButton) {
-        feedbackMessageVM.feedbackMessage(message: tfSendData.text ?? "" , feedId: feed_id) { isSuccess in
-            if isSuccess {
-                self.loadData()
-            }else{
-                self.showAlert(alertMessage: "Something went wrong!")
-            }
+        
+        if tfSendData.text == "" {
+            self.showAlert(alertMessage: "Please Send the Message!")
+        }else{
+            let CMMessageData = CMFeedbackMessageData(feedbackId: feed_id, image: "", message: tfSendData.text ?? "")
             
+            feedbackMessageVM.feedbackMessageData(imageData: selectImage?.pngData(), messageData: CMMessageData) { isCompleted in
+                if isCompleted {
+                    self.tfSendData.text = ""
+                    self.loadData()
+                }else{
+                    self.showAlert(alertMessage: "Something went wrong!")
+                }
+            }
         }
-        
-        
-        
+ 
     }
     
     
@@ -139,35 +162,75 @@ class FeedbackServiceVC: UIViewController {
     
 }
 
+
+//MARK: - UITableView Delegate and UIImagePickerView
+
 extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return FeedbackVM.getFeedbackServiceDataSource.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! FeedbackServiceCell
-        if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].type == "incoming" {
-            cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
-            cell.lblMsg.textColor = .white
-            cell.cellView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
-            cell.cellView.roundLeftChatCorner(cornerRadius: 16)
+        let cell2 = tableView.dequeueReusableCell(withIdentifier:cellID2 , for: indexPath) as! FeedbackMsgImageCell
+//        if indexPath.row == 0{
+//            cell.lblMsg.text = FeedbackVM.getFeedbackDescriptionDataSource[indexPath.row].desc
+//            cell.lblTime.text = Utility.shared.timeFormatConvertor(string: FeedbackVM.getFeedbackDescriptionDataSource[0].createdAt!)
+//            cell.lblMsg.textColor = .white
+//            cell.cellView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
+//            cell.cellView.roundLeftChatCorner(cornerRadius: 16)
+//        }else
+        if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].type == "incoming" && FeedbackVM.getFeedbackServiceDataSource[indexPath.row].message == "" {
+            
+            cell2.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
+            print("feedback Image : \(FeedbackVM.getFeedbackServiceDataSource[indexPath.row].image!)")
+            cell2.cardView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
+            cell2.cardView.roundLeftChatCorner(cornerRadius: 16)
+            return cell2
+        }else if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].type == "outgoing" && FeedbackVM.getFeedbackServiceDataSource[indexPath.row].message == "" {
+            cell2.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
+            print("feedback Image : \(FeedbackVM.getFeedbackServiceDataSource[indexPath.row].image!)")
+            cell2.cardView.layer.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
+            cell2.cardView.roundRightChatCorner(cornerRadius: 16)
+        }else{
+            if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].type == "incoming" && FeedbackVM.getFeedbackServiceDataSource[indexPath.row].message != nil{
+                cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
+                cell.lblMsg.textColor = .white
+                cell.cellView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
+                cell.cellView.roundLeftChatCorner(cornerRadius: 16)
+            }else{
+                cell.cellView.layer.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
+                cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
+                cell.lblMsg.textColor = .black
+                cell.cellView.roundRightChatCorner(cornerRadius: 16)
+            }
         }
-        else{
-            cell.cellView.layer.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
-            cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
-            cell.lblMsg.textColor = .black
-            cell.cellView.roundRightChatCorner(cornerRadius: 16)
-        }
-        
         return cell
     }
-    
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {return}
-        print(image.size)
-        picker.dismiss(animated: true, completion: nil)
+//        self.selectedImage = image
+    
+        self.selectImage = image
+        let CMMessageData = CMFeedbackMessageData(feedbackId: feed_id, image: "", message: "")
+        
+        feedbackMessageVM.feedbackMessageData(imageData: selectImage?.pngData(), messageData: CMMessageData) { isCompleted in
+            if isCompleted {
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    self.FeedbackVM.getFeedbackServiceDataSource.removeAll()
+                    self.loadData()
+                    self.dismiss(animated: true)
+                }
+                
+            }else{
+                self.showAlert(alertMessage: "Something went wrong!")
+            }
+        }
+ 
     }
 }
+
+
 
 
 

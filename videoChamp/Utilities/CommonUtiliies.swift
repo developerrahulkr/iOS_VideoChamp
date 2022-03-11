@@ -38,9 +38,23 @@ extension UIViewController {
     
     func showAlert(alertMessage : String) {
         let alert = UIAlertController(title: appName, message: alertMessage, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+//    MARK: - Email Validation
+    
+    func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    func isValidName(userName : String) -> Bool {
+        let userNameregEx = "[A-Za-z]{3,18}"
+        let userNameStr = NSPredicate(format: "SELF MATCHES %@", userNameregEx)
+        return userNameStr.evaluate(with: userName)
     }
     
     

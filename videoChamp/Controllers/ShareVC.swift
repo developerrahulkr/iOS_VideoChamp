@@ -39,7 +39,7 @@ class ShareVC: UIViewController {
     }
     
     @IBAction func onClickedFacebookBtn(_ sender: UIButton) {
-        openLink(urlLink: "https://api.facebook.com/")
+        openLink(urlLink: "https://www.facebook.com/")
     }
     
     @IBAction func onClickedInstagramBtn(_ sender: UIButton) {
@@ -47,7 +47,7 @@ class ShareVC: UIViewController {
     }
     
     @IBAction func onClickedTwitter(_ sender: UIButton) {
-        openLink(urlLink: "https://api.twitter.com/")
+        openLink(urlLink: "https://www.twitter.com/")
     }
     
     @IBAction func onClickedYoutubeBtn(_ sender: UIButton) {
@@ -66,5 +66,7 @@ class ShareVC: UIViewController {
             application.open(webURL)
         }
     }
+    
+    
 
 }

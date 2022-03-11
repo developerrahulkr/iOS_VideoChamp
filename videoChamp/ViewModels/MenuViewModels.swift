@@ -67,7 +67,7 @@ class CameraConnectViewModel : NSObject {
         let data2 = CMCameraDeviceModel(name: "2- Confirm Device Are Connected", imageIcon: "camera_device_icon")
         cameraDataSource.append(data2)
         
-        let data3 = CMCameraDeviceModel(name: "3- Start Recoring & Control", imageIcon: "camera_recording_icon")
+        let data3 = CMCameraDeviceModel(name: "3- Start Recording & Control", imageIcon: "camera_recording_icon")
         cameraDataSource.append(data3)
     }
     

@@ -81,6 +81,7 @@ extension FeedbackVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as! NotificationCell
         cell.updateFeedbackData(inData: feedbackVM.getFeedbackDataSource[indexPath.row])
+        cell.lblNotification.isHidden = true
         return cell
     }
     

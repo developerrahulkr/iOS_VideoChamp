@@ -81,14 +81,58 @@ class CMGetFeedbackServiceData : NSObject {
     var message : String?
     var type : String?
     var createdAt : String?
-    init(message : String, type : String, createdAt : String) {
-        super.init()
+    var image : String?
+    init(message : String, type : String, createdAt : String, image : String) {
+//        super.init()
         self.message = message
         self.type = type
         self.createdAt = createdAt
+        self.image = image
     }
+    
+    
 }
 
+//struct DataClass: Encodable {
+//    let messagelisting: [Messagelisting]
+//    let feedbackDetail: FeedbackDetail
+//}
+//// MARK: - FeedbackDetail
+//struct FeedbackDetail: Codable {
+//    let id, desc: String
+//    let image: [String]
+//    let createdAt: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id = "_id"
+//        case desc, image, createdAt
+//    }
+//}
+//
+//// MARK: - Messagelisting
+//struct Messagelisting: Codable {
+//    let id, userID, message, type: String
+//    let status: Bool
+//    let createdAt: String
+//    let image: [String]
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id = "_id"
+//        case userID = "userId"
+//        case message, type, status, createdAt, image
+//    }
+//}
+
+
+class CMGetFeedbackDescriptionData : NSObject{
+    var desc : String?
+    var createdAt : String?
+    init(desc : String,createdAt : String){
+        super.init()
+        self.desc = desc
+        self.createdAt = createdAt
+    }
+}
 
 
 class CMPostFeedbackData : NSObject {
@@ -101,6 +145,20 @@ class CMPostFeedbackData : NSObject {
         self.desc = desc
         self.title = title
         self.email = email
+        self.image = image
+    }
+}
+
+
+class CMFeedbackMessageData : NSObject {
+    var feedbackId : String?
+    var message : String?
+    var image : String?
+    
+    init(feedbackId : String, image : String, message : String) {
+        super.init()
+        self.feedbackId = feedbackId
+        self.message = message
         self.image = image
     }
 }

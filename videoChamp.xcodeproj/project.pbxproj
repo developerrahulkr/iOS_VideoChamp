@@ -79,6 +79,8 @@
 		2CA1CF5627C8B21F00BEB063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA1CF5527C8B21F00BEB063 /* GoogleService-Info.plist */; };
 		2CA1CF5927C8BE1600BEB063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA1CF5827C8BE1600BEB063 /* GoogleService-Info.plist */; };
 		2CA56C2227D2411800152FC8 /* FeedbackMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA56C2127D2411800152FC8 /* FeedbackMessageViewModel.swift */; };
+		2CC21B1627D8A58C0054DF4B /* FeedbackMsgImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC21B1427D8A58B0054DF4B /* FeedbackMsgImageCell.swift */; };
+		2CC21B1727D8A58C0054DF4B /* FeedbackMsgImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC21B1527D8A58B0054DF4B /* FeedbackMsgImageCell.xib */; };
 		6FA962F5DBBF38AAD0527794 /* Pods_videoChamp_videoChampUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526E4869A0DCF02E6EEC06CA /* Pods_videoChamp_videoChampUITests.framework */; };
 		8142DA31F7DDE0C029225308 /* Pods_videoChampTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8FE09D5B7675409F991BA0 /* Pods_videoChampTests.framework */; };
 		B1F6E9D19F79E4DB3BAC13DB /* Pods_videoChamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52FEA1DE9FEC8BD9ECF5F135 /* Pods_videoChamp.framework */; };
@@ -187,6 +189,8 @@
 		2CC21B1127D7A59A0054DF4B /* argentum-sans.extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.extrabold.ttf"; sourceTree = SOURCE_ROOT; };
 		2CC21B1227D7A59A0054DF4B /* argentum-sans.regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.regular.ttf"; sourceTree = SOURCE_ROOT; };
 		2CC21B1327D7A59A0054DF4B /* argentum-sans.bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.bold.ttf"; sourceTree = SOURCE_ROOT; };
+		2CC21B1427D8A58B0054DF4B /* FeedbackMsgImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMsgImageCell.swift; sourceTree = "<group>"; };
+		2CC21B1527D8A58B0054DF4B /* FeedbackMsgImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackMsgImageCell.xib; sourceTree = "<group>"; };
 		526E4869A0DCF02E6EEC06CA /* Pods_videoChamp_videoChampUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoChamp_videoChampUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52FEA1DE9FEC8BD9ECF5F135 /* Pods_videoChamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoChamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FDB6A7353C962CC9DFFD46 /* Pods-videoChampTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoChampTests.release.xcconfig"; path = "Target Support Files/Pods-videoChampTests/Pods-videoChampTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -380,6 +384,8 @@
 				2C96885427CF47BB0048145C /* CodeVerifyCell.xib */,
 				2C8E351027CF8FD9005201A9 /* GiveFeedbackCell4.swift */,
 				2C8E351127CF8FD9005201A9 /* GiveFeedbackCell4.xib */,
+				2CC21B1427D8A58B0054DF4B /* FeedbackMsgImageCell.swift */,
+				2CC21B1527D8A58B0054DF4B /* FeedbackMsgImageCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -589,6 +595,7 @@
 				2C172D3E27C50097005BA3AD /* FeedbackServiceCell.xib in Resources */,
 				2C172D3227C4EAAD005BA3AD /* GiveFeedbackCell2.xib in Resources */,
 				2C8D43D627BF6AA900C5722A /* CameraCodeCell.xib in Resources */,
+				2CC21B1727D8A58C0054DF4B /* FeedbackMsgImageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +771,7 @@
 				2C96885527CF47BB0048145C /* CodeVerifyCell.swift in Sources */,
 				2C52B2DA27CCB115004F2A00 /* CMRegister.swift in Sources */,
 				2C36261927BD169B00EB4CD6 /* NotificationVC.swift in Sources */,
+				2CC21B1627D8A58C0054DF4B /* FeedbackMsgImageCell.swift in Sources */,
 				2CA56C2227D2411800152FC8 /* FeedbackMessageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -955,8 +963,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -991,8 +1000,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

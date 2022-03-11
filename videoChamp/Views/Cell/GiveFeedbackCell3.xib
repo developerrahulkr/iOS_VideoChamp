@@ -31,9 +31,26 @@
                                             <constraint firstAttribute="height" constant="50" id="rYj-f3-tNA"/>
                                         </constraints>
                                     </imageView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ECS-TI-GJF">
+                                        <rect key="frame" x="77.5" y="20" width="20" height="20"/>
+                                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="M2p-HA-qgB"/>
+                                            <constraint firstAttribute="width" constant="20" id="XXi-bH-tgS"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.0" green="0.55391991139999996" blue="0.20992600920000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onClickedLeftImageCancel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YlY-aD-Hak"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="ECS-TI-GJF" firstAttribute="top" secondItem="kkL-ln-fHl" secondAttribute="top" id="5rO-Jb-6jc"/>
+                                    <constraint firstItem="ECS-TI-GJF" firstAttribute="trailing" secondItem="kkL-ln-fHl" secondAttribute="trailing" id="PWX-qj-wsl"/>
                                     <constraint firstItem="kkL-ln-fHl" firstAttribute="centerX" secondItem="cyN-eI-qSC" secondAttribute="centerX" id="WxY-04-Ukn"/>
                                     <constraint firstItem="kkL-ln-fHl" firstAttribute="centerY" secondItem="cyN-eI-qSC" secondAttribute="centerY" id="wEh-sI-ODW"/>
                                 </constraints>
@@ -48,10 +65,27 @@
                                             <constraint firstAttribute="height" constant="50" id="IJL-Xj-Ayr"/>
                                         </constraints>
                                     </imageView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epp-Vr-DZ4">
+                                        <rect key="frame" x="87.5" y="20" width="10" height="10"/>
+                                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="CiU-F4-i8E"/>
+                                            <constraint firstAttribute="width" constant="10" id="kPc-RO-IuY"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.0" green="0.55391991139999996" blue="0.20992600920000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onClickedRightImageClose:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Tfu-rk-sOo"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="epp-Vr-DZ4" firstAttribute="top" secondItem="b7n-Z3-T65" secondAttribute="top" id="2E4-8D-bAQ"/>
                                     <constraint firstItem="b7n-Z3-T65" firstAttribute="centerX" secondItem="z7c-Gv-Uie" secondAttribute="centerX" id="eP3-9O-XGv"/>
+                                    <constraint firstItem="epp-Vr-DZ4" firstAttribute="trailing" secondItem="b7n-Z3-T65" secondAttribute="trailing" id="idH-J7-wjN"/>
                                     <constraint firstItem="b7n-Z3-T65" firstAttribute="centerY" secondItem="z7c-Gv-Uie" secondAttribute="centerY" id="xpl-WX-GJE"/>
                                 </constraints>
                             </view>
@@ -80,6 +114,9 @@
         <image name="image_upload_icon" width="46" height="41"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
