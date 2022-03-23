@@ -72,16 +72,22 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = Bundle.main.loadNibNamed("FeedbackSectionCell", owner: self, options: nil)?.first as! FeedbackSectionCell
-        header.lblTitle1.text = giveFeedbackViewModel.giveFeedbackSection[section].secTitle
-        header.lblTitle2.text = giveFeedbackViewModel.giveFeedbackSection[section].secTitle2
+        
+        if section == 2 {
+            header.lblTitle1.isHidden = true
+            header.lblTitle2.isHidden = true
+        }else{
+            header.lblTitle1.text = giveFeedbackViewModel.giveFeedbackSection[section].secTitle
+            header.lblTitle2.text = giveFeedbackViewModel.giveFeedbackSection[section].secTitle2
+        }
 
         return header
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 2 {
-            return -20.0
+            return 0.0
         }else {
-            return 20
+            return 35.0
         }
         
     }
@@ -95,7 +101,8 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
         if indexPath.section == 0  || indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID1, for: indexPath) as! GiveFeedbackCell1
             
-            cell.tfTitle.placeholder = (indexPath.section == 0) ? "Enter Title" : "Email"
+            cell.tfTitle.placeholder = (indexPath.section == 0) ? "Enter Title" : "Enter Email"
+            cell.bottomConstraints.constant = (indexPath.section == 0) ? 10.0 : 10.0
             cell.callBack = {
                 val in
                 if indexPath.section == 0{
@@ -120,8 +127,8 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
             }
             
             cell.callBackUpdateCounting = { data in
-                cell.lblCount.text = "\(data.count+1)/100"
                 
+                cell.lblCount.text = "\(data.count+1)/100"
             }
             return cell
             
@@ -163,13 +170,15 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 2 {
-            return 130
+            return 180.0
         }else if indexPath.section == 3 {
-            return 100.0
+            return 120.0
         }else if indexPath.section == 4 {
             return 85.0
+        }else if indexPath.section == 0{
+            return 70.0
         }else{
-            return 60.0
+            return 70.0
         }
     }
     

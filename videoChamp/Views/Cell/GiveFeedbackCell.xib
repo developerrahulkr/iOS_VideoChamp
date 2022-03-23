@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,8 +27,8 @@
                         <rect key="frame" x="0.0" y="5" width="377" height="50"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Tittle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zbN-QE-W48">
-                                <rect key="frame" x="10" y="0.0" width="357" height="50"/>
-                                <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="10"/>
+                                <rect key="frame" x="30" y="0.0" width="337" height="50"/>
+                                <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
@@ -37,7 +37,7 @@
                             <constraint firstAttribute="bottom" secondItem="zbN-QE-W48" secondAttribute="bottom" id="LXK-jj-cx0"/>
                             <constraint firstAttribute="trailing" secondItem="zbN-QE-W48" secondAttribute="trailing" constant="10" id="OM6-rZ-ouY"/>
                             <constraint firstItem="zbN-QE-W48" firstAttribute="top" secondItem="9uG-db-ufC" secondAttribute="top" id="WaX-4f-Rim"/>
-                            <constraint firstItem="zbN-QE-W48" firstAttribute="leading" secondItem="9uG-db-ufC" secondAttribute="leading" constant="10" id="ZEY-Mh-LPr"/>
+                            <constraint firstItem="zbN-QE-W48" firstAttribute="leading" secondItem="9uG-db-ufC" secondAttribute="leading" constant="30" id="ZEY-Mh-LPr"/>
                         </constraints>
                     </view>
                 </subviews>

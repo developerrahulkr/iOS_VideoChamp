@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,26 +25,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="344" height="254"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please do share your feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55G-Tz-rxr">
-                        <rect key="frame" x="16" y="5" width="150" height="11.5"/>
-                        <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="10"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MESSAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55G-Tz-rxr">
+                        <rect key="frame" x="16" y="0.0" width="74" height="17.5"/>
+                        <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="15"/>
                         <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R67-sd-jPb">
-                        <rect key="frame" x="300" y="5" width="28" height="11.5"/>
-                        <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="10"/>
+                        <rect key="frame" x="286" y="0.0" width="42" height="17.5"/>
+                        <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="15"/>
                         <color key="textColor" red="0.3921568627" green="0.38823529410000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Hk-pb-Vbr">
-                        <rect key="frame" x="0.0" y="32.5" width="344" height="216.5"/>
+                        <rect key="frame" x="0.0" y="27.5" width="344" height="216.5"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type Something" translatesAutoresizingMaskIntoConstraints="NO" id="8l9-ik-492">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter Message" translatesAutoresizingMaskIntoConstraints="NO" id="8l9-ik-492">
                                 <rect key="frame" x="10" y="0.0" width="324" height="176.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -60,12 +60,12 @@
                 <constraints>
                     <constraint firstItem="55G-Tz-rxr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="3PH-7X-vV2"/>
                     <constraint firstItem="R67-sd-jPb" firstAttribute="centerY" secondItem="55G-Tz-rxr" secondAttribute="centerY" id="FdL-vv-dSL"/>
-                    <constraint firstItem="55G-Tz-rxr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Je2-Jm-AXM"/>
-                    <constraint firstAttribute="bottom" secondItem="1Hk-pb-Vbr" secondAttribute="bottom" constant="5" id="KUS-Qb-Bz1"/>
+                    <constraint firstItem="55G-Tz-rxr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Je2-Jm-AXM"/>
+                    <constraint firstAttribute="bottom" secondItem="1Hk-pb-Vbr" secondAttribute="bottom" constant="10" id="KUS-Qb-Bz1"/>
                     <constraint firstAttribute="trailing" secondItem="1Hk-pb-Vbr" secondAttribute="trailing" id="Yd8-et-mty"/>
                     <constraint firstItem="1Hk-pb-Vbr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="m9C-2K-tFV"/>
                     <constraint firstAttribute="trailing" secondItem="R67-sd-jPb" secondAttribute="trailing" constant="16" id="uUU-EB-wpi"/>
-                    <constraint firstItem="1Hk-pb-Vbr" firstAttribute="top" secondItem="55G-Tz-rxr" secondAttribute="bottom" constant="16" id="zce-VE-Pjm"/>
+                    <constraint firstItem="1Hk-pb-Vbr" firstAttribute="top" secondItem="55G-Tz-rxr" secondAttribute="bottom" constant="10" id="zce-VE-Pjm"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -73,6 +73,8 @@
             <connections>
                 <outlet property="cardView" destination="1Hk-pb-Vbr" id="71W-B3-iP9"/>
                 <outlet property="lblCount" destination="R67-sd-jPb" id="OdU-0Y-fdo"/>
+                <outlet property="lblCounting" destination="R67-sd-jPb" id="HnU-iA-S4P"/>
+                <outlet property="lblHeader" destination="55G-Tz-rxr" id="bun-b3-78z"/>
                 <outlet property="tfView" destination="8l9-ik-492" id="X5E-pA-rTR"/>
             </connections>
             <point key="canvasLocation" x="155.07246376811597" y="67.633928571428569"/>

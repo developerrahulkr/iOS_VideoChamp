@@ -16,13 +16,12 @@ class GiveFeedbackCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        cellView.layer.cornerRadius = cellView.bounds.height/2
+        
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override func layoutSubviews() {
+        cellView.layer.masksToBounds = true
+        cellView.layer.cornerRadius = cellView.bounds.height/2
     }
     
 }

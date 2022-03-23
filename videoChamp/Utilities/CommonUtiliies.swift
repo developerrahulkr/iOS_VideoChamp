@@ -51,10 +51,16 @@ extension UIViewController {
         return emailTest.evaluate(with: testStr)
     }
     
-    func isValidName(userName : String) -> Bool {
-        let userNameregEx = "[A-Za-z]{3,18}"
-        let userNameStr = NSPredicate(format: "SELF MATCHES %@", userNameregEx)
-        return userNameStr.evaluate(with: userName)
+//    func isValidName(userName : String) -> Bool {
+//        let userNameregEx = "[A-Za-z]{3,18}"
+//        let userNameStr = NSPredicate(format: "SELF MATCHES %@", userNameregEx)
+//        return userNameStr.evaluate(with: userName)
+//    }
+    
+    func isValidName(userName:String) -> Bool {
+        guard userName.count > 3, userName.count < 18 else { return false }
+        let predicateTest = NSPredicate(format: "SELF MATCHES %@", "^(([^ ]?)(^[a-zA-Z].*[a-zA-Z]$)([^ ]?))$")
+        return predicateTest.evaluate(with: userName)
     }
     
     
@@ -66,9 +72,9 @@ extension UIViewController {
     func gradientColor(topColor : UIColor, bottomColor : UIColor){
         
         let gradient = CAGradientLayer()
-        
         gradient.frame = view.bounds
         gradient.colors = [topColor.cgColor, bottomColor.cgColor]
+        
         view.layer.insertSublayer(gradient, at: 0)
     }
     func gradientThreeColor(topColor : UIColor, mediumColor : UIColor, bottomColor : UIColor){

@@ -92,14 +92,17 @@ extension UserDefaults {
         }
 
     }
-    
+    @available(iOS, deprecated: 9.0)
     func imageForKey(key: String) -> UIImage? {
         var image: UIImage?
+        
         if let imageData = data(forKey: key) {
             image = NSKeyedUnarchiver.unarchiveObject(with: imageData) as? UIImage
         }
         return image
     }
+    
+    @available(iOS, deprecated: 9.0)
     func setImage(image: UIImage?, forKey key: String) {
         var imageData: NSData?
         if let image = image {

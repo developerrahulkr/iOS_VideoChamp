@@ -11,8 +11,11 @@ class GiveFeedbackCell1: UITableViewCell,UITextFieldDelegate {
 
 //    var callBAck :((_ str: String)) -> ())?
     var callBack : ((_ str : String) -> ())?
+    
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var tfTitle: UITextField!
+    @IBOutlet weak var bottomConstraints: NSLayoutConstraint!
+    
 
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -22,7 +25,7 @@ class GiveFeedbackCell1: UITableViewCell,UITextFieldDelegate {
         super.awakeFromNib()
         tfTitle.delegate = self
         // Initialization code
-        cardView.layer.cornerRadius = cardView.bounds.height/2
+        cardView.layer.cornerRadius = cardView.bounds.height/2 + 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

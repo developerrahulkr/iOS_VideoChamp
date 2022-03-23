@@ -206,6 +206,24 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].image != "" {
+            print("\(FeedbackVM.getFeedbackServiceDataSource[indexPath.row].image ?? "")")
+            self.showActivityIndicator()
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                self.hideActivityIndicator()
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "FeedbackImageVC") as! FeedbackImageVC
+                vc.imgURL = self.FeedbackVM.getFeedbackServiceDataSource[indexPath.row].image ?? ""
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        
+        }else{
+            print("No Image")
+        }
+    }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {return}

@@ -186,7 +186,7 @@ class APIManager : NSObject {
                 do {
                     _ = try JSONSerialization.jsonObject(with: data!, options: [])
                     let jsonData = try? JSON(data: response.data!)
-                    print("All Data : \(jsonData)")
+                    print("All Data : \(String(describing: jsonData))")
                     completionHandler(jsonData)
                 }catch (let err) {
                     print(err.localizedDescription)

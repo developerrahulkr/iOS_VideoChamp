@@ -27,10 +27,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
         
         registerForPushNotification()
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { success, _ in
+//        let notificationCenter = UNUserNotificationCenter.current()
+//        
+//        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { success, _ in
 //            guard success else {return}
 //            print("success in APNS Registry")
 //
+//        }
+//        let content = UNMutableNotificationContent()
+//        content.sound = .default
+//        let triggered = UNTimeIntervalNotificationTrigger.init(timeInterval: 1.0, repeats: false)
+//        
+//        let request = UNNotificationRequest.init(identifier: UUID().uuidString, content: content, trigger: triggered)
+//        
+//        notificationCenter.add(request) { (error) in
+//            print(error?.localizedDescription ?? "")
 //        }
 //        application.registerForRemoteNotifications()
         return true

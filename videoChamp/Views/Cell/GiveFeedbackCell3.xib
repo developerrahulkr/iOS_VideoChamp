@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,20 +19,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ius-Po-iju">
-                        <rect key="frame" x="5" y="5" width="310" height="90"/>
+                        <rect key="frame" x="5" y="10" width="310" height="85"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cyN-eI-qSC">
-                                <rect key="frame" x="0.0" y="0.0" width="145" height="90"/>
+                                <rect key="frame" x="0.0" y="0.0" width="145" height="85"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_upload_icon" translatesAutoresizingMaskIntoConstraints="NO" id="kkL-ln-fHl">
-                                        <rect key="frame" x="47.5" y="20" width="50" height="50"/>
+                                        <rect key="frame" x="47.5" y="17.5" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Zoe-mE-VW7"/>
                                             <constraint firstAttribute="height" constant="50" id="rYj-f3-tNA"/>
                                         </constraints>
                                     </imageView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ECS-TI-GJF">
-                                        <rect key="frame" x="77.5" y="20" width="20" height="20"/>
+                                        <rect key="frame" x="77.5" y="17.5" width="20" height="20"/>
                                         <color key="backgroundColor" systemColor="systemPinkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="M2p-HA-qgB"/>
@@ -56,17 +56,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7c-Gv-Uie">
-                                <rect key="frame" x="165" y="0.0" width="145" height="90"/>
+                                <rect key="frame" x="165" y="0.0" width="145" height="85"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_upload_icon" translatesAutoresizingMaskIntoConstraints="NO" id="b7n-Z3-T65">
-                                        <rect key="frame" x="47.5" y="20" width="50" height="50"/>
+                                        <rect key="frame" x="47.5" y="17.5" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Bkj-le-KpJ"/>
                                             <constraint firstAttribute="height" constant="50" id="IJL-Xj-Ayr"/>
                                         </constraints>
                                     </imageView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epp-Vr-DZ4">
-                                        <rect key="frame" x="87.5" y="20" width="10" height="10"/>
+                                        <rect key="frame" x="87.5" y="17.5" width="10" height="10"/>
                                         <color key="backgroundColor" systemColor="systemPinkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="CiU-F4-i8E"/>
@@ -93,7 +93,7 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ius-Po-iju" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="RDg-rA-tXh"/>
+                    <constraint firstItem="ius-Po-iju" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="RDg-rA-tXh"/>
                     <constraint firstAttribute="bottom" secondItem="ius-Po-iju" secondAttribute="bottom" constant="5" id="cxf-bB-61h"/>
                     <constraint firstAttribute="trailing" secondItem="ius-Po-iju" secondAttribute="trailing" constant="5" id="j2b-XG-bgi"/>
                     <constraint firstItem="ius-Po-iju" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="t0M-Vp-SC1"/>

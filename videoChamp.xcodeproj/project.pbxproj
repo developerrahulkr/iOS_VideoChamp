@@ -77,10 +77,10 @@
 		2CA1CF3B27C65D0F00BEB063 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1CF3A27C65D0F00BEB063 /* UserViewModel.swift */; };
 		2CA1CF3D27C75A1D00BEB063 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1CF3C27C75A1D00BEB063 /* Utility.swift */; };
 		2CA1CF5627C8B21F00BEB063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA1CF5527C8B21F00BEB063 /* GoogleService-Info.plist */; };
-		2CA1CF5927C8BE1600BEB063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA1CF5827C8BE1600BEB063 /* GoogleService-Info.plist */; };
 		2CA56C2227D2411800152FC8 /* FeedbackMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA56C2127D2411800152FC8 /* FeedbackMessageViewModel.swift */; };
 		2CC21B1627D8A58C0054DF4B /* FeedbackMsgImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC21B1427D8A58B0054DF4B /* FeedbackMsgImageCell.swift */; };
 		2CC21B1727D8A58C0054DF4B /* FeedbackMsgImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC21B1527D8A58B0054DF4B /* FeedbackMsgImageCell.xib */; };
+		2CF5CF5327E1CD93000DFE0A /* FeedbackImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF5CF5227E1CD93000DFE0A /* FeedbackImageVC.swift */; };
 		6FA962F5DBBF38AAD0527794 /* Pods_videoChamp_videoChampUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526E4869A0DCF02E6EEC06CA /* Pods_videoChamp_videoChampUITests.framework */; };
 		8142DA31F7DDE0C029225308 /* Pods_videoChampTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8FE09D5B7675409F991BA0 /* Pods_videoChampTests.framework */; };
 		B1F6E9D19F79E4DB3BAC13DB /* Pods_videoChamp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52FEA1DE9FEC8BD9ECF5F135 /* Pods_videoChamp.framework */; };
@@ -191,6 +191,7 @@
 		2CC21B1327D7A59A0054DF4B /* argentum-sans.bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "argentum-sans.bold.ttf"; sourceTree = SOURCE_ROOT; };
 		2CC21B1427D8A58B0054DF4B /* FeedbackMsgImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMsgImageCell.swift; sourceTree = "<group>"; };
 		2CC21B1527D8A58B0054DF4B /* FeedbackMsgImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackMsgImageCell.xib; sourceTree = "<group>"; };
+		2CF5CF5227E1CD93000DFE0A /* FeedbackImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackImageVC.swift; sourceTree = "<group>"; };
 		526E4869A0DCF02E6EEC06CA /* Pods_videoChamp_videoChampUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoChamp_videoChampUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52FEA1DE9FEC8BD9ECF5F135 /* Pods_videoChamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoChamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FDB6A7353C962CC9DFFD46 /* Pods-videoChampTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoChampTests.release.xcconfig"; path = "Target Support Files/Pods-videoChampTests/Pods-videoChampTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -235,6 +236,7 @@
 				2C36261A27BD16D600EB4CD6 /* FeedbackVC.swift */,
 				2C319B4027C4C08B00AAB997 /* GiveFeedbackVC.swift */,
 				2C172D3727C4F66C005BA3AD /* FeedbackServiceVC.swift */,
+				2CF5CF5227E1CD93000DFE0A /* FeedbackImageVC.swift */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
@@ -590,7 +592,6 @@
 				2CA1CF5627C8B21F00BEB063 /* GoogleService-Info.plist in Resources */,
 				2C36262727BD32AA00EB4CD6 /* TermsAndConditionsCell.xib in Resources */,
 				2C8D43DE27BF868700C5722A /* CameraCodeCell3.xib in Resources */,
-				2CA1CF5927C8BE1600BEB063 /* GoogleService-Info.plist in Resources */,
 				2C3625CB27BC077200EB4CD6 /* Main.storyboard in Resources */,
 				2C172D3E27C50097005BA3AD /* FeedbackServiceCell.xib in Resources */,
 				2C172D3227C4EAAD005BA3AD /* GiveFeedbackCell2.xib in Resources */,
@@ -750,6 +751,7 @@
 				2C36261D27BD16EE00EB4CD6 /* TermsAndConditionVC.swift in Sources */,
 				2C8D43DD27BF868700C5722A /* CameraCodeCell3.swift in Sources */,
 				2C8D43D227BF645D00C5722A /* CameraVideoShareCodeVC.swift in Sources */,
+				2CF5CF5327E1CD93000DFE0A /* FeedbackImageVC.swift in Sources */,
 				2C319B4327C4C5F600AAB997 /* FeedbackSectionCell.swift in Sources */,
 				2C3625C427BC077100EB4CD6 /* AppDelegate.swift in Sources */,
 				2CA1CF3B27C65D0F00BEB063 /* UserViewModel.swift in Sources */,

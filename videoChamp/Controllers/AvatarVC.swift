@@ -121,8 +121,9 @@ class AvatarVC: UIViewController {
         
     }
     
-    
+    @available(iOS, deprecated: 9.0)
     @IBAction func onClickedSubmitButton(_ sender: UIButton) {
+        
         
         if lblUserName1.text == "" {
             showAlert(alertMessage: "User Name  is Required!")

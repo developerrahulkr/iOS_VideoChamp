@@ -9,6 +9,8 @@ import UIKit
 
 class GiveFeedbackCell2: UITableViewCell {
 
+    @IBOutlet weak var lblCounting: UILabel!
+    @IBOutlet weak var lblHeader: UILabel!
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var tfView: UITextView!
     var wordLimit = 100
@@ -22,6 +24,11 @@ class GiveFeedbackCell2: UITableViewCell {
         // Initialization code
         cardView.layer.cornerRadius = 20.0
         tfView.delegate = self
+    }
+    
+    override func layoutSubviews() {
+        lblCount.font = UIFont.systemFont(ofSize: 15.0, weight: .light)
+        lblHeader.font = UIFont.systemFont(ofSize: 15.0, weight: .light)
     }
 }
 
@@ -42,8 +49,8 @@ extension GiveFeedbackCell2 : UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         self.callBackUpdateCounting?(textView.text ?? "")
-        guard let textViewText = textView.text,
-              let rangeOfTextToReplace = Range(range, in: textViewText) else {
+        guard let textViewText = textView.text, let rangeOfTextToReplace = Range(range, in: textViewText) else {
+            print("Error Messgae...")
             return false
         }
         let substringToReplace = textViewText[rangeOfTextToReplace]
@@ -57,9 +64,7 @@ extension GiveFeedbackCell2 : UITextViewDelegate {
 //            giveFeedbackViewModel.giveFeedbackSection[0].secTitle2 = "Maximum 0 word in the blogs."
 //            CMFeedBack(secTitle: "0", secTitle2: "100")
             wordLimit = 0
-            
         }
-        
         return count < 100
     }
     

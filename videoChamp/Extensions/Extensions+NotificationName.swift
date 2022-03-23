@@ -30,7 +30,7 @@ extension UIView {
         self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner]
     }
     
-    func roundRightChatCorner(cornerRadius : Double){
+    func    roundRightChatCorner(cornerRadius : Double){
         self.layer.cornerRadius = CGFloat(cornerRadius)
         self.clipsToBounds = true
         self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner, .layerMinXMaxYCorner]

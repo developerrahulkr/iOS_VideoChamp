@@ -52,9 +52,11 @@ class HomeVC: UIViewController {
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
         
         self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
-        print("View Controller : \(self.navigationController?.viewControllers)")
+        print("View Controller : \(String(describing: self.navigationController?.viewControllers))")
     }
     
+    
+    @available(iOS, deprecated: 9.0)
     override func viewDidLayoutSubviews() {
         lblShortName.text = UserDefaults.standard.string(forKey: "userText")
         if let userSelectedColorData = UserDefaults.standard.object(forKey: "UserSelectedColor") as? Data {
@@ -134,6 +136,7 @@ class HomeVC: UIViewController {
     @IBAction func onClickedMenuBtn(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SideMenuVC") as! SideMenuVC
 //        vc.modalTransitionStyle = .
+        
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: false, completion: nil)
     }

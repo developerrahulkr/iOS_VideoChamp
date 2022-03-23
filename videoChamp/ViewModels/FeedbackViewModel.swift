@@ -67,16 +67,16 @@ class FeedbackViewModel : NSObject {
     }
     
     func getSection(){
-        let data1 = CMFeedBack(secTitle: "Title", secTitle2: "")
+        let data1 = CMFeedBack(secTitle: "SUBJECT", secTitle2: "")
         giveFeedbackSection.append(data1)
         
-        let data2 = CMFeedBack(secTitle: "Enter your email Id", secTitle2: "")
+        let data2 = CMFeedBack(secTitle: "EMAIL ADDRESS", secTitle2: "")
         giveFeedbackSection.append(data2)
         
         let data3 = CMFeedBack(secTitle: "", secTitle2: "")
         giveFeedbackSection.append(data3)
         
-        let data4 = CMFeedBack(secTitle: "Attach Screenshots (Optional)", secTitle2: "")
+        let data4 = CMFeedBack(secTitle: "ATTATCH SCREENSHOTS (Optional)", secTitle2: "")
         giveFeedbackSection.append(data4)
         let data5 = CMFeedBack(secTitle: "", secTitle2: "")
         giveFeedbackSection.append(data5)

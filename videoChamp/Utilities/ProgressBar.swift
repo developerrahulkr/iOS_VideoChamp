@@ -12,6 +12,8 @@ import UIKit
 
 
 extension UIViewController {
+    
+//    @available(iOS, deprecated: 13.0)
     func showActivityIndicator() {
         let backgroundview = UIView.init(frame: CGRect.init(x: 0, y: 0, width:  view.frame.size.width, height:  view.frame.size.height))
         backgroundview.tag=1024;
@@ -19,7 +21,7 @@ extension UIViewController {
         let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
         actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         actInd.center = self.view.center
-        actInd.style = UIActivityIndicatorView.Style.whiteLarge
+        actInd.style = UIActivityIndicatorView.Style.large
         actInd.color = UIColor.red
         actInd.startAnimating()
         backgroundview.addSubview(actInd)
