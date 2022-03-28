@@ -12,7 +12,6 @@ class MenuCell: UITableViewCell {
     @IBOutlet weak var imgNotification: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var btnArrow: UIButton!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +21,7 @@ class MenuCell: UITableViewCell {
 
     
     @IBAction func onClickedArrowBtn(_ sender: UIButton) {
-        
+//        self.delegate.getData()
         
     }
     

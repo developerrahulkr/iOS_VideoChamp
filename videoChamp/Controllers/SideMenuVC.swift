@@ -14,6 +14,8 @@ class SideMenuVC: UIViewController {
     
     let menuViewModel = MenuViewModels()
     let cellID = "MenuCell"
+    
+    var indexPath1 : IndexPath?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +33,9 @@ class SideMenuVC: UIViewController {
 
 
 
-extension SideMenuVC : UITableViewDelegate, UITableViewDataSource {
+extension SideMenuVC : UITableViewDelegate, UITableViewDataSource{
+   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuViewModel.dataSource.count
     }
@@ -39,6 +43,7 @@ extension SideMenuVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! MenuCell
         cell.updateData(inData: menuViewModel.dataSource[indexPath.row])
+        indexPath1 = indexPath
         return cell
     }
     
@@ -71,4 +76,8 @@ extension SideMenuVC : UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+    
+    
+
 }
