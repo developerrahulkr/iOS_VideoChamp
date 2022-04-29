@@ -7,6 +7,7 @@
 
 import Foundation
 
+import UIKit
 //protocol MenuViewModelView : AnyObject {
 //    func didReceievedResponse(inData : Any)
 //}
@@ -39,6 +40,30 @@ class MenuViewModels : NSObject {
         
         let data4 = CMModel(ids: uuid, name: "SHARE APPLICATION", imageIcon: "share_icon", arrowIcon: "arrow_icon")
         dataSource.append(data4)
+        
+    }
+    
+    func activateDateAPIData(completionHandler : @escaping(Bool, Bool) -> Void) {
+        UIApplication.topViewController()?.showActivityIndicator()
+        APIManager.shared.activateDate { dict in
+            UIApplication.topViewController()?.hideActivityIndicator()
+            if dict == nil {
+                print("Directore is Nil")
+            }else{
+                let statusCode = dict!["status"].stringValue
+                let error_msg = dict!["message"].stringValue
+                let data = dict?["data"].dictionary
+                let activatedDate = data?["activatedDate"]?.dictionary
+                let activeStatus = activatedDate?["status"]?.boolValue
+                if statusCode == "200"{
+                    completionHandler(true,activeStatus!)
+                    print("Active Status is : \(activeStatus)")
+                }else{
+                    completionHandler(false, activeStatus!)
+                    print(error_msg)
+                }
+            }
+        }
         
     }
 }
@@ -102,6 +127,9 @@ class CameraConnectViewModel : NSObject {
         let data10 = CMNotification(title: "Lorem ipsum", desc: "euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.")
         notificationDataSource.append(data10)
     }
+    
+    
+  
     
     
 }

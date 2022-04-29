@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -139,7 +140,7 @@ extension AppDelegate : MessagingDelegate, UNUserNotificationCenterDelegate {
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let info = notification.request.content.userInfo
-        print(info) // the payload that is attached to the push notification
+        print("Notification Info : \(info)") // the payload that is attached to the push notification
         completionHandler([.alert,.sound, .badge])
     }
     

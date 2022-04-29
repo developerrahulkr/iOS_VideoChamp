@@ -24,6 +24,14 @@ let message_list_url = "\(base_url)/msglisting?FeedId="
 let feedback_message_url = "\(base_url)/feedbackmsg"
 
 
+let termAndConditions_url = "\(base_url)/getcondition"
+
+let generate_number_url = "\(base_url)/number"
+let number_verify_url = "\(base_url)/vefnumber"
+
+let activateDate_url = "\(base_url)/activatedDate"
+
+
 
 
 

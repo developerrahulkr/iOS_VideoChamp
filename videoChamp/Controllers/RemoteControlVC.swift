@@ -18,6 +18,8 @@ class RemoteControlVC: UIViewController {
     let cellID2 = "CodeVerifyCell"
     let cellId3 = "CameraCodeCell3"
     var otpString : String = ""
+    
+    let codeGenerateVM = GenerateNumberViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -92,7 +94,24 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
         print("Varification Code : \(otpString)")
         if otpString.isEmpty {
             self.showAlert(alertMessage: "Please fill the Code")
+        }else{
+            self.CodeVerifyApi(number: otpString)
         }
-        self.showAlert(alertMessage: "CODE IS : \(otpString)")
+        
+    }
+    
+    
+    
+    func CodeVerifyApi(number : String){
+        codeGenerateVM.verifyNumber(number: number) { [weak self] isSuccess in
+            
+            guard let self = self else{return}
+            if isSuccess {
+//                self.showAlert(alertMessage: "OTP Verified!")
+                self.navigationController?.popViewController(animated: true)
+            }else{
+                self.showAlert(alertMessage: "\(self.otpString) is Not Correct")
+            }
+        }
     }
 }

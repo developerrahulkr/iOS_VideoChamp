@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C0B02F927D0C7A000599A54 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B02F827D0C7A000599A54 /* NotificationViewModel.swift */; };
+		2C15F23027FC289C0002999E /* CheckNetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15F22F27FC289C0002999E /* CheckNetworkStatus.swift */; };
 		2C172D2927C4C8F8005BA3AD /* GiveFeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C172D2727C4C8F8005BA3AD /* GiveFeedbackCell.swift */; };
 		2C172D2A27C4C8F8005BA3AD /* GiveFeedbackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C172D2827C4C8F8005BA3AD /* GiveFeedbackCell.xib */; };
 		2C172D2C27C4CA4E005BA3AD /* CMFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C172D2B27C4CA4E005BA3AD /* CMFeedBack.swift */; };
@@ -54,6 +55,8 @@
 		2C36262627BD32AA00EB4CD6 /* TermsAndConditionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36262427BD32AA00EB4CD6 /* TermsAndConditionsCell.swift */; };
 		2C36262727BD32AA00EB4CD6 /* TermsAndConditionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C36262527BD32AA00EB4CD6 /* TermsAndConditionsCell.xib */; };
 		2C40DFFD27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C40DFFC27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift */; };
+		2C49770D27FEB0D3005D6DF9 /* GenerateNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49770C27FEB0D3005D6DF9 /* GenerateNumberViewModel.swift */; };
+		2C49770F27FEB148005D6DF9 /* CMGenerateNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49770E27FEB148005D6DF9 /* CMGenerateNumber.swift */; };
 		2C52B2DA27CCB115004F2A00 /* CMRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52B2D927CCB115004F2A00 /* CMRegister.swift */; };
 		2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */; };
 		2C68C7F627CCFDD600F76E8A /* GiveFeedbackCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */; };
@@ -106,6 +109,7 @@
 /* Begin PBXFileReference section */
 		0EC93BE3A2837525CBB51034 /* Pods-videoChamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoChamp.release.xcconfig"; path = "Target Support Files/Pods-videoChamp/Pods-videoChamp.release.xcconfig"; sourceTree = "<group>"; };
 		2C0B02F827D0C7A000599A54 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		2C15F22F27FC289C0002999E /* CheckNetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNetworkStatus.swift; sourceTree = "<group>"; };
 		2C172D2727C4C8F8005BA3AD /* GiveFeedbackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackCell.swift; sourceTree = "<group>"; };
 		2C172D2827C4C8F8005BA3AD /* GiveFeedbackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiveFeedbackCell.xib; sourceTree = "<group>"; };
 		2C172D2B27C4CA4E005BA3AD /* CMFeedBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMFeedBack.swift; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 		2C36262427BD32AA00EB4CD6 /* TermsAndConditionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsCell.swift; sourceTree = "<group>"; };
 		2C36262527BD32AA00EB4CD6 /* TermsAndConditionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAndConditionsCell.xib; sourceTree = "<group>"; };
 		2C40DFFC27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMReadNotificationStatus.swift; sourceTree = "<group>"; };
+		2C49770C27FEB0D3005D6DF9 /* GenerateNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNumberViewModel.swift; sourceTree = "<group>"; };
+		2C49770E27FEB148005D6DF9 /* CMGenerateNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMGenerateNumber.swift; sourceTree = "<group>"; };
 		2C52B2D927CCB115004F2A00 /* CMRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRegister.swift; sourceTree = "<group>"; };
 		2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackCell1.swift; sourceTree = "<group>"; };
 		2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiveFeedbackCell1.xib; sourceTree = "<group>"; };
@@ -399,6 +405,7 @@
 				2C172D2B27C4CA4E005BA3AD /* CMFeedBack.swift */,
 				2C52B2D927CCB115004F2A00 /* CMRegister.swift */,
 				2C40DFFC27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift */,
+				2C49770E27FEB148005D6DF9 /* CMGenerateNumber.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -411,6 +418,7 @@
 				2CA1CF3A27C65D0F00BEB063 /* UserViewModel.swift */,
 				2C0B02F827D0C7A000599A54 /* NotificationViewModel.swift */,
 				2CA56C2127D2411800152FC8 /* FeedbackMessageViewModel.swift */,
+				2C49770C27FEB0D3005D6DF9 /* GenerateNumberViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -441,6 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA1CF3627C658C800BEB063 /* API Manager.swift */,
+				2C15F22F27FC289C0002999E /* CheckNetworkStatus.swift */,
 			);
 			path = ServiceManager;
 			sourceTree = "<group>";
@@ -736,6 +745,7 @@
 				2C0B02F927D0C7A000599A54 /* NotificationViewModel.swift in Sources */,
 				2C172D3127C4EAAD005BA3AD /* GiveFeedbackCell2.swift in Sources */,
 				2CA1CF3227C6200F00BEB063 /* CameraUtilities.swift in Sources */,
+				2C49770D27FEB0D3005D6DF9 /* GenerateNumberViewModel.swift in Sources */,
 				2C3625C827BC077200EB4CD6 /* SplashVC.swift in Sources */,
 				2C8D43D927BF75F400C5722A /* CameraCodeCell2.swift in Sources */,
 				2C8D43D527BF6AA900C5722A /* CameraCodeCell.swift in Sources */,
@@ -762,6 +772,7 @@
 				2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */,
 				2C8D43EC27BFC02B00C5722A /* RemoteControlVC.swift in Sources */,
 				2CA1CF3927C658DD00BEB063 /* Common_url.swift in Sources */,
+				2C49770F27FEB148005D6DF9 /* CMGenerateNumber.swift in Sources */,
 				2C172D2927C4C8F8005BA3AD /* GiveFeedbackCell.swift in Sources */,
 				2CA1CF3727C658C800BEB063 /* API Manager.swift in Sources */,
 				2C3625C627BC077100EB4CD6 /* SceneDelegate.swift in Sources */,
@@ -772,6 +783,7 @@
 				2C36261727BD138400EB4CD6 /* Extensions+NotificationName.swift in Sources */,
 				2C96885527CF47BB0048145C /* CodeVerifyCell.swift in Sources */,
 				2C52B2DA27CCB115004F2A00 /* CMRegister.swift in Sources */,
+				2C15F23027FC289C0002999E /* CheckNetworkStatus.swift in Sources */,
 				2C36261927BD169B00EB4CD6 /* NotificationVC.swift in Sources */,
 				2CC21B1627D8A58C0054DF4B /* FeedbackMsgImageCell.swift in Sources */,
 				2CA56C2227D2411800152FC8 /* FeedbackMessageViewModel.swift in Sources */,

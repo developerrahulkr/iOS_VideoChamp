@@ -19,13 +19,33 @@ class CameraVideoShareCodeVC: UIViewController {
     
     let cameraViewModel = CameraConnectViewModel()
 
+    var generatedNumber = ""
+    
+    let generateNumberVM = GenerateNumberViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         cameraViewModel.getCemaraData()
         registerCell()
+        loadData()
+        
     }
+    
+    func loadData(){
+        generateNumberVM.getGenerateNumber { isSuccess, number in
+            if isSuccess {
+                print("generated Number : \(number)")
+                
+                self.generatedNumber = number
+                self.tableView.reloadData()
+            }else{
+                print("Error")
+            }
+        }
+    }
+    
+    
     override func viewDidLayoutSubviews() {
         lbl.font = UIFont(name: "ArgentumSans-Bold", size: 31.0)
         lbl.font = UIFont.systemFont(ofSize: 31.0, weight: .semibold)
@@ -72,11 +92,11 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CameraCodeCell
             cell.updateData(inData: cameraViewModel.cameraDataSource[indexPath.row])
-            
             return cell
         }else if indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! CameraCodeCell2
             cell.delegate = self
+            cell.lblCode.text = generatedNumber
             cell.btnShare.tag = indexPath.row
             cell.btnResend.tag = indexPath.row
             return cell
@@ -108,6 +128,7 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     
     func resendCode(tag: Int) {
         print("resend Code : \(tag)")
+        self.loadData()
     }
     
     func shareCode(tag: Int) {

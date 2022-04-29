@@ -13,6 +13,9 @@ class TermsAndConditionVC: UIViewController {
     @IBOutlet weak var lblTermAndCondition: UILabel!
     
     let cellID = "TermsAndConditionsCell"
+    
+    let termVM = GenerateNumberViewModel()
+    var termsAndConditions = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,7 +26,22 @@ class TermsAndConditionVC: UIViewController {
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
         
         lblTermAndCondition.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
+        loadData()
     }
+    
+    func loadData(){
+        termVM.termAndConditionsData { [weak self] isSuccess, termData in
+            guard let self = self else {return}
+            if isSuccess {
+                self.termsAndConditions = termData
+                self.tableView.reloadData()
+                
+            }else{
+                self.showAlert(alertMessage: "Data is Empty!")
+            }
+        }
+    }
+    
     
     @IBAction func onClickedBackBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)

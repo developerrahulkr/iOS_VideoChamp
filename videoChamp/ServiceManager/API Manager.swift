@@ -13,7 +13,7 @@ class APIManager : NSObject {
     
     static let shared = APIManager()
     func getUser(userName : String, deviceToken : String,  completionHandler : @escaping(_ dict : JSON?) -> Void) {
-//        let header : HTTPHeaders = [.contentType("application/json")]
+        //        let header : HTTPHeaders = [.contentType("application/json")]
         let param = ["name" : userName, "deviceToken" : deviceToken, "deviceType" : "\(UIDevice.current.systemName)", "deviceId" : "\(UIDevice.current.name)"]
         
         print("device Model and name : \(UIDevice.current.name) \(String(describing: UIDevice.current.model))")
@@ -27,7 +27,7 @@ class APIManager : NSObject {
                     let jsonData = try? JSON(data: response.data!)
                     completionHandler(jsonData)
                 }catch {
-                    print(error.localizedDescription)
+                    print("\(error.localizedDescription)")
                 }
             case .failure(let err) :
                 print("Error : \(err.localizedDescription)")
@@ -36,14 +36,38 @@ class APIManager : NSObject {
     }
     
     
-//    MARK: - Post feedback Message
+    //    MARK: - Verify Number
+    
+    func verifyCode(verCode : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
+        let param = ["number" : verCode]
+        
+        AF.request(number_verify_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response {
+            (response) in
+            switch response.result {
+            case .success(let data) :
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let jsonData = try? JSON(data: response.data!)
+                    completionHandler(jsonData)
+                }catch {
+                    print("\(error.localizedDescription)")
+                }
+            case .failure(let err) :
+                print("Error : \(err.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    //    MARK: - Post feedback Message
     
     func postFeedbackMessageData(imgData : Data?, parameter : [String : Any], completionHandler : ((_ inDict : JSON?) -> Void)? = nil ) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
-
+        
         AF.upload(multipartFormData: { MultipartFormData in
             if imgData?.isEmpty == nil {
-//                UIApplication.topViewController()?.showAlert(alertMessage: "Please Upload Image!")
+                //                UIApplication.topViewController()?.showAlert(alertMessage: "Please Upload Image!")
                 print("image is Not Uploaded!")
             }else{
                 MultipartFormData.append(imgData!, withName: "image", fileName: "filename.png", mimeType: "image/png")
@@ -68,10 +92,15 @@ class APIManager : NSObject {
         }
         
     }
-
+    
+    
+    
+    
+    
+    
     
     //    MARK: - read Notification
-        
+    
     func readNotification(notificationId : String, completionHandler : @escaping(_ dict : JSON?) -> Void){
         let param = ["notificationId" : notificationId]
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
@@ -93,7 +122,7 @@ class APIManager : NSObject {
         }
     }
     
-//  MARK: - delete Notification
+    //  MARK: - delete Notification
     
     func deleteNotification(notificationId : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
         let param = ["notificationId" : notificationId]
@@ -121,7 +150,7 @@ class APIManager : NSObject {
     
     
     
-//    MARK: - Get Feedback Data
+    //    MARK: - Get Feedback Data
     
     func getFeedback(completionHandler : @escaping(_ dict : JSON?) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
@@ -139,12 +168,84 @@ class APIManager : NSObject {
                 }
             case .failure(let err):
                 print(err.localizedDescription)
-            } 
+            }
+        }
+    }
+    
+    func getTermAndCondition(type : Int, completionHandler : @escaping(_ dict : JSON?) -> Void) {
+        
+        let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
+        
+        let param = ["type" : type]
+        
+        AF.request(termAndConditions_url,method: .get, parameters: param, headers: header).response {
+            (response) in
+            switch response.result {
+            case .success(let data):
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let jsonData = try? JSON(data: response.data!)
+                    completionHandler(jsonData)
+                    
+                }catch (let err) {
+                    print("Term and Condition Error : \(err.localizedDescription)")
+                }
+            case .failure(let err):
+                print("Term and Condition Error : \(err.localizedDescription)")
+            }
         }
     }
     
     
-//    MARK: - Get All Notification
+    //    MARK: - Generate Number
+    
+    func generateNumber(completionHandler : @escaping(_ dict : JSON?) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
+        AF.request(generate_number_url, method: .get, headers: header).response {
+            (response) in
+            
+            switch response.result {
+                
+            case .success(let data):
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let jsonData = try? JSON(data: response.data!)
+                    completionHandler(jsonData)
+                    
+                }catch (let err) {
+                    print(err.localizedDescription)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    
+//    MARK: - Activate Date
+    
+    func activateDate(completionHandler : @escaping(_ dict : JSON?) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
+        AF.request(activateDate_url, method: .get, headers: header).response {
+            (response) in
+            switch response.result {
+            case .success(let data):
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let jsonData = try? JSON(data: response.data!)
+                    completionHandler(jsonData)
+                    
+                }catch (let err) {
+                    print(err.localizedDescription)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    
+    //    MARK: - Get All Notification
     
     func getNotification(completionHandler : @escaping(_ dict : JSON?) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
@@ -169,11 +270,11 @@ class APIManager : NSObject {
     }
     
     
-
     
     
-//    MARK: GetFeedback Message Data
-
+    
+    //    MARK: GetFeedback Message Data
+    
     func getFeedbackData(feedID : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
         let feedback_list_url = "\(message_list_url)\(feedID)"
@@ -201,13 +302,13 @@ class APIManager : NSObject {
     
     
     
-//    MARK: Post Message Data
+    //    MARK: Post Message Data
     
     
     
     func uploadPostData(imgData : [Data?], parameter : [String : Any], completionHandler : ((_ inDict : JSON?) -> Void)? = nil ) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
-
+        
         AF.upload(multipartFormData: { MultipartFormData in
             if imgData.count == 0 {
                 UIApplication.topViewController()?.showAlert(alertMessage: "Please Upload Image!")

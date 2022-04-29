@@ -31,7 +31,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var remoteView: UIView!
     
-    
+    let homeVM = MenuViewModels()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +53,28 @@ class HomeVC: UIViewController {
         
         self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
         print("View Controller : \(String(describing: self.navigationController?.viewControllers))")
+        checkBlockAndActivateDate()
+    }
+    
+    
+    func checkBlockAndActivateDate() {
+        homeVM.activateDateAPIData { isSuccess,isUnblock  in
+            if isSuccess && isUnblock{
+                print("User is Unblock")
+//                exit(0)
+            }else if isSuccess && !isUnblock{
+                let alert = UIAlertController(title: "VideoChamp", message: "User is blocked from Admin Side ", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                    exit(0)
+                }
+                alert.addAction(okAction)
+                self.present(alert, animated: true)
+                self.showAlert(alertMessage: "User is Block")
+                
+            }else{
+                self.showAlert(alertMessage: "Is Success is no Working")
+            }
+        }
     }
     
     
@@ -136,7 +158,7 @@ class HomeVC: UIViewController {
     @IBAction func onClickedMenuBtn(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SideMenuVC") as! SideMenuVC
 //        vc.modalTransitionStyle = .
-        
+
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: false, completion: nil)
     }
