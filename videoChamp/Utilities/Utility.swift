@@ -7,10 +7,13 @@
 
 import Foundation
 import UIKit
+import MFrameWork
+import MultipeerConnectivity
 
 class Utility : NSObject {
     static let shared = Utility()
     
+    var sessionManager : MCSessionManager!
     func getUserAppToken() -> String {
         let token = UserDefaults.standard.string(forKey: "Apptoken")
         if let utoken = token{

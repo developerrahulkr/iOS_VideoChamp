@@ -6,6 +6,14 @@
 //
 
 import UIKit
+import MFrameWork
+import MultipeerConnectivity
+
+
+enum ConnectionState {
+    case needToRunToggle
+    case none
+}
 
 class HomeVC: UIViewController {
     
@@ -18,50 +26,129 @@ class HomeVC: UIViewController {
     @IBOutlet weak var lblControlDevice: UILabel!
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblOR: UILabel!
-    
-    
-    
-    
-    
     var shortName = ""
     var nameTextColor : UIColor!
     var avatarImage : UIImage?
-    
-    
+    var checkConnectionState : ConnectionState = .none
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var remoteView: UIView!
+    
+    let cameraViewModel = CameraConnectViewModel()
+    private var mcSessionViewModel : MCSessionViewModel!
+    var peerTableViewModel =  PeerTableViewModel()
+
+    var peerIDs : [MCPeerID]!
+    private let serviceType = "video-champ"
+    private let displayName = UIDevice.current.name
+    private let serviceProtocol:MCSessionManager.ServiceProtocol = .textAndVideo
+    private let alertPresenter:AlertPresenter = .init()
     
     let homeVM = MenuViewModels()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
 //        lblDeviceTitle.font = UIFont(name: "argentum-sans.bold", size: 14.0)
+        setUpSessionManager()
+        // Do any additional setup after loading the view.
+        cameraAndRemoteViewAction()
+        checkBlockAndActivateDate()
+        loadData()
+        
+    }
+    
+    private func setUpSessionManager() {
+        Utility.shared.sessionManager = MCSessionManager.init(displayName: displayName, serviceType: serviceType,serviceProtocol: serviceProtocol)
+        Utility.shared.sessionManager.onStateChanaged(connecting: {[weak self] (peerID, state) in
+            guard let self = self else {return}
+            print("PeerID is : \(peerID), connectionID : \(state)")
+            self.peerTableViewModel.updateConnectedPeerIDs()
+            self.peerTableViewModel.updateCellDataIfStateChanged(peerID: peerID, state: state)
+            if state == MCConnectionState.connected {
+                
+                DispatchQueue.main.async {
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "PeerIDVC") as! PeerIDVC
+//                    self.navigationController?.pushViewController(vc, animated: true)
+                    let vc = LiveViewController.init(mcSessionManager: Utility.shared.sessionManager, targetPeerID: peerID)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            }, foundPeerIDs: {[weak self](ids) in
+                guard let self = self else {return}
+                
+                self.peerIDs = ids
+                let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: ids, requiringSecureCoding: false)
+                UserDefaults.standard.set(encodedData, forKey: "MCPeerIDs")
+                self.peerTableViewModel.updateFoundCell(ids)
+                
+        })
+        setUpOnInvited()
+    }
+    
+    private func setUpOnInvited() {
+        let title = "Invitation from"
+        let acceptTitle = "Accept"
+        let cancelTitle = "Decline"
+        Utility.shared.sessionManager.onInvited {[weak self] (fromPeerID, answerCallback) in
+            let message = "\(fromPeerID.displayName)"
+            self?.alertPresenter.confirmAlert(title: title, message: message, acceptTitle: acceptTitle, cancelTitle: cancelTitle, acceptCallback: { (isAccept) in
+                answerCallback(isAccept)
+            })
+        }
+    }
+
+    func loadData(){
+        mcSessionViewModel = MCSessionViewModel.init(mcSessionManger: Utility.shared.sessionManager)
+        
         lblDeviceTitle.font = UIFont.systemFont(ofSize: 14.0, weight: .bold)
         lblOR.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
         lblUserName.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
-
-        // Do any additional setup after loading the view.
+        
+        print("Baerer Token : \(Utility.shared.getUserAppToken())")
+        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+        self.mcSessionViewModel.togggleConnectionRunState()
+        self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
+        print("View Controller : \(String(describing: self.navigationController?.viewControllers))")
         
         NotificationCenter.default.addObserver(self, selector: #selector(notificationScreen), name: .kNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(termAndConditionScreen), name: .kTermsAndConditions, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(feedbackScreen), name: .kFeedback, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(shareScreen), name: .kShare, object: nil)
-        cameraAndRemoteViewAction()
-        print("Baerer Token : \(Utility.shared.getUserAppToken())")
-        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
         
-        self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
-        print("View Controller : \(String(describing: self.navigationController?.viewControllers))")
-        checkBlockAndActivateDate()
+//        DispatchQueue.main.asyncAfter(deadline: .now()) {
+//            self.browsingState()
+//        }
+        switch checkConnectionState {
+        case .needToRunToggle:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        case .none:
+            break
+        }
     }
+    
+    func browsingState(){
+        self.mcSessionViewModel.toggleBrwosing()
+        self.showActivityIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.hideActivityIndicator()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PeerIDVC") as! PeerIDVC
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
+    
+    
+    
+        
+   
     
     
     func checkBlockAndActivateDate() {
         homeVM.activateDateAPIData { isSuccess,isUnblock  in
             if isSuccess && isUnblock{
                 print("User is Unblock")
-//                exit(0)
             }else if isSuccess && !isUnblock{
                 let alert = UIAlertController(title: "VideoChamp", message: "User is blocked from Admin Side ", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default) { _ in
@@ -110,11 +197,15 @@ class HomeVC: UIViewController {
     }
     
     @objc func funcCameraActivity(){
+        print("peer ids is : \(String(describing: self.peerIDs))")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "CameraVideoShareCodeVC") as! CameraVideoShareCodeVC
+//        vc.sessionManager = sessionManager
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func funcRemoteActivity(){
+        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
         self.navigationController?.pushViewController(vc, animated: true)
     }

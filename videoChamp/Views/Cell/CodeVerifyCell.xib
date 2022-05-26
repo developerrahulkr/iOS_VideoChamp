@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +28,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NTW-R6-rKK">
                                 <rect key="frame" x="40" y="30" width="383" height="60"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="R5c-l3-sTQ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wi-vU-cP5">
+                                        <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="R5c-l3-sTQ">
                                         <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cy3-iK-UmA">
@@ -65,9 +71,13 @@
                                 <color key="backgroundColor" red="0.77648282049999995" green="0.77654325960000004" blue="0.77238720660000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="R5c-l3-sTQ" secondAttribute="bottom" id="0Db-nI-f4x"/>
+                                    <constraint firstAttribute="bottom" secondItem="6Wi-vU-cP5" secondAttribute="bottom" id="832-xC-4FP"/>
                                     <constraint firstItem="R5c-l3-sTQ" firstAttribute="leading" secondItem="NTW-R6-rKK" secondAttribute="leading" id="chS-Yu-f7P"/>
                                     <constraint firstAttribute="height" constant="60" id="d7H-nh-wo9"/>
                                     <constraint firstItem="R5c-l3-sTQ" firstAttribute="top" secondItem="NTW-R6-rKK" secondAttribute="top" id="ddr-X6-P9c"/>
+                                    <constraint firstItem="6Wi-vU-cP5" firstAttribute="top" secondItem="NTW-R6-rKK" secondAttribute="top" id="ds1-R4-Tma"/>
+                                    <constraint firstAttribute="trailing" secondItem="6Wi-vU-cP5" secondAttribute="trailing" id="hnC-Pr-Ab5"/>
+                                    <constraint firstItem="6Wi-vU-cP5" firstAttribute="leading" secondItem="NTW-R6-rKK" secondAttribute="leading" id="iSB-Zj-IsH"/>
                                     <constraint firstAttribute="trailing" secondItem="R5c-l3-sTQ" secondAttribute="trailing" id="mxh-6T-DE7"/>
                                 </constraints>
                             </view>
@@ -109,6 +119,7 @@
             <connections>
                 <outlet property="btnConnect" destination="Hwc-0w-xeu" id="VAa-Ba-Hr0"/>
                 <outlet property="cardView" destination="N2M-rS-kfW" id="CqG-0b-9mw"/>
+                <outlet property="lblURL" destination="6Wi-vU-cP5" id="yo5-K9-1p6"/>
                 <outlet property="tf1" destination="Cy3-iK-UmA" id="1OD-bD-U0P"/>
                 <outlet property="tf2" destination="sWV-1H-Q2f" id="j7N-IF-71z"/>
                 <outlet property="tf3" destination="g6A-5a-6hn" id="gob-V9-unl"/>

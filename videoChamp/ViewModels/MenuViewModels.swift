@@ -57,7 +57,6 @@ class MenuViewModels : NSObject {
                 let activeStatus = activatedDate?["status"]?.boolValue
                 if statusCode == "200"{
                     completionHandler(true,activeStatus!)
-                    print("Active Status is : \(activeStatus)")
                 }else{
                     completionHandler(false, activeStatus!)
                     print(error_msg)

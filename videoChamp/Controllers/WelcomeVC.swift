@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class WelcomeVC: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!

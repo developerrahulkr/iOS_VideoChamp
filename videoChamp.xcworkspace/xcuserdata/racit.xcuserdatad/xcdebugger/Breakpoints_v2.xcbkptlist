@@ -8,14 +8,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "712737E0-8CC1-47C2-B479-40872C57CEBE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/Controllers/Delegate/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "userNotificationCenter(_:didReceive:withCompletionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C17877B1-D340-43E2-8496-966E86D8C10D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/Controllers/TermsAndConditionVC.swift"
@@ -40,7 +40,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D95AA27F-E25F-4AE0-AED9-5B51CF43A2A7"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/Controllers/TermsAndConditionVC.swift"
@@ -56,7 +56,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "E1E2EF10-5E2E-4AA3-A810-8954C6F25330"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/ViewModels/GenerateNumberViewModel.swift"
@@ -72,7 +72,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "FBE0F30A-A3F3-470F-8A88-4B3AB6FEC28B"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/ViewModels/GenerateNumberViewModel.swift"
@@ -88,7 +88,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "801335FD-9050-4EAA-9836-25C24E5B8398"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/ViewModels/GenerateNumberViewModel.swift"
@@ -104,7 +104,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "EABD0D5A-B72E-4005-9E56-BD8D4F7634DE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/ViewModels/GenerateNumberViewModel.swift"
@@ -120,14 +120,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "69611104-9872-4F8D-BB59-5FD92ADC9D7C"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/ServiceManager/API Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "getTermAndCondition(type:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -136,14 +136,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "10536DFA-198B-4D74-8047-2A9A3BF13E02"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/ServiceManager/API Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "getTermAndCondition(type:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -152,14 +152,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "F3664986-835B-4505-B114-60AF9479516D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/ServiceManager/API Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "getTermAndCondition(type:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -168,16 +168,473 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "09D1BB99-C8D8-4BB8-97A7-76CF700F2F0D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "videoChamp/ServiceManager/API Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "getTermAndCondition(type:completionHandler:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9BC189A8-D4A8-4947-AE92-86FBFF4A9026"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "needsToRunSession"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "9BC189A8-D4A8-4947-AE92-86FBFF4A9026 - c77380772d0b04a4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.needsToRunSession.getter : Swift.Bool"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "67">
+               </Location>
+               <Location
+                  uuid = "9BC189A8-D4A8-4947-AE92-86FBFF4A9026 - ca5dc6b8c66f490"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.needsToRunSession.setter : Swift.Bool"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "223">
+               </Location>
+               <Location
+                  uuid = "9BC189A8-D4A8-4947-AE92-86FBFF4A9026 - a263ff00d1fd0a1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.needsToRunSession.modify : Swift.Bool"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "9BC189A8-D4A8-4947-AE92-86FBFF4A9026 - 617f1272f82d8197"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.needsToRunSession.modify : Swift.Bool with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "9BC189A8-D4A8-4947-AE92-86FBFF4A9026 - 60acc5dd3ccdbc97"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.init(displayName: Swift.String, serviceType: Swift.String, serviceProtocol: MultipeerFramework.MCSessionManager.ServiceProtocol, encryptionPreference: __C.MCEncryptionPreference, discoveryInfo: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.String&gt;&gt;) -&gt; MultipeerFramework.MCSessionManager"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "1830">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C955DFCE-C7B1-4E8F-8E0C-1C11B81EAECA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "needsToRunSession"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9A79A3A7-0FE2-45B5-8176-1C9E14BF5974"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "needsToRunSession"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BDEA9778-6D6F-4041-B63B-D3C337D92BB4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "needsToRunSession"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E382BF4B-7C20-40DE-9736-A19C5C5CCD3D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "MCSessionManager"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "81FAB696-751A-4135-B8C4-F6F5DDA64947"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "MCSessionManager"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "81FAB696-751A-4135-B8C4-F6F5DDA64947 - 2feb1c5376062f32"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.receivedDataCallback.getter : Swift.Optional&lt;(Swift.Optional&lt;Foundation.Data&gt;, __C.MCPeerID) -&gt; ()&gt;"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "103">
+               </Location>
+               <Location
+                  uuid = "81FAB696-751A-4135-B8C4-F6F5DDA64947 - 3473ef0cb231790e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.receivedDataCallback.setter : Swift.Optional&lt;(Swift.Optional&lt;Foundation.Data&gt;, __C.MCPeerID) -&gt; ()&gt;"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "141">
+               </Location>
+               <Location
+                  uuid = "81FAB696-751A-4135-B8C4-F6F5DDA64947 - 41db9fd984214bbf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.receivedDataCallback.modify : Swift.Optional&lt;(Swift.Optional&lt;Foundation.Data&gt;, __C.MCPeerID) -&gt; ()&gt;"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "81FAB696-751A-4135-B8C4-F6F5DDA64947 - 786119f0e5d7d82d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.receivedDataCallback.modify : Swift.Optional&lt;(Swift.Optional&lt;Foundation.Data&gt;, __C.MCPeerID) -&gt; ()&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  uuid = "81FAB696-751A-4135-B8C4-F6F5DDA64947 - 60acc5dd3ccdc685"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.MCSessionManager.init(displayName: Swift.String, serviceType: Swift.String, serviceProtocol: MultipeerFramework.MCSessionManager.ServiceProtocol, encryptionPreference: __C.MCEncryptionPreference, discoveryInfo: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.String&gt;&gt;) -&gt; MultipeerFramework.MCSessionManager"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "1118">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5E5BB49C-CE9D-4477-945D-AFF15673723B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "MCSessionManager"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C02A5E13-6DE6-4313-A1F8-59949B6FE4C3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "needsToRunSession"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "86087F34-D392-438F-826A-87DD0DFDA19A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "needsToRunSession"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FD8B21F9-5F77-4B63-8353-ECCAEE460F3F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MultipeerFramework/MultipeerFramework/Sources/Models/MCSessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "needsToRunSession"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1768C1A7-D271-49BF-9CAE-C068416A6B82"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "videoChamp/Controllers/PeerIDVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "onTappedButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BA49B9D4-BFAD-42F1-8D5D-DE6D23CD7CE5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "videoChamp/Controllers/PeerIDVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "onTappedButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8167A7F3-792B-4E65-9741-3A666B368127"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "bindReceivedCallbacks(gotImage:gotAudioData:gotTextMessage:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8167A7F3-792B-4E65-9741-3A666B368127 - a4b5727688beeaa2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Foundation.Data, __C.MCPeerID) -&gt; () in MFrameWork.LivePresenter.bindReceivedCallbacks(gotImage: (Swift.Optional&lt;__C.UIImage&gt;, __C.MCPeerID) -&gt; (), gotAudioData: (Foundation.Data, __C.MCPeerID) -&gt; (), gotTextMessage: Swift.Optional&lt;(Swift.String, __C.MCPeerID) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "MFrameWork"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1180">
+               </Location>
+               <Location
+                  uuid = "8167A7F3-792B-4E65-9741-3A666B368127 - a4b5727688beeaa2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Foundation.Data, __C.MCPeerID) -&gt; () in MFrameWork.LivePresenter.bindReceivedCallbacks(gotImage: (Swift.Optional&lt;__C.UIImage&gt;, __C.MCPeerID) -&gt; (), gotAudioData: (Foundation.Data, __C.MCPeerID) -&gt; (), gotTextMessage: Swift.Optional&lt;(Swift.String, __C.MCPeerID) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "MFrameWork"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1117">
+               </Location>
+               <Location
+                  uuid = "8167A7F3-792B-4E65-9741-3A666B368127 - a4b5727688beeaa2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Foundation.Data, __C.MCPeerID) -&gt; () in MFrameWork.LivePresenter.bindReceivedCallbacks(gotImage: (Swift.Optional&lt;__C.UIImage&gt;, __C.MCPeerID) -&gt; (), gotAudioData: (Foundation.Data, __C.MCPeerID) -&gt; (), gotTextMessage: Swift.Optional&lt;(Swift.String, __C.MCPeerID) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "MFrameWork"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1064">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "064FD9A6-8175-4702-9F1F-EE8C16AC8C48"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../FrameworkAnd Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "setUpCamera(initPosition:sessionPreset:avAudioFormat:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "064FD9A6-8175-4702-9F1F-EE8C16AC8C48 - fe16c15e6a058432"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MFrameWork.LivePresenter.setUpCamera(initPosition: __C.AVCaptureDevicePosition, sessionPreset: __C.AVCaptureSessionPreset, avAudioFormat: __C.AVAudioFormat) throws -&gt; ()"
+                  moduleName = "MFrameWork"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "528">
+               </Location>
+               <Location
+                  uuid = "064FD9A6-8175-4702-9F1F-EE8C16AC8C48 - fe16c15e6a058432"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MFrameWork.LivePresenter.setUpCamera(initPosition: __C.AVCaptureDevicePosition, sessionPreset: __C.AVCaptureSessionPreset, avAudioFormat: __C.AVAudioFormat) throws -&gt; ()"
+                  moduleName = "MFrameWork"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "384">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

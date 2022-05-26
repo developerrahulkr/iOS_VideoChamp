@@ -31,6 +31,9 @@ let number_verify_url = "\(base_url)/vefnumber"
 
 let activateDate_url = "\(base_url)/activatedDate"
 
+let generate_link_url = "\(base_url)/link"
+
+
 
 
 

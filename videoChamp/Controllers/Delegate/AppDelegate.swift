@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        application.registerForRemoteNotifications()
         return true
     }
+    
 
 
     // MARK: UISceneSession Lifecycle

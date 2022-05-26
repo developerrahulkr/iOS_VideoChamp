@@ -15,6 +15,9 @@ pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'NVActivityIndicatorView'
 pod 'SDWebImage'
+pod 'SnapKit', '~> 5.0.0'
+pod 'GSImageViewerController'
+
   target 'videoChampTests' do
     inherit! :search_paths
     # Pods for testing

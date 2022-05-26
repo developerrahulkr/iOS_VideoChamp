@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MFrameWork
+import MultipeerConnectivity
 
 class CameraVideoShareCodeVC: UIViewController {
     
@@ -18,37 +20,78 @@ class CameraVideoShareCodeVC: UIViewController {
     let cellId3 = "CameraCodeCell3"
     
     let cameraViewModel = CameraConnectViewModel()
-
-    var generatedNumber = ""
+    private var mcSessionViewModel : MCSessionViewModel!
+    var staticLink = "http-remote://videochamp/remote/"
+    var generatedUrlCode = ""
+    var urlLink = ""
+//    let generateNumberVM = GenerateNumberViewModel()
     
-    let generateNumberVM = GenerateNumberViewModel()
+    let generateLinkVM = GeneratedLinkViewModel()
+    var sessionManager: MCSessionManager!
+    private let serviceType = "video-champ"
+    private let displayName = UIDevice.current.name
+    private let serviceProtocol:MCSessionManager.ServiceProtocol = .textAndVideo
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        print("Display Name : \(Utility.shared.sessionManager.myPeerID?.description)")
         cameraViewModel.getCemaraData()
         registerCell()
         loadData()
-        
     }
     
+    
+    
     func loadData(){
-        generateNumberVM.getGenerateNumber { isSuccess, number in
+        mcSessionViewModel = MCSessionViewModel.init(mcSessionManger: Utility.shared.sessionManager)
+        self.mcSessionViewModel.toogleAdvertising()
+        
+        
+        
+//        generateNumberVM.getGenerateNumber { [weak self] isSuccess, number in
+//            guard let self = self else { return }
+//            if isSuccess {
+//                print("generated Number : \(number)")
+//                self.generatedNumber = number
+//
+//                self.tableView.reloadData()
+//            }else{
+//                print("Error")
+//            }
+//        }
+        
+        
+        generateLinkVM.linkGenerated(cmGenerateLinkData: CMGenerateLink(deviceType: "IOS",
+                                                                        deviceId: Utility.shared.sessionManager.myPeerID?.displayName ?? "",
+                                                                        isCamera: "true",
+                                                                        peerId: Utility.shared.sessionManager.displayName,
+                                                                        connectionState: "true")) {
+            [weak self] isSuccess,linkURL,urlCode  in
+            guard let self = self else {return}
             if isSuccess {
-                print("generated Number : \(number)")
+//                self.generatedNumber = number
+                print("Deeplinking URL : \(linkURL)")
+                print("url Code : \(urlCode)")
+                self.urlLink = linkURL
+                self.generatedUrlCode = urlCode
+                self.staticLink = "\(self.staticLink)\(self.generatedUrlCode)"
                 
-                self.generatedNumber = number
                 self.tableView.reloadData()
+                
             }else{
                 print("Error")
             }
         }
+        
+        
     }
     
     
     override func viewDidLayoutSubviews() {
         lbl.font = UIFont(name: "ArgentumSans-Bold", size: 31.0)
-        lbl.font = UIFont.systemFont(ofSize: 31.0, weight: .semibold)
+        lbl.font = UIFont.systemFont(ofSize: 31.0, weight: .regular)
         self.gradientColor(topColor: topyellowColor, bottomColor: bottomYellowColor)
         lblShareCode.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
@@ -77,26 +120,36 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return cameraViewModel.cameraDataSource.count
-        }else{
-            return 1
-        }
+//        if section == 0 {
+//            return cameraViewModel.cameraDataSource.count
+//        }else{
+//            return 1
+//        }
+        1
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 10
+        }else{
+            return 20
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CameraCodeCell
-            cell.updateData(inData: cameraViewModel.cameraDataSource[indexPath.row])
-            return cell
-        }else if indexPath.section == 1{
+//        if indexPath.section == 0 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CameraCodeCell
+//            cell.updateData(inData: cameraViewModel.cameraDataSource[indexPath.row])
+//            return cell
+//        }else
+        if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! CameraCodeCell2
             cell.delegate = self
-            cell.lblCode.text = generatedNumber
+            cell.lblCode.text = staticLink
             cell.btnShare.tag = indexPath.row
             cell.btnResend.tag = indexPath.row
             return cell
@@ -116,9 +169,10 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 60.0
-        }else if indexPath.section == 1{
+//        if indexPath.section == 0 {
+//            return 150
+//        }else
+        if indexPath.section == 0{
             return 150.0
         }else{
             return 165.0
@@ -132,9 +186,12 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     }
     
     func shareCode(tag: Int) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShareVC") as! ShareVC
-        vc.headingText = "SHARE CODE"
-        self.navigationController?.pushViewController(vc, animated: true)
+        guard let url = URL(string: self.staticLink)
+        else{
+            return
+        }
+        let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
+        self.present(sharesheetVC, animated: true)
     }
     
     

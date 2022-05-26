@@ -36,6 +36,34 @@ class APIManager : NSObject {
     }
     
     
+    //    MARK: - Generate Link
+    func generateLink(data : CMGenerateLink, completionHandler : @escaping(_ dict : JSON?) -> Void){
+        let param = ["deviceType" : data.deviceType,
+                     "deviceId" : data.deviceId,
+                     "isCamera" : data.isCamera,
+                     "peerId" : data.peerId,
+                     "connectionState" : data.connectionState]
+        let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
+        AF.request(generate_link_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response {
+            (response) in
+            switch response.result {
+            case .success(let data) :
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let jsonData = try? JSON(data: response.data!)
+                    completionHandler(jsonData)
+                }catch {
+                    print("\(error.localizedDescription)")
+                }
+            case .failure(let err) :
+                print("Error : \(err.localizedDescription)")
+            }
+            
+        }
+        
+    }
+    
+    
     //    MARK: - Verify Number
     
     func verifyCode(verCode : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
@@ -58,6 +86,7 @@ class APIManager : NSObject {
             }
         }
     }
+    
     
     
     //    MARK: - Post feedback Message
@@ -92,6 +121,9 @@ class APIManager : NSObject {
         }
         
     }
+    
+    
+
     
     
     

@@ -19,6 +19,9 @@ class CodeVerifyCell: UITableViewCell {
     @IBOutlet weak var tf3: UITextField!
     @IBOutlet weak var tf4: UITextField!
     @IBOutlet weak var btnConnect: UIButton!
+    @IBOutlet weak var lblURL: UILabel!
+    
+    
     var delegate : VerifyCodeDelegate!
     var otpString = ""
     var callBack : ((_ str : String) -> ())?

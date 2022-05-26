@@ -3,24 +3,16 @@
 //  videoChamp
 //
 //  Created by iOS Developer on 04/03/22.
-//
-
 import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
-
-
 class FeedbackMessageViewModel : NSObject {
-    
     func feedbackMessageData( imageData : Data?, messageData : CMFeedbackMessageData, completionHandler : @escaping(Bool) -> Void) {
-        
         let param = ["feedbackId" : messageData.feedbackId ?? "", "message" : messageData.message ?? "", "image" : messageData.image ?? ""] as [String : Any]
-        
         UIApplication.topViewController()?.showActivityIndicator()
         APIManager.shared.postFeedbackMessageData(imgData: imageData, parameter: param) { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
-            
             if inDict == nil {
                 UIApplication.topViewController()?.showAlert(alertMessage: "Directory is Empty...")
             }else{
@@ -36,14 +28,7 @@ class FeedbackMessageViewModel : NSObject {
                 }
             }
         }
-        
-        
-        
     }
-    
-    
-    
-    
 }
 
 

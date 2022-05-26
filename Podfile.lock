@@ -92,6 +92,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - GSImageViewerController (1.6.3)
   - IQKeyboardManagerSwift (6.5.9)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
@@ -106,16 +107,19 @@ PODS:
   - SDWebImage (5.12.3):
     - SDWebImage/Core (= 5.12.3)
   - SDWebImage/Core (5.12.3)
+  - SnapKit (5.0.1)
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - Firebase/Core
   - Firebase/Messaging
+  - GSImageViewerController
   - IQKeyboardManagerSwift
   - NVActivityIndicatorView
   - ProgressHUD
   - SDWebImage
+  - SnapKit (~> 5.0.0)
   - SwiftyJSON
 
 SPEC REPOS:
@@ -130,12 +134,14 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - GSImageViewerController
     - IQKeyboardManagerSwift
     - nanopb
     - NVActivityIndicatorView
     - ProgressHUD
     - PromisesObjC
     - SDWebImage
+    - SnapKit
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -149,14 +155,16 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: aa3cb422fab2b05d2efac543a5720d1a85b9dea5
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  GSImageViewerController: 20a257d7e3dd9ee171c2dfea659992eba2761839
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: bc0d1a799c0d1303dba820a317f6ebb758ac11e9
+PODFILE CHECKSUM: 42d8cfa30293977d453d5483adc7cad5edddbd67
 
 COCOAPODS: 1.11.2

@@ -13,6 +13,7 @@ let kAvatarNAme = ""
 let appName = "Video Champ"
 
 let kToken = ""
+var sendingRemoteMessage = "You are invited to become monitor/camera. Please click the below link:"
 
 
 let termsAndConditions = """

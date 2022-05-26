@@ -43,6 +43,8 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
+    
 //    MARK: - Email Validation
     
     func isValidEmail(testStr:String) -> Bool {
@@ -95,6 +97,22 @@ extension UIViewController {
     }
     
     
+}
+
+
+extension String {
+    func boldAttributeString(boldStr : String) {
+        let boldString = boldStr
+        let normalStrins1 = "Your invite request to become"
+        let normalString2 = "for the recipient is here"
+        
+        let attributedString1 = NSMutableAttributedString(string:normalStrins1)
+        let attributeString2 = NSMutableAttributedString(string: normalString2)
+        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 21),NSAttributedString.Key.foregroundColor : UIColor.black]
+        let BoldText = NSMutableAttributedString(string: boldString, attributes:attrs)
+        BoldText.append(attributedString1)
+        BoldText.append(attributeString2)
+    }
 }
 
 

@@ -18,6 +18,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+//        print(URLContexts.first?.url)
+        let url = URLContexts.first?.url
+        let urlString: String = url!.absoluteString
+        let array = urlString.components(separatedBy: "/")
+//        print(array.first)
+        let rootViewController = self.window!.rootViewController as! UINavigationController
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
+        
+        if array.first == "http-remote:"{
+            profileViewController.redirectType = .remote
+            
+        }else if array.first == "http-camera:" {
+            profileViewController.redirectType = .camera
+        }
+        rootViewController.pushViewController(profileViewController, animated: true)
+        
+    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
