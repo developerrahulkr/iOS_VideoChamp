@@ -4,7 +4,7 @@
 //
 //  Created by iOS Developer on 15/02/22.
 //
-
+import StoreKit
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -17,7 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+
     }
+    
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
 //        print(URLContexts.first?.url)
@@ -25,18 +27,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let urlString: String = url!.absoluteString
         let array = urlString.components(separatedBy: "/")
 //        print(array.first)
-        let rootViewController = self.window!.rootViewController as! UINavigationController
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
-        
+
         if array.first == "http-remote:"{
             profileViewController.redirectType = .remote
-            
+
         }else if array.first == "http-camera:" {
             profileViewController.redirectType = .camera
+        }else{
+            let vc = SKStoreProductViewController()
+            vc.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: NSNumber(value: 10)],completionBlock: nil)
+            UIApplication.getNavController()?.present(vc, animated: true)
         }
-        rootViewController.pushViewController(profileViewController, animated: true)
-        
+        if let navController = UIApplication.getNavController() {
+             //do something with rootViewController
+            navController.pushViewController(profileViewController, animated: true)
+        }
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -118,7 +118,9 @@ class HomeVC: UIViewController {
 //        }
         switch checkConnectionState {
         case .needToRunToggle:
+            self.showActivityIndicator()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.hideActivityIndicator()
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
                 self.navigationController?.pushViewController(vc, animated: true)
             }

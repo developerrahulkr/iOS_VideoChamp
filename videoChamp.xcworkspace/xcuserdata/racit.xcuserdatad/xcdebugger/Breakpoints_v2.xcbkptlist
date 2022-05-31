@@ -14,8 +14,8 @@
             filePath = "videoChamp/Controllers/Delegate/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "userNotificationCenter(_:didReceive:withCompletionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -524,117 +524,6 @@
             endingLineNumber = "122"
             landmarkName = "onTappedButton(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8167A7F3-792B-4E65-9741-3A666B368127"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../FrameworkAnd Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "bindReceivedCallbacks(gotImage:gotAudioData:gotTextMessage:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8167A7F3-792B-4E65-9741-3A666B368127 - a4b5727688beeaa2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Foundation.Data, __C.MCPeerID) -&gt; () in MFrameWork.LivePresenter.bindReceivedCallbacks(gotImage: (Swift.Optional&lt;__C.UIImage&gt;, __C.MCPeerID) -&gt; (), gotAudioData: (Foundation.Data, __C.MCPeerID) -&gt; (), gotTextMessage: Swift.Optional&lt;(Swift.String, __C.MCPeerID) -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "MFrameWork"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "1180">
-               </Location>
-               <Location
-                  uuid = "8167A7F3-792B-4E65-9741-3A666B368127 - a4b5727688beeaa2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Foundation.Data, __C.MCPeerID) -&gt; () in MFrameWork.LivePresenter.bindReceivedCallbacks(gotImage: (Swift.Optional&lt;__C.UIImage&gt;, __C.MCPeerID) -&gt; (), gotAudioData: (Foundation.Data, __C.MCPeerID) -&gt; (), gotTextMessage: Swift.Optional&lt;(Swift.String, __C.MCPeerID) -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "MFrameWork"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "1117">
-               </Location>
-               <Location
-                  uuid = "8167A7F3-792B-4E65-9741-3A666B368127 - a4b5727688beeaa2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Foundation.Data, __C.MCPeerID) -&gt; () in MFrameWork.LivePresenter.bindReceivedCallbacks(gotImage: (Swift.Optional&lt;__C.UIImage&gt;, __C.MCPeerID) -&gt; (), gotAudioData: (Foundation.Data, __C.MCPeerID) -&gt; (), gotTextMessage: Swift.Optional&lt;(Swift.String, __C.MCPeerID) -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "MFrameWork"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "1064">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "064FD9A6-8175-4702-9F1F-EE8C16AC8C48"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../FrameworkAnd Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "setUpCamera(initPosition:sessionPreset:avAudioFormat:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "064FD9A6-8175-4702-9F1F-EE8C16AC8C48 - fe16c15e6a058432"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MFrameWork.LivePresenter.setUpCamera(initPosition: __C.AVCaptureDevicePosition, sessionPreset: __C.AVCaptureSessionPreset, avAudioFormat: __C.AVAudioFormat) throws -&gt; ()"
-                  moduleName = "MFrameWork"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "184"
-                  endingLineNumber = "184"
-                  offsetFromSymbolStart = "528">
-               </Location>
-               <Location
-                  uuid = "064FD9A6-8175-4702-9F1F-EE8C16AC8C48 - fe16c15e6a058432"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MFrameWork.LivePresenter.setUpCamera(initPosition: __C.AVCaptureDevicePosition, sessionPreset: __C.AVCaptureSessionPreset, avAudioFormat: __C.AVAudioFormat) throws -&gt; ()"
-                  moduleName = "MFrameWork"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/racit/Documents/FrameworkAnd%20Project/MFrameWork/MFrameWork/Sources/Presenter/LivePresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "184"
-                  endingLineNumber = "184"
-                  offsetFromSymbolStart = "384">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

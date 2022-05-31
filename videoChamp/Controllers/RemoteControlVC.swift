@@ -61,13 +61,16 @@ class RemoteControlVC: UIViewController {
             print("decoded Data : \(decodedTeams)")
             self.peerTableViewModel.updateFoundCell(decodedTeams)
             if self.peerTableViewModel.foundCellData.count != 0 {
-                let sameNameIndexes = PeerIDHelper.whereSameNames(ids: Utility.shared.sessionManager.connectedPeerIDs, target: self.peerTableViewModel.foundCellData[0].peerID)
-                if sameNameIndexes.isEmpty {
-                    Utility.shared.sessionManager.inviteTo(peerID: self.peerTableViewModel.foundCellData[0].peerID, timeout: self.timeout)
-    //                self.loadData()
-                } else {
-                    Utility.shared.sessionManager.canselConectRequestTo(peerID: self.peerTableViewModel.foundCellData[0].peerID)
+                for i in 0...self.peerTableViewModel.foundCellData.count-1 {
+                    let sameNameIndexes = PeerIDHelper.whereSameNames(ids: Utility.shared.sessionManager.connectedPeerIDs, target:
+                                                                        self.peerTableViewModel.foundCellData[i].peerID)
+                    if sameNameIndexes.isEmpty {
+                        Utility.shared.sessionManager.inviteTo(peerID: self.peerTableViewModel.foundCellData[i].peerID, timeout: self.timeout)
+        //                self.loadData()
+                    } else {
+                        Utility.shared.sessionManager.canselConectRequestTo(peerID: self.peerTableViewModel.foundCellData[i].peerID)
 
+                    }
                 }
             }else{
                 print("Found Cell Data L : \(self.peerTableViewModel.foundCellData)")

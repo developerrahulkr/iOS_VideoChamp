@@ -6,11 +6,9 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string></string>
+			<string>com.ripenapps.videoChamp</string>
 		</dict>
 		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.ripenapps.videoChamp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>http-camera</string>

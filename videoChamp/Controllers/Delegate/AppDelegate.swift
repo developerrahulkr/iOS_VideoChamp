@@ -46,9 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        application.registerForRemoteNotifications()
         return true
     }
+
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//        print(url)
+//        print("url host : \(url.host)")
+//        print("url path : \(url.path)")
+//        return true
+//    }
     
-
-
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

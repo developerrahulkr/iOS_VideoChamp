@@ -18,13 +18,15 @@ final class LiveViewController: UIViewController {
     private var liveView: LiveView!
     private var liveViewModel: LiveViewModel!
     //
+    private var sessionSetupSucceeds = false
     private var targetPeerID: MCPeerID!
     private var margin: CGFloat = 5
     private let sendInterval:TimeInterval = 0.1
     private let videoCompressionQuality:CGFloat = 0.8
     private let sessionPreset:AVCaptureSession.Preset = .medium
-    
-    
+    private var activeCamera: AVCaptureDevice?
+    var zoomScaleRange: ClosedRange<CGFloat> = 1...10
+    private let sessionQueue = DispatchQueue(label: "Session Queue")
 //    Capture Session
     var session : AVCaptureSession?
 //    Photo Output
@@ -34,6 +36,7 @@ final class LiveViewController: UIViewController {
     
 
     private func setUpLiveViewPresenter() {
+        
         liveView = LiveView()
         self.view = liveView.setUpViews(frame: UIScreen.main.bounds, margin: margin)
     }
@@ -47,6 +50,7 @@ final class LiveViewController: UIViewController {
                                       videoCompressionQuality: videoCompressionQuality,
                                       sessionPreset: sessionPreset)
             liveViewModel.updatePeerID(targetPeerID)
+
             liveViewModel.attachViews(liveView: liveView)
         } catch let error {
             print(error)
@@ -74,10 +78,53 @@ final class LiveViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpChatViewModel()
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        liveView.imageView.addGestureRecognizer(pinch)
         liveView.imageView.layer.addSublayer(previewLayer)
         session = liveViewModel.capSession
 //        liveView.imageCapture.layer.addSublayer(previewLayer)
         checkCameraPermission()
+    }
+    
+    private var initialScale: CGFloat = 0
+    @objc
+    private func handlePinch(_ pinch: UIPinchGestureRecognizer) {
+        guard sessionSetupSucceeds,  let device = activeCamera else { return }
+
+        switch pinch.state {
+        case .began:
+            initialScale = device.videoZoomFactor
+        case .changed:
+            let minAvailableZoomScale = device.minAvailableVideoZoomFactor
+            let maxAvailableZoomScale = device.maxAvailableVideoZoomFactor
+            let availableZoomScaleRange = minAvailableZoomScale...maxAvailableZoomScale
+            let resolvedZoomScaleRange = zoomScaleRange.clamped(to: availableZoomScaleRange)
+
+            print("Pinch Data : \(pinch.scale)")
+            let resolvedScale = max(resolvedZoomScaleRange.lowerBound, min(pinch.scale * initialScale, resolvedZoomScaleRange.upperBound))
+
+            configCamera(device) { device in
+                device.videoZoomFactor = resolvedScale
+            }
+        default:
+            return
+        }
+    }
+    
+    private func configCamera(_ camera: AVCaptureDevice?, _ config: @escaping (AVCaptureDevice) -> ()) {
+        guard let device = camera else { return }
+
+        sessionQueue.async { [device] in
+            do {
+                try device.lockForConfiguration()
+            } catch {
+                return
+            }
+
+            config(device)
+
+            device.unlockForConfiguration()
+        }
     }
     override func viewDidLayoutSubviews() {
         previewLayer.frame = liveView.imageView.bounds
@@ -138,6 +185,7 @@ final class LiveViewController: UIViewController {
                 }
                 previewLayer.videoGravity = .resizeAspectFill
                 previewLayer.session = session
+                sessionSetupSucceeds = true
                 
 //                session!.startRunning()
 //                self.session = session

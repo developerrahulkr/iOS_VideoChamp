@@ -19,7 +19,11 @@ public class LiveViewModel: NSObject {
     var livePresenter: LivePresenter!
     //
     private var targetPeerID: MCPeerID?
-    private var sendString = ""
+    private var sendString = "SaveImage"
+    private var sendImage = UIImage()
+    private var zooomImageString = ""
+    
+    
     private var liveSetupView : LiveView!
 
     public var capSession : AVCaptureSession!
@@ -30,20 +34,26 @@ public class LiveViewModel: NSObject {
     private let cameraBackLabel = "back"
     private let sendTextButtonTitle = "send text"
 
+    
+    
     private enum ButtonType {
         case sound
         case sendVideo
     }
 
+    
+    
     typealias ButtonDisplayData = (title: String, color: UIColor)
 
     private lazy var soundBtnData: [Bool: ButtonDisplayData]    = [true: ("Sound ON", onColor), false: ("...", offColor)]
     private lazy var publishBtnData: [Bool: ButtonDisplayData]  = [true: ("start_video_recording_icon", onColor), false: ("stop_video_recording_icon", offColor)]
 
 
+    
     init(targetPeerID: MCPeerID?, mcSessionManager: MCSessionManager,
          sendVideoInterval:TimeInterval,videoCompressionQuality:CGFloat,
          sessionPreset:AVCaptureSession.Preset = .low) throws {
+        
         
         self.targetPeerID = targetPeerID
         print("target Peer ID is  : \(self.targetPeerID)")
@@ -67,10 +77,26 @@ public class LiveViewModel: NSObject {
         attachDisplayData(liveView)
 //        let data = publishBtnData[livePresenter.needsVideoRun]!
         capSession = livePresenter.cap
-
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        let batterPercentage = UIDevice.current.batteryLevel * 100
+        
+        if batterPercentage <= 20 {
+            do {
+                try livePresenter.sendText(text: "low", sendMode: .unreliable)
+            } catch let error {
+                print(error)
+            }
+        }else{
+            print("asdf asdfasd fasd fas dfasdf asdfas dfasdfasdf  \(batterPercentage)")
+        }
+        
         self.livePresenter.bindReceivedCallbacks(gotImage: {[liveView] (image, fromPeerID) in
+            self.capSession = nil
+            liveView.imageView.layer.sublayers = nil
             DispatchQueue.main.async {
+//                print("Battery Percentage is : \(batterPercentage)")
                 liveView.imageView.image = image
+                liveView.cameraControlButton.isUserInteractionEnabled = false
             }
         }, gotAudioData: {[weak self](audioData, fromPeerID) in
             guard let weakSelf = self else {return}
@@ -82,8 +108,51 @@ public class LiveViewModel: NSObject {
                 }
             }
         }, gotTextMessage: {[liveView](msg, fromPeerID) in
+            
             DispatchQueue.main.async {
-                liveView.receivedTextLabel.text = msg
+                
+                
+                
+//                let image = UIImage(data: msg)
+                let str = String.init(data: msg, encoding: .utf8)
+                
+                switch str {
+                case "zoomIn" :
+                    liveView.imageView.contentMode = .scaleAspectFill
+                    liveView.lblZoom.text = "2x"
+                case "zoomOut" :
+                    liveView.imageView.contentMode = .scaleAspectFit
+                    liveView.lblZoom.text = "1x"
+                case "low":
+                    let alert = UIAlertController(title: "VideoChamp", message: "Battry is Low", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "ok", style: .cancel, handler: nil)
+                    alert.addAction(okAction)
+                    UIApplication.topViewController()?.present(alert, animated: true)
+                    
+                default :
+                    let image = UIImage(data: msg)
+                    print(image)
+                    UIImageWriteToSavedPhotosAlbum(image ?? UIImage(), nil, nil, nil)
+//                    break
+                }
+                
+                
+//                if str == "zoomIn" {
+//                    liveView.imageView.contentMode = .scaleAspectFill
+//                    liveView.lblZoom.text = "2x"
+//                }else if str == "low"{
+//                    let alert = UIAlertController(title: "VideoChamp", message: "Battry is Low", preferredStyle: .alert)
+//                    let okAction = UIAlertAction(title: "ok", style: .cancel, handler: nil)
+//                    alert.addAction(okAction)
+//                    UIApplication.topViewController()?.present(alert, animated: true)
+////                    print("BatteryPercentage is law \(batterPercentage)")
+//                }else{
+//                    liveView.imageView.contentMode = .scaleAspectFit
+//                    liveView.lblZoom.text = "1x"
+//                }
+//                let image = UIImage(data: msg)
+//                print(image)
+//                UIImageWriteToSavedPhotosAlbum(image ?? UIImage(), nil, nil, nil)
             }
         })
         
@@ -94,7 +163,7 @@ public class LiveViewModel: NSObject {
         liveView.soundControlButton.addTarget(self, action: #selector(toggleSouondMuteState(_:)), for: .touchUpInside)
         liveView.changeCameraButton.addTarget(self, action: #selector(cameraToggle(_:)), for: .touchUpInside)
         liveView.cameraControlButton.addTarget(self, action: #selector(toggleSendVideoData(_:)), for: .touchUpInside)
-        liveView.textSendButton.addTarget(self, action: #selector(sendText), for: .touchUpInside)
+        liveView.textSendButton.addTarget(self, action: #selector(zoomInImage), for: .touchUpInside)
         liveView.sendTextField.addTarget(self, action: #selector(onchangedTextField(_:)), for: .editingChanged)
         liveView.btnBack.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
         liveView.btnClose.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
@@ -104,7 +173,16 @@ public class LiveViewModel: NSObject {
     @objc func captureFrames(_ sender: UIButton){
 //        liveSetupView.imageCapture.image = liveSetupView.imageView.image
         
-        savePic()
+//        savePic()
+        
+        do {
+            sendImage = liveSetupView.imageView.image ?? UIImage()
+            print("send String : \(sendImage)")
+            let imageData = sendImage.pngData()
+            try livePresenter.send(text: imageData ?? Data(), sendMode: .reliable)
+        } catch let error {
+            print(error)
+        }
         
     }
     
@@ -155,7 +233,7 @@ public class LiveViewModel: NSObject {
         liveView.sendTextField.backgroundColor = .white
         liveView.sendTextField.isHidden = true
         liveView.textSendButton.setTitleColor(onColor, for: .highlighted)
-        liveView.btnCamera.isUserInteractionEnabled = false
+//        liveView.btnCamera.isUserInteractionEnabled = false
         // others
         liveView.imageView.contentMode = .scaleAspectFill
         liveView.receivedTextLabel.adjustsFontSizeToFitWidth = true
@@ -165,16 +243,33 @@ public class LiveViewModel: NSObject {
     }
 
     @objc private func cameraToggle(_ sender: UIButton) {
+//        #if !targetEnvironment(simulator)
+//
+//        do {
+//            try livePresenter.toggleCamera()
+//        } catch let error {
+//            print(error)
+//        }
+////        let title = setUpCameraPositionLabel()
+////        sender.setTitle(title, for: .normal)
+//
+//        #endif
         #if !targetEnvironment(simulator)
-
+        
+        
+        
         do {
-            try livePresenter.toggleCamera()
+            liveSetupView.imageView.contentMode = .scaleAspectFill
+            zooomImageString = "zoomIn"
+            try livePresenter.sendText(text: zooomImageString, sendMode: .unreliable)
         } catch let error {
             print(error)
         }
-//        let title = setUpCameraPositionLabel()
-//        sender.setTitle(title, for: .normal)
-
+        
+        
+        
+        
+        
         #endif
     }
 
@@ -231,18 +326,33 @@ public class LiveViewModel: NSObject {
         #endif
     }
 
-    @objc private func sendText() {
+    @objc private func zoomInImage() {
+//        do {
+//
+//            sendImage = liveSetupView.imageView.image ?? UIImage()
+//            print("send String : \(sendImage)")
+//            let imageData = sendImage.pngData()
+//            try livePresenter.send(text: imageData ?? Data(), sendMode: .reliable)
+//        } catch let error {
+//            print(error)
+//        }
+        
+        
         do {
-            try livePresenter.send(text: sendString, sendMode: .unreliable)
+            liveSetupView.imageView.contentMode = .scaleAspectFit
+            zooomImageString = "ZoomOut"
+            try livePresenter.sendText(text: zooomImageString, sendMode: .unreliable)
         } catch let error {
             print(error)
         }
+        
+        
     }
     
     
 
     @objc private func onchangedTextField(_ sender: UITextField) {
-        sendString = sender.text ?? ""
+        sendString = "saveImage"
     }
 
     deinit {
