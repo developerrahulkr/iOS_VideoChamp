@@ -24,11 +24,16 @@ class RemoteControlVC: UIViewController {
     var otpString : String = ""
     var foundCellData: [PeerIDCellData] = []
     var connectedCellData: [PeerIDCellData] = []
-    let generatedNumber = "http-camera://videochamp/monitor/2206"
     let codeGenerateVM = GenerateNumberViewModel()
     private var peerTableViewModel = PeerTableViewModel()
     private let timeout: TimeInterval = 20
     private let alertPresenter:AlertPresenter = .init()
+    
+    
+    let generateLinkVM = GeneratedLinkViewModel()
+    var generatedUrlCode = ""
+    var staticLink = "http://videochamp/camera/"
+    var urlLink = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +45,48 @@ class RemoteControlVC: UIViewController {
         registerCell()
         lblEnterCode.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
         
+        loadData()
+        
                 
+    }
+    func loadData(){
+        
+        let linkGenerated = CMGenerateLink(deviceType: "IOS",deviceId: Utility.shared.sessionManager.myPeerID?.displayName ?? "", isCamera: "false", peerId: Utility.shared.sessionManager.displayName, connectionState: "true")
+        generateLinkVM.linkGenerated(cmGenerateLinkData: linkGenerated) {
+            [weak self] isSuccess,linkURL,urlCode, codeMessage  in
+            guard let self = self else {return}
+            if isSuccess && codeMessage == "Number generate"{
+//                self.generatedNumber = number
+                print("Deeplinking URL : \(linkURL)")
+                print("url Code : \(urlCode)")
+                self.urlLink = linkURL
+                self.generatedUrlCode = urlCode
+                self.staticLink = "\(self.staticLink)\(urlCode)"
+                self.tableView.reloadData()
+                
+            }else if codeMessage == "code is already generated" && isSuccess {
+                print("Deeplinking URL : \(linkURL)")
+                print("url Code : \(urlCode)")
+                self.urlLink = linkURL
+                self.generatedUrlCode = urlCode
+                
+                self.tableView.reloadData()
+            }else if codeMessage == "code Expire" && isSuccess {
+                self.expireCodeAlert(message: codeMessage)
+            }else{
+                print("Error")
+            }
+        }
+    }
+    
+    
+    func expireCodeAlert(message : String) {
+        let alert = UIAlertController(title: appName, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
  
     func registerCell(){
@@ -75,6 +121,8 @@ class RemoteControlVC: UIViewController {
             }else{
                 print("Found Cell Data L : \(self.peerTableViewModel.foundCellData)")
             }
+            
+ 
             
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PeerIDVC") as! PeerIDVC
 //            self.navigationController?.pushViewController(vc, animated: true)
@@ -117,7 +165,7 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! CameraCodeCell2
             cell.delegate = self
-            cell.lblCode.text = generatedNumber
+            cell.lblCode.text = staticLink
             cell.btnShare.tag = indexPath.row
             cell.btnResend.tag = indexPath.row
 //            cell.delegate = self
@@ -188,8 +236,14 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
     }
     
     func shareCode(tag: Int) {
-        guard let url = URL(string: generatedNumber)
+        let url = urlLink.replacingOccurrences(of: " ", with: "_")
+        let finalUrl = url.replacingOccurrences(of: "'", with: "_")
+        print("My URL IS \(url)")
+        
+        
+        guard let url = URL(string: finalUrl)
         else{
+            print("url is incorrect")
             return
         }
         let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
@@ -201,7 +255,6 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
     func CodeVerifyApi(number : String){
         
         codeGenerateVM.verifyNumber(number: number) { [weak self] isSuccess in
-            
             guard let self = self else{return}
             if isSuccess {
 //                self.showAlert(alertMessage: "OTP Verified!")

@@ -14,7 +14,7 @@ import SwiftyJSON
 class GeneratedLinkViewModel {
     
     
-    func linkGenerated(cmGenerateLinkData : CMGenerateLink, completionHandler : @escaping(Bool, String, String) -> Void){
+    func linkGenerated(cmGenerateLinkData : CMGenerateLink, completionHandler : @escaping(Bool, String, String, String) -> Void){
         
         UIApplication.topViewController()?.showActivityIndicator()
         APIManager.shared.generateLink(data: cmGenerateLinkData) { dict in
@@ -24,14 +24,13 @@ class GeneratedLinkViewModel {
                 let error_msg = dict!["message"].stringValue
                 let url = dict!["data"]["url"].stringValue
                 let urlCode = dict!["data"]["code"].stringValue
-                
                 if statusCode == "200" {
                     print("URL IS : \(url), /n code \(urlCode)")
                     print("GEnerate Link Message : \(error_msg)")
-                    completionHandler(true,url,urlCode)
+                    completionHandler(true,url,urlCode,error_msg)
                 }else{
                     print("error Message : \(error_msg)")
-                    completionHandler(false, url,error_msg)
+                    completionHandler(false, url,error_msg,error_msg)
                 }
                 
             }else{

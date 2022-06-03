@@ -37,6 +37,7 @@ final class LiveView: NSObject {
     let topViewStackView = UIStackView()
     let btnCamera = UIButton()
     let btnVideo = UIButton()
+    let viewZoom = UIView()
     let lblZoom = UILabel()
     
 
@@ -92,7 +93,9 @@ final class LiveView: NSObject {
         
         topViewStackView.addArrangedSubview(btnCamera)
         topViewStackView.addArrangedSubview(btnVideo)
-        topViewStackView.addArrangedSubview(lblZoom)
+//        topViewStackView.addArrangedSubview(lblZoom)
+        topViewStackView.addArrangedSubview(viewZoom)
+        viewZoom.addSubview(lblZoom)
     }
 
     func setUpViews(frame: CGRect, margin: CGFloat) -> UIView {
@@ -103,6 +106,10 @@ final class LiveView: NSObject {
             make.top.equalTo(100)
             make.right.equalTo(20)
             make.height.width.equalTo(100.0)
+        }
+        
+        lblZoom.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
         }
         
         topViewStackView.snp.makeConstraints { make in
@@ -195,6 +202,14 @@ final class LiveView: NSObject {
         lblZoom.textColor = .white
         lblZoom.font = UIFont.systemFont(ofSize: 10.0)
         
+        viewZoom.backgroundColor = .clear
+        
+        viewZoom.clipsToBounds = true
+        viewZoom.layer.cornerRadius = 12
+        viewZoom.layer.borderColor = UIColor.white.cgColor
+        viewZoom.layer.borderWidth = 0.5
+        
+        
         btnBack.setImage(UIImage(named: "back_arrow"), for: .normal)
         btnClose.setImage(UIImage(named: "close_icon"), for: .normal)
         
@@ -228,6 +243,10 @@ final class LiveView: NSObject {
         
         topViewStackView.distribution = .fillEqually
         topViewStackView.spacing = 30.0
+        
+//        lblZoom.snp.makeConstraints { make in
+//            make.edges.equalTo(lblZoom)
+//        }
 
         textAreaStackView.arrangedSubviews.forEach {
             $0.toRoundly(margin)

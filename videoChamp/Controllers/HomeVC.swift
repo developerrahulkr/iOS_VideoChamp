@@ -84,14 +84,16 @@ class HomeVC: UIViewController {
     }
     
     private func setUpOnInvited() {
-        let title = "Invitation from"
-        let acceptTitle = "Accept"
-        let cancelTitle = "Decline"
+//        let title = "Invitation from"
+//        let acceptTitle = "Accept"
+//        let cancelTitle = "Decline"
         Utility.shared.sessionManager.onInvited {[weak self] (fromPeerID, answerCallback) in
+            guard let self = self else {return}
             let message = "\(fromPeerID.displayName)"
-            self?.alertPresenter.confirmAlert(title: title, message: message, acceptTitle: acceptTitle, cancelTitle: cancelTitle, acceptCallback: { (isAccept) in
-                answerCallback(isAccept)
-            })
+            answerCallback(true)
+//            self?.alertPresenter.confirmAlert(title: title, message: message, acceptTitle: acceptTitle, cancelTitle: cancelTitle, acceptCallback: { (isAccept) in
+//                answerCallback(isAccept)
+//            })
         }
     }
 

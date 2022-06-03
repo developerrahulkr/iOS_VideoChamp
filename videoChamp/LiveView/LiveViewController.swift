@@ -84,6 +84,11 @@ final class LiveViewController: UIViewController {
         session = liveViewModel.capSession
 //        liveView.imageCapture.layer.addSublayer(previewLayer)
         checkCameraPermission()
+        NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .kPopToRoot, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .kCloseScreen, object: nil)
+    }
+    @objc func closeVC(){
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     private var initialScale: CGFloat = 0
@@ -146,6 +151,8 @@ final class LiveViewController: UIViewController {
 
     deinit {
         //print("deinit:LiveVC")
+        NotificationCenter.default.removeObserver(self, name: .kCloseScreen, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .kPopToRoot, object: nil)
     }
     
     

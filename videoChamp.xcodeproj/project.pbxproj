@@ -69,6 +69,10 @@
 		2C49770F27FEB148005D6DF9 /* CMGenerateNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49770E27FEB148005D6DF9 /* CMGenerateNumber.swift */; };
 		2C52B2DA27CCB115004F2A00 /* CMRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52B2D927CCB115004F2A00 /* CMRegister.swift */; };
 		2C5BA21728432485004B60AD /* GetNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA21628432485004B60AD /* GetNavBar.swift */; };
+		2C5BA25D28462DDE004B60AD /* AlertCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA25B28462DDE004B60AD /* AlertCameraVC.swift */; };
+		2C5BA25E28462DDE004B60AD /* AlertCameraVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BA25C28462DDE004B60AD /* AlertCameraVC.xib */; };
+		2C5BA29D28463994004B60AD /* DisconnectCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA29B28463994004B60AD /* DisconnectCameraVC.swift */; };
+		2C5BA29E28463994004B60AD /* DisconnectCameraVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BA29C28463994004B60AD /* DisconnectCameraVC.xib */; };
 		2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */; };
 		2C68C7F627CCFDD600F76E8A /* GiveFeedbackCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */; };
 		2C8D43D227BF645D00C5722A /* CameraVideoShareCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D43D127BF645D00C5722A /* CameraVideoShareCodeVC.swift */; };
@@ -243,6 +247,10 @@
 		2C49770E27FEB148005D6DF9 /* CMGenerateNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMGenerateNumber.swift; sourceTree = "<group>"; };
 		2C52B2D927CCB115004F2A00 /* CMRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMRegister.swift; sourceTree = "<group>"; };
 		2C5BA21628432485004B60AD /* GetNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNavBar.swift; sourceTree = "<group>"; };
+		2C5BA25B28462DDE004B60AD /* AlertCameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCameraVC.swift; sourceTree = "<group>"; };
+		2C5BA25C28462DDE004B60AD /* AlertCameraVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertCameraVC.xib; sourceTree = "<group>"; };
+		2C5BA29B28463994004B60AD /* DisconnectCameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectCameraVC.swift; sourceTree = "<group>"; };
+		2C5BA29C28463994004B60AD /* DisconnectCameraVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisconnectCameraVC.xib; sourceTree = "<group>"; };
 		2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackCell1.swift; sourceTree = "<group>"; };
 		2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiveFeedbackCell1.xib; sourceTree = "<group>"; };
 		2C8D43D127BF645D00C5722A /* CameraVideoShareCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVideoShareCodeVC.swift; sourceTree = "<group>"; };
@@ -527,6 +535,10 @@
 				2C3625FE27BCBB7C00EB4CD6 /* Cell */,
 				2C3625C927BC077200EB4CD6 /* Main.storyboard */,
 				2C3625D127BC077600EB4CD6 /* LaunchScreen.storyboard */,
+				2C5BA25B28462DDE004B60AD /* AlertCameraVC.swift */,
+				2C5BA25C28462DDE004B60AD /* AlertCameraVC.xib */,
+				2C5BA29B28463994004B60AD /* DisconnectCameraVC.swift */,
+				2C5BA29C28463994004B60AD /* DisconnectCameraVC.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -852,6 +864,8 @@
 				2C36260227BCBB9F00EB4CD6 /* WelcomeCell.xib in Resources */,
 				2C3625D327BC077600EB4CD6 /* LaunchScreen.storyboard in Resources */,
 				2C68C7F627CCFDD600F76E8A /* GiveFeedbackCell1.xib in Resources */,
+				2C5BA25E28462DDE004B60AD /* AlertCameraVC.xib in Resources */,
+				2C5BA29E28463994004B60AD /* DisconnectCameraVC.xib in Resources */,
 				2C172D3627C4ED50005BA3AD /* GiveFeedbackCell3.xib in Resources */,
 				2C8D43DA27BF75F400C5722A /* CameraCodeCell2.xib in Resources */,
 				2C26053D282A3F7E00D6B485 /* PeerIDTableCell.xib in Resources */,
@@ -1043,6 +1057,7 @@
 				2C36260E27BD087300EB4CD6 /* CMMenu.swift in Sources */,
 				2C40DFFD27D5EA8E00BDAC05 /* CMReadNotificationStatus.swift in Sources */,
 				2CBF38932833D2FF00CD6735 /* UIColor+.swift in Sources */,
+				2C5BA25D28462DDE004B60AD /* AlertCameraVC.swift in Sources */,
 				2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */,
 				2C8D43EC27BFC02B00C5722A /* RemoteControlVC.swift in Sources */,
 				2CA1CF3927C658DD00BEB063 /* Common_url.swift in Sources */,
@@ -1066,6 +1081,7 @@
 				2C260539282A3EE500D6B485 /* PeerIDVC.swift in Sources */,
 				2C260806282BA38100D6B485 /* MCSessionViewModel.swift in Sources */,
 				2CA56C2227D2411800152FC8 /* FeedbackMessageViewModel.swift in Sources */,
+				2C5BA29D28463994004B60AD /* DisconnectCameraVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

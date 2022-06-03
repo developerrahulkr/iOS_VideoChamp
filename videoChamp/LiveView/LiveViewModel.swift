@@ -17,11 +17,14 @@ public class LiveViewModel: NSObject {
     //
     private var mcSessionManager: MCSessionManager!
     var livePresenter: LivePresenter!
+    
     //
     private var targetPeerID: MCPeerID?
     private var sendString = "SaveImage"
     private var sendImage = UIImage()
     private var zooomImageString = ""
+    
+    
     
     
     private var liveSetupView : LiveView!
@@ -54,7 +57,6 @@ public class LiveViewModel: NSObject {
          sendVideoInterval:TimeInterval,videoCompressionQuality:CGFloat,
          sessionPreset:AVCaptureSession.Preset = .low) throws {
         
-        
         self.targetPeerID = targetPeerID
         print("target Peer ID is  : \(self.targetPeerID)")
         super.init()
@@ -72,7 +74,7 @@ public class LiveViewModel: NSObject {
     }
 
     func attachViews(liveView: LiveView) {
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(closeViewC), name: .kCloseScreen, object: nil)
         attachButtonActions(liveView)
         attachDisplayData(liveView)
 //        let data = publishBtnData[livePresenter.needsVideoRun]!
@@ -91,12 +93,12 @@ public class LiveViewModel: NSObject {
         }
         
         self.livePresenter.bindReceivedCallbacks(gotImage: {[liveView] (image, fromPeerID) in
-            self.capSession = nil
+//            self.capSession = nil
             liveView.imageView.layer.sublayers = nil
             DispatchQueue.main.async {
 //                print("Battery Percentage is : \(batterPercentage)")
                 liveView.imageView.image = image
-                liveView.cameraControlButton.isUserInteractionEnabled = false
+//                liveView.cameraControlButton.isUserInteractionEnabled = false
             }
         }, gotAudioData: {[weak self](audioData, fromPeerID) in
             guard let weakSelf = self else {return}
@@ -120,18 +122,44 @@ public class LiveViewModel: NSObject {
                 case "zoomIn" :
                     liveView.imageView.contentMode = .scaleAspectFill
                     liveView.lblZoom.text = "2x"
-                case "zoomOut" :
+                case "ZoomOut" :
                     liveView.imageView.contentMode = .scaleAspectFit
                     liveView.lblZoom.text = "1x"
                 case "low":
-                    let alert = UIAlertController(title: "VideoChamp", message: "Battry is Low", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "ok", style: .cancel, handler: nil)
-                    alert.addAction(okAction)
-                    UIApplication.topViewController()?.present(alert, animated: true)
-                    
+                    let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                    vc.modalPresentationStyle = .overFullScreen
+                    vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                    vc.image = UIImage(named: "battery_icon")!
+                    vc.titleText = "BATTERY ALERT"
+                    vc.messageText = "Remote Device Battery is low"
+                    UIApplication.topViewController()?.present(vc, animated: true)
+                case "close" :
+                    let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+                    vc.modalPresentationStyle = .overFullScreen
+                    UIApplication.topViewController()?.present(vc, animated: true)
+                case "camera" :
+                    self.sendString = str ?? ""
+                    print("send String is : \(self.sendString)")
+                    liveView.btnCamera.setImage(UIImage(named: "camera_icon_yellow"), for: .normal)
+                    liveView.btnVideo.setImage(UIImage(named: "record_video_icon_white"), for: .normal)
+                    liveView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
+                    liveView.cameraControlButton.isUserInteractionEnabled = true
+                case "video":
+                    liveView.cameraControlButton.isUserInteractionEnabled = false
+                    liveView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
+                    liveView.btnVideo.setImage(UIImage(named: "video_recording_icon"), for: .normal)
+                case "popToRoot":
+                    NotificationCenter.default.post(name: .kPopToRoot, object: nil)
                 default :
                     let image = UIImage(data: msg)
                     print(image)
+                    let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                    vc.modalPresentationStyle = .overFullScreen
+                    vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                    vc.image = UIImage(named: "save_Image_icon")!
+                    vc.titleText = "MEDIA SAVED"
+                    vc.messageText = "Files have been saved in your device gallery"
+                    UIApplication.topViewController()?.present(vc, animated: true)
                     UIImageWriteToSavedPhotosAlbum(image ?? UIImage(), nil, nil, nil)
 //                    break
                 }
@@ -157,29 +185,84 @@ public class LiveViewModel: NSObject {
         })
         
     }
+    
+    @objc func closeViewC(){
+//        UIApplication.topViewController()?.navigationController?.popToRootViewController(animated: true)
+        do {
+            try livePresenter.sendText(text: "popToRoot", sendMode: .reliable)
+        }catch let error {
+            print(error)
+        }
+    }
 
     private func attachButtonActions(_ liveView: LiveView) {
 
         liveView.soundControlButton.addTarget(self, action: #selector(toggleSouondMuteState(_:)), for: .touchUpInside)
         liveView.changeCameraButton.addTarget(self, action: #selector(cameraToggle(_:)), for: .touchUpInside)
         liveView.cameraControlButton.addTarget(self, action: #selector(toggleSendVideoData(_:)), for: .touchUpInside)
-        liveView.textSendButton.addTarget(self, action: #selector(zoomInImage), for: .touchUpInside)
+        liveView.textSendButton.addTarget(self, action: #selector(zoomInImage(_:)), for: .touchUpInside)
         liveView.sendTextField.addTarget(self, action: #selector(onchangedTextField(_:)), for: .editingChanged)
-        liveView.btnBack.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
-        liveView.btnClose.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
+        liveView.btnBack.addTarget(self, action: #selector(backVC(_:)), for: .touchUpInside)
+        liveView.btnClose.addTarget(self, action: #selector(closeVC(_:)), for: .touchUpInside)
         liveView.btnCamera.addTarget(self, action: #selector(captureFrames(_:)), for: .touchUpInside)
+        liveView.btnVideo.addTarget(self, action: #selector(startRecording(_:)), for: .touchUpInside)
 
     }
+    
+    @objc func startRecording(_ sender : UIButton){
+        do {
+            sender.setImage(UIImage(named: "video_recording_icon"), for: .normal)
+            liveSetupView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
+            let data = publishBtnData[livePresenter.needsVideoRun]!
+            
+            if data.title == "start_video_recording_icon" {
+                liveSetupView.lblRecordingTiming.isHidden = false
+                liveSetupView.lblRecording.textColor = .red
+                liveSetupView.lblRecording.text = "RECORDING"
+//                liveSetupView.btnCamera.isUserInteractionEnabled = true
+                
+                liveSetupView.cameraControlButton.setImage(UIImage(named: "start_video_recording_icon"), for: .normal)
+            }else{
+                liveSetupView.lblRecordingTiming.isHidden = true
+                liveSetupView.lblRecording.textColor = .white
+                liveSetupView.lblRecording.text = "CAPTURE"
+//                sender.setImage(UIImage(named: "video_recording_icon"), for: .normal)
+//                liveSetupView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
+//                liveSetupView.btnCamera.isUserInteractionEnabled = false
+                
+            }
+            
+            
+            sendString = "video"
+            liveSetupView.cameraControlButton.isUserInteractionEnabled = true
+//            liveSetupView.cameraControlButton.setImage(UIImage(named: "start_video_recording_icon"), for: .normal)
+            try livePresenter.sendText(text: sendString, sendMode: .reliable)
+        }catch let error {
+            print(error)
+        }
+        
+    }
+    
     @objc func captureFrames(_ sender: UIButton){
 //        liveSetupView.imageCapture.image = liveSetupView.imageView.image
         
 //        savePic()
         
         do {
-            sendImage = liveSetupView.imageView.image ?? UIImage()
-            print("send String : \(sendImage)")
-            let imageData = sendImage.pngData()
-            try livePresenter.send(text: imageData ?? Data(), sendMode: .reliable)
+//            sendImage = liveSetupView.imageView.image ?? UIImage()
+            sender.setImage(UIImage(named: "camera_icon_yellow"), for: .normal)
+            liveSetupView.btnVideo.setImage(UIImage(named: "record_video_icon_white"), for: .normal)
+            liveSetupView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
+            liveSetupView.lblRecordingTiming.isHidden = true
+            liveSetupView.lblRecording.textColor = .white
+            liveSetupView.lblRecording.text = "CAPTURE"
+            sendString = "camera"
+//            print("send String : \(sendImage)")
+//            let imageData = sendImage.pngData()
+//            try livePresenter.send(text: imageData ?? Data(), sendMode: .reliable)
+            liveSetupView.cameraControlButton.isUserInteractionEnabled = false
+            try livePresenter.sendText(text: sendString, sendMode: .unreliable)
+            
         } catch let error {
             print(error)
         }
@@ -192,9 +275,32 @@ public class LiveViewModel: NSObject {
 //        let image = UIImage(data: liveSetupView.imageView.image)
         UIImageWriteToSavedPhotosAlbum(liveSetupView.imageCapture.image ?? UIImage(), nil, nil, nil)
     }
-    @objc func closeVC(){
-        print("Close Tab")
-        UIApplication.topViewController()?.navigationController?.popViewController(animated: true)
+    
+    
+    @objc func backVC(_ sender: UIButton) {
+//        UIApplication.topViewController()?.navigationController?.popViewController(animated: true)
+        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        UIApplication.topViewController()?.present(vc, animated: true)
+    }
+    @objc func closeVC(_ sender: UIButton){
+//
+//        do {
+////            liveSetupView.imageView.contentMode = .scaleAspectFill
+//            zooomImageString = "close"
+//
+//            try livePresenter.sendText(text: zooomImageString, sendMode: .unreliable)
+////            UIApplication.topViewController()?.navigationController?.popViewController(animated: true)
+//        } catch let error {
+//            print(error)
+//        }
+        
+        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        UIApplication.topViewController()?.present(vc, animated: true)
+//        print("Close Tab")
+//
+        
     }
 
     private func attachDisplayData(_ liveView: LiveView) {
@@ -218,9 +324,6 @@ public class LiveViewModel: NSObject {
         liveView.btnVideo.setImage(UIImage(named: "video_recording_icon"), for: .normal)
         liveView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
         liveView.lblZoom.text = "2x"
-        liveView.lblZoom.layer.cornerRadius = liveView.lblZoom.bounds.height/2
-        liveView.lblZoom.layer.borderColor = UIColor.white.cgColor
-        liveView.lblZoom.layer.borderWidth = 0.5
         liveView.lblZoom.textAlignment = .center
    
         //colors
@@ -233,6 +336,7 @@ public class LiveViewModel: NSObject {
         liveView.sendTextField.backgroundColor = .white
         liveView.sendTextField.isHidden = true
         liveView.textSendButton.setTitleColor(onColor, for: .highlighted)
+        liveView.imageView.isUserInteractionEnabled = false
 //        liveView.btnCamera.isUserInteractionEnabled = false
         // others
         liveView.imageView.contentMode = .scaleAspectFill
@@ -259,7 +363,7 @@ public class LiveViewModel: NSObject {
         
         
         do {
-            liveSetupView.imageView.contentMode = .scaleAspectFill
+//            liveSetupView.imageView.contentMode = .scaleAspectFill
             zooomImageString = "zoomIn"
             try livePresenter.sendText(text: zooomImageString, sendMode: .unreliable)
         } catch let error {
@@ -306,27 +410,59 @@ public class LiveViewModel: NSObject {
 
     @objc private func toggleSendVideoData(_ sender: UIButton) {
         #if !targetEnvironment(simulator)
-        livePresenter.needsVideoRun.toggle()
-        
-        let data = publishBtnData[livePresenter.needsVideoRun]!
-        
-        sender.setImage(UIImage(named: data.title), for: .normal)
-        if data.title == "start_video_recording_icon" {
-            liveSetupView.lblRecordingTiming.isHidden = false
-            liveSetupView.lblRecording.textColor = .red
-            liveSetupView.lblRecording.text = "RECORDING"
-            liveSetupView.btnCamera.isUserInteractionEnabled = true
-        }else{
+        if sendString == "camera"{
+            sender.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
             liveSetupView.lblRecordingTiming.isHidden = true
             liveSetupView.lblRecording.textColor = .white
             liveSetupView.lblRecording.text = "CAPTURE"
-            liveSetupView.btnCamera.isUserInteractionEnabled = false
+            
+//            liveSetupView.btnCamera.isUserInteractionEnabled = false
+            do {
+                sendImage = liveSetupView.imageView.image ?? UIImage()
+//                sender.setImage(UIImage(named: "camera_icon_yellow"), for: .normal)
+
+                sender.isUserInteractionEnabled = true
+                let imageData = sendImage.pngData()
+                if ((imageData?.isEmpty) == nil) {
+                    print("Data is Empty ")
+                }else{
+                    try livePresenter.send(text: imageData ?? Data(), sendMode: .reliable)
+                }
+            } catch let error {
+                print(error)
+            }
+            
+            
+        }else{
+            livePresenter.needsVideoRun.toggle()
+            
+            do {
+                let data = publishBtnData[livePresenter.needsVideoRun]!
+                sender.setImage(UIImage(named: data.title), for: .normal)
+                if data.title == "start_video_recording_icon" {
+                    liveSetupView.lblRecordingTiming.isHidden = false
+                    liveSetupView.lblRecording.textColor = .red
+                    liveSetupView.lblRecording.text = "RECORDING"
+                    liveSetupView.btnCamera.isUserInteractionEnabled = true
+                    
+                }else{
+                    liveSetupView.lblRecordingTiming.isHidden = true
+                    liveSetupView.lblRecording.textColor = .white
+                    liveSetupView.lblRecording.text = "CAPTURE"
+                    liveSetupView.btnCamera.isUserInteractionEnabled = false
+                }
+                sendString = "video"
+                try livePresenter.sendText(text: sendString, sendMode: .reliable)
+            }catch let error {
+                print(error)
+            }
+            
         }
 //        sender.backgroundColor = data.color
         #endif
     }
 
-    @objc private func zoomInImage() {
+    @objc private func zoomInImage(_ sender : UIButton) {
 //        do {
 //
 //            sendImage = liveSetupView.imageView.image ?? UIImage()
@@ -339,7 +475,6 @@ public class LiveViewModel: NSObject {
         
         
         do {
-            liveSetupView.imageView.contentMode = .scaleAspectFit
             zooomImageString = "ZoomOut"
             try livePresenter.sendText(text: zooomImageString, sendMode: .unreliable)
         } catch let error {
@@ -356,6 +491,6 @@ public class LiveViewModel: NSObject {
     }
 
     deinit {
-         //print("deinit:LiveViewModel")
+//         print("deinit:LiveViewModel")
     }
 }

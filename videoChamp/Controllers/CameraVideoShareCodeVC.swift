@@ -21,7 +21,7 @@ class CameraVideoShareCodeVC: UIViewController {
     
     let cameraViewModel = CameraConnectViewModel()
     private var mcSessionViewModel : MCSessionViewModel!
-    var staticLink = "http-remote://videochamp/remote/"
+    var staticLink = "http://videochamp/remote/"
     var generatedUrlCode = ""
     var urlLink = ""
 //    let generateNumberVM = GenerateNumberViewModel()
@@ -68,25 +68,37 @@ class CameraVideoShareCodeVC: UIViewController {
                                                                         isCamera: "true",
                                                                         peerId: Utility.shared.sessionManager.displayName,
                                                                         connectionState: "true")) {
-            [weak self] isSuccess,linkURL,urlCode  in
+            [weak self] isSuccess,linkURL,urlCode, codeMessage  in
             guard let self = self else {return}
-            if isSuccess {
+            if isSuccess && codeMessage == "Number generate"{
 //                self.generatedNumber = number
                 print("Deeplinking URL : \(linkURL)")
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
-                self.staticLink = "\(self.staticLink)\(self.generatedUrlCode)"
-                
+                self.staticLink = "\(self.staticLink)\(urlCode)"
                 self.tableView.reloadData()
                 
+            }else if codeMessage == "code is already generated" && isSuccess {
+                print("Deeplinking URL : \(linkURL)")
+                print("url Code : \(urlCode)")
+                self.urlLink = linkURL
+                self.generatedUrlCode = urlCode
+                self.tableView.reloadData()
+            }else if codeMessage == "code Expire" && isSuccess {
+                self.expireCodeAlert(message: codeMessage)
             }else{
                 print("Error")
             }
         }
         
         
+        
+        
     }
+    
+    
+
     
     
     override func viewDidLayoutSubviews() {
@@ -186,7 +198,9 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     }
     
     func shareCode(tag: Int) {
-        guard let url = URL(string: self.staticLink)
+        let url = urlLink.replacingOccurrences(of: " ", with: "_")
+        let finalUrl = url.replacingOccurrences(of: "'", with: "_")
+        guard let url = URL(string: finalUrl)
         else{
             return
         }
@@ -198,6 +212,22 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     
     
     
+}
+
+//MARK: - ALert POPup
+
+extension CameraVideoShareCodeVC  {
+    func expireCodeAlert(message : String) {
+        let alert = UIAlertController(title: appName, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 
