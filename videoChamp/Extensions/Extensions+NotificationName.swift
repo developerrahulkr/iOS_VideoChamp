@@ -17,7 +17,6 @@ extension Notification.Name {
     static let refreshFeedbackData = Notification.Name("refreshFeedbackData")
     static let kNotificationReadSelection = Notification.Name("kNotificationReadSelection")
     static let kRefreshTableView = Notification.Name("kRefreshTableView")
-    
     static let kCloseScreen = Notification.Name("kCloseScreen")
     static let kPopToRoot = Notification.Name("kPopToRoot")
 }

@@ -7,7 +7,8 @@
 
 import Foundation
 import MultipeerConnectivity
-import MFrameWork
+//import MFrameWork
+import MultipeerFramework
 
 
 final class PeerTableViewModel: NSObject {
@@ -80,7 +81,7 @@ final class PeerTableViewModel: NSObject {
     }
     
     func updateFoundCell(_ ids: [MCPeerID]) {
-        print(ids)
+        print("All IDS :: ::: : :: : : : ::-----------------\(ids)")
         self.foundCellData = ids.map {
             let isContains = PeerIDHelper.isContainsSameName(ids: Utility.shared.sessionManager.connectedPeerIDs, target: $0)
             let description = isContains ? MCConnectionState.connected : MCConnectionState.connectionFail

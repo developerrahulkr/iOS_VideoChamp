@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import MFrameWork
+//import MFrameWork
+import MultipeerFramework
 import MultipeerConnectivity
 
 class CameraVideoShareCodeVC: UIViewController {
@@ -46,27 +47,10 @@ class CameraVideoShareCodeVC: UIViewController {
     
     func loadData(){
         mcSessionViewModel = MCSessionViewModel.init(mcSessionManger: Utility.shared.sessionManager)
-        self.mcSessionViewModel.toogleAdvertising()
-        
-        
-        
-//        generateNumberVM.getGenerateNumber { [weak self] isSuccess, number in
-//            guard let self = self else { return }
-//            if isSuccess {
-//                print("generated Number : \(number)")
-//                self.generatedNumber = number
-//
-//                self.tableView.reloadData()
-//            }else{
-//                print("Error")
-//            }
-//        }
-        
-        
         generateLinkVM.linkGenerated(cmGenerateLinkData: CMGenerateLink(deviceType: "IOS",
                                                                         deviceId: Utility.shared.sessionManager.myPeerID?.displayName ?? "",
                                                                         isCamera: "true",
-                                                                        peerId: Utility.shared.sessionManager.displayName,
+                                                                        peerId: "\(Utility.shared.sessionManager.myPeerID?.displayName ?? "")",
                                                                         connectionState: "true")) {
             [weak self] isSuccess,linkURL,urlCode, codeMessage  in
             guard let self = self else {return}
@@ -77,12 +61,14 @@ class CameraVideoShareCodeVC: UIViewController {
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
                 self.staticLink = "\(self.staticLink)\(urlCode)"
+                self.mcSessionViewModel.toogleAdvertising()
                 self.tableView.reloadData()
                 
             }else if codeMessage == "code is already generated" && isSuccess {
                 print("Deeplinking URL : \(linkURL)")
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
+                self.mcSessionViewModel.toogleAdvertising()
                 self.generatedUrlCode = urlCode
                 self.tableView.reloadData()
             }else if codeMessage == "code Expire" && isSuccess {
@@ -198,14 +184,25 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     }
     
     func shareCode(tag: Int) {
-        let url = urlLink.replacingOccurrences(of: " ", with: "_")
-        let finalUrl = url.replacingOccurrences(of: "'", with: "_")
-        guard let url = URL(string: finalUrl)
-        else{
-            return
+        if let encoded = urlLink.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+            let url = URL(string: encoded)
+        {
+            print("original URL is : \(url)")
+            let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
+            self.present(sharesheetVC, animated: true)
         }
-        let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
-        self.present(sharesheetVC, animated: true)
+//        let url = urlLink.replacingOccurrences(of: " ", with: "_")
+////        let finalUrl1 = url.replacingOccurrences(of: "'", with: "_")
+////        let finalUrl1 = url.replacingOccurrences(of: "<", with: "&")
+//        let finalUrl = url.replacingOccurrences(of: "'", with: " ")
+//
+//
+//        guard let url = URL(string: finalUrl)
+//        else{
+//            return
+//        }
+//        let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
+//        self.present(sharesheetVC, animated: true)
     }
     
     

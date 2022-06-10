@@ -30,7 +30,7 @@
                                 <rect key="frame" x="30" y="20" width="308" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https://videochamp/camera/2206" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFi-jT-sVQ">
-                                        <rect key="frame" x="0.0" y="9.5" width="308" height="24.5"/>
+                                        <rect key="frame" x="20" y="9.5" width="268" height="24.5"/>
                                         <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="21"/>
                                         <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -47,12 +47,12 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="fkp-oy-Diw" secondAttribute="trailing" constant="10" id="ATo-ZM-xzL"/>
-                                    <constraint firstAttribute="trailing" secondItem="QFi-jT-sVQ" secondAttribute="trailing" id="FZV-sa-9Rv"/>
+                                    <constraint firstAttribute="trailing" secondItem="QFi-jT-sVQ" secondAttribute="trailing" constant="20" id="FZV-sa-9Rv"/>
                                     <constraint firstItem="QFi-jT-sVQ" firstAttribute="centerY" secondItem="pF6-NZ-7uC" secondAttribute="centerY" id="K2I-Ni-uTP"/>
                                     <constraint firstItem="fkp-oy-Diw" firstAttribute="centerY" secondItem="QFi-jT-sVQ" secondAttribute="centerY" id="KmR-o4-VuS"/>
                                     <constraint firstAttribute="height" constant="43" id="Taj-F8-v4N"/>
                                     <constraint firstItem="QFi-jT-sVQ" firstAttribute="centerX" secondItem="pF6-NZ-7uC" secondAttribute="centerX" id="lM1-AN-WNJ"/>
-                                    <constraint firstItem="QFi-jT-sVQ" firstAttribute="leading" secondItem="pF6-NZ-7uC" secondAttribute="leading" id="nIA-88-2fF"/>
+                                    <constraint firstItem="QFi-jT-sVQ" firstAttribute="leading" secondItem="pF6-NZ-7uC" secondAttribute="leading" constant="20" id="nIA-88-2fF"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vr-Me-isd">

@@ -8,7 +8,8 @@
 
 import MultipeerConnectivity
 //import MultipeerLiveKit
-import MFrameWork
+
+import MultipeerFramework
 import AVFoundation
 import GSImageViewerController
 
@@ -23,20 +24,25 @@ public class LiveViewModel: NSObject {
     private var sendString = "SaveImage"
     private var sendImage = UIImage()
     private var zooomImageString = ""
-    
+    private let sessionQueue = DispatchQueue(label: "com.hayao.MultipeerLiveKit.videodata-ouput-queue")
     
     
     
     private var liveSetupView : LiveView!
 
-    public var capSession : AVCaptureSession!
+    public var capSession : AVCaptureSession?
+    //    Photo Output
+    let output = AVCapturePhotoOutput()
     private var needsMute = false
     private let onColor: UIColor = .red
     private let offColor: UIColor = .black
     private let cameraFrontLabel = "front"
     private let cameraBackLabel = "back"
     private let sendTextButtonTitle = "send text"
-
+    private var sessionSetupSucceeds = false
+    
+    private var activeCamera: AVCaptureDevice?
+    var zoomScaleRange: ClosedRange<CGFloat> = 1...10
     
     
     private enum ButtonType {
@@ -55,7 +61,7 @@ public class LiveViewModel: NSObject {
     
     init(targetPeerID: MCPeerID?, mcSessionManager: MCSessionManager,
          sendVideoInterval:TimeInterval,videoCompressionQuality:CGFloat,
-         sessionPreset:AVCaptureSession.Preset = .low) throws {
+         sessionPreset:AVCaptureSession.Preset = .medium) throws {
         
         self.targetPeerID = targetPeerID
         print("target Peer ID is  : \(self.targetPeerID)")
@@ -75,10 +81,12 @@ public class LiveViewModel: NSObject {
 
     func attachViews(liveView: LiveView) {
         NotificationCenter.default.addObserver(self, selector: #selector(closeViewC), name: .kCloseScreen, object: nil)
+        capSession = livePresenter.cap
         attachButtonActions(liveView)
         attachDisplayData(liveView)
+        
 //        let data = publishBtnData[livePresenter.needsVideoRun]!
-        capSession = livePresenter.cap
+//        capSession = livePresenter.cap
         UIDevice.current.isBatteryMonitoringEnabled = true
         let batterPercentage = UIDevice.current.batteryLevel * 100
         
@@ -98,6 +106,9 @@ public class LiveViewModel: NSObject {
             DispatchQueue.main.async {
 //                print("Battery Percentage is : \(batterPercentage)")
                 liveView.imageView.image = image
+//                liveView.imageView.layer.addSublayer(liveView.previewLayer)
+                
+//                self.checkCameraPermission()
 //                liveView.cameraControlButton.isUserInteractionEnabled = false
             }
         }, gotAudioData: {[weak self](audioData, fromPeerID) in
@@ -120,11 +131,13 @@ public class LiveViewModel: NSObject {
                 
                 switch str {
                 case "zoomIn" :
-                    liveView.imageView.contentMode = .scaleAspectFill
+//                    liveView.imageView.contentMode = .scaleAspectFill
                     liveView.lblZoom.text = "2x"
+                    self.zoomInSession()
                 case "ZoomOut" :
-                    liveView.imageView.contentMode = .scaleAspectFit
+//                    liveView.imageView.contentMode = .scaleAspectFit
                     liveView.lblZoom.text = "1x"
+                    self.zoomOutSession()
                 case "low":
                     let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
                     vc.modalPresentationStyle = .overFullScreen
@@ -152,7 +165,7 @@ public class LiveViewModel: NSObject {
                     NotificationCenter.default.post(name: .kPopToRoot, object: nil)
                 default :
                     let image = UIImage(data: msg)
-                    print(image)
+                    print(image ?? UIImage())
                     let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
                     vc.modalPresentationStyle = .overFullScreen
                     vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
@@ -183,6 +196,8 @@ public class LiveViewModel: NSObject {
 //                UIImageWriteToSavedPhotosAlbum(image ?? UIImage(), nil, nil, nil)
             }
         })
+        
+        checkCameraPermission()
         
     }
     
@@ -306,6 +321,7 @@ public class LiveViewModel: NSObject {
     private func attachDisplayData(_ liveView: LiveView) {
 
         liveSetupView = liveView
+        capSession = livePresenter.cap
         let publishBtndata = setUpButtonLabel(buttonType: .sendVideo)
         let soundBtnData = setUpButtonLabel(buttonType: .sound)
         // title
@@ -325,9 +341,9 @@ public class LiveViewModel: NSObject {
         liveView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
         liveView.lblZoom.text = "2x"
         liveView.lblZoom.textAlignment = .center
-   
         //colors
 //        liveView.imageCapture.backgroundColor = .blue
+//        imageCapture.layer.addSublayer(previewLayer)
         liveView.imageCapture.isHidden = true
         liveView.imageView.backgroundColor = .black
         liveView.receivedTextLabel.backgroundColor = .white
@@ -343,7 +359,55 @@ public class LiveViewModel: NSObject {
         liveView.receivedTextLabel.adjustsFontSizeToFitWidth = true
         liveView.soundControlButton.layer.opacity = 0.5
         liveView.textSendButton.titleLabel?.adjustsFontSizeToFitWidth = true
-
+        
+    }
+    
+    
+    private func checkCameraPermission(){
+        switch AVCaptureDevice.authorizationStatus(for: .video){
+            
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                guard granted else{
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.setupCamera()
+                }
+            }
+        case .restricted:
+            break
+        case .denied:
+            break
+        case .authorized:
+            setupCamera()
+        @unknown default:
+            break
+        }
+    }
+    
+    private func setupCamera(){
+        if let device = AVCaptureDevice.default(for: .video) {
+            do {
+               let input = try AVCaptureDeviceInput(device: device)
+                if capSession!.canAddInput(input) {
+                    capSession!.addInput(input)
+                }
+                if capSession!.canAddOutput(output){
+                    capSession!.addOutput(output)
+                }
+                liveSetupView.previewLayer.videoGravity = .resizeAspectFill
+                liveSetupView.previewLayer.session = capSession
+                sessionSetupSucceeds = true
+                
+                activeCamera = device
+//                session!.startRunning()
+//                self.session = session
+                
+            }catch {
+                print(error)
+            }
+        }
     }
 
     @objc private func cameraToggle(_ sender: UIButton) {
@@ -362,9 +426,14 @@ public class LiveViewModel: NSObject {
         
         
         
+        
+        
+        
         do {
 //            liveSetupView.imageView.contentMode = .scaleAspectFill
             zooomImageString = "zoomIn"
+            liveSetupView.lblZoom.text = "2x"
+            zoomInSession()
             try livePresenter.sendText(text: zooomImageString, sendMode: .unreliable)
         } catch let error {
             print(error)
@@ -375,6 +444,20 @@ public class LiveViewModel: NSObject {
         
         
         #endif
+    }
+    
+    
+    func zoomInSession(){
+        guard sessionSetupSucceeds,  let device = activeCamera else { return }
+        let minAvailableZoomScale = device.minAvailableVideoZoomFactor
+        let maxAvailableZoomScale = device.maxAvailableVideoZoomFactor
+        let availableZoomScaleRange = minAvailableZoomScale...maxAvailableZoomScale
+        let resolvedZoomScaleRange = zoomScaleRange.clamped(to: availableZoomScaleRange)
+        let resolvedScale = max(resolvedZoomScaleRange.lowerBound, min( 1.34 * 1.0, resolvedZoomScaleRange.upperBound))
+
+        configCamera(device) { device in
+            device.videoZoomFactor = resolvedScale
+        }
     }
 
     private func setUpCameraPositionLabel() -> String {
@@ -415,7 +498,7 @@ public class LiveViewModel: NSObject {
             liveSetupView.lblRecordingTiming.isHidden = true
             liveSetupView.lblRecording.textColor = .white
             liveSetupView.lblRecording.text = "CAPTURE"
-            
+            SoundPlayer.shared.playAudioSound(name: SoundName.captureImageSound, volume: 1.0)
 //            liveSetupView.btnCamera.isUserInteractionEnabled = false
             do {
                 sendImage = liveSetupView.imageView.image ?? UIImage()
@@ -463,25 +546,50 @@ public class LiveViewModel: NSObject {
     }
 
     @objc private func zoomInImage(_ sender : UIButton) {
-//        do {
-//
-//            sendImage = liveSetupView.imageView.image ?? UIImage()
-//            print("send String : \(sendImage)")
-//            let imageData = sendImage.pngData()
-//            try livePresenter.send(text: imageData ?? Data(), sendMode: .reliable)
-//        } catch let error {
-//            print(error)
-//        }
-        
-        
         do {
+            liveSetupView.lblZoom.text = "1x"
             zooomImageString = "ZoomOut"
+            zoomOutSession()
             try livePresenter.sendText(text: zooomImageString, sendMode: .unreliable)
         } catch let error {
             print(error)
         }
         
         
+    }
+    
+    
+//    MARK: - Zoomm Out Image
+    
+    func zoomOutSession(){
+        guard sessionSetupSucceeds,  let device = activeCamera else { return }
+        let minAvailableZoomScale = device.minAvailableVideoZoomFactor
+        let maxAvailableZoomScale = device.maxAvailableVideoZoomFactor
+        let availableZoomScaleRange = minAvailableZoomScale...maxAvailableZoomScale
+        let resolvedZoomScaleRange = zoomScaleRange.clamped(to: availableZoomScaleRange)
+
+        let resolvedScale = max(resolvedZoomScaleRange.lowerBound, min( 0.438976 * 1.8601487874984741, resolvedZoomScaleRange.upperBound))
+
+        configCamera(device) { device in
+            device.videoZoomFactor = resolvedScale
+        }
+    }
+    
+    
+    private func configCamera(_ camera: AVCaptureDevice?, _ config: @escaping (AVCaptureDevice) -> ()) {
+        guard let device = camera else { return }
+
+        sessionQueue.async { [device] in
+            do {
+                try device.lockForConfiguration()
+            } catch {
+                return
+            }
+
+            config(device)
+
+            device.unlockForConfiguration()
+        }
     }
     
     

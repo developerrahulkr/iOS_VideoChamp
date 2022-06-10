@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import MFrameWork
+//import MFrameWork
+import MultipeerFramework
 import MultipeerConnectivity
 
 
@@ -29,7 +30,7 @@ class RemoteControlVC: UIViewController {
     private let timeout: TimeInterval = 20
     private let alertPresenter:AlertPresenter = .init()
     
-    
+    var myPeerID : String!
     let generateLinkVM = GeneratedLinkViewModel()
     var generatedUrlCode = ""
     var staticLink = "http://videochamp/camera/"
@@ -61,6 +62,7 @@ class RemoteControlVC: UIViewController {
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
+                self.mcSessionViewModel.toggleBrwosing()
                 self.staticLink = "\(self.staticLink)\(urlCode)"
                 self.tableView.reloadData()
                 
@@ -69,7 +71,7 @@ class RemoteControlVC: UIViewController {
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
-                
+                self.mcSessionViewModel.toggleBrwosing()
                 self.tableView.reloadData()
             }else if codeMessage == "code Expire" && isSuccess {
                 self.expireCodeAlert(message: codeMessage)
@@ -97,7 +99,7 @@ class RemoteControlVC: UIViewController {
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.register(UINib(nibName: cellId3, bundle: nil), forCellReuseIdentifier: cellId3)
         
-        self.mcSessionViewModel.toggleBrwosing()
+        
         self.showActivityIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             self.hideActivityIndicator()
@@ -105,27 +107,32 @@ class RemoteControlVC: UIViewController {
             let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as! Data
             guard let decodedTeams = try? (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as! [MCPeerID]) else { return }
             print("decoded Data : \(decodedTeams)")
+            
             self.peerTableViewModel.updateFoundCell(decodedTeams)
             if self.peerTableViewModel.foundCellData.count != 0 {
                 for i in 0...self.peerTableViewModel.foundCellData.count-1 {
-                    let sameNameIndexes = PeerIDHelper.whereSameNames(ids: Utility.shared.sessionManager.connectedPeerIDs, target:
-                                                                        self.peerTableViewModel.foundCellData[i].peerID)
-                    if sameNameIndexes.isEmpty {
-                        Utility.shared.sessionManager.inviteTo(peerID: self.peerTableViewModel.foundCellData[i].peerID, timeout: self.timeout)
-        //                self.loadData()
-                    } else {
-                        Utility.shared.sessionManager.canselConectRequestTo(peerID: self.peerTableViewModel.foundCellData[i].peerID)
+                    
+                    if self.peerTableViewModel.foundCellData[i].peerID.displayName == self.myPeerID {
+                        
+                        
+                        print("Data is found................... \(self.peerTableViewModel.foundCellData[i].peerID)")
+                        let sameNameIndexes = PeerIDHelper.whereSameNames(ids: Utility.shared.sessionManager.connectedPeerIDs, target:
+                                                                            self.peerTableViewModel.foundCellData[i].peerID)
+                        if sameNameIndexes.isEmpty {
+                            Utility.shared.sessionManager.inviteTo(peerID: self.peerTableViewModel.foundCellData[i].peerID, timeout: self.timeout)
+            //                self.loadData()
+                        } else {
+                            Utility.shared.sessionManager.canselConectRequestTo(peerID: self.peerTableViewModel.foundCellData[i].peerID)
 
+                        }
+                    }else{
+                        print("Data is Not Found.........")
                     }
+                    
                 }
             }else{
                 print("Found Cell Data L : \(self.peerTableViewModel.foundCellData)")
             }
-            
- 
-            
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PeerIDVC") as! PeerIDVC
-//            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import MFrameWork
+//import MFrameWork
+import MultipeerFramework
 import MultipeerConnectivity
 
 
@@ -42,7 +43,7 @@ class HomeVC: UIViewController {
     private let displayName = UIDevice.current.name
     private let serviceProtocol:MCSessionManager.ServiceProtocol = .textAndVideo
     private let alertPresenter:AlertPresenter = .init()
-    
+    var myPeerID : String!
     let homeVM = MenuViewModels()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +76,7 @@ class HomeVC: UIViewController {
                 guard let self = self else {return}
                 
                 self.peerIDs = ids
+                
                 let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: ids, requiringSecureCoding: false)
                 UserDefaults.standard.set(encodedData, forKey: "MCPeerIDs")
                 self.peerTableViewModel.updateFoundCell(ids)
@@ -84,16 +86,16 @@ class HomeVC: UIViewController {
     }
     
     private func setUpOnInvited() {
-//        let title = "Invitation from"
-//        let acceptTitle = "Accept"
-//        let cancelTitle = "Decline"
+        let title = "Invitation from"
+        let acceptTitle = "Accept"
+        let cancelTitle = "Decline"
         Utility.shared.sessionManager.onInvited {[weak self] (fromPeerID, answerCallback) in
             guard let self = self else {return}
             let message = "\(fromPeerID.displayName)"
-            answerCallback(true)
-//            self?.alertPresenter.confirmAlert(title: title, message: message, acceptTitle: acceptTitle, cancelTitle: cancelTitle, acceptCallback: { (isAccept) in
-//                answerCallback(isAccept)
-//            })
+//            answerCallback(true)
+            self.alertPresenter.confirmAlert(title: title, message: message, acceptTitle: acceptTitle, cancelTitle: cancelTitle, acceptCallback: { (isAccept) in
+                answerCallback(isAccept)
+            })
         }
     }
 
@@ -124,6 +126,7 @@ class HomeVC: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.hideActivityIndicator()
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
+                vc.myPeerID = self.myPeerID
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         case .none:

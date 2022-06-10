@@ -9,6 +9,7 @@
 import UIKit
 //import SnapKitFrame
 import SnapKit
+import AVFoundation
 
 
 final class LiveView: NSObject {
@@ -40,6 +41,10 @@ final class LiveView: NSObject {
     let viewZoom = UIView()
     let lblZoom = UILabel()
     
+    
+    //    Video PReview
+    let previewLayer = AVCaptureVideoPreviewLayer()
+    
 
     private func setUpSoundControlButton(margin: CGFloat) {
         imageView.addSubview(soundControlButton)
@@ -69,6 +74,7 @@ final class LiveView: NSObject {
         view.addSubview(imageView)
         view.addSubview(textAreaStackView)
         view.addSubview(imageCapture)
+        imageView.layer.addSublayer(previewLayer)
 //        view.addSubview(buttonAreaStackView)
         view.addSubview(bottomView)
         view.addSubview(btnBack)
@@ -76,6 +82,8 @@ final class LiveView: NSObject {
         bottomView.addSubview(viewMedia)
         bottomView.addSubview(buttonAreaStackView)
         viewMedia.addSubview(topViewStackView)
+        
+        
         
         
 //        ViewTopStack.addSubview(topStackView)
@@ -96,12 +104,15 @@ final class LiveView: NSObject {
 //        topViewStackView.addArrangedSubview(lblZoom)
         topViewStackView.addArrangedSubview(viewZoom)
         viewZoom.addSubview(lblZoom)
+        
     }
 
     func setUpViews(frame: CGRect, margin: CGFloat) -> UIView {
         view = .init(frame: frame)
 
+        
         addViews()
+        
         imageCapture.snp.makeConstraints { make in
             make.top.equalTo(100)
             make.right.equalTo(20)
@@ -121,6 +132,7 @@ final class LiveView: NSObject {
             make.bottom.equalTo(buttonAreaStackView.snp.top).offset(0)
             
         }
+        
         
         btnBack.snp.makeConstraints { make in
 //            make.height.width.equalTo(50.0)
@@ -198,18 +210,20 @@ final class LiveView: NSObject {
     
     private func setUpViewProperties(margin: CGFloat) {
 
+        previewLayer.frame = view.bounds
         view.backgroundColor = Colors.whiteFb
         lblZoom.textColor = .white
         lblZoom.font = UIFont.systemFont(ofSize: 10.0)
         
         viewZoom.backgroundColor = .clear
         
+        previewLayer.backgroundColor = UIColor(red: 231/255, green: 10/255, blue: 150/255, alpha: 1.0).cgColor
+        
         viewZoom.clipsToBounds = true
         viewZoom.layer.cornerRadius = 12
         viewZoom.layer.borderColor = UIColor.white.cgColor
         viewZoom.layer.borderWidth = 0.5
-        
-        
+//        imageCapture.layer.addSublayer(previewLayer)
         btnBack.setImage(UIImage(named: "back_arrow"), for: .normal)
         btnClose.setImage(UIImage(named: "close_icon"), for: .normal)
         
@@ -243,6 +257,8 @@ final class LiveView: NSObject {
         
         topViewStackView.distribution = .fillEqually
         topViewStackView.spacing = 30.0
+        
+        
         
 //        lblZoom.snp.makeConstraints { make in
 //            make.edges.equalTo(lblZoom)

@@ -11,6 +11,7 @@ import IQKeyboardManagerSwift
 import FirebaseMessaging
 import Firebase
 import UserNotifications
+import MultipeerConnectivity
 
 
 @main
@@ -49,18 +50,18 @@ var window: UIWindow?
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print(url)
-        print("url host : \(url.host)")
-        print("url path : \(url.path)")
-        let urlString: String = url.absoluteString
-        let array = urlString.components(separatedBy: "/")
-        print(array[8])
+        let array = url.path.components(separatedBy: "/")
+        let myPeerID = array[array.count-2]
+//        let myPeerID = MCPeerID(displayName: urlName)
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
 
-        if array[8] == "false"{
+        if array[array.count-3] == "false"{
             profileViewController.redirectType = .camera
 
-        }else if array[8] == "true" {
+        }else if array[array.count-3] == "true" {
+            
+            profileViewController.myPeerID = myPeerID
             profileViewController.redirectType = .remote
             
         }

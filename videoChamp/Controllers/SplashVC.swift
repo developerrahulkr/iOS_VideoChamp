@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 enum RedirectVC {
     case camera
@@ -18,12 +19,16 @@ class SplashVC: UIViewController {
     var timerTest : Timer?
 
     var redirectType : RedirectVC = .none
+    
+    var myPeerID : String!
     override func viewDidLoad() {
         super.viewDidLoad()
         Log(self)
         // Do any additional setup after loading the view.
         
         StartTimer()
+        
+        print("MMy Peer ID : \(myPeerID)")
         
         
     }
@@ -67,6 +72,7 @@ class SplashVC: UIViewController {
             let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
             vc.checkConnectionState = .needToRunToggle
+            vc.myPeerID = myPeerID
             let nav_obj = UINavigationController(rootViewController: vc)
             nav_obj.isNavigationBarHidden = true
             UIApplication.shared.windows.first?.rootViewController = nav_obj

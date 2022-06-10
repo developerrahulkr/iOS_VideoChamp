@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-import MFrameWork
+//import MFrameWork
+import MultipeerFramework
 import MultipeerConnectivity
 
 class Utility : NSObject {
