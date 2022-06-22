@@ -61,7 +61,12 @@ var window: UIWindow?
 
         }else if array[array.count-3] == "true" {
             
+//            CMJoinLink(verifyNumber: array[array.count-1], userID: array[array.count-7])
+            
             profileViewController.myPeerID = myPeerID
+            profileViewController.verified_Code = array[array.count-1]
+            profileViewController.userID = array[array.count-7]
+            print("Generated Code : \(array[array.count-1])")
             profileViewController.redirectType = .remote
             
         }

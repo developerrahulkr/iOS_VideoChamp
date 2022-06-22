@@ -12,6 +12,8 @@ import MultipeerConnectivity
 import MultipeerFramework
 import AVFoundation
 import GSImageViewerController
+import Photos
+
 
 
 public class LiveViewModel: NSObject {
@@ -25,7 +27,7 @@ public class LiveViewModel: NSObject {
     private var sendImage = UIImage()
     private var zooomImageString = ""
     private let sessionQueue = DispatchQueue(label: "com.hayao.MultipeerLiveKit.videodata-ouput-queue")
-    
+    private lazy var photoOutput = AVCapturePhotoOutput()
     
     
     private var liveSetupView : LiveView!
@@ -40,6 +42,8 @@ public class LiveViewModel: NSObject {
     private let cameraBackLabel = "back"
     private let sendTextButtonTitle = "send text"
     private var sessionSetupSucceeds = false
+    private var videoOrientation: AVCaptureVideoOrientation = .portrait
+    private var captureProcessors: [Int64: PhotoCaptureProcessor] = [:]
     
     private var activeCamera: AVCaptureDevice?
     var zoomScaleRange: ClosedRange<CGFloat> = 1...10
@@ -73,13 +77,19 @@ public class LiveViewModel: NSObject {
                                                targetPeerID: targetPeerID,
                                                sessionPreset: sessionPreset)
         
+        
+        
     }
 
+    
     func updatePeerID(_ peerID: MCPeerID) {
         livePresenter.updateTargetPeerID(peerID)
     }
+    
+    
 
     func attachViews(liveView: LiveView) {
+        
         NotificationCenter.default.addObserver(self, selector: #selector(closeViewC), name: .kCloseScreen, object: nil)
         capSession = livePresenter.cap
         attachButtonActions(liveView)
@@ -87,6 +97,8 @@ public class LiveViewModel: NSObject {
         
 //        let data = publishBtnData[livePresenter.needsVideoRun]!
 //        capSession = livePresenter.cap
+//
+
         UIDevice.current.isBatteryMonitoringEnabled = true
         let batterPercentage = UIDevice.current.batteryLevel * 100
         
@@ -106,6 +118,10 @@ public class LiveViewModel: NSObject {
             DispatchQueue.main.async {
 //                print("Battery Percentage is : \(batterPercentage)")
                 liveView.imageView.image = image
+//                self.configureSession()
+//                liveView.imageView.layer.sublayers = image?.superclass
+                
+//                liveView.imageView.layer.addSublayer(liveView.imageView.layer)
 //                liveView.imageView.layer.addSublayer(liveView.previewLayer)
                 
 //                self.checkCameraPermission()
@@ -157,23 +173,21 @@ public class LiveViewModel: NSObject {
                     liveView.btnVideo.setImage(UIImage(named: "record_video_icon_white"), for: .normal)
                     liveView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
                     liveView.cameraControlButton.isUserInteractionEnabled = true
+                    
                 case "video":
                     liveView.cameraControlButton.isUserInteractionEnabled = false
                     liveView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
                     liveView.btnVideo.setImage(UIImage(named: "video_recording_icon"), for: .normal)
                 case "popToRoot":
                     NotificationCenter.default.post(name: .kPopToRoot, object: nil)
+
                 default :
                     let image = UIImage(data: msg)
                     print(image ?? UIImage())
-                    let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
-                    vc.modalPresentationStyle = .overFullScreen
-                    vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
-                    vc.image = UIImage(named: "save_Image_icon")!
-                    vc.titleText = "MEDIA SAVED"
-                    vc.messageText = "Files have been saved in your device gallery"
-                    UIApplication.topViewController()?.present(vc, animated: true)
-                    UIImageWriteToSavedPhotosAlbum(image ?? UIImage(), nil, nil, nil)
+                    
+                    self.saveImageAlertVC()
+//                    UIImageWriteToSavedPhotosAlbum(image ?? UIImage(), nil, nil, nil)
+                    self.takePhoto()
 //                    break
                 }
                 
@@ -199,6 +213,18 @@ public class LiveViewModel: NSObject {
         
         checkCameraPermission()
         
+        
+    }
+    
+//    MARK: - Save Image Alert VC
+    func saveImageAlertVC(){
+        let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+        vc.image = UIImage(named: "save_Image_icon")!
+        vc.titleText = "MEDIA SAVED"
+        vc.messageText = "Files have been saved in your device gallery"
+        UIApplication.topViewController()?.present(vc, animated: true)
     }
     
     @objc func closeViewC(){
@@ -275,7 +301,7 @@ public class LiveViewModel: NSObject {
 //            print("send String : \(sendImage)")
 //            let imageData = sendImage.pngData()
 //            try livePresenter.send(text: imageData ?? Data(), sendMode: .reliable)
-            liveSetupView.cameraControlButton.isUserInteractionEnabled = false
+//            liveSetupView.cameraControlButton.isUserInteractionEnabled = false
             try livePresenter.sendText(text: sendString, sendMode: .unreliable)
             
         } catch let error {
@@ -339,7 +365,7 @@ public class LiveViewModel: NSObject {
         
         liveView.btnVideo.setImage(UIImage(named: "video_recording_icon"), for: .normal)
         liveView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
-        liveView.lblZoom.text = "2x"
+        liveView.lblZoom.text = "1x"
         liveView.lblZoom.textAlignment = .center
         //colors
 //        liveView.imageCapture.backgroundColor = .blue
@@ -359,6 +385,8 @@ public class LiveViewModel: NSObject {
         liveView.receivedTextLabel.adjustsFontSizeToFitWidth = true
         liveView.soundControlButton.layer.opacity = 0.5
         liveView.textSendButton.titleLabel?.adjustsFontSizeToFitWidth = true
+    
+        
         
     }
     
@@ -371,34 +399,55 @@ public class LiveViewModel: NSObject {
                 guard granted else{
                     return
                 }
-                DispatchQueue.main.async {
-                    self?.setupCamera()
+                self?.sessionQueue.async { [unowned self] in
+                    self?.configureSession()
                 }
+//                DispatchQueue.main.async {
+//                    self?.setupCamera()
+//                }
             }
         case .restricted:
             break
         case .denied:
             break
         case .authorized:
-            setupCamera()
+            sessionQueue.async { [unowned self] in
+                self.configureSession()
+            }
+            
         @unknown default:
             break
         }
     }
     
+    private func configureSession() {
+        capSession?.beginConfiguration()
+        capSession?.sessionPreset = .photo
+        
+        setupCamera()
+        self.photoOutput.isHighResolutionCaptureEnabled = true
+        guard ((self.capSession?.canAddOutput(self.photoOutput)) != nil) else {
+            return
+        }
+        self.capSession?.addOutput(self.photoOutput)
+        self.capSession?.commitConfiguration()
+        sessionSetupSucceeds = true
+    }
+    
     private func setupCamera(){
         if let device = AVCaptureDevice.default(for: .video) {
+            
             do {
                let input = try AVCaptureDeviceInput(device: device)
                 if capSession!.canAddInput(input) {
                     capSession!.addInput(input)
                 }
-                if capSession!.canAddOutput(output){
-                    capSession!.addOutput(output)
-                }
+//                if capSession!.canAddOutput(output){
+//                    capSession!.addOutput(output)
+//                }
                 liveSetupView.previewLayer.videoGravity = .resizeAspectFill
                 liveSetupView.previewLayer.session = capSession
-                sessionSetupSucceeds = true
+//                sessionSetupSucceeds = true
                 
                 activeCamera = device
 //                session!.startRunning()
@@ -494,6 +543,7 @@ public class LiveViewModel: NSObject {
     @objc private func toggleSendVideoData(_ sender: UIButton) {
         #if !targetEnvironment(simulator)
         if sendString == "camera"{
+            self.takePhoto()
             sender.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
             liveSetupView.lblRecordingTiming.isHidden = true
             liveSetupView.lblRecording.textColor = .white
@@ -505,21 +555,25 @@ public class LiveViewModel: NSObject {
 //                sender.setImage(UIImage(named: "camera_icon_yellow"), for: .normal)
 
                 sender.isUserInteractionEnabled = true
+                
                 let imageData = sendImage.pngData()
+                
                 if ((imageData?.isEmpty) == nil) {
                     print("Data is Empty ")
                 }else{
+                    self.saveImageAlertVC()
                     try livePresenter.send(text: imageData ?? Data(), sendMode: .reliable)
                 }
             } catch let error {
                 print(error)
             }
-            
-            
+
+
         }else{
             livePresenter.needsVideoRun.toggle()
-            
+
             do {
+                self.saveImageAlertVC()
                 let data = publishBtnData[livePresenter.needsVideoRun]!
                 sender.setImage(UIImage(named: data.title), for: .normal)
                 if data.title == "start_video_recording_icon" {
@@ -527,7 +581,7 @@ public class LiveViewModel: NSObject {
                     liveSetupView.lblRecording.textColor = .red
                     liveSetupView.lblRecording.text = "RECORDING"
                     liveSetupView.btnCamera.isUserInteractionEnabled = true
-                    
+
                 }else{
                     liveSetupView.lblRecordingTiming.isHidden = true
                     liveSetupView.lblRecording.textColor = .white
@@ -539,7 +593,7 @@ public class LiveViewModel: NSObject {
             }catch let error {
                 print(error)
             }
-            
+
         }
 //        sender.backgroundColor = data.color
         #endif
@@ -600,5 +654,110 @@ public class LiveViewModel: NSObject {
 
     deinit {
 //         print("deinit:LiveViewModel")
+    }
+}
+
+
+extension LiveViewModel {
+    func takePhoto(_ completion: ((Photo) -> Void)? = nil) {
+        guard sessionSetupSucceeds else { return }
+
+        let settings: AVCapturePhotoSettings
+        if self.photoOutput.availablePhotoCodecTypes.contains(.hevc) {
+            settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+        } else {
+            settings = AVCapturePhotoSettings()
+        }
+
+        let orientation = videoOrientation
+
+        // Update the photo output's connection to match current device's orientation
+        photoOutput.connection(with: .video)?.videoOrientation = orientation
+
+        let processor = PhotoCaptureProcessor()
+        processor.orientation = orientation
+        processor.completion = { [unowned self] processor in
+            if let photo = processor.photo {
+                PHPhotoLibrary.shared().performChanges({
+                    // Add the captured photo's file data as the main resource for the Photos asset.
+                    let creationRequest = PHAssetCreationRequest.forAsset()
+                    creationRequest.addResource(with: .photo, data: photo.fileDataRepresentation()!, options: nil)
+                }, completionHandler: nil)
+
+                completion?(Photo(photo: photo, orientation: processor.orientation))
+            }
+
+            if let settings = processor.settings {
+                let id = settings.uniqueID
+                self.captureProcessors.removeValue(forKey: id)
+            }
+        }
+        captureProcessors[settings.uniqueID] = processor
+
+        sessionQueue.async { [unowned self] in
+            self.photoOutput.capturePhoto(with: settings, delegate: processor)
+        }
+    }
+}
+
+// MARK: - CameraController.Photo
+extension LiveViewModel {
+    /// An object to represent the result photo taken with the camera
+    class Photo {
+        private let photo: AVCapturePhoto
+        private let orientation: AVCaptureVideoOrientation
+
+        fileprivate init(photo: AVCapturePhoto, orientation: AVCaptureVideoOrientation) {
+            self.photo = photo
+            self.orientation = orientation
+        }
+
+        func image() -> UIImage? {
+            guard let cgImage = photo.cgImageRepresentation() else { return nil }
+
+//            guard let cgImages = photo.cgImageRepresentation()CameraController
+            let imageOrientation: UIImage.Orientation
+            switch orientation {
+            case .portrait:
+                imageOrientation = .right
+            case .portraitUpsideDown:
+                imageOrientation = .left
+            case .landscapeRight:
+                imageOrientation = .up
+            case .landscapeLeft:
+                imageOrientation = .down
+            }
+
+            return UIImage(cgImage: cgImage, scale: 1, orientation: imageOrientation)
+        }
+    }
+}
+
+
+// MARK: - PhotoCaptureProcessor
+private class PhotoCaptureProcessor: NSObject {
+    var photo: AVCapturePhoto?
+    var completion: ((PhotoCaptureProcessor) -> Void)?
+    var settings: AVCaptureResolvedPhotoSettings?
+    var orientation: AVCaptureVideoOrientation = .portrait
+}
+
+extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard error == nil else {
+            return
+        }
+
+        self.photo = photo
+    }
+
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?) {
+        guard error == nil else {
+            return
+        }
+
+        self.settings = resolvedSettings
+
+        completion?(self)
     }
 }

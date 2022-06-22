@@ -5,6 +5,8 @@
 //  Created by iOS Developer on 18/02/22.
 //
 
+
+//8610
 import UIKit
 //import MFrameWork
 import MultipeerFramework
@@ -31,6 +33,8 @@ class RemoteControlVC: UIViewController {
     private let alertPresenter:AlertPresenter = .init()
     
     var myPeerID : String!
+    var number : String!
+    var userID : String?
     let generateLinkVM = GeneratedLinkViewModel()
     var generatedUrlCode = ""
     var staticLink = "http://videochamp/camera/"
@@ -45,8 +49,8 @@ class RemoteControlVC: UIViewController {
         
         registerCell()
         lblEnterCode.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
-        
         loadData()
+        
         
                 
     }
@@ -62,7 +66,9 @@ class RemoteControlVC: UIViewController {
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
-                self.mcSessionViewModel.toggleBrwosing()
+//                self.mcSessionViewModel.toggleBrwosing()
+                print(self.userID)
+                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
                 self.staticLink = "\(self.staticLink)\(urlCode)"
                 self.tableView.reloadData()
                 
@@ -71,10 +77,11 @@ class RemoteControlVC: UIViewController {
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
-                self.mcSessionViewModel.toggleBrwosing()
+//                self.mcSessionViewModel.toggleBrwosing()
+                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
                 self.tableView.reloadData()
-            }else if codeMessage == "code Expire" && isSuccess {
-                self.expireCodeAlert(message: codeMessage)
+            }else if codeMessage == "code Expire" && isSuccess{
+                self.loadData()
             }else{
                 print("Error")
             }
@@ -208,7 +215,6 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
         }
     }
     func verifyCode(tag: Int) {
-        self.mcSessionViewModel.toggleBrwosing()
         self.showActivityIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.hideActivityIndicator()
@@ -243,33 +249,28 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
     }
     
     func shareCode(tag: Int) {
-        let url = urlLink.replacingOccurrences(of: " ", with: "_")
-        let finalUrl = url.replacingOccurrences(of: "'", with: "_")
-        print("My URL IS \(url)")
-        
-        
-        guard let url = URL(string: finalUrl)
-        else{
-            print("url is incorrect")
-            return
+        if let encoded = urlLink.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+            let url = URL(string: encoded)
+        {
+            print("original URL is : \(url)")
+            let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
+            self.present(sharesheetVC, animated: true)
         }
-        let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
-        self.present(sharesheetVC, animated: true)
     }
     
     
     
-    func CodeVerifyApi(number : String){
+    func CodeVerifyApi(number : String, userId : String){
         
-        codeGenerateVM.verifyNumber(number: number) { [weak self] isSuccess in
+        codeGenerateVM.verifyNumber(number: number, userID: userId) { [weak self] isSuccess, message in
             guard let self = self else{return}
             if isSuccess {
-//                self.showAlert(alertMessage: "OTP Verified!")
-//                self.navigationController?.popViewController(animated: true)
-                self.showOTPAlert(alertMessage: "OTP Verified!")
+                print("Message : \(message)")
+                self.mcSessionViewModel.toggleBrwosing()
                 
             }else{
-                self.showAlert(alertMessage: "\(self.otpString) is Not Correct")
+                print("Message : \(message)")
+                self.expireCodeAlert(message: message)
             }
         }
     }
@@ -279,7 +280,6 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
     func showOTPAlert(alertMessage : String) {
         let alert = UIAlertController(title: appName, message: alertMessage, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            self.mcSessionViewModel.toggleBrwosing()
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 
 //                let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as! Data

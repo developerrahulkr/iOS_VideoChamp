@@ -71,10 +71,10 @@ class CameraVideoShareCodeVC: UIViewController {
                 self.mcSessionViewModel.toogleAdvertising()
                 self.generatedUrlCode = urlCode
                 self.tableView.reloadData()
-            }else if codeMessage == "code Expire" && isSuccess {
-                self.expireCodeAlert(message: codeMessage)
+            }else if codeMessage == "code Expire" && isSuccess{
+                self.loadData()
             }else{
-                print("Error")
+                print("error")
             }
         }
         

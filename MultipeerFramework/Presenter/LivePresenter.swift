@@ -222,6 +222,7 @@ open class LivePresenter: NSObject {
 
         do {
             let audioData = AudioConverter.audioBufferToNSData(pcmBuffer: audioBuffer)
+            print("Video Buffer : \(videoBuffer)")
             let image = VideoDataConverter.convertImageFrom(buffer: videoBuffer)
             let imageData = VideoDataConverter.imageToJpegData(image,
                                                                compressionQuality: jpegCompressionQuality)

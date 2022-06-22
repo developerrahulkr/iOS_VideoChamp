@@ -44,6 +44,8 @@ class HomeVC: UIViewController {
     private let serviceProtocol:MCSessionManager.ServiceProtocol = .textAndVideo
     private let alertPresenter:AlertPresenter = .init()
     var myPeerID : String!
+    var verifyNum : String!
+    var userID : String!
     let homeVM = MenuViewModels()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +128,8 @@ class HomeVC: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.hideActivityIndicator()
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
+                vc.number = self.verifyNum
+                vc.userID = self.userID
                 vc.myPeerID = self.myPeerID
                 self.navigationController?.pushViewController(vc, animated: true)
             }

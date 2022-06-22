@@ -43,10 +43,10 @@ class GenerateNumberViewModel : NSObject {
     }
     
     
-    func verifyNumber(number : String, completionHandler : @escaping(Bool) -> Void){
+    func verifyNumber(number : String,userID : String, completionHandler : @escaping(Bool,String) -> Void){
         
         UIApplication.topViewController()?.showActivityIndicator()
-        APIManager.shared.verifyCode(verCode: number) { dict in
+        APIManager.shared.verifyCode(verCode: number, userId: userID) { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if dict == nil {
                 print("Directory is Empty")
@@ -55,9 +55,9 @@ class GenerateNumberViewModel : NSObject {
                 let message = dict!["message"].stringValue
                 if statusCode == "200"{
                     print(message)
-                    completionHandler(true)
+                    completionHandler(true,message)
                 }else{
-                    completionHandler(false)
+                    completionHandler(false, message)
                     print("Error Msg : \(message)")
                 }
             }

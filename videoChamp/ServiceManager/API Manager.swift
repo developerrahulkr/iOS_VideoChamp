@@ -66,9 +66,9 @@ class APIManager : NSObject {
     
     //    MARK: - Verify Number
     
-    func verifyCode(verCode : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
+    func verifyCode(verCode : String, userId : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
-        let param = ["number" : verCode]
+        let param = ["number" : verCode, "userId" : userId ]
         
         AF.request(number_verify_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response {
             (response) in
@@ -121,15 +121,6 @@ class APIManager : NSObject {
         }
         
     }
-    
-    
-
-    
-    
-    
-    
-    
-    
     
     //    MARK: - read Notification
     

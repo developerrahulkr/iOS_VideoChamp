@@ -19,6 +19,8 @@ class SplashVC: UIViewController {
     var timerTest : Timer?
 
     var redirectType : RedirectVC = .none
+    var verified_Code : String!
+    var userID : String!
     
     var myPeerID : String!
     override func viewDidLoad() {
@@ -73,6 +75,8 @@ class SplashVC: UIViewController {
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
             vc.checkConnectionState = .needToRunToggle
             vc.myPeerID = myPeerID
+            vc.verifyNum = verified_Code
+            vc.userID = userID
             let nav_obj = UINavigationController(rootViewController: vc)
             nav_obj.isNavigationBarHidden = true
             UIApplication.shared.windows.first?.rootViewController = nav_obj
