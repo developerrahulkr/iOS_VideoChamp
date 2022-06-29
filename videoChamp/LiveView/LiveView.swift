@@ -13,7 +13,7 @@ import AVFoundation
 
 
 final class LiveView: NSObject {
-    private var view: UIView!
+    var view: UIView!
     private let toHiddenKeyboardGesture:UITapGestureRecognizer = .init()
     let imageView = UIImageView()
     let receivedTextLabel = UILabel()
@@ -43,7 +43,7 @@ final class LiveView: NSObject {
     
     
     //    Video PReview
-    let previewLayer = AVCaptureVideoPreviewLayer()
+    var previewLayer = AVCaptureVideoPreviewLayer()
     
 
     private func setUpSoundControlButton(margin: CGFloat) {
@@ -217,7 +217,7 @@ final class LiveView: NSObject {
         
         viewZoom.backgroundColor = .clear
         
-        previewLayer.backgroundColor = UIColor(red: 231/255, green: 10/255, blue: 150/255, alpha: 1.0).cgColor
+//        previewLayer.backgroundColor = UIColor(red: 231/255, green: 10/255, blue: 150/255, alpha: 1.0).cgColor
         
         viewZoom.clipsToBounds = true
         viewZoom.layer.cornerRadius = 12

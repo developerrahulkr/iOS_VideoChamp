@@ -55,7 +55,6 @@ class RemoteControlVC: UIViewController {
                 
     }
     func loadData(){
-        
         let linkGenerated = CMGenerateLink(deviceType: "IOS",deviceId: Utility.shared.sessionManager.myPeerID?.displayName ?? "", isCamera: "false", peerId: Utility.shared.sessionManager.displayName, connectionState: "true")
         generateLinkVM.linkGenerated(cmGenerateLinkData: linkGenerated) {
             [weak self] isSuccess,linkURL,urlCode, codeMessage  in
@@ -79,6 +78,7 @@ class RemoteControlVC: UIViewController {
                 self.generatedUrlCode = urlCode
 //                self.mcSessionViewModel.toggleBrwosing()
                 self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
+                self.staticLink = "\(self.staticLink)\(urlCode)"
                 self.tableView.reloadData()
             }else if codeMessage == "code Expire" && isSuccess{
                 self.loadData()
@@ -111,7 +111,9 @@ class RemoteControlVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             self.hideActivityIndicator()
             
-            let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as! Data
+            guard  let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as? Data else {
+                return
+            }
             guard let decodedTeams = try? (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as! [MCPeerID]) else { return }
             print("decoded Data : \(decodedTeams)")
             
@@ -196,13 +198,7 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
             return cell
         }
     }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 10
-        }else{
-            return 20
-        }
-    }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        if indexPath.section == 0 {
@@ -253,7 +249,7 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
             let url = URL(string: encoded)
         {
             print("original URL is : \(url)")
-            let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
+            let sharesheetVC = UIActivityViewController(activityItems: [sendingCameraMessage,url], applicationActivities: nil)
             self.present(sharesheetVC, animated: true)
         }
     }
@@ -266,7 +262,12 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
             guard let self = self else{return}
             if isSuccess {
                 print("Message : \(message)")
-                self.mcSessionViewModel.toggleBrwosing()
+                if self.myPeerID == nil {
+                    self.mcSessionViewModel.toogleAdvertising()
+                }else{
+                    self.mcSessionViewModel.toggleBrwosing()
+                }
+                
                 
             }else{
                 print("Message : \(message)")
@@ -274,8 +275,6 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
             }
         }
     }
-    
-    
     
     func showOTPAlert(alertMessage : String) {
         let alert = UIAlertController(title: appName, message: alertMessage, preferredStyle: .alert)

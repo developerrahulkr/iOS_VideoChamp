@@ -13,6 +13,7 @@ import MultipeerConnectivity
 
 enum ConnectionState {
     case needToRunToggle
+    case needToCameraToggle
     case none
 }
 
@@ -55,6 +56,7 @@ class HomeVC: UIViewController {
         cameraAndRemoteViewAction()
         checkBlockAndActivateDate()
         loadData()
+        
         
     }
     
@@ -102,6 +104,7 @@ class HomeVC: UIViewController {
     }
 
     func loadData(){
+        
         mcSessionViewModel = MCSessionViewModel.init(mcSessionManger: Utility.shared.sessionManager)
         
         lblDeviceTitle.font = UIFont.systemFont(ofSize: 14.0, weight: .bold)
@@ -127,6 +130,7 @@ class HomeVC: UIViewController {
             self.showActivityIndicator()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.hideActivityIndicator()
+                self.showToast(message: "Custom Toast", font: .systemFont(ofSize: 12.0))
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
                 vc.number = self.verifyNum
                 vc.userID = self.userID
@@ -135,25 +139,20 @@ class HomeVC: UIViewController {
             }
         case .none:
             break
+        case .needToCameraToggle:
+            self.showActivityIndicator()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.hideActivityIndicator()
+                self.showToast(message: "Custom Toast", font: .systemFont(ofSize: 12.0))
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "CameraVideoShareCodeVC") as! CameraVideoShareCodeVC
+                vc.number = self.verifyNum
+                vc.userID = self.userID
+                vc.myPeerID = self.myPeerID
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
         }
     }
-    
-    func browsingState(){
-        self.mcSessionViewModel.toggleBrwosing()
-        self.showActivityIndicator()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.hideActivityIndicator()
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PeerIDVC") as! PeerIDVC
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    
-    
-    
-    
-        
-   
     
     
     func checkBlockAndActivateDate() {
@@ -210,6 +209,7 @@ class HomeVC: UIViewController {
     @objc func funcCameraActivity(){
         print("peer ids is : \(String(describing: self.peerIDs))")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "CameraVideoShareCodeVC") as! CameraVideoShareCodeVC
+        videochampManager.videochamp_sharedManager.redirectType = .camera
 //        vc.sessionManager = sessionManager
         
         self.navigationController?.pushViewController(vc, animated: true)
@@ -219,6 +219,7 @@ class HomeVC: UIViewController {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
         self.navigationController?.pushViewController(vc, animated: true)
+        videochampManager.videochamp_sharedManager.redirectType = .remote
     }
     
     @objc func notificationScreen(){

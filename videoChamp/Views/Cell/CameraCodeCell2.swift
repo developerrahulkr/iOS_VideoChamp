@@ -29,7 +29,7 @@ class CameraCodeCell2: UITableViewCell {
         topView.layer.cornerRadius = topView.bounds.height/2
         bottomView.layer.cornerRadius = bottomView.bounds.height/2
         cardView.layer.cornerRadius = 30.0
-        lblCode.font = UIFont.systemFont(ofSize: 21.0, weight: .regular)
+        lblCode.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
     }
 
     @IBAction func onClickedResendCode(_ sender: UIButton) {

@@ -13,7 +13,6 @@ import Firebase
 import UserNotifications
 import MultipeerConnectivity
 
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -56,19 +55,22 @@ var window: UIWindow?
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
 
-        if array[array.count-3] == "false"{
+        if array[array.count-4] == "false"{
             profileViewController.redirectType = .camera
-
-        }else if array[array.count-3] == "true" {
-            
+            profileViewController.myPeerID = myPeerID
+            profileViewController.verified_Code = array[array.count-1]
+            profileViewController.userID = array[array.count-7]
+            videochampManager.videochamp_sharedManager.redirectType  = .camera
+        }else if array[array.count-4] == "true" {
 //            CMJoinLink(verifyNumber: array[array.count-1], userID: array[array.count-7])
-            
             profileViewController.myPeerID = myPeerID
             profileViewController.verified_Code = array[array.count-1]
             profileViewController.userID = array[array.count-7]
             print("Generated Code : \(array[array.count-1])")
             profileViewController.redirectType = .remote
-            
+            videochampManager.videochamp_sharedManager.redirectType  = .remote
+        }else{
+            profileViewController.redirectType = .none
         }
         if let navController = UIApplication.getNavController() {
              //do something with rootViewController
@@ -189,6 +191,16 @@ extension AppDelegate : MessagingDelegate, UNUserNotificationCenterDelegate {
         
     }
     
+}
+
+
+
+class videochampManager
+{
+    
+    static let videochamp_sharedManager = videochampManager()
+    var redirectType : RedirectVC = .none
+
 }
 
 

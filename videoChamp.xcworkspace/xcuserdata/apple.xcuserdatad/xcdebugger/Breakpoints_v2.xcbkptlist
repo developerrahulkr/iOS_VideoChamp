@@ -7,48 +7,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "61C9E254-D5E7-4C17-AABA-8CFDBF4C3AB9"
+            uuid = "D0D381FF-5FD6-4B11-A0D7-A62E54B92593"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "videoChamp/ViewModels/GenerateLinkViewModel.swift"
+            filePath = "videoChamp/Controllers/AvatarVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "linkGenerated(cmGenerateLinkData:completionHandler:)"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "onClickedSubmitButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "644A9830-E15E-43FD-A5AA-BB528CB10499"
-            shouldBeEnabled = "Yes"
+            uuid = "ECFBE4FB-AEC6-4A80-949C-ED9942E37020"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "videoChamp/Controllers/RemoteControlVC.swift"
+            filePath = "MultipeerFramework/Media/Audio/AudioCaptureModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "loadData()"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "audioRecordEnableTo(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D85B1670-3F51-4DE0-9977-4329EBFAFF05"
+            uuid = "B2583F68-A1C5-4214-BAFE-E2539F3E2381"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultipeerFramework/Media/Audio/AudioCaptureModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(avAudioFormat:nodeBus:bufferLate:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D84FA364-8F84-467E-BF6B-A419CC0D2A81"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultipeerFramework/Presenter/LivePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "initModels()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "93712C8C-21B0-4F4E-B970-AA1205D520B0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultipeerFramework/Media/Audio/AudioCaptureModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "engineInit()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4333FC46-8F53-4BEF-9BB3-D3E763F7F2A9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "videoChamp/Controllers/HomeVC.swift"
+            filePath = "videoChamp/LiveView/LiveViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "loadData()"
+            startingLineNumber = "935"
+            endingLineNumber = "935"
+            landmarkName = "video(_:didFinishSavingWithError:contextInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

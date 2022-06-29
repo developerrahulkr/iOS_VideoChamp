@@ -59,28 +59,53 @@ class SplashVC: UIViewController {
             }
         }else{
             initialSetUp()
-        }   
+        }
+        
     }
     func initialSetUp(){
         switch redirectType {
         case .camera:
-            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CameraVideoShareCodeVC") as! CameraVideoShareCodeVC
-            let nav_obj = UINavigationController(rootViewController: vc)
-            nav_obj.isNavigationBarHidden = true
-            UIApplication.shared.windows.first?.rootViewController = nav_obj
+            if Utility.shared.checkIsUserRegister().isEmpty {
+                let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVC") as! WelcomeVC
+                let nav_obj = UINavigationController(rootViewController: vc)
+                nav_obj.isNavigationBarHidden = true
+                UIApplication.shared.windows.first?.rootViewController = nav_obj
+                
+            }else{
+                let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                vc.checkConnectionState = .needToCameraToggle
+                vc.myPeerID = myPeerID
+                vc.verifyNum = verified_Code
+                vc.userID = userID
+                let nav_obj = UINavigationController(rootViewController: vc)
+                nav_obj.isNavigationBarHidden = true
+                UIApplication.shared.windows.first?.rootViewController = nav_obj
+            }
             
         case .remote:
-            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-            vc.checkConnectionState = .needToRunToggle
-            vc.myPeerID = myPeerID
-            vc.verifyNum = verified_Code
-            vc.userID = userID
-            let nav_obj = UINavigationController(rootViewController: vc)
-            nav_obj.isNavigationBarHidden = true
-            UIApplication.shared.windows.first?.rootViewController = nav_obj
-        case .none: break
+            if Utility.shared.checkIsUserRegister().isEmpty {
+                let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeVC") as! WelcomeVC
+                let nav_obj = UINavigationController(rootViewController: vc)
+                nav_obj.isNavigationBarHidden = true
+                UIApplication.shared.windows.first?.rootViewController = nav_obj
+                
+            }else{
+                let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                vc.checkConnectionState = .needToRunToggle
+                vc.myPeerID = myPeerID
+                vc.verifyNum = verified_Code
+                vc.userID = userID
+                let nav_obj = UINavigationController(rootViewController: vc)
+                nav_obj.isNavigationBarHidden = true
+                UIApplication.shared.windows.first?.rootViewController = nav_obj
+            }
+        case .none:
+
+            break
             
         }
     }

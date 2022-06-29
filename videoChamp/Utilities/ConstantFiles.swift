@@ -14,11 +14,21 @@ let appName = "Video Champ"
 
 let kToken = ""
 var sendingRemoteMessage = """
-You are invited to become monitor/camera. Please click the below link:
+You are invited to become monitor.
 
+Please click the below link:
 
 
 """
+
+var sendingCameraMessage = """
+You are invited to become camera.
+
+Please click the below link:
+
+
+"""
+
 
 
 let termsAndConditions = """

@@ -25,8 +25,15 @@ class CameraVideoShareCodeVC: UIViewController {
     var staticLink = "http://videochamp/remote/"
     var generatedUrlCode = ""
     var urlLink = ""
+    
+    var number : String!
+    var userID : String?
+    private let timeout: TimeInterval = 20
+    var myPeerID : String!
+    let codeGenerateVM = GenerateNumberViewModel()
 //    let generateNumberVM = GenerateNumberViewModel()
     
+    private var peerTableViewModel = PeerTableViewModel()
     let generateLinkVM = GeneratedLinkViewModel()
     var sessionManager: MCSessionManager!
     private let serviceType = "video-champ"
@@ -42,9 +49,7 @@ class CameraVideoShareCodeVC: UIViewController {
         registerCell()
         loadData()
     }
-    
-    
-    
+
     func loadData(){
         mcSessionViewModel = MCSessionViewModel.init(mcSessionManger: Utility.shared.sessionManager)
         generateLinkVM.linkGenerated(cmGenerateLinkData: CMGenerateLink(deviceType: "IOS",
@@ -61,14 +66,16 @@ class CameraVideoShareCodeVC: UIViewController {
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
                 self.staticLink = "\(self.staticLink)\(urlCode)"
-                self.mcSessionViewModel.toogleAdvertising()
+                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
                 self.tableView.reloadData()
                 
             }else if codeMessage == "code is already generated" && isSuccess {
                 print("Deeplinking URL : \(linkURL)")
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
-                self.mcSessionViewModel.toogleAdvertising()
+                
+                self.staticLink = "\(self.staticLink)\(urlCode)"
+                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
                 self.generatedUrlCode = urlCode
                 self.tableView.reloadData()
             }else if codeMessage == "code Expire" && isSuccess{
@@ -81,6 +88,27 @@ class CameraVideoShareCodeVC: UIViewController {
         
         
         
+        
+    }
+    
+    func CodeVerifyApi(number : String, userId : String){
+        
+        codeGenerateVM.verifyNumber(number: number, userID: userId) { [weak self] isSuccess, message in
+            guard let self = self else{return}
+            if isSuccess {
+                print("Message : \(message)")
+                if self.myPeerID == nil {
+                    self.mcSessionViewModel.toogleAdvertising()
+                }else{
+                    self.mcSessionViewModel.toggleBrwosing()
+                }
+                
+                
+            }else{
+                print("Message : \(message)")
+                self.expireCodeAlert(message: message)
+            }
+        }
     }
     
     
@@ -99,6 +127,44 @@ class CameraVideoShareCodeVC: UIViewController {
         tableView.register(UINib(nibName: cellID2, bundle: nil), forCellReuseIdentifier: cellID2)
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.register(UINib(nibName: cellId3, bundle: nil), forCellReuseIdentifier: cellId3)
+        
+        
+        self.showActivityIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+            self.hideActivityIndicator()
+            
+            guard let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as? Data else {
+                return
+            }
+            guard let decodedTeams = try? (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as! [MCPeerID]) else { return }
+            print("decoded Data : \(decodedTeams)")
+            
+            self.peerTableViewModel.updateFoundCell(decodedTeams)
+            if self.peerTableViewModel.foundCellData.count != 0 {
+                for i in 0...self.peerTableViewModel.foundCellData.count-1 {
+                    
+                    if self.peerTableViewModel.foundCellData[i].peerID.displayName == self.myPeerID {
+                        
+                        
+                        print("Data is found................... \(self.peerTableViewModel.foundCellData[i].peerID)")
+                        let sameNameIndexes = PeerIDHelper.whereSameNames(ids: Utility.shared.sessionManager.connectedPeerIDs, target:
+                                                                            self.peerTableViewModel.foundCellData[i].peerID)
+                        if sameNameIndexes.isEmpty {
+                            Utility.shared.sessionManager.inviteTo(peerID: self.peerTableViewModel.foundCellData[i].peerID, timeout: self.timeout)
+            //                self.loadData()
+                        } else {
+                            Utility.shared.sessionManager.canselConectRequestTo(peerID: self.peerTableViewModel.foundCellData[i].peerID)
+
+                        }
+                    }else{
+                        print("Data is Not Found.........")
+                    }
+                    
+                }
+            }else{
+                print("Found Cell Data L : \(self.peerTableViewModel.foundCellData)")
+            }
+        }
     }
     
     
@@ -130,13 +196,7 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
         return 2
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 10
-        }else{
-            return 20
-        }
-    }
+  
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        if indexPath.section == 0 {

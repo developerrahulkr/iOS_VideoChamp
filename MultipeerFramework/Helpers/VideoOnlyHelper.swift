@@ -43,6 +43,8 @@ extension VideoOnlyHelper: MCSessionDelegate {
             connectingStateCallback?(peerID, .connected)
         case .notConnected:
             connectingStateCallback?(peerID, .connectionFail)
+        @unknown default:
+            print("error")
         }
     }
     

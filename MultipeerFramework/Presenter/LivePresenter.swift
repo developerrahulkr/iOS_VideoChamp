@@ -45,9 +45,10 @@ open class LivePresenter: NSObject {
     }
 
     private let avAudioFormat: AVAudioFormat? = AVAudioFormat(commonFormat: AVAudioCommonFormat.pcmFormatFloat32,
-                                                              sampleRate: 44100.0,
+                                                              sampleRate: 44100,
                                                               channels: 1,
                                                               interleaved: true)
+    
 
     public init(mcSessionManager: MCSessionManager, sendVideoInterval: TimeInterval,
                 videoCompressionQuality:CGFloat, targetPeerID: MCPeerID?=nil,
@@ -222,13 +223,12 @@ open class LivePresenter: NSObject {
 
         do {
             let audioData = AudioConverter.audioBufferToNSData(pcmBuffer: audioBuffer)
-            print("Video Buffer : \(videoBuffer)")
             let image = VideoDataConverter.convertImageFrom(buffer: videoBuffer)
             let imageData = VideoDataConverter.imageToJpegData(image,
                                                                compressionQuality: jpegCompressionQuality)
             try manager.send(videoData: imageData, audioData: audioData,
                              audioStreamName: audioStreamName,
-                             sendMode: .reliable, target: peerID)
+                             sendMode: .unreliable, target: peerID)
         } catch let error {
             Log(error)
         }

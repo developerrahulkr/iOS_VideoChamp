@@ -7,6 +7,9 @@
 //
 
 import AVFoundation
+import Photos
+import UIKit
+
 
 
 final class SampleBufferCamera: NSObject, VideoDataOutputDelegate {
@@ -26,7 +29,10 @@ final class SampleBufferCamera: NSObject, VideoDataOutputDelegate {
     var zoomScaleRange: ClosedRange<CGFloat> = 1...10
 
     var position: AVCaptureDevice.Position
+    
 
+    
+    
     init(initPosition: AVCaptureDevice.Position, sessionPreset: AVCaptureSession.Preset) {
         self.position = initPosition
         self.sessionPreset = sessionPreset
@@ -38,7 +44,7 @@ final class SampleBufferCamera: NSObject, VideoDataOutputDelegate {
         try setUpCameraInput()
         setUpVideoDataOutput()
         setVideoDataSetting()
-        var cap = captureSessionStart()
+        let cap = captureSessionStart()
         return cap
     }
 
@@ -51,6 +57,7 @@ final class SampleBufferCamera: NSObject, VideoDataOutputDelegate {
 
     func captureSessionStop() {
         guard captureSession.isRunning else {return}
+        
         captureSession.stopRunning()
     }
 
@@ -89,6 +96,9 @@ final class SampleBufferCamera: NSObject, VideoDataOutputDelegate {
         }
     }
     
+    
+    
+    
 //    private func setupCameraPinchGesture() throws {
 //        guard let device = captureDevice else { return }
 //
@@ -118,4 +128,5 @@ extension SampleBufferCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         self.resultBuffer = sampleBuffer
     }
+ 
 }

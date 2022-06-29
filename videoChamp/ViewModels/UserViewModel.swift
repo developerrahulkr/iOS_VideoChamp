@@ -13,7 +13,7 @@ import SwiftyJSON
 class UserViewModel : NSObject {
     
     
-    func registerUser(userName : String, deviceToken : String, completionHandler : @escaping(Bool) -> Void) {
+    func registerUser(userName : String, deviceToken : String, completionHandler : @escaping(Bool, String) -> Void) {
         
         UIApplication.topViewController()?.showActivityIndicator()
         
@@ -28,15 +28,15 @@ class UserViewModel : NSObject {
                 let data = dict!["data"].dictionary
                 let token = data!["token"]?.stringValue
                 let userManagement = data!["userManagement"]?.dictionary
-                let name = userManagement!["name"]?.stringValue
+                let name = userManagement?["name"]?.stringValue
                 if statusCode == "200"{
                     print(name ?? "")
                     UserDefaults.standard.set(token ?? "", forKey: "Apptoken")
                     print("Baerer token : \(token ?? "")")
                     print(error_msg)
-                    completionHandler(true)
+                    completionHandler(true, error_msg)
                 }else{
-                    completionHandler(false)
+                    completionHandler(false, error_msg)
                     print("Error Msg : \(error_msg)")
                 }
             }

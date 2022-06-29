@@ -20,6 +20,7 @@ class AlertCameraVC: UIViewController {
     var titleText = ""
     var messageText = ""
     var btnColor = UIColor()
+    var btnOkText = "OK"
     
     
     
@@ -30,6 +31,12 @@ class AlertCameraVC: UIViewController {
         lblTitle.text = titleText
         lblMsg.text = messageText
         imgView.image = image
+        if btnOkText.isEmpty {
+            
+        }else{
+            btnOK.setTitle(btnOkText, for: .normal)
+        }
+        
         
     }
 
@@ -41,7 +48,14 @@ class AlertCameraVC: UIViewController {
     }
     
     @IBAction func onClickedOKBtn(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        if btnOkText.isEmpty {
+            self.dismiss(animated: true)
+        }else{
+            self.dismiss(animated: true)
+            NotificationCenter.default.post(name: .kDisconnect, object: nil)
+        }
+        
+        
         
     }
 }

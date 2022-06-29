@@ -10,6 +10,9 @@
 		1866B193284E1E0E002CE4BE /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866B192284E1E0E002CE4BE /* AudioPlayer.swift */; };
 		1866B197284E1EC6002CE4BE /* CMSoundName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866B196284E1EC6002CE4BE /* CMSoundName.swift */; };
 		1866B199284E2002002CE4BE /* captureImage.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1866B198284E2002002CE4BE /* captureImage.mp3 */; };
+		189D3EDC2864A19000326660 /* DisconnectCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D3EDB2864A19000326660 /* DisconnectCameraVC.swift */; };
+		189D3EE12864A2E500326660 /* RemoteDismissScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D3EDF2864A2E500326660 /* RemoteDismissScreenVC.swift */; };
+		189D3EE22864A2E500326660 /* RemoteDismissScreenVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D3EE02864A2E500326660 /* RemoteDismissScreenVC.xib */; };
 		18E1AF2A2851CBE000E14044 /* LivePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1AF282851CBE000E14044 /* LivePresenter.swift */; };
 		18E1AF2B2851CBE000E14044 /* MediaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1AF292851CBE000E14044 /* MediaPresenter.swift */; };
 		18E1AF302851CC5C00E14044 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1AF2F2851CC5C00E14044 /* utils.swift */; };
@@ -98,7 +101,6 @@
 		2C5BA21728432485004B60AD /* GetNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA21628432485004B60AD /* GetNavBar.swift */; };
 		2C5BA25D28462DDE004B60AD /* AlertCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA25B28462DDE004B60AD /* AlertCameraVC.swift */; };
 		2C5BA25E28462DDE004B60AD /* AlertCameraVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BA25C28462DDE004B60AD /* AlertCameraVC.xib */; };
-		2C5BA29D28463994004B60AD /* DisconnectCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA29B28463994004B60AD /* DisconnectCameraVC.swift */; };
 		2C5BA29E28463994004B60AD /* DisconnectCameraVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BA29C28463994004B60AD /* DisconnectCameraVC.xib */; };
 		2C68C7F527CCFDD600F76E8A /* GiveFeedbackCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */; };
 		2C68C7F627CCFDD600F76E8A /* GiveFeedbackCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */; };
@@ -180,6 +182,9 @@
 		1866B192284E1E0E002CE4BE /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		1866B196284E1EC6002CE4BE /* CMSoundName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSoundName.swift; sourceTree = "<group>"; };
 		1866B198284E2002002CE4BE /* captureImage.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = captureImage.mp3; sourceTree = "<group>"; };
+		189D3EDB2864A19000326660 /* DisconnectCameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectCameraVC.swift; sourceTree = "<group>"; };
+		189D3EDF2864A2E500326660 /* RemoteDismissScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDismissScreenVC.swift; sourceTree = "<group>"; };
+		189D3EE02864A2E500326660 /* RemoteDismissScreenVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoteDismissScreenVC.xib; sourceTree = "<group>"; };
 		18E1AF282851CBE000E14044 /* LivePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePresenter.swift; sourceTree = "<group>"; };
 		18E1AF292851CBE000E14044 /* MediaPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPresenter.swift; sourceTree = "<group>"; };
 		18E1AF2F2851CC5C00E14044 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
@@ -271,7 +276,6 @@
 		2C5BA21628432485004B60AD /* GetNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNavBar.swift; sourceTree = "<group>"; };
 		2C5BA25B28462DDE004B60AD /* AlertCameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCameraVC.swift; sourceTree = "<group>"; };
 		2C5BA25C28462DDE004B60AD /* AlertCameraVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertCameraVC.xib; sourceTree = "<group>"; };
-		2C5BA29B28463994004B60AD /* DisconnectCameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectCameraVC.swift; sourceTree = "<group>"; };
 		2C5BA29C28463994004B60AD /* DisconnectCameraVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisconnectCameraVC.xib; sourceTree = "<group>"; };
 		2C68C7F327CCFDD600F76E8A /* GiveFeedbackCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackCell1.swift; sourceTree = "<group>"; };
 		2C68C7F427CCFDD600F76E8A /* GiveFeedbackCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiveFeedbackCell1.xib; sourceTree = "<group>"; };
@@ -369,6 +373,33 @@
 				2CC21B0F27D7A59A0054DF4B /* argentum-sans.semibold.ttf */,
 			);
 			path = "Font Style";
+			sourceTree = "<group>";
+		};
+		189D3EDA2864A13600326660 /* DisconnectCameraVC */ = {
+			isa = PBXGroup;
+			children = (
+				2C5BA29C28463994004B60AD /* DisconnectCameraVC.xib */,
+				189D3EDB2864A19000326660 /* DisconnectCameraVC.swift */,
+			);
+			path = DisconnectCameraVC;
+			sourceTree = "<group>";
+		};
+		189D3EDD2864A2B000326660 /* AlertCameraVC */ = {
+			isa = PBXGroup;
+			children = (
+				2C5BA25B28462DDE004B60AD /* AlertCameraVC.swift */,
+				2C5BA25C28462DDE004B60AD /* AlertCameraVC.xib */,
+			);
+			path = AlertCameraVC;
+			sourceTree = "<group>";
+		};
+		189D3EDE2864A2BE00326660 /* DismissScreenVC */ = {
+			isa = PBXGroup;
+			children = (
+				189D3EDF2864A2E500326660 /* RemoteDismissScreenVC.swift */,
+				189D3EE02864A2E500326660 /* RemoteDismissScreenVC.xib */,
+			);
+			path = DismissScreenVC;
 			sourceTree = "<group>";
 		};
 		18E1AF252851CBD100E14044 /* Presenter */ = {
@@ -542,13 +573,12 @@
 		2C3625F627BC09A400EB4CD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				189D3EDE2864A2BE00326660 /* DismissScreenVC */,
 				2C3625FE27BCBB7C00EB4CD6 /* Cell */,
 				2C3625C927BC077200EB4CD6 /* Main.storyboard */,
 				2C3625D127BC077600EB4CD6 /* LaunchScreen.storyboard */,
-				2C5BA25B28462DDE004B60AD /* AlertCameraVC.swift */,
-				2C5BA25C28462DDE004B60AD /* AlertCameraVC.xib */,
-				2C5BA29B28463994004B60AD /* DisconnectCameraVC.swift */,
-				2C5BA29C28463994004B60AD /* DisconnectCameraVC.xib */,
+				189D3EDD2864A2B000326660 /* AlertCameraVC */,
+				189D3EDA2864A13600326660 /* DisconnectCameraVC */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -876,6 +906,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C319B4527C4C64500AAB997 /* FeedbackSectionCell.xib in Resources */,
+				189D3EE22864A2E500326660 /* RemoteDismissScreenVC.xib in Resources */,
 				2C36260227BCBB9F00EB4CD6 /* WelcomeCell.xib in Resources */,
 				2C3625D327BC077600EB4CD6 /* LaunchScreen.storyboard in Resources */,
 				2C68C7F627CCFDD600F76E8A /* GiveFeedbackCell1.xib in Resources */,
@@ -1086,6 +1117,7 @@
 				2C36262227BD24A200EB4CD6 /* NotificationCell.swift in Sources */,
 				2C36261027BD0A6E00EB4CD6 /* MenuViewModels.swift in Sources */,
 				2CC95726283CE238000A5B93 /* CMGenerateLink.swift in Sources */,
+				189D3EE12864A2E500326660 /* RemoteDismissScreenVC.swift in Sources */,
 				2C172D3527C4ED50005BA3AD /* GiveFeedbackCell3.swift in Sources */,
 				2C36260627BCE49800EB4CD6 /* ConstantFiles.swift in Sources */,
 				2CBF38922833D2FF00CD6735 /* UIView+.swift in Sources */,
@@ -1111,6 +1143,7 @@
 				2CA1CF3927C658DD00BEB063 /* Common_url.swift in Sources */,
 				2C49770F27FEB148005D6DF9 /* CMGenerateNumber.swift in Sources */,
 				2C172D2927C4C8F8005BA3AD /* GiveFeedbackCell.swift in Sources */,
+				189D3EDC2864A19000326660 /* DisconnectCameraVC.swift in Sources */,
 				2CA1CF3727C658C800BEB063 /* API Manager.swift in Sources */,
 				2CC9572A283CF8D6000A5B93 /* GenerateLinkViewModel.swift in Sources */,
 				2C3625C627BC077100EB4CD6 /* SceneDelegate.swift in Sources */,
@@ -1129,7 +1162,6 @@
 				2C260539282A3EE500D6B485 /* PeerIDVC.swift in Sources */,
 				2C260806282BA38100D6B485 /* MCSessionViewModel.swift in Sources */,
 				2CA56C2227D2411800152FC8 /* FeedbackMessageViewModel.swift in Sources */,
-				2C5BA29D28463994004B60AD /* DisconnectCameraVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1396,7 +1428,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1438,7 +1470,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -61,7 +61,7 @@ extension UIViewController {
     
     func isValidName(userName:String) -> Bool {
         guard userName.count > 3, userName.count < 18 else { return false }
-        let predicateTest = NSPredicate(format: "SELF MATCHES %@", "^(([^ ]?)(^[a-zA-Z].*[a-zA-Z]$)([^ ]?))$")
+        let predicateTest = NSPredicate(format: "SELF MATCHES %@", "^(([^ ]?)(^[a-zA-Z].*[a-zA-Z][0-9]$)([^ ]?))$")
         return predicateTest.evaluate(with: userName)
     }
     

@@ -22,8 +22,8 @@ final class LiveViewController: UIViewController {
     private var targetPeerID: MCPeerID!
     private var margin: CGFloat = 5
     private let sendInterval:TimeInterval = 0.1
-    private let videoCompressionQuality:CGFloat = 0.8
-    private let sessionPreset:AVCaptureSession.Preset = .medium
+    private let videoCompressionQuality:CGFloat = 0.1
+    private let sessionPreset:AVCaptureSession.Preset = .low
     private var activeCamera: AVCaptureDevice?
     
 
@@ -32,8 +32,6 @@ final class LiveViewController: UIViewController {
         liveView = LiveView()
         self.view = liveView.setUpViews(frame: UIScreen.main.bounds, margin: margin)
     }
-
-    
     private func setUpChatViewModel() {
         do {
             liveViewModel = try .init(targetPeerID: targetPeerID,
@@ -42,7 +40,6 @@ final class LiveViewController: UIViewController {
                                       videoCompressionQuality: videoCompressionQuality,
                                       sessionPreset: sessionPreset)
             liveViewModel.updatePeerID(targetPeerID)
-
             liveViewModel.attachViews(liveView: liveView)
         } catch let error {
             print(error)
@@ -98,7 +95,5 @@ final class LiveViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .kPopToRoot, object: nil)
     }
     
-    
-    
-    
+
 }

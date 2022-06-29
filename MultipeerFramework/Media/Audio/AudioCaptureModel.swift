@@ -44,7 +44,7 @@ final class AudioCaptureModel: NSObject, AudioOutputDelegate {
         inputNode = engine.inputNode
         engine.attach(mixerNode)
         engine.connect(mixerNode, to: mainMixerNode, format: avAudioFormat)
-        engine.connect(inputNode, to: mixerNode, format: avAudioFormat)
+//        engine.connect(inputNode, to: mixerNode, format: avAudioFormat)
     }
 
     private func engineStart() throws {

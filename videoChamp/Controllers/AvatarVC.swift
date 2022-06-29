@@ -127,8 +127,6 @@ class AvatarVC: UIViewController {
         
         if lblUserName1.text == "" {
             showAlert(alertMessage: "User Name  is Required!")
-        }else if !isValidName(userName: tfName.text ?? "") {
-            self.showAlert(alertMessage: "UserName is Not Valid")
         }else if !isSelected {
             self.showAlert(alertMessage: "Please Choose Avatar!")
         }else if tfName.text?.count != 0 && tfName.text != nil {
@@ -151,18 +149,21 @@ class AvatarVC: UIViewController {
 //            self.view.backgroundColor = 
             let deviceToken = UserDefaults.standard.string(forKey: "deviceToken")
             
-            userViewModel.registerUser(userName: tfName.text ?? "", deviceToken: deviceToken!) { [weak self] isSuccess in
+            userViewModel.registerUser(userName: tfName.text ?? "", deviceToken: deviceToken!) { [weak self] isSuccess,error_msg  in
                 guard let self = self else {return}
-                if isSuccess {
+                if isSuccess && error_msg == "Success"{
                     print("device Token : \(deviceToken ?? "")")
                     UserDefaults.standard.set("Register", forKey: "isUserRegister")
                     UserDefaults.standard.set(self.lblUserName1.textColor, forKey: "userTextColor")
-                    
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
                     vc.shortName = self.lblUserName1.text ?? ""
                     vc.avatarImage = self.img1.image
                     self.navigationController?.pushViewController(vc, animated: true)
-                }else{
+                }else if isSuccess && error_msg == "User name already exit"{
+                    self.showAlert(alertMessage: error_msg)
+                }
+                
+                else{
                     self.showAlert(alertMessage: "Something Went Wrong")
                 }
             }
