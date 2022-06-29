@@ -122,6 +122,14 @@ class CameraVideoShareCodeVC: UIViewController {
         lblShareCode.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        if self.myPeerID == nil {
+//            self.mcSessionViewModel.toogleAdvertising()
+//        }else{
+//            self.mcSessionViewModel.toggleBrwosing()
+//        }
+//    }
+    
     
     func registerCell(){
         tableView.register(UINib(nibName: cellID2, bundle: nil), forCellReuseIdentifier: cellID2)

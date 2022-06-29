@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		182A563A286CC38C001FF6C4 /* VideoChampVideoUutputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A5639286CC38C001FF6C4 /* VideoChampVideoUutputDelegate.swift */; };
 		1866B193284E1E0E002CE4BE /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866B192284E1E0E002CE4BE /* AudioPlayer.swift */; };
 		1866B197284E1EC6002CE4BE /* CMSoundName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866B196284E1EC6002CE4BE /* CMSoundName.swift */; };
 		1866B199284E2002002CE4BE /* captureImage.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1866B198284E2002002CE4BE /* captureImage.mp3 */; };
@@ -179,6 +180,7 @@
 
 /* Begin PBXFileReference section */
 		0EC93BE3A2837525CBB51034 /* Pods-videoChamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoChamp.release.xcconfig"; path = "Target Support Files/Pods-videoChamp/Pods-videoChamp.release.xcconfig"; sourceTree = "<group>"; };
+		182A5639286CC38C001FF6C4 /* VideoChampVideoUutputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChampVideoUutputDelegate.swift; sourceTree = "<group>"; };
 		1866B192284E1E0E002CE4BE /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		1866B196284E1EC6002CE4BE /* CMSoundName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSoundName.swift; sourceTree = "<group>"; };
 		1866B198284E2002002CE4BE /* captureImage.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = captureImage.mp3; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 				18E1AF5B2851CD4400E14044 /* CameraProtocols.swift */,
 				18E1AF5D2851CD4400E14044 /* SampleBufferCamera.swift */,
 				18E1AF5C2851CD4400E14044 /* VideoDataConverter.swift */,
+				182A5639286CC38C001FF6C4 /* VideoChampVideoUutputDelegate.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				18E1AF422851CCCA00E14044 /* NSObject+.swift in Sources */,
 				18E1AF4F2851CD0700E14044 /* VideoOnlyHelper.swift in Sources */,
 				18E1AF3A2851CCAE00E14044 /* BrowserModel.swift in Sources */,
+				182A563A286CC38C001FF6C4 /* VideoChampVideoUutputDelegate.swift in Sources */,
 				18E1AF5F2851CD4400E14044 /* VideoDataConverter.swift in Sources */,
 				18E1AF582851CD3B00E14044 /* AudioPlayer.swift in Sources */,
 				18E1AF412851CCCA00E14044 /* MCPeerID+.swift in Sources */,
@@ -1415,16 +1419,18 @@
 				CODE_SIGN_ENTITLEMENTS = videoChamp/videoChamp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.1;
 				DEVELOPMENT_TEAM = RSADBA7SVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = videoChamp/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access Camera to taken the picture";
+				INFOPLIST_KEY_NSCameraUsageDescription = "to take movie";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "to take movie";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow to access";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access Gallary to take the picture";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
@@ -1457,16 +1463,18 @@
 				CODE_SIGN_ENTITLEMENTS = videoChamp/videoChamp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.1;
 				DEVELOPMENT_TEAM = RSADBA7SVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = videoChamp/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access Camera to taken the picture";
+				INFOPLIST_KEY_NSCameraUsageDescription = "to take movie";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "to take movie";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow to access";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access Gallary to take the picture";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;

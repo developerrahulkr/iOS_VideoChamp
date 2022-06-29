@@ -65,8 +65,6 @@ class RemoteControlVC: UIViewController {
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
-//                self.mcSessionViewModel.toggleBrwosing()
-                print(self.userID)
                 self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
                 self.staticLink = "\(self.staticLink)\(urlCode)"
                 self.tableView.reloadData()
@@ -76,7 +74,6 @@ class RemoteControlVC: UIViewController {
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
-//                self.mcSessionViewModel.toggleBrwosing()
                 self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
                 self.staticLink = "\(self.staticLink)\(urlCode)"
                 self.tableView.reloadData()
@@ -87,6 +84,15 @@ class RemoteControlVC: UIViewController {
             }
         }
     }
+    
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        if self.myPeerID == nil {
+//            self.mcSessionViewModel.toogleAdvertising()
+//        }else{
+//            self.mcSessionViewModel.toggleBrwosing()
+//        }
+//    }
     
     
     func expireCodeAlert(message : String) {
@@ -100,8 +106,6 @@ class RemoteControlVC: UIViewController {
  
     func registerCell(){
         mcSessionViewModel = MCSessionViewModel.init(mcSessionManger: Utility.shared.sessionManager)
-//        self.mcSessionViewModel.toogleAdvertising()
-       
         tableView.register(UINib(nibName: cellID2, bundle: nil), forCellReuseIdentifier: cellID2)
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.register(UINib(nibName: cellId3, bundle: nil), forCellReuseIdentifier: cellId3)

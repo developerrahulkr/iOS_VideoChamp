@@ -113,7 +113,6 @@ class HomeVC: UIViewController {
         
         print("Baerer Token : \(Utility.shared.getUserAppToken())")
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
-        self.mcSessionViewModel.togggleConnectionRunState()
         self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
         print("View Controller : \(String(describing: self.navigationController?.viewControllers))")
         
@@ -152,6 +151,10 @@ class HomeVC: UIViewController {
             }
             
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.mcSessionViewModel.togggleConnectionRunState()
     }
     
     

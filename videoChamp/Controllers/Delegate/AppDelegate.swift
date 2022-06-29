@@ -200,6 +200,7 @@ class videochampManager
     
     static let videochamp_sharedManager = videochampManager()
     var redirectType : RedirectVC = .none
+    var _captureState : _CaptureState = .idle
 
 }
 
