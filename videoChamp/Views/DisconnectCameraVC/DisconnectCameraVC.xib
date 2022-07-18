@@ -35,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cc-b4-yqR">
-                    <rect key="frame" x="88.5" y="311.5" width="237" height="273"/>
+                    <rect key="frame" x="88.5" y="311" width="237" height="274"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ler-HZ-m5F">
                             <rect key="frame" x="207" y="16" width="10" height="22"/>
@@ -100,7 +100,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="sBs-BW-xkU" firstAttribute="top" secondItem="Ler-HZ-m5F" secondAttribute="bottom" constant="10" id="0jV-jH-aIK"/>
-                        <constraint firstAttribute="height" constant="273" id="3l8-MZ-a9r"/>
+                        <constraint firstAttribute="height" constant="274" id="3l8-MZ-a9r"/>
                         <constraint firstItem="1E7-cQ-ige" firstAttribute="top" secondItem="Tht-gC-fes" secondAttribute="bottom" constant="10" id="5im-Me-A4M"/>
                         <constraint firstItem="FSH-aY-oek" firstAttribute="leading" secondItem="2cc-b4-yqR" secondAttribute="leading" constant="16" id="BVy-Tl-Nkr"/>
                         <constraint firstItem="Tht-gC-fes" firstAttribute="top" secondItem="sBs-BW-xkU" secondAttribute="bottom" constant="10" id="EXS-zV-ibN"/>

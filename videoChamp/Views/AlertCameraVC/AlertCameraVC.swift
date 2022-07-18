@@ -37,6 +37,10 @@ class AlertCameraVC: UIViewController {
             btnOK.setTitle(btnOkText, for: .normal)
         }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            self.dismiss(animated: true)
+        }
+        
         
     }
 

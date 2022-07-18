@@ -79,6 +79,8 @@ public final class MCSessionManager: NSObject,SessionHelperProtocol{
         }
     }
     
+    
+    
     public var foundIDs: [MCPeerID] {
         get {
             guard let _browserModel = browserModel else {
@@ -256,6 +258,10 @@ public final class MCSessionManager: NSObject,SessionHelperProtocol{
             self.disconnect()
         }
         runStateChangedCallback?(.connectionRunning, needsToRunSession)
+    }
+    
+    public func disconnectConnection() {
+        self.disconnect()
     }
     
     private func browserControl() {

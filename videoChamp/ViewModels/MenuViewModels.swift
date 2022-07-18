@@ -43,7 +43,7 @@ class MenuViewModels : NSObject {
         
     }
     
-    func activateDateAPIData(completionHandler : @escaping(Bool, Bool) -> Void) {
+    func activateDateAPIData(completionHandler : @escaping(Bool, Bool,String) -> Void) {
         UIApplication.topViewController()?.showActivityIndicator()
         APIManager.shared.activateDate { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
@@ -53,12 +53,14 @@ class MenuViewModels : NSObject {
                 let statusCode = dict!["status"].stringValue
                 let error_msg = dict!["message"].stringValue
                 let data = dict?["data"].dictionary
+                let Code = dict!["Code"].stringValue
+                print("blocked code : \(Code)")
                 let activatedDate = data?["activatedDate"]?.dictionary
                 let activeStatus = activatedDate?["status"]?.boolValue
                 if statusCode == "200"{
-                    completionHandler(true,activeStatus!)
+                    completionHandler(true,activeStatus!, Code)
                 }else{
-                    completionHandler(false, activeStatus!)
+                    completionHandler(false, activeStatus ?? false, Code)
                     print(error_msg)
                 }
             }

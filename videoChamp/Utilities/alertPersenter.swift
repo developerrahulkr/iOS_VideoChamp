@@ -21,6 +21,9 @@ struct AlertPresenter {
         alertContainer.addAction(accept)
         alertContainer.addAction(cancel)
         show(alertContainer: alertContainer)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            dismiss(alertContainer: alertContainer)
+        }
     }
 
     func notice(title: String, message: String, style: UIAlertController.Style = .alert) {
@@ -28,7 +31,11 @@ struct AlertPresenter {
         let accept = UIAlertAction.init(title: "OK", style: .default)
         alertContainer.addAction(accept)
         show(alertContainer: alertContainer)
+        
     }
+    
+   
+    
 
     private func show(alertContainer: UIAlertController) {
         guard
@@ -37,5 +44,13 @@ struct AlertPresenter {
             else { return }
         
         vc.present(alertContainer, animated: false, completion: nil)
+    }
+    
+    private func dismiss(alertContainer : UIAlertController) {
+        guard
+            let window = UIApplication.shared.keyWindow,
+            let vc = window.rootViewController
+            else { return }
+        vc.dismiss(animated: true)
     }
 }

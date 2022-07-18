@@ -83,7 +83,7 @@ class FeedbackViewModel : NSObject {
     }
     
 //    MARK: - Uplaod Data with Image
-    func uploadFeedbackData(imageData : [Data?], feedBackData : CMPostFeedbackData, completionHandler : @escaping (Bool) -> Void) {
+    func uploadFeedbackData(imageData : [Data?], feedBackData : CMPostFeedbackData, completionHandler : @escaping (Bool, String) -> Void) {
         
         let parameter = ["title" : feedBackData.title ?? "", "desc" : feedBackData.desc ?? "", "email" : feedBackData.email ?? "", "image" : feedBackData.image] as [String : Any]
         UIApplication.topViewController()?.showActivityIndicator()
@@ -91,15 +91,15 @@ class FeedbackViewModel : NSObject {
             UIApplication.topViewController()?.hideActivityIndicator()
             if inDict == nil {
                 UIApplication.topViewController()?.showAlert(alertMessage: "Directory is Empty")
-                completionHandler(false)
             }else{
                 let statusCode = inDict!["status"].stringValue
                 let error_msg = inDict!["message"].stringValue
+                let blockStatus = inDict!["Code"].stringValue
                 if statusCode == "200"{
                     print("\(error_msg)")
-                    completionHandler(true)
+                    completionHandler(true, blockStatus)
                 }else{
-                    completionHandler(false)
+                    completionHandler(false, blockStatus)
                     print("Error Msg : \(error_msg)")
                 }
                 
@@ -107,7 +107,7 @@ class FeedbackViewModel : NSObject {
         }
     }
     
-    func getFeedbackListData(feedId : String, completionHandler : @escaping(Bool) -> ()) {
+    func getFeedbackListData(feedId : String, completionHandler : @escaping(Bool, String) -> ()) {
         UIApplication.topViewController()?.showActivityIndicator()
         
         APIManager.shared.getFeedbackData(feedID: feedId) { dict in
@@ -119,7 +119,7 @@ class FeedbackViewModel : NSObject {
                 let statusCode = dict!["status"].stringValue
                 let data = dict!["data"].dictionary
                 let messageData = data!["messagelisting"]!.arrayValue
-                
+                let blockCode = dict!["Code"].stringValue
                 let feedbackDetail = data!["feedbackDetail"]?.dictionary
                 print(feedbackDetail!["desc"]!.stringValue)
                 self.getFeedbackDescriptionDataSource.append(CMGetFeedbackDescriptionData(desc: feedbackDetail!["desc"]!.stringValue, createdAt: feedbackDetail!["createdAt"]!.stringValue))
@@ -131,10 +131,10 @@ class FeedbackViewModel : NSObject {
 
                     }
                     print("\(msg)")
-                    completionHandler(true)
+                    completionHandler(true, blockCode)
                 }else{
                     print("error message : \(msg)")
-                    completionHandler(false)
+                    completionHandler(false, blockCode)
                 }
                 
             }

@@ -11,6 +11,7 @@
 		1866B193284E1E0E002CE4BE /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866B192284E1E0E002CE4BE /* AudioPlayer.swift */; };
 		1866B197284E1EC6002CE4BE /* CMSoundName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866B196284E1EC6002CE4BE /* CMSoundName.swift */; };
 		1866B199284E2002002CE4BE /* captureImage.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1866B198284E2002002CE4BE /* captureImage.mp3 */; };
+		188CEB062885473000A07D9B /* CMVarifyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CEB052885473000A07D9B /* CMVarifyCode.swift */; };
 		189D3EDC2864A19000326660 /* DisconnectCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D3EDB2864A19000326660 /* DisconnectCameraVC.swift */; };
 		189D3EE12864A2E500326660 /* RemoteDismissScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D3EDF2864A2E500326660 /* RemoteDismissScreenVC.swift */; };
 		189D3EE22864A2E500326660 /* RemoteDismissScreenVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D3EE02864A2E500326660 /* RemoteDismissScreenVC.xib */; };
@@ -184,6 +185,7 @@
 		1866B192284E1E0E002CE4BE /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		1866B196284E1EC6002CE4BE /* CMSoundName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSoundName.swift; sourceTree = "<group>"; };
 		1866B198284E2002002CE4BE /* captureImage.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = captureImage.mp3; sourceTree = "<group>"; };
+		188CEB052885473000A07D9B /* CMVarifyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMVarifyCode.swift; sourceTree = "<group>"; };
 		189D3EDB2864A19000326660 /* DisconnectCameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectCameraVC.swift; sourceTree = "<group>"; };
 		189D3EDF2864A2E500326660 /* RemoteDismissScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDismissScreenVC.swift; sourceTree = "<group>"; };
 		189D3EE02864A2E500326660 /* RemoteDismissScreenVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoteDismissScreenVC.xib; sourceTree = "<group>"; };
@@ -682,6 +684,7 @@
 				2C49770E27FEB148005D6DF9 /* CMGenerateNumber.swift */,
 				2C26053E282A42DD00D6B485 /* CMPeerIDData.swift */,
 				2CC95725283CE237000A5B93 /* CMGenerateLink.swift */,
+				188CEB052885473000A07D9B /* CMVarifyCode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1100,6 +1103,7 @@
 				2C36260127BCBB9F00EB4CD6 /* WelcomeCell.swift in Sources */,
 				2CBF37972833C96000CD6735 /* LiveViewModel.swift in Sources */,
 				2C172D2E27C4CABE005BA3AD /* FeedbackViewModel.swift in Sources */,
+				188CEB062885473000A07D9B /* CMVarifyCode.swift in Sources */,
 				2C36260827BCE67200EB4CD6 /* HomeVC.swift in Sources */,
 				2C36260427BCC4A500EB4CD6 /* AvatarVC.swift in Sources */,
 				2C172D3927C4F66C005BA3AD /* FeedbackServiceVC.swift in Sources */,
@@ -1433,7 +1437,7 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1477,7 +1481,7 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

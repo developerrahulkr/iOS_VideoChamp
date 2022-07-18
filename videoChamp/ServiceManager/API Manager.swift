@@ -12,14 +12,35 @@ import SwiftyJSON
 class APIManager : NSObject {
     
     static let shared = APIManager()
-    func getUser(userName : String, deviceToken : String,  completionHandler : @escaping(_ dict : JSON?) -> Void) {
+    func getUser(userName : String, avatarType : String, deviceToken : String,  completionHandler : @escaping(_ dict : JSON?) -> Void) {
         //        let header : HTTPHeaders = [.contentType("application/json")]
-        let param = ["name" : userName, "deviceToken" : deviceToken, "deviceType" : "\(UIDevice.current.systemName)", "deviceId" : "\(UIDevice.current.name)"]
+        let param = ["name" : userName,"avatarType" : avatarType, "deviceToken" : deviceToken, "deviceType" : "\(UIDevice.current.systemName)", "deviceId" : "\(UIDevice.current.name)"]
         
         print("device Model and name : \(UIDevice.current.name) \(String(describing: UIDevice.current.model))")
         print("\(UIDevice.current.model)")
         AF.request(register_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: nil).response {
             (response) in
+            switch response.result {
+            case .success(let data) :
+                do {
+                    _ = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let jsonData = try? JSON(data: response.data!)
+                    completionHandler(jsonData)
+                }catch {
+                    print("\(error.localizedDescription)")
+                }
+            case .failure(let err) :
+                print("Error : \(err.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    func updateAvatar(avatarType : Int, completionHandler : @escaping(_ dict : JSON?) -> Void ) {
+        let param = ["avatarType" : avatarType]
+        let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
+        AF.request(update_avatar_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response{
+            response in
             switch response.result {
             case .success(let data) :
                 do {
@@ -66,11 +87,11 @@ class APIManager : NSObject {
     
     //    MARK: - Verify Number
     
-    func verifyCode(verCode : String, userId : String, completionHandler : @escaping(_ dict : JSON?) -> Void) {
+    func verifyCode(verCode : String, userId : String,isCamera : Bool, completionHandler : @escaping(_ dict : JSON?) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
-        let param = ["number" : verCode, "userId" : userId ]
+        let param = ["number" : verCode, "userId" : userId, "isCamera" :  isCamera ] as! [String : Any]
         
-        AF.request(number_verify_url, method: .post, parameters: param, encoder: JSONParameterEncoder.default, headers: header).response {
+        AF.request(number_verify_url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).response {
             (response) in
             switch response.result {
             case .success(let data) :

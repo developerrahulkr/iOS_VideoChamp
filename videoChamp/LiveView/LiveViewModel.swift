@@ -97,7 +97,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
          sessionPreset:AVCaptureSession.Preset = .medium) throws {
         
         self.targetPeerID = targetPeerID
-        print("target Peer ID is  : \(self.targetPeerID)")
+        
         super.init()
         self.mcSessionManager = mcSessionManager
         try livePresenter = LivePresenter.init(mcSessionManager: mcSessionManager,
@@ -207,6 +207,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                 case "close" :
                     self.sendString = str ?? ""
                     let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+                    vc.mcSessionManage = self.mcSessionManager
                     vc.modalPresentationStyle = .overFullScreen
                     UIApplication.topViewController()?.present(vc, animated: true)
                 case "camera" :
@@ -400,7 +401,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     }
     
     func savePic(){
-        print("original Image : \(liveSetupView.imageView.image)")
+//        print("original Image : \(liveSetupView.imageView.image)")
          liveSetupView.imageCapture.image = liveSetupView.imageView.image
 //        let image = UIImage(data: liveSetupView.imageView.image)
         UIImageWriteToSavedPhotosAlbum(liveSetupView.imageCapture.image ?? UIImage(), nil, nil, nil)
@@ -880,7 +881,7 @@ extension LiveViewModel {
             let fileName = dateString + "output.mov"
             let fileUrl = paths[0].appendingPathComponent(fileName)
             try? FileManager.default.removeItem(at: fileUrl)
-            print(self.capSession?.outputs)
+//            print(self.capSession?.outputs)
             
             
             _filename = UUID().uuidString

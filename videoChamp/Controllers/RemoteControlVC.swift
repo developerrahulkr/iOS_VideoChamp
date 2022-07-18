@@ -31,12 +31,13 @@ class RemoteControlVC: UIViewController {
     private var peerTableViewModel = PeerTableViewModel()
     private let timeout: TimeInterval = 20
     private let alertPresenter:AlertPresenter = .init()
-    
     var myPeerID : String!
     var number : String!
     var userID : String?
+    var isCamera : String!
     let generateLinkVM = GeneratedLinkViewModel()
     var generatedUrlCode = ""
+    var varCamera : Bool!
     var staticLink = "http://videochamp/camera/"
     var urlLink = ""
     
@@ -55,30 +56,41 @@ class RemoteControlVC: UIViewController {
                 
     }
     func loadData(){
+        NotificationCenter.default.addObserver(self, selector: #selector(closeScreen), name: .kCloseScreen, object: nil)
         let linkGenerated = CMGenerateLink(deviceType: "IOS",deviceId: Utility.shared.sessionManager.myPeerID?.displayName ?? "", isCamera: "false", peerId: Utility.shared.sessionManager.displayName, connectionState: "true")
         generateLinkVM.linkGenerated(cmGenerateLinkData: linkGenerated) {
-            [weak self] isSuccess,linkURL,urlCode, codeMessage  in
+            [weak self] isSuccess,linkURL,urlCode, codeMessage,blockedCode   in
             guard let self = self else {return}
-            if isSuccess && codeMessage == "Number generate"{
+            if isSuccess{
 //                self.generatedNumber = number
                 print("Deeplinking URL : \(linkURL)")
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
-                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
+                if self.isCamera == "true" {
+                    self.varCamera = true
+                }else{
+                    self.varCamera = false
+                }
+                
+                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "", isCamera: self.varCamera)
                 self.staticLink = "\(self.staticLink)\(urlCode)"
                 self.tableView.reloadData()
                 
-            }else if codeMessage == "code is already generated" && isSuccess {
-                print("Deeplinking URL : \(linkURL)")
-                print("url Code : \(urlCode)")
-                self.urlLink = linkURL
-                self.generatedUrlCode = urlCode
-                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
-                self.staticLink = "\(self.staticLink)\(urlCode)"
-                self.tableView.reloadData()
-            }else if codeMessage == "code Expire" && isSuccess{
+            }
+//            else if codeMessage == "code is already generated" && isSuccess {
+//                print("Deeplinking URL : \(linkURL)")
+//                print("url Code : \(urlCode)")
+//                self.urlLink = linkURL
+//                self.generatedUrlCode = urlCode
+//                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
+//                self.staticLink = "\(self.staticLink)\(urlCode)"
+//                self.tableView.reloadData()
+//            }
+            else if codeMessage == "code Expire" && isSuccess{
                 self.loadData()
+            }else if isSuccess && blockedCode == "10" {
+                self.showExitAlert()
             }else{
                 print("Error")
             }
@@ -148,13 +160,25 @@ class RemoteControlVC: UIViewController {
             }
         }
     }
+    
+    @objc func closeScreen(){
+        self.navigationController?.popViewController(animated: true)
+    }
 
     @IBAction func onClickedBackBtn(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.isBack = true
+        present(vc, animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func OnClickedCloaseBtn(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.isBack = true
+        present(vc, animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -188,6 +212,8 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
             cell.lblCode.text = staticLink
             cell.btnShare.tag = indexPath.row
             cell.btnResend.tag = indexPath.row
+            
+            cell.bottomView.layer.backgroundColor = UIColor(red: 57/255, green: 187/255, blue: 53/255, alpha: 1.0).cgColor
 //            cell.delegate = self
 //            cell.callBack =
 //            { codeData in
@@ -209,7 +235,7 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
 //            return 60.0
 //        }else
         if indexPath.section == 0{
-            return 150.0
+            return 170.0
         }else{
             return 165.0
         }
@@ -260,14 +286,21 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
     
     
     
-    func CodeVerifyApi(number : String, userId : String){
+    func CodeVerifyApi(number : String, userId : String, isCamera : Bool){
         
-        codeGenerateVM.verifyNumber(number: number, userID: userId) { [weak self] isSuccess, message in
+        codeGenerateVM.verifyNumber(number: number, userID: userId, isCamera: isCamera) { [weak self] isSuccess, message, verCode in
             guard let self = self else{return}
             if isSuccess {
                 print("Message : \(message)")
                 if self.myPeerID == nil {
-                    self.mcSessionViewModel.toogleAdvertising()
+                    
+                    if Utility.shared.sessionManager.needsAdvertising == true {
+                        print("Already Advertise.........")
+                    }else{
+                        self.mcSessionViewModel.toogleAdvertising()
+                    }
+                }else if isSuccess && verCode == "4" {
+                    self.showAlert(alertMessage: message)
                 }else{
                     self.mcSessionViewModel.toggleBrwosing()
                 }

@@ -61,9 +61,12 @@ class FeedbackServiceVC: UIViewController {
     
     func loadData() {
         self.FeedbackVM.getFeedbackServiceDataSource.removeAll()
-        FeedbackVM.getFeedbackListData(feedId: feed_id) { isSuccess in
+        FeedbackVM.getFeedbackListData(feedId: feed_id) { isSuccess,blockCode  in
+            
             if isSuccess {
                 self.tableView.reloadData()
+            }else if isSuccess && blockCode == "10" {
+                self.showExitAlert()
             }else{
                 self.showAlert(alertMessage: "Something Went Wrong!")
             }
@@ -98,10 +101,12 @@ class FeedbackServiceVC: UIViewController {
         }else{
             let CMMessageData = CMFeedbackMessageData(feedbackId: feed_id, image: "", message: tfSendData.text ?? "")
             
-            feedbackMessageVM.feedbackMessageData(imageData: selectImage?.pngData(), messageData: CMMessageData) { isCompleted in
+            feedbackMessageVM.feedbackMessageData(imageData: selectImage?.pngData(), messageData: CMMessageData) { isCompleted, blockedCode  in
                 if isCompleted {
                     self.tfSendData.text = ""
                     self.loadData()
+                }else if isCompleted && blockedCode == "10" {
+                    self.showExitAlert()
                 }else{
                     self.showAlert(alertMessage: "Something went wrong!")
                 }
@@ -196,12 +201,14 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
                 cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
                 cell.lblMsg.textColor = .white
                 cell.cellView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
-                cell.cellView.roundLeftChatCorner(cornerRadius: 16)
+                
+                cell.cellView.roundRightChatCorner(cornerRadius: 16)
+                
             }else{
                 cell.cellView.layer.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
                 cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
                 cell.lblMsg.textColor = .black
-                cell.cellView.roundRightChatCorner(cornerRadius: 16)
+                cell.cellView.roundLeftChatCorner(cornerRadius: 16)
             }
         }
         return cell
@@ -224,6 +231,8 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
             print("No Image")
         }
     }
+    
+    
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {return}
@@ -232,7 +241,7 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
         self.selectImage = image
         let CMMessageData = CMFeedbackMessageData(feedbackId: feed_id, image: "", message: "")
         
-        feedbackMessageVM.feedbackMessageData(imageData: selectImage?.pngData(), messageData: CMMessageData) { isCompleted in
+        feedbackMessageVM.feedbackMessageData(imageData: selectImage?.pngData(), messageData: CMMessageData) { isCompleted,blockCode  in
             if isCompleted {
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
                     self.FeedbackVM.getFeedbackServiceDataSource.removeAll()
@@ -240,6 +249,8 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
                     self.dismiss(animated: true)
                 }
                 
+            }else if isCompleted && blockCode == "10"{
+                self.showExitAlert()
             }else{
                 self.showAlert(alertMessage: "Something went wrong!")
             }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MultipeerFramework
 
 class DisconnectCameraVC: UIViewController {
 
@@ -16,10 +17,15 @@ class DisconnectCameraVC: UIViewController {
     @IBOutlet weak var lblMsg: UILabel!
     @IBOutlet weak var btnYes: UIButton!
     @IBOutlet weak var btnNo: UIButton!
+    var isBack : Bool = false
+    var mcSessionManage : MCSessionManager!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            self.dismiss(animated: true)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -29,9 +35,14 @@ class DisconnectCameraVC: UIViewController {
     }
     @IBAction func onClickedYesBtn(_ sender: UIButton) {
         
+        if isBack {
+            self.dismiss(animated: true)
+            NotificationCenter.default.post(name: .kCloseScreen, object: nil)
+        }else{
+            self.dismiss(animated: true)
+            NotificationCenter.default.post(name: .kCloseScreen, object: nil)
+        }
         
-        self.dismiss(animated: true)
-        NotificationCenter.default.post(name: .kCloseScreen, object: nil)
     }
     
     @IBAction func onClickedNoBtn(_ sender: UIButton) {

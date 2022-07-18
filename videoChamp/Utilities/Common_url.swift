@@ -33,6 +33,8 @@ let activateDate_url = "\(base_url)/activatedDate"
 
 let generate_link_url = "\(base_url)/link"
 
+let update_avatar_url = "\(base_url)/changeAvatar"
+
 
 
 

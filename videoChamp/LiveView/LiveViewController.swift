@@ -69,9 +69,18 @@ final class LiveViewController: UIViewController {
         setUpChatViewModel()
         NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .kPopToRoot, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .kCloseScreen, object: nil)
+        
     }
     @objc func closeVC(){
-        self.navigationController?.popToRootViewController(animated: true)
+        let controllers = self.navigationController!.viewControllers
+        for controller in controllers {
+            if controller is HomeVC {
+                self.navigationController?.popToViewController(controller, animated: true)
+            }else{
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+        
     }
     
 

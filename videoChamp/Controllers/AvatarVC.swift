@@ -39,6 +39,10 @@ class AvatarVC: UIViewController {
     @IBOutlet weak var imgAvatar7: UIImageView!
     var isSelected = false
     let userViewModel = UserViewModel()
+    var isUpdateProfile = false
+    var userName = ""
+    var shortName = ""
+    var avatarKey = 0
     
     
     
@@ -47,6 +51,25 @@ class AvatarVC: UIViewController {
 
         // Do any additional setup after loading the view.
         tfName.delegate = self
+        if isUpdateProfile {
+            tfName.isUserInteractionEnabled = false
+            btnSubmit.setTitle("UPDATE", for: .normal)
+            tfName.text = userName
+            lblUserName1.text = shortName
+            lblUserName2.text = shortName
+            lblUserName3.text = shortName
+            lblUserName4.text = shortName
+            lblUserName5.text = shortName
+            lblUserName6.text = shortName
+            lblUserName7.text = shortName
+            viewText.backgroundColor = .lightGray
+            
+        }else{
+            tfName.isUserInteractionEnabled = true
+            viewText.backgroundColor = .white
+            tfName.text = ""
+        }
+        
         changeAvatar()
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
     }
@@ -79,24 +102,28 @@ class AvatarVC: UIViewController {
     @objc func changeImage1(){
         img1.image = imgAvatar2.image
         lblUserName1.textColor = lblUserName2.textColor
+        avatarKey = 1
         isSelected = true
     }
     
     @objc func changeImage2(){
         img1.image = imgAvatar3.image
         lblUserName1.textColor = lblUserName3.textColor
+        avatarKey = 2
         isSelected = true
     }
     
     @objc func changeImage3(){
         img1.image = imgAvatar4.image
         lblUserName1.textColor = lblUserName4.textColor
+        avatarKey = 3
         isSelected = true
     }
     
     @objc func changeImage4(){
         img1.image = imgAvatar5.image
         lblUserName1.textColor = lblUserName5.textColor
+        avatarKey = 4
         isSelected = true
     }
     
@@ -104,12 +131,14 @@ class AvatarVC: UIViewController {
     @objc func changeImage5(){
         img1.image = imgAvatar6.image
         lblUserName1.textColor = lblUserName6.textColor
+        avatarKey = 5
         isSelected = true
     }
     
     @objc func changeImage6(){
         img1.image = imgAvatar7.image
         lblUserName1.textColor = lblUserName7.textColor
+        avatarKey = 6
         isSelected = true
     }
     
@@ -118,59 +147,85 @@ class AvatarVC: UIViewController {
     override func viewDidLayoutSubviews() {
         viewText.layer.cornerRadius = viewText.bounds.height/2
         btnSubmit.layer.cornerRadius = btnSubmit.bounds.height/2
-        
+        btnSubmit.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
+        tfName.attributedPlaceholder = NSAttributedString(string: "Enter your name", attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray])
     }
     
     @available(iOS, deprecated: 9.0)
     @IBAction func onClickedSubmitButton(_ sender: UIButton) {
         
-        
-        if lblUserName1.text == "" {
-            showAlert(alertMessage: "User Name  is Required!")
-        }else if !isSelected {
-            self.showAlert(alertMessage: "Please Choose Avatar!")
-        }else if tfName.text?.count != 0 && tfName.text != nil {
-            var color = UIColor()
-            var avatarImage = UIImage()
-            color = self.lblUserName1.textColor
-            
-            let colorToSetAsDefault : UIColor = self.lblUserName1.textColor
-            let data : Data = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as Data
-            UserDefaults.standard.set(data, forKey: "UserSelectedColor")
-            UserDefaults.standard.synchronize()
-            print("SET DEFAULT USER COLOR TO RED")
-            
-            avatarImage = self.img1.image!
-            UserDefaults.standard.setImage(image: avatarImage, forKey: "avatarImage")
-            UserDefaults.standard.set(tfName.text ?? "", forKey: kUserNAme)
-            UserDefaults.standard.set("\(String(describing: color))", forKey: "userTextColor")
-//            UserDefaults.standard.set("\(String(describing: avatarImage))", forKey: "avatarImage")
-            UserDefaults.standard.set("\(self.lblUserName1.text ?? "")", forKey: "userText")
-//            self.view.backgroundColor = 
-            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken")
-            
-            userViewModel.registerUser(userName: tfName.text ?? "", deviceToken: deviceToken!) { [weak self] isSuccess,error_msg  in
-                guard let self = self else {return}
-                if isSuccess && error_msg == "Success"{
-                    print("device Token : \(deviceToken ?? "")")
-                    UserDefaults.standard.set("Register", forKey: "isUserRegister")
-                    UserDefaults.standard.set(self.lblUserName1.textColor, forKey: "userTextColor")
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-                    vc.shortName = self.lblUserName1.text ?? ""
-                    vc.avatarImage = self.img1.image
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }else if isSuccess && error_msg == "User name already exit"{
-                    self.showAlert(alertMessage: error_msg)
-                }
+        if !isUpdateProfile {
+            if lblUserName1.text == "" {
+                showAlert(alertMessage: "User Name  is Required!")
+            }else if !isSelected {
+                self.showAlert(alertMessage: "Please Choose Avatar!")
+            }else if tfName.text?.count != 0 && tfName.text != nil {
+                var color = UIColor()
+                var avatarImage = UIImage()
+                color = self.lblUserName1.textColor
                 
-                else{
-                    self.showAlert(alertMessage: "Something Went Wrong")
+                let colorToSetAsDefault : UIColor = self.lblUserName1.textColor
+                let data : Data = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as Data
+                UserDefaults.standard.set(data, forKey: "UserSelectedColor")
+                UserDefaults.standard.synchronize()
+                print("SET DEFAULT USER COLOR TO RED")
+                
+                avatarImage = self.img1.image!
+                UserDefaults.standard.setImage(image: avatarImage, forKey: "avatarImage")
+                UserDefaults.standard.set(tfName.text ?? "", forKey: kUserNAme)
+                UserDefaults.standard.set("\(String(describing: color))", forKey: "userTextColor")
+    //            UserDefaults.standard.set("\(String(describing: avatarImage))", forKey: "avatarImage")
+                UserDefaults.standard.set("\(self.lblUserName1.text ?? "")", forKey: "userText")
+    //            self.view.backgroundColor =
+                let deviceToken = UserDefaults.standard.string(forKey: "deviceToken")
+                
+                userViewModel.registerUser(userName: tfName.text ?? "", avatarType: "\(avatarKey)", deviceToken: deviceToken!) { [weak self] isSuccess,error_msg  in
+                    guard let self = self else {return}
+                    if isSuccess && error_msg == "Success"{
+                        print("device Token : \(deviceToken ?? "")")
+                        UserDefaults.standard.set("Register", forKey: "isUserRegister")
+                        UserDefaults.standard.set(self.lblUserName1.textColor, forKey: "userTextColor")
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                        vc.shortName = self.lblUserName1.text ?? ""
+                        vc.avatarImage = self.img1.image
+                        
+                        if let navBar = UIApplication.getNavController() {
+                            navBar.pushViewController(vc, animated: true)
+                        }
+                        
+                    }else if isSuccess && error_msg == "User name already exit"{
+                        self.showAlert(alertMessage: error_msg)
+                    }else{
+                        self.showAlert(alertMessage: error_msg)
+                    }
+                }
+            }else {
+                showAlert(alertMessage: "Name is Required!")
+            }
+            print("User Name : \(lblUserName1.text ?? "")")
+        }else{
+            
+            userViewModel.updateAvatar(updateAvatar: avatarKey) { [weak self] isSuccess, Code in
+                guard let self = self else{ return }
+                if isSuccess {
+                    var avatarImage = UIImage()
+//                    self.showAlert(alertMessage: "Avatar Change Successfully...")
+                    avatarImage = self.img1.image!
+                    UserDefaults.standard.setImage(image: avatarImage, forKey: "avatarImage")
+                    var color = UIColor()
+                    let colorToSetAsDefault : UIColor = self.lblUserName1.textColor
+                    let data : Data = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as Data
+                    UserDefaults.standard.set(data, forKey: "UserSelectedColor")
+                    UserDefaults.standard.synchronize()
+                    self.dismiss(animated: true)
+                }else if isSuccess && Code == "10"{
+                    self.showExitAlert()
+                }else{
+                    print("something went Wrong..... ")
                 }
             }
-        }else {
-            showAlert(alertMessage: "Name is Required!")
+            
         }
-        print("User Name : \(lblUserName1.text ?? "")")
     }
 }
 

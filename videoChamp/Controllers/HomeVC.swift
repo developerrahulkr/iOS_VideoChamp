@@ -47,6 +47,7 @@ class HomeVC: UIViewController {
     var myPeerID : String!
     var verifyNum : String!
     var userID : String!
+    var isCamera : String!
     let homeVM = MenuViewModels()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,19 @@ class HomeVC: UIViewController {
         loadData()
         
         
+        
     }
+    
+    @IBAction func onClickedProfile(_ sender: UIButton) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "AvatarVC") as! AvatarVC
+        vc.modalPresentationStyle = .fullScreen
+        vc.isUpdateProfile = true
+        vc.userName = lblUserName.text ?? ""
+        vc.shortName = lblShortName.text ?? ""
+        self.present(vc, animated: true)
+        
+    }
+    
     
     private func setUpSessionManager() {
         Utility.shared.sessionManager = MCSessionManager.init(displayName: displayName, serviceType: serviceType,serviceProtocol: serviceProtocol)
@@ -78,9 +91,7 @@ class HomeVC: UIViewController {
             }
             }, foundPeerIDs: {[weak self](ids) in
                 guard let self = self else {return}
-                
                 self.peerIDs = ids
-                
                 let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: ids, requiringSecureCoding: false)
                 UserDefaults.standard.set(encodedData, forKey: "MCPeerIDs")
                 self.peerTableViewModel.updateFoundCell(ids)
@@ -102,6 +113,11 @@ class HomeVC: UIViewController {
             })
         }
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        AppUtility.lockOrientation(.all)
+    }
+    
 
     func loadData(){
         
@@ -134,19 +150,22 @@ class HomeVC: UIViewController {
                 vc.number = self.verifyNum
                 vc.userID = self.userID
                 vc.myPeerID = self.myPeerID
+                vc.isCamera = self.isCamera
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         case .none:
             break
         case .needToCameraToggle:
             self.showActivityIndicator()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                guard let self = self else {return}
                 self.hideActivityIndicator()
                 self.showToast(message: "Custom Toast", font: .systemFont(ofSize: 12.0))
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "CameraVideoShareCodeVC") as! CameraVideoShareCodeVC
                 vc.number = self.verifyNum
                 vc.userID = self.userID
                 vc.myPeerID = self.myPeerID
+                vc.isCamera = self.isCamera
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             
@@ -154,29 +173,39 @@ class HomeVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.mcSessionViewModel.togggleConnectionRunState()
+        if Utility.shared.sessionManager.needsToRunSession == true {
+            print("already is in Running State...................")
+        }else{
+            self.mcSessionViewModel.togggleConnectionRunState()
+        }
+        
+        AppUtility.lockOrientation(.portrait)
+        imgAvatar.image = UserDefaults.standard.imageForKey(key: "avatarImage")
+        
+        lblShortName.text = UserDefaults.standard.string(forKey: "userText")
+        if let userSelectedColorData = UserDefaults.standard.object(forKey: "UserSelectedColor") as? Data {
+            if let userSelectedColor = NSKeyedUnarchiver.unarchiveObject(with:userSelectedColorData as Data) as? UIColor {
+                print(userSelectedColor)
+                lblShortName.textColor = userSelectedColor
+            }
+        }
+        
     }
     
     
     func checkBlockAndActivateDate() {
-        homeVM.activateDateAPIData { isSuccess,isUnblock  in
-            if isSuccess && isUnblock{
-                print("User is Unblock")
-            }else if isSuccess && !isUnblock{
-                let alert = UIAlertController(title: "VideoChamp", message: "User is blocked from Admin Side ", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                    exit(0)
-                }
-                alert.addAction(okAction)
-                self.present(alert, animated: true)
-                self.showAlert(alertMessage: "User is Block")
+        homeVM.activateDateAPIData { isSuccess,isUnblock, Code  in
+            if isSuccess && isUnblock && Code == "1"{
                 
+                print("User is Unblock")
+            }else if isSuccess && !isUnblock && Code == "10"{
+                self.showExitAlert()
             }else{
                 self.showAlert(alertMessage: "Is Success is no Working")
             }
         }
     }
-    
+
     
     @available(iOS, deprecated: 9.0)
     override func viewDidLayoutSubviews() {

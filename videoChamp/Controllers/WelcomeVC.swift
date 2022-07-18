@@ -30,6 +30,7 @@ class WelcomeVC: UIViewController {
 
     override func viewDidLayoutSubviews() {
         btnGetStarted.layer.cornerRadius = btnGetStarted.bounds.height/2
+        btnGetStarted.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         pageController.currentPageIndicatorTintColor = .yellow
     }
     

@@ -19,11 +19,11 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CameraCodeCell2" rowHeight="150" id="KGk-i7-Jjw" customClass="CameraCodeCell2" customModule="videoChamp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="408" height="160"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="408" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxw-z6-foE">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxw-z6-foE">
                         <rect key="frame" x="20" y="10" width="368" height="140"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pF6-NZ-7uC">
@@ -56,10 +56,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vr-Me-isd">
-                                <rect key="frame" x="30" y="79" width="308" height="41"/>
+                                <rect key="frame" x="30" y="79" width="308" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hnY-cc-Agc">
-                                        <rect key="frame" x="108.5" y="9.5" width="91" height="22"/>
+                                        <rect key="frame" x="108.5" y="14" width="91" height="22"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHARE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-gp-OpU">
                                                 <rect key="frame" x="0.0" y="0.0" width="45.5" height="22"/>
@@ -75,7 +75,8 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwq-RN-cIS">
-                                        <rect key="frame" x="0.0" y="0.0" width="308" height="41"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="308" height="50"/>
+                                        <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="18"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="onClickedShareBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bhk-Ue-8rb"/>
@@ -88,7 +89,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Hwq-RN-cIS" secondAttribute="bottom" id="6UD-wg-822"/>
                                     <constraint firstItem="hnY-cc-Agc" firstAttribute="centerX" secondItem="7Vr-Me-isd" secondAttribute="centerX" id="CLw-sb-S09"/>
                                     <constraint firstItem="Hwq-RN-cIS" firstAttribute="top" secondItem="7Vr-Me-isd" secondAttribute="top" id="JU0-qd-iKp"/>
-                                    <constraint firstAttribute="height" constant="41" id="LaC-ks-dWP"/>
+                                    <constraint firstAttribute="height" constant="50" id="LaC-ks-dWP"/>
                                     <constraint firstItem="hnY-cc-Agc" firstAttribute="centerY" secondItem="7Vr-Me-isd" secondAttribute="centerY" id="bsQ-EA-4ad"/>
                                     <constraint firstItem="Hwq-RN-cIS" firstAttribute="leading" secondItem="7Vr-Me-isd" secondAttribute="leading" id="qqf-aC-rii"/>
                                 </constraints>

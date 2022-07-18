@@ -21,6 +21,7 @@ class SplashVC: UIViewController {
     var redirectType : RedirectVC = .none
     var verified_Code : String!
     var userID : String!
+    var isCamera : String!
     
     var myPeerID : String!
     override func viewDidLoad() {
@@ -30,7 +31,7 @@ class SplashVC: UIViewController {
         
         StartTimer()
         
-        print("MMy Peer ID : \(myPeerID)")
+        print("MMy Peer ID : \(myPeerID ?? "")")
         
         
     }
@@ -79,6 +80,7 @@ class SplashVC: UIViewController {
                 vc.myPeerID = myPeerID
                 vc.verifyNum = verified_Code
                 vc.userID = userID
+                vc.isCamera = isCamera
                 let nav_obj = UINavigationController(rootViewController: vc)
                 nav_obj.isNavigationBarHidden = true
                 UIApplication.shared.windows.first?.rootViewController = nav_obj
@@ -99,6 +101,7 @@ class SplashVC: UIViewController {
                 vc.myPeerID = myPeerID
                 vc.verifyNum = verified_Code
                 vc.userID = userID
+                vc.isCamera = isCamera
                 let nav_obj = UINavigationController(rootViewController: vc)
                 nav_obj.isNavigationBarHidden = true
                 UIApplication.shared.windows.first?.rootViewController = nav_obj

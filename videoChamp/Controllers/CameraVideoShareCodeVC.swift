@@ -25,11 +25,12 @@ class CameraVideoShareCodeVC: UIViewController {
     var staticLink = "http://videochamp/remote/"
     var generatedUrlCode = ""
     var urlLink = ""
-    
+    var varCamera : Bool!
     var number : String!
     var userID : String?
     private let timeout: TimeInterval = 20
     var myPeerID : String!
+    var isCamera : String?
     let codeGenerateVM = GenerateNumberViewModel()
 //    let generateNumberVM = GenerateNumberViewModel()
     
@@ -43,43 +44,54 @@ class CameraVideoShareCodeVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        print("Display Name : \(Utility.shared.sessionManager.myPeerID?.description)")
         cameraViewModel.getCemaraData()
         registerCell()
         loadData()
     }
 
     func loadData(){
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(closeScreen), name: .kCloseScreen, object: nil)
         mcSessionViewModel = MCSessionViewModel.init(mcSessionManger: Utility.shared.sessionManager)
         generateLinkVM.linkGenerated(cmGenerateLinkData: CMGenerateLink(deviceType: "IOS",
                                                                         deviceId: Utility.shared.sessionManager.myPeerID?.displayName ?? "",
                                                                         isCamera: "true",
                                                                         peerId: "\(Utility.shared.sessionManager.myPeerID?.displayName ?? "")",
                                                                         connectionState: "true")) {
-            [weak self] isSuccess,linkURL,urlCode, codeMessage  in
+            [weak self] isSuccess,linkURL,urlCode, codeMessage, blockCode in
             guard let self = self else {return}
-            if isSuccess && codeMessage == "Number generate"{
+            if isSuccess{
 //                self.generatedNumber = number
                 print("Deeplinking URL : \(linkURL)")
                 print("url Code : \(urlCode)")
                 self.urlLink = linkURL
                 self.generatedUrlCode = urlCode
-                self.staticLink = "\(self.staticLink)\(urlCode)"
-                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
-                self.tableView.reloadData()
-                
-            }else if codeMessage == "code is already generated" && isSuccess {
-                print("Deeplinking URL : \(linkURL)")
-                print("url Code : \(urlCode)")
-                self.urlLink = linkURL
+                if self.isCamera == "true" {
+                    self.varCamera = true
+                }else{
+                    self.varCamera = false
+                }
                 
                 self.staticLink = "\(self.staticLink)\(urlCode)"
-                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
-                self.generatedUrlCode = urlCode
+                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "", isCamera: self.varCamera)
                 self.tableView.reloadData()
-            }else if codeMessage == "code Expire" && isSuccess{
+                
+            }
+//            else if codeMessage == "code is already generated" && isSuccess {
+//                print("Deeplinking URL : \(linkURL)")
+//                print("url Code : \(urlCode)")
+//                self.urlLink = linkURL
+//
+//                self.staticLink = "\(self.staticLink)\(urlCode)"
+//                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
+//                self.generatedUrlCode = urlCode
+//                self.tableView.reloadData()
+//            }
+            else if codeMessage == "code Expire" && isSuccess{
                 self.loadData()
+            }else if isSuccess && blockCode == "10"{
+                self.showExitAlert()
+            
             }else{
                 print("error")
             }
@@ -91,19 +103,30 @@ class CameraVideoShareCodeVC: UIViewController {
         
     }
     
-    func CodeVerifyApi(number : String, userId : String){
+    @objc func closeScreen(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func CodeVerifyApi(number : String, userId : String, isCamera : Bool){
         
-        codeGenerateVM.verifyNumber(number: number, userID: userId) { [weak self] isSuccess, message in
+        
+        codeGenerateVM.verifyNumber(number: number, userID: userId, isCamera: isCamera) {  [weak self] isSuccess, message, verCode in
             guard let self = self else{return}
             if isSuccess {
+                
                 print("Message : \(message)")
                 if self.myPeerID == nil {
-                    self.mcSessionViewModel.toogleAdvertising()
+                    if Utility.shared.sessionManager.needsAdvertising == true {
+                        print("Already Advertise.........")
+                    }else{
+                        self.mcSessionViewModel.toogleAdvertising()
+                    }
+                    
                 }else{
                     self.mcSessionViewModel.toggleBrwosing()
                 }
-                
-                
+            }else if isSuccess && verCode == "4" {
+                self.showAlert(alertMessage: message)
             }else{
                 print("Message : \(message)")
                 self.expireCodeAlert(message: message)
@@ -179,11 +202,19 @@ class CameraVideoShareCodeVC: UIViewController {
     
     
     @IBAction func onClickedBackBtn(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.isBack = true
+        present(vc, animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func onClickedCloseBtn(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.isBack = true
+        present(vc, animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -192,12 +223,7 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 0 {
-//            return cameraViewModel.cameraDataSource.count
-//        }else{
-//            return 1
-//        }
-        1
+        return 1
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -239,7 +265,7 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
 //            return 150
 //        }else
         if indexPath.section == 0{
-            return 150.0
+            return 170.0
         }else{
             return 165.0
         }

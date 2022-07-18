@@ -13,11 +13,10 @@ import SwiftyJSON
 class UserViewModel : NSObject {
     
     
-    func registerUser(userName : String, deviceToken : String, completionHandler : @escaping(Bool, String) -> Void) {
+    func registerUser(userName : String, avatarType : String, deviceToken : String, completionHandler : @escaping(Bool, String) -> Void) {
         
         UIApplication.topViewController()?.showActivityIndicator()
-        
-        APIManager.shared.getUser(userName: userName, deviceToken : deviceToken) { dict in
+        APIManager.shared.getUser(userName: userName, avatarType: avatarType, deviceToken : deviceToken) { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
             
             if dict == nil {
@@ -29,6 +28,7 @@ class UserViewModel : NSObject {
                 let token = data!["token"]?.stringValue
                 let userManagement = data!["userManagement"]?.dictionary
                 let name = userManagement?["name"]?.stringValue
+                
                 if statusCode == "200"{
                     print(name ?? "")
                     UserDefaults.standard.set(token ?? "", forKey: "Apptoken")
@@ -41,6 +41,33 @@ class UserViewModel : NSObject {
                 }
             }
         }
+    }
+    
+    
+    
+    func updateAvatar(updateAvatar : Int, completionHandler : @escaping(Bool, String) -> Void) {
+        UIApplication.topViewController()?.hideActivityIndicator()
+        APIManager.shared.updateAvatar(avatarType: updateAvatar) { dict in
+            UIApplication.topViewController()?.hideActivityIndicator()
+            
+            if dict == nil {
+                print("Directory is Empty")
+            }else{
+                let statusCode = dict!["status"].stringValue
+                let msg = dict!["message"].stringValue
+                let Code = dict!["Code"].stringValue
+                if statusCode == "200"{
+                   
+                    print(msg)
+                    completionHandler(true, Code)
+                }else{
+                    completionHandler(false, Code)
+                    print("Error Msg : \(msg)")
+                }
+            }
+        }
+        
+        
     }
     
 }

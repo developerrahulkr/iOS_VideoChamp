@@ -21,6 +21,7 @@ extension Notification.Name {
     static let kDisconnect = Notification.Name("kDisconnect")
 
     static let kPopToRoot = Notification.Name("kPopToRoot")
+    static let kAvatarKey = Notification.Name("kAvatarKey")
 }
 
 

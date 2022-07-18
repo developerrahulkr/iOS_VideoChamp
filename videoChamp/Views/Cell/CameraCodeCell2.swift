@@ -30,6 +30,7 @@ class CameraCodeCell2: UITableViewCell {
         bottomView.layer.cornerRadius = bottomView.bounds.height/2
         cardView.layer.cornerRadius = 30.0
         lblCode.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
+        btnShare.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
     }
 
     @IBAction func onClickedResendCode(_ sender: UIButton) {

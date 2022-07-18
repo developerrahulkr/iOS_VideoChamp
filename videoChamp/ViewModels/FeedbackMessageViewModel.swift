@@ -8,7 +8,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 class FeedbackMessageViewModel : NSObject {
-    func feedbackMessageData( imageData : Data?, messageData : CMFeedbackMessageData, completionHandler : @escaping(Bool) -> Void) {
+    func feedbackMessageData( imageData : Data?, messageData : CMFeedbackMessageData, completionHandler : @escaping(Bool,String) -> Void) {
         let param = ["feedbackId" : messageData.feedbackId ?? "", "message" : messageData.message ?? "", "image" : messageData.image ?? ""] as [String : Any]
         UIApplication.topViewController()?.showActivityIndicator()
         APIManager.shared.postFeedbackMessageData(imgData: imageData, parameter: param) { inDict in
@@ -19,12 +19,13 @@ class FeedbackMessageViewModel : NSObject {
                 
                 let statusCode = inDict!["status"].stringValue
                 let error_msg = inDict!["message"].stringValue
+                let blockCode = inDict!["Code"].stringValue
                 if statusCode == "200"{
                     print("msg : \(error_msg)")
-                    completionHandler(true)
+                    completionHandler(true, blockCode)
                 }else{
                     print("Error Meaage : \(error_msg)")
-                    completionHandler(false)
+                    completionHandler(false, blockCode)
                 }
             }
         }

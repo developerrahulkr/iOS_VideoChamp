@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 var window: UIWindow?
 
+    var orientationLock = UIInterfaceOrientationMask.all
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
@@ -46,6 +47,10 @@ var window: UIWindow?
 //        application.registerForRemoteNotifications()
         return true
     }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return self.orientationLock
+    }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print(url)
@@ -60,6 +65,8 @@ var window: UIWindow?
             profileViewController.myPeerID = myPeerID
             profileViewController.verified_Code = array[array.count-1]
             profileViewController.userID = array[array.count-7]
+            profileViewController.isCamera = array[array.count-4]
+            
             videochampManager.videochamp_sharedManager.redirectType  = .camera
         }else if array[array.count-4] == "true" {
 //            CMJoinLink(verifyNumber: array[array.count-1], userID: array[array.count-7])
@@ -67,6 +74,7 @@ var window: UIWindow?
             profileViewController.verified_Code = array[array.count-1]
             profileViewController.userID = array[array.count-7]
             print("Generated Code : \(array[array.count-1])")
+            profileViewController.isCamera = array[array.count-4]
             profileViewController.redirectType = .remote
             videochampManager.videochamp_sharedManager.redirectType  = .remote
         }else{
@@ -201,6 +209,28 @@ class videochampManager
     static let videochamp_sharedManager = videochampManager()
     var redirectType : RedirectVC = .none
     var _captureState : _CaptureState = .idle
+
+}
+
+struct AppUtility {
+    
+    static let shared = AppUtility()
+
+    static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+    
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.orientationLock = orientation
+        }
+    }
+
+    /// OPTIONAL Added method to adjust lock and rotate to the desired orientation
+    static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
+   
+        self.lockOrientation(orientation)
+    
+        UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+        UINavigationController.attemptRotationToDeviceOrientation()
+    }
 
 }
 

@@ -35,6 +35,8 @@ class GiveFeedbackCell2: UITableViewCell {
 
 extension GiveFeedbackCell2 : UITextViewDelegate {
     
+
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         self.callBack?(textView.text ?? "")
     }

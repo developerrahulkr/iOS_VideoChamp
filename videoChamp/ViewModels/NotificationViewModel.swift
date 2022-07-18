@@ -55,7 +55,7 @@ class NotificationViewModel : NSObject {
     
     
     
-    func readNotificationData(notificationId : String, completionHandler : @escaping(Bool) -> ()) {
+    func readNotificationData(notificationId : String, completionHandler : @escaping(Bool, String) -> ()) {
         UIApplication.topViewController()?.showActivityIndicator()
         APIManager.shared.readNotification(notificationId: notificationId) { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
@@ -65,15 +65,16 @@ class NotificationViewModel : NSObject {
                 let statusCode = inDict!["status"].stringValue
                 let msg = inDict!["message"].stringValue
                 let data = inDict!["data"].dictionary
+                let blockCode = inDict!["Code"].stringValue
                 let notification = data!["notification"]?.dictionary
                 let read_status = notification!["status"]?.stringValue
                 
                 if statusCode == "200"{
-                    completionHandler(true)
+                    completionHandler(true, blockCode)
                     print("read Status : \(read_status ?? "")")
                     print(msg)
                 }else{
-                    completionHandler(false)
+                    completionHandler(false,blockCode)
                 }
                 
             }
@@ -82,7 +83,7 @@ class NotificationViewModel : NSObject {
     
 //    MARK: - Delete Notification Function 
     
-    func deleteNotificationData(notificationId : String, completionHandler : @escaping(Bool) -> ()) {
+    func deleteNotificationData(notificationId : String, completionHandler : @escaping(Bool, String) -> ()) {
         UIApplication.topViewController()?.showActivityIndicator()
         APIManager.shared.deleteNotification(notificationId: notificationId) { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
@@ -91,12 +92,13 @@ class NotificationViewModel : NSObject {
             }else{
                 let statusCode = inDict!["status"].stringValue
                 let msg = inDict!["message"].stringValue
+                let blockedCode = inDict?["Code"].stringValue ?? ""
                 if statusCode == "200"{
-                    completionHandler(true)
+                    completionHandler(true, blockedCode)
                     print("Successfully delete the Notification.")
                     print(msg)
                 }else{
-                    completionHandler(false)
+                    completionHandler(false, blockedCode)
                 }
             }
         }

@@ -38,9 +38,20 @@ extension UIViewController {
     
     func showAlert(alertMessage : String) {
         let alert = UIAlertController(title: appName, message: alertMessage, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showExitAlert() {
+        let alert = UIAlertController(title: "VideoChamp", message: "User is blocked from Admin Side ", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            exit(0)
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+        self.showAlert(alertMessage: "User is Block")
+        
     }
     
     

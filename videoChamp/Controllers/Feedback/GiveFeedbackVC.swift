@@ -212,7 +212,7 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
     func submitData(tag: Int) {
         if isValidEmail(testStr: email) {
             let cmFeedbackData = CMPostFeedbackData(title: feedbackTitle, desc: desc, email: email, image: [""])
-            giveFeedbackViewModel.uploadFeedbackData(imageData: [selectImage?.pngData(), rightImage?.pngData()], feedBackData: cmFeedbackData) { isCompleted in
+            giveFeedbackViewModel.uploadFeedbackData(imageData: [selectImage?.pngData(), rightImage?.pngData()], feedBackData: cmFeedbackData) { isCompleted, blockCode  in
                 if isCompleted {
                     NotificationCenter.default.post(name: .refreshFeedbackData, object: nil)
                     UIApplication.topViewController()?.showActivityIndicator()
@@ -220,6 +220,8 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
                         UIApplication.topViewController()?.hideActivityIndicator()
                         self.navigationController?.popViewController(animated: true)
                     }
+                }else if isCompleted && blockCode == "10" {
+                    self.showExitAlert()
                 }else{
                     if self.feedbackTitle == "" {
                         self.showAlert(alertMessage: "Please Enter the title!")

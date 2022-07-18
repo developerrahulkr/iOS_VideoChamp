@@ -30,12 +30,14 @@ class TermsAndConditionVC: UIViewController {
     }
     
     func loadData(){
-        termVM.termAndConditionsData { [weak self] isSuccess, termData in
+        termVM.termAndConditionsData { [weak self] isSuccess, termData,blockCode  in
             guard let self = self else {return}
             if isSuccess {
                 self.termsAndConditions = termData
                 self.tableView.reloadData()
                 
+            }else if isSuccess && blockCode == "10" {
+                self.showExitAlert()
             }else{
                 self.showAlert(alertMessage: "Data is Empty!")
             }
