@@ -138,6 +138,8 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             }
             
             
+        }else if videochampManager.videochamp_sharedManager.redirectType == .remote {
+            liveSetupView.lblFilmingDevice.text = "Remote Device"
         }
         attachButtonActions(liveView)
         attachDisplayData(liveView)

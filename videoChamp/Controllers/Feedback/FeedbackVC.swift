@@ -22,7 +22,7 @@ class FeedbackVC: UIViewController {
 
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: "NotificationCell")
-        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+//        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .refreshFeedbackData, object: nil)
         loadData()
     }
@@ -87,6 +87,14 @@ extension FeedbackVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+            self.tableView.reloadData()
+        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+            self.tableView.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

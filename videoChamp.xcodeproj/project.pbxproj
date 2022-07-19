@@ -12,6 +12,8 @@
 		1866B197284E1EC6002CE4BE /* CMSoundName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866B196284E1EC6002CE4BE /* CMSoundName.swift */; };
 		1866B199284E2002002CE4BE /* captureImage.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1866B198284E2002002CE4BE /* captureImage.mp3 */; };
 		188CEB062885473000A07D9B /* CMVarifyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CEB052885473000A07D9B /* CMVarifyCode.swift */; };
+		188CEB0A2885735B00A07D9B /* DismissAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CEB082885735B00A07D9B /* DismissAlertVC.swift */; };
+		188CEB0B2885735B00A07D9B /* DismissAlertVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188CEB092885735B00A07D9B /* DismissAlertVC.xib */; };
 		189D3EDC2864A19000326660 /* DisconnectCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D3EDB2864A19000326660 /* DisconnectCameraVC.swift */; };
 		189D3EE12864A2E500326660 /* RemoteDismissScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D3EDF2864A2E500326660 /* RemoteDismissScreenVC.swift */; };
 		189D3EE22864A2E500326660 /* RemoteDismissScreenVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189D3EE02864A2E500326660 /* RemoteDismissScreenVC.xib */; };
@@ -186,6 +188,8 @@
 		1866B196284E1EC6002CE4BE /* CMSoundName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSoundName.swift; sourceTree = "<group>"; };
 		1866B198284E2002002CE4BE /* captureImage.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = captureImage.mp3; sourceTree = "<group>"; };
 		188CEB052885473000A07D9B /* CMVarifyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMVarifyCode.swift; sourceTree = "<group>"; };
+		188CEB082885735B00A07D9B /* DismissAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAlertVC.swift; sourceTree = "<group>"; };
+		188CEB092885735B00A07D9B /* DismissAlertVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DismissAlertVC.xib; sourceTree = "<group>"; };
 		189D3EDB2864A19000326660 /* DisconnectCameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectCameraVC.swift; sourceTree = "<group>"; };
 		189D3EDF2864A2E500326660 /* RemoteDismissScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDismissScreenVC.swift; sourceTree = "<group>"; };
 		189D3EE02864A2E500326660 /* RemoteDismissScreenVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoteDismissScreenVC.xib; sourceTree = "<group>"; };
@@ -377,6 +381,15 @@
 				2CC21B0F27D7A59A0054DF4B /* argentum-sans.semibold.ttf */,
 			);
 			path = "Font Style";
+			sourceTree = "<group>";
+		};
+		188CEB072885734100A07D9B /* DismissAlertVC */ = {
+			isa = PBXGroup;
+			children = (
+				188CEB082885735B00A07D9B /* DismissAlertVC.swift */,
+				188CEB092885735B00A07D9B /* DismissAlertVC.xib */,
+			);
+			path = DismissAlertVC;
 			sourceTree = "<group>";
 		};
 		189D3EDA2864A13600326660 /* DisconnectCameraVC */ = {
@@ -578,6 +591,7 @@
 		2C3625F627BC09A400EB4CD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				188CEB072885734100A07D9B /* DismissAlertVC */,
 				189D3EDE2864A2BE00326660 /* DismissScreenVC */,
 				2C3625FE27BCBB7C00EB4CD6 /* Cell */,
 				2C3625C927BC077200EB4CD6 /* Main.storyboard */,
@@ -931,6 +945,7 @@
 				2C36262727BD32AA00EB4CD6 /* TermsAndConditionsCell.xib in Resources */,
 				2C8D43DE27BF868700C5722A /* CameraCodeCell3.xib in Resources */,
 				2C3625CB27BC077200EB4CD6 /* Main.storyboard in Resources */,
+				188CEB0B2885735B00A07D9B /* DismissAlertVC.xib in Resources */,
 				2C172D3E27C50097005BA3AD /* FeedbackServiceCell.xib in Resources */,
 				2C172D3227C4EAAD005BA3AD /* GiveFeedbackCell2.xib in Resources */,
 				2C8D43D627BF6AA900C5722A /* CameraCodeCell.xib in Resources */,
@@ -1127,6 +1142,7 @@
 				2CC95726283CE238000A5B93 /* CMGenerateLink.swift in Sources */,
 				189D3EE12864A2E500326660 /* RemoteDismissScreenVC.swift in Sources */,
 				2C172D3527C4ED50005BA3AD /* GiveFeedbackCell3.swift in Sources */,
+				188CEB0A2885735B00A07D9B /* DismissAlertVC.swift in Sources */,
 				2C36260627BCE49800EB4CD6 /* ConstantFiles.swift in Sources */,
 				2CBF38922833D2FF00CD6735 /* UIView+.swift in Sources */,
 				2CA1CF3527C6529300BEB063 /* ProgressBar.swift in Sources */,
@@ -1435,7 +1451,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1479,7 +1495,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

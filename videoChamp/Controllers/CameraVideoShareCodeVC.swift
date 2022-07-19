@@ -46,7 +46,16 @@ class CameraVideoShareCodeVC: UIViewController {
         // Do any additional setup after loading the view.
         cameraViewModel.getCemaraData()
         registerCell()
+        print("user ID : \(self.userID ?? "")")
         loadData()
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
     }
 
     func loadData(){
@@ -202,7 +211,12 @@ class CameraVideoShareCodeVC: UIViewController {
     
     
     @IBAction func onClickedBackBtn(_ sender: UIButton) {
-        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        guard UserDefaults.standard.string(forKey: "isCheck") != "true"  else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        let vc = DismissAlertVC(nibName: "DismissAlertVC", bundle: nil)
         vc.modalPresentationStyle = .overFullScreen
         vc.isBack = true
         present(vc, animated: true)
@@ -210,7 +224,11 @@ class CameraVideoShareCodeVC: UIViewController {
     }
     
     @IBAction func onClickedCloseBtn(_ sender: UIButton) {
-        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        guard UserDefaults.standard.string(forKey: "isCheck") != "true"  else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        let vc = DismissAlertVC(nibName: "DismissAlertVC", bundle: nil)
         vc.modalPresentationStyle = .overFullScreen
         vc.isBack = true
         present(vc, animated: true)
@@ -297,6 +315,14 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
 //        }
 //        let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
 //        self.present(sharesheetVC, animated: true)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+            self.tableView.reloadData()
+        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+            self.tableView.reloadData()
+        }
     }
     
     

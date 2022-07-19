@@ -12,6 +12,7 @@ class AvatarVC: UIViewController {
     @IBOutlet weak var viewText: UIView!
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var tfName: UITextField!
+    @IBOutlet var viewTableView: UIView!
     
     
     @IBOutlet weak var lblUserName1: UILabel!
@@ -72,6 +73,13 @@ class AvatarVC: UIViewController {
         
         changeAvatar()
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+    }
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
     }
     
     
@@ -141,8 +149,6 @@ class AvatarVC: UIViewController {
         avatarKey = 6
         isSelected = true
     }
-    
-    
     
     override func viewDidLayoutSubviews() {
         viewText.layer.cornerRadius = viewText.bounds.height/2
@@ -253,4 +259,27 @@ extension AvatarVC : UITextFieldDelegate {
             
         } 
     }
+}
+
+
+
+extension AvatarVC : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return viewTableView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 896.0
+    }
+    
+    
+    
 }

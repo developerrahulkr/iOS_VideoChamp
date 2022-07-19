@@ -36,6 +36,13 @@ class SplashVC: UIViewController {
         
     }
     
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
+    }
     
     
     func StartTimer() {

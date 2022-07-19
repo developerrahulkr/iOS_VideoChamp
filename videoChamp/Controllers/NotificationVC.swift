@@ -24,7 +24,7 @@ class NotificationVC: UIViewController {
         // Do any additional setup after loading the view.
         notificationTableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         loadData()
-        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+//        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
         
         refreshControl.attributedTitle = NSAttributedString(string: "refresh Data")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
@@ -38,10 +38,13 @@ class NotificationVC: UIViewController {
             self.loadData()
             self.refreshControl.endRefreshing()
         }
-        
-        
-        
-        
+    }
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
     }
     
     func loadData() {
@@ -99,6 +102,15 @@ extension NotificationVC : UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+            self.notificationTableView.reloadData()
+        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+            self.notificationTableView.reloadData()
+        }
+    }
+    
 
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

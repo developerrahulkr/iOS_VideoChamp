@@ -232,6 +232,14 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+            self.tableView.reloadData()
+        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+            self.tableView.reloadData()
+        }
+    }
+    
     
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

@@ -19,6 +19,7 @@ enum ConnectionState {
 
 class HomeVC: UIViewController {
     
+    @IBOutlet var viewTable: UIView!
     @IBOutlet weak var imgAvatar: UIImageView!
     @IBOutlet weak var lblShortName: UILabel!
     @IBOutlet weak var lblDeviceTitle: UILabel!
@@ -57,9 +58,6 @@ class HomeVC: UIViewController {
         cameraAndRemoteViewAction()
         checkBlockAndActivateDate()
         loadData()
-        
-        
-        
     }
     
     @IBAction func onClickedProfile(_ sender: UIButton) {
@@ -70,6 +68,13 @@ class HomeVC: UIViewController {
         vc.shortName = lblShortName.text ?? ""
         self.present(vc, animated: true)
         
+    }
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
     }
     
     
@@ -113,10 +118,6 @@ class HomeVC: UIViewController {
             })
         }
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        AppUtility.lockOrientation(.all)
-    }
     
 
     func loadData(){
@@ -128,8 +129,8 @@ class HomeVC: UIViewController {
         lblUserName.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
         
         print("Baerer Token : \(Utility.shared.getUserAppToken())")
-        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
-        self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
+//        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+//        self.gradientThreeColor(topColor: lightWhite, mediumColor: lightgrey, bottomColor: lightgrey)
         print("View Controller : \(String(describing: self.navigationController?.viewControllers))")
         
         NotificationCenter.default.addObserver(self, selector: #selector(notificationScreen), name: .kNotification, object: nil)
@@ -179,7 +180,7 @@ class HomeVC: UIViewController {
             self.mcSessionViewModel.togggleConnectionRunState()
         }
         
-        AppUtility.lockOrientation(.portrait)
+//        AppUtility.lockOrientation(.portrait)
         imgAvatar.image = UserDefaults.standard.imageForKey(key: "avatarImage")
         
         lblShortName.text = UserDefaults.standard.string(forKey: "userText")
@@ -297,6 +298,35 @@ class HomeVC: UIViewController {
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: false, completion: nil)
     }
+}
+
+
+extension HomeVC : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return viewTable
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 550.0
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
+    }
+    
+    
 }
 
 

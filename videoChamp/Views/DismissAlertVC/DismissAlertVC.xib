@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="argentum-sans.light.ttf">
+            <string>ArgentumSans-Light</string>
+        </array>
+        <array key="argentum-sans.regular.ttf">
+            <string>ArgentumSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DismissAlertVC" customModule="videoChamp" customModuleProvider="target">
+            <connections>
+                <outlet property="btnCheck" destination="Ck9-7k-dCT" id="Xth-2c-uCC"/>
+                <outlet property="btnNo" destination="m2u-Xg-XtI" id="8Ff-0G-F1L"/>
+                <outlet property="btnOK" destination="GTI-tW-XoH" id="ID9-nw-sOI"/>
+                <outlet property="cardView" destination="gWq-SC-em8" id="qjd-3u-8Cs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWq-SC-em8">
+                    <rect key="frame" x="88.5" y="288" width="237" height="320"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XE8-3B-viF">
+                            <rect key="frame" x="207" y="16" width="10" height="22"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="alert_close_Icon"/>
+                            <connections>
+                                <action selector="onClickedCloseBtn:" destination="-1" eventType="touchUpInside" id="rht-He-qGh"/>
+                            </connections>
+                        </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Query_icon" translatesAutoresizingMaskIntoConstraints="NO" id="yhn-co-KW9">
+                            <rect key="frame" x="71" y="48" width="95" height="95"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="95" id="41R-UA-5SC"/>
+                                <constraint firstAttribute="width" constant="95" id="vGu-mn-H3h"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARE YOU SURE?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYZ-ox-AOb">
+                            <rect key="frame" x="58.5" y="153" width="120.5" height="17.5"/>
+                            <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="15"/>
+                            <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your remote connection will be disconnected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbD-TA-xyR">
+                            <rect key="frame" x="20" y="180.5" width="197" height="25.5"/>
+                            <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="11"/>
+                            <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TIg-O5-8dO">
+                            <rect key="frame" x="16" y="220" width="205" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2u-Xg-XtI">
+                                    <rect key="frame" x="0.0" y="0.0" width="92.5" height="40"/>
+                                    <color key="backgroundColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="14"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="NO">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onClickedNoBtn:" destination="-1" eventType="touchUpInside" id="Hu7-hV-GNq"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTI-tW-XoH">
+                                    <rect key="frame" x="112.5" y="0.0" width="92.5" height="40"/>
+                                    <color key="backgroundColor" red="0.22352941179999999" green="0.73333333329999995" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="14"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="OK">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onClickedOKBtn:" destination="-1" eventType="touchUpInside" id="9XY-5H-pUD"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="cYh-2R-tKr"/>
+                            </constraints>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ck9-7k-dCT">
+                            <rect key="frame" x="16" y="280" width="19.5" height="22"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="square" catalog="system"/>
+                            <connections>
+                                <action selector="onClickedCheckBtn:" destination="-1" eventType="touchUpInside" id="obz-jn-vXu"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not ask me again" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGw-d3-VB1">
+                            <rect key="frame" x="45.5" y="284" width="115" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="237" id="02v-Ux-t5h"/>
+                        <constraint firstItem="gbD-TA-xyR" firstAttribute="top" secondItem="aYZ-ox-AOb" secondAttribute="bottom" constant="10" id="7S9-Mk-2GV"/>
+                        <constraint firstAttribute="trailing" secondItem="TIg-O5-8dO" secondAttribute="trailing" constant="16" id="Bp1-C4-pj3"/>
+                        <constraint firstItem="Ck9-7k-dCT" firstAttribute="leading" secondItem="TIg-O5-8dO" secondAttribute="leading" id="CHp-Z1-5wB"/>
+                        <constraint firstAttribute="height" constant="320" id="FLA-vP-48s"/>
+                        <constraint firstItem="yhn-co-KW9" firstAttribute="centerX" secondItem="gWq-SC-em8" secondAttribute="centerX" id="IEI-7k-3C2"/>
+                        <constraint firstAttribute="trailing" secondItem="XE8-3B-viF" secondAttribute="trailing" constant="20" id="JdT-oz-dPe"/>
+                        <constraint firstItem="XGw-d3-VB1" firstAttribute="centerY" secondItem="Ck9-7k-dCT" secondAttribute="centerY" id="Oeu-IM-j6b"/>
+                        <constraint firstItem="yhn-co-KW9" firstAttribute="top" secondItem="XE8-3B-viF" secondAttribute="bottom" constant="10" id="RSO-jA-Vzd"/>
+                        <constraint firstItem="TIg-O5-8dO" firstAttribute="leading" secondItem="gWq-SC-em8" secondAttribute="leading" constant="16" id="UhY-mJ-gO7"/>
+                        <constraint firstItem="XE8-3B-viF" firstAttribute="top" secondItem="gWq-SC-em8" secondAttribute="top" constant="16" id="UnW-DE-0oi"/>
+                        <constraint firstItem="XGw-d3-VB1" firstAttribute="leading" secondItem="Ck9-7k-dCT" secondAttribute="trailing" constant="10" id="awp-08-mvJ"/>
+                        <constraint firstItem="TIg-O5-8dO" firstAttribute="top" secondItem="gbD-TA-xyR" secondAttribute="bottom" constant="14" id="chC-dO-ArV"/>
+                        <constraint firstItem="Ck9-7k-dCT" firstAttribute="top" secondItem="TIg-O5-8dO" secondAttribute="bottom" constant="20" id="dP7-TD-o2M"/>
+                        <constraint firstItem="gbD-TA-xyR" firstAttribute="leading" secondItem="gWq-SC-em8" secondAttribute="leading" constant="20" id="dd4-bJ-UPG"/>
+                        <constraint firstItem="gbD-TA-xyR" firstAttribute="centerX" secondItem="aYZ-ox-AOb" secondAttribute="centerX" id="dm4-3E-HeQ"/>
+                        <constraint firstAttribute="trailing" secondItem="gbD-TA-xyR" secondAttribute="trailing" constant="20" id="et9-uj-3TE"/>
+                        <constraint firstItem="aYZ-ox-AOb" firstAttribute="centerX" secondItem="yhn-co-KW9" secondAttribute="centerX" id="nKf-Ad-Slx"/>
+                        <constraint firstItem="aYZ-ox-AOb" firstAttribute="top" secondItem="yhn-co-KW9" secondAttribute="bottom" constant="10" id="rG4-1c-UAC"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="gWq-SC-em8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="bUK-Q5-PGd"/>
+                <constraint firstItem="gWq-SC-em8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ouD-Xz-L0v"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="121"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Query_icon" width="95" height="93.5"/>
+        <image name="alert_close_Icon" width="10" height="10"/>
+        <image name="square" catalog="system" width="128" height="114"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -208,6 +208,14 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
     
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+            self.tableView.reloadData()
+        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+            self.tableView.reloadData()
+        }
+    }
+    
     
     func submitData(tag: Int) {
         if isValidEmail(testStr: email) {

@@ -60,8 +60,6 @@ extension GiveFeedbackCell2 : UITextViewDelegate {
         wordLimit -= 1
 //        print("word Remaining : \(wordLimit)")
         if wordLimit >= 0 {
-//            print("word Remaining : \(wordLimit)")
-            print("total Text : \(textView.text.count)")
         }else{
 //            giveFeedbackViewModel.giveFeedbackSection[0].secTitle2 = "Maximum 0 word in the blogs."
 //            CMFeedBack(secTitle: "0", secTitle2: "100")

@@ -24,11 +24,20 @@ class SideMenuVC: UIViewController {
         
         menuViewModel.getData()
     }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
+    }
 
     @IBAction func onClickedDismissBtn(_ sender: UIButton) {
         dismiss(animated: false, completion: nil)
     }
 }
+
 
 
 
@@ -74,6 +83,14 @@ extension SideMenuVC : UITableViewDelegate, UITableViewDataSource{
             self.dismiss(animated: false) {
                 NotificationCenter.default.post(name: .kShare, object: nil)
             }
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+            self.tableView.reloadData()
+        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+            self.tableView.reloadData()
         }
     }
     

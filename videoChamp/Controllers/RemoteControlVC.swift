@@ -44,17 +44,25 @@ class RemoteControlVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.gradientColor(topColor: lightGreenColor, bottomColor: lightYellow)
+        
         cameraViewModel.getRemoteData()
         
         
         registerCell()
+        
         lblEnterCode.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
         loadData()
-        
-        
-                
+        print("user ID : \(self.userID ?? "")")
+         
     }
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
+    }
+    
     func loadData(){
         NotificationCenter.default.addObserver(self, selector: #selector(closeScreen), name: .kCloseScreen, object: nil)
         let linkGenerated = CMGenerateLink(deviceType: "IOS",deviceId: Utility.shared.sessionManager.myPeerID?.displayName ?? "", isCamera: "false", peerId: Utility.shared.sessionManager.displayName, connectionState: "true")
@@ -166,7 +174,12 @@ class RemoteControlVC: UIViewController {
     }
 
     @IBAction func onClickedBackBtn(_ sender: UIButton) {
-        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        guard UserDefaults.standard.string(forKey: "isCheck") != "true"  else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        let vc = DismissAlertVC(nibName: "DismissAlertVC", bundle: nil)
         vc.modalPresentationStyle = .overFullScreen
         vc.isBack = true
         present(vc, animated: true)
@@ -174,7 +187,11 @@ class RemoteControlVC: UIViewController {
     }
     
     @IBAction func OnClickedCloaseBtn(_ sender: UIButton) {
-        let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
+        guard UserDefaults.standard.string(forKey: "isCheck") != "true"  else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        let vc = DismissAlertVC(nibName: "DismissAlertVC", bundle: nil)
         vc.modalPresentationStyle = .overFullScreen
         vc.isBack = true
         present(vc, animated: true)
@@ -240,6 +257,16 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
             return 165.0
         }
     }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+            self.tableView.reloadData()
+        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    
     func verifyCode(tag: Int) {
         self.showActivityIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -313,6 +340,8 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
         }
     }
     
+    
+    
     func showOTPAlert(alertMessage : String) {
         let alert = UIAlertController(title: appName, message: alertMessage, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
@@ -333,3 +362,6 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
         self.present(alert, animated: true, completion: nil)
     }
 }
+
+
+
