@@ -194,6 +194,7 @@ open class LivePresenter: NSObject {
 
     private func videoStart() {
         guard mediaPresenter != nil else {
+            print("Media player is nil.......")
             return
         }
 
@@ -205,7 +206,12 @@ open class LivePresenter: NSObject {
     }
 
     private func videoStop() {
-        guard timerManager != nil else {return}
+        guard timerManager != nil else {
+            print("Video Stop....")
+            print("time manager......... \(timerManager)")
+            return
+            
+        }
         timerManager.stop()
         timerManager = nil
     }

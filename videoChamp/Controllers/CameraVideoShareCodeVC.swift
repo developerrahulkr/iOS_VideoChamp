@@ -26,7 +26,7 @@ class CameraVideoShareCodeVC: UIViewController {
     var generatedUrlCode = ""
     var urlLink = ""
     var varCamera : Bool!
-    var number : String!
+    var number : String?
     var userID : String?
     private let timeout: TimeInterval = 20
     var myPeerID : String!
@@ -82,7 +82,7 @@ class CameraVideoShareCodeVC: UIViewController {
                 }
                 
                 self.staticLink = "\(self.staticLink)\(urlCode)"
-                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "", isCamera: self.varCamera)
+                self.CodeVerifyApi(number: self.number ?? "", userId: self.userID ?? "", isCamera: self.varCamera)
                 self.tableView.reloadData()
                 
             }
@@ -170,7 +170,7 @@ class CameraVideoShareCodeVC: UIViewController {
         
         
         self.showActivityIndicator()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.hideActivityIndicator()
             
             guard let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as? Data else {

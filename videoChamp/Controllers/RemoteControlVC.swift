@@ -32,7 +32,7 @@ class RemoteControlVC: UIViewController {
     private let timeout: TimeInterval = 20
     private let alertPresenter:AlertPresenter = .init()
     var myPeerID : String!
-    var number : String!
+    var number : String?
     var userID : String?
     var isCamera : String!
     let generateLinkVM = GeneratedLinkViewModel()
@@ -81,7 +81,7 @@ class RemoteControlVC: UIViewController {
                     self.varCamera = false
                 }
                 
-                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "", isCamera: self.varCamera)
+                self.CodeVerifyApi(number: self.number ?? "", userId: self.userID ?? "", isCamera: self.varCamera)
                 self.staticLink = "\(self.staticLink)\(urlCode)"
                 self.tableView.reloadData()
                 
@@ -130,9 +130,8 @@ class RemoteControlVC: UIViewController {
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.register(UINib(nibName: cellId3, bundle: nil), forCellReuseIdentifier: cellId3)
         
-        
         self.showActivityIndicator()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.hideActivityIndicator()
             
             guard  let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as? Data else {
@@ -159,6 +158,7 @@ class RemoteControlVC: UIViewController {
 
                         }
                     }else{
+                        self.showAlert(alertMessage: "Data is Not Found")
                         print("Data is Not Found.........")
                     }
                     
@@ -269,20 +269,36 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
     
     func verifyCode(tag: Int) {
         self.showActivityIndicator()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
             self.hideActivityIndicator()
-            
             let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as! Data
             guard let decodedTeams = try? (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as! [MCPeerID]) else { return }
             print("\(decodedTeams)")
             
-            let sameNameIndexes = PeerIDHelper.whereSameNames(ids: Utility.shared.sessionManager.connectedPeerIDs, target: self.peerTableViewModel.foundCellData[0].peerID)
-            if sameNameIndexes.isEmpty {
-                Utility.shared.sessionManager.inviteTo(peerID: self.peerTableViewModel.foundCellData[0].peerID, timeout: self.timeout)
-//                self.loadData()
-            } else {
-                Utility.shared.sessionManager.canselConectRequestTo(peerID: self.peerTableViewModel.foundCellData[0].peerID)
-                
+            self.peerTableViewModel.updateFoundCell(decodedTeams)
+            if self.peerTableViewModel.foundCellData.count != 0 {
+                for i in 0...self.peerTableViewModel.foundCellData.count-1 {
+                    
+                    if self.peerTableViewModel.foundCellData[i].peerID.displayName == self.myPeerID {
+                        
+                        
+                        print("Data is found................... \(self.peerTableViewModel.foundCellData[i].peerID)")
+                        let sameNameIndexes = PeerIDHelper.whereSameNames(ids: Utility.shared.sessionManager.connectedPeerIDs, target:
+                                                                            self.peerTableViewModel.foundCellData[i].peerID)
+                        if sameNameIndexes.isEmpty {
+                            Utility.shared.sessionManager.inviteTo(peerID: self.peerTableViewModel.foundCellData[i].peerID, timeout: self.timeout)
+            //                self.loadData()
+                        } else {
+                            Utility.shared.sessionManager.canselConectRequestTo(peerID: self.peerTableViewModel.foundCellData[i].peerID)
+
+                        }
+                    }else{
+                        print("Data is Not Found.........")
+                    }
+                    
+                }
+            }else{
+                print("Found Cell Data L : \(self.peerTableViewModel.foundCellData)")
             }
             
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PeerIDVC") as! PeerIDVC
@@ -320,7 +336,6 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
             if isSuccess {
                 print("Message : \(message)")
                 if self.myPeerID == nil {
-                    
                     if Utility.shared.sessionManager.needsAdvertising == true {
                         print("Already Advertise.........")
                     }else{
@@ -329,7 +344,10 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
                 }else if isSuccess && verCode == "4" {
                     self.showAlert(alertMessage: message)
                 }else{
-                    self.mcSessionViewModel.toggleBrwosing()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                        self.mcSessionViewModel.toggleBrwosing()
+                    }
+                    
                 }
                 
                 

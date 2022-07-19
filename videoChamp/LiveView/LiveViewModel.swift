@@ -138,8 +138,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             }
             
             
-        }else if videochampManager.videochamp_sharedManager.redirectType == .remote {
-            liveSetupView.lblFilmingDevice.text = "Remote Device"
         }
         attachButtonActions(liveView)
         attachDisplayData(liveView)
@@ -167,6 +165,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             DispatchQueue.main.async {
                 liveView.imageView.image = image
             }
+            print("data image \(image)")
         }, gotAudioData: {[weak self](audioData, fromPeerID) in
             guard let weakSelf = self else {return}
             if weakSelf.needsMute == false {
@@ -226,6 +225,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     liveView.cameraControlButton.isUserInteractionEnabled = true
                 case "startStreaming":
                     self.sendString = str ?? ""
+                    liveView.lblFilmingDevice.text = "REMOTE DEVICE"
                     liveView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
                     if videochampManager.videochamp_sharedManager.redirectType == .camera {
                         self.connectAlertVC()
@@ -346,6 +346,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         if isDisconnect {
             NotificationCenter.default.post(name: .kPopToRoot, object: nil)
         }else{
+            UIApplication.topViewController()?.showAlert(alertMessage: "Video Paused.")
             print("Disconnect : \(isDisconnect)")
         }
         

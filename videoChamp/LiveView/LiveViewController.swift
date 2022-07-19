@@ -71,6 +71,15 @@ final class LiveViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .kCloseScreen, object: nil)
         
     }
+    
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
+    }
     @objc func closeVC(){
         let controllers = self.navigationController!.viewControllers
         for controller in controllers {
@@ -86,6 +95,7 @@ final class LiveViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
     }
 
     required init?(coder aDecoder: NSCoder) {

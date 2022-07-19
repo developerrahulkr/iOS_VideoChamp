@@ -40,6 +40,7 @@
 		18E1AF5E2851CD4400E14044 /* CameraProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1AF5B2851CD4400E14044 /* CameraProtocols.swift */; };
 		18E1AF5F2851CD4400E14044 /* VideoDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1AF5C2851CD4400E14044 /* VideoDataConverter.swift */; };
 		18E1AF602851CD4400E14044 /* SampleBufferCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1AF5D2851CD4400E14044 /* SampleBufferCamera.swift */; };
+		18F1E96F28869685004E6DAE /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F1E96E28869685004E6DAE /* NetworkMonitor.swift */; };
 		18F703F72851CB68001CADC1 /* MultipeerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 18F703F62851CB68001CADC1 /* MultipeerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18F703FA2851CB68001CADC1 /* MultipeerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F703F42851CB68001CADC1 /* MultipeerFramework.framework */; };
 		18F703FB2851CB68001CADC1 /* MultipeerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18F703F42851CB68001CADC1 /* MultipeerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -216,6 +217,7 @@
 		18E1AF5B2851CD4400E14044 /* CameraProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraProtocols.swift; sourceTree = "<group>"; };
 		18E1AF5C2851CD4400E14044 /* VideoDataConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDataConverter.swift; sourceTree = "<group>"; };
 		18E1AF5D2851CD4400E14044 /* SampleBufferCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleBufferCamera.swift; sourceTree = "<group>"; };
+		18F1E96E28869685004E6DAE /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		18F703F42851CB68001CADC1 /* MultipeerFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultipeerFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F703F62851CB68001CADC1 /* MultipeerFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultipeerFramework.h; sourceTree = "<group>"; };
 		2C0B02F827D0C7A000599A54 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
@@ -736,6 +738,7 @@
 			children = (
 				2CA1CF3627C658C800BEB063 /* API Manager.swift */,
 				2C15F22F27FC289C0002999E /* CheckNetworkStatus.swift */,
+				18F1E96E28869685004E6DAE /* NetworkMonitor.swift */,
 			);
 			path = ServiceManager;
 			sourceTree = "<group>";
@@ -1170,6 +1173,7 @@
 				189D3EDC2864A19000326660 /* DisconnectCameraVC.swift in Sources */,
 				2CA1CF3727C658C800BEB063 /* API Manager.swift in Sources */,
 				2CC9572A283CF8D6000A5B93 /* GenerateLinkViewModel.swift in Sources */,
+				18F1E96F28869685004E6DAE /* NetworkMonitor.swift in Sources */,
 				2C3625C627BC077100EB4CD6 /* SceneDelegate.swift in Sources */,
 				2C172D2C27C4CA4E005BA3AD /* CMFeedBack.swift in Sources */,
 				2C3625CE27BC077200EB4CD6 /* videoChamp.xcdatamodeld in Sources */,

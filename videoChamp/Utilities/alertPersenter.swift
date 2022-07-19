@@ -21,9 +21,9 @@ struct AlertPresenter {
         alertContainer.addAction(accept)
         alertContainer.addAction(cancel)
         show(alertContainer: alertContainer)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            dismiss(alertContainer: alertContainer)
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+//            dismiss(alertContainer: alertContainer)
+//        }
     }
 
     func notice(title: String, message: String, style: UIAlertController.Style = .alert) {
