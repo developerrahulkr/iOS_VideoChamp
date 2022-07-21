@@ -82,13 +82,14 @@ extension UIViewController {
     
 //    MARK: Gradient Color
     
-    func gradientColor(topColor : UIColor, bottomColor : UIColor){
-        
+    func gradientColor(topColor : UIColor, bottomColor : UIColor)
+    {
         let gradient = CAGradientLayer()
         gradient.frame = view.frame
         gradient.colors = [topColor.cgColor, bottomColor.cgColor]
         view.layer.insertSublayer(gradient, at: 0)
     }
+    
     func gradientThreeColor(topColor : UIColor, mediumColor : UIColor, bottomColor : UIColor){
         
         let gradient = CAGradientLayer()

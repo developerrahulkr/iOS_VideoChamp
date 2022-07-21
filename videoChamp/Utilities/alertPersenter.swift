@@ -25,6 +25,12 @@ struct AlertPresenter {
 //            dismiss(alertContainer: alertContainer)
 //        }
     }
+    
+
+    
+    
+    
+    
 
     func notice(title: String, message: String, style: UIAlertController.Style = .alert) {
         let alertContainer = UIAlertController.init(title: title, message: message, preferredStyle: style)

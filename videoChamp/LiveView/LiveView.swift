@@ -34,6 +34,9 @@ final class LiveView: NSObject {
     let lblRecordingTiming = UILabel()
     let imageCapture = UIImageView()
     
+    let buttonView = UIView()
+    let btnStopCasting = UIButton()
+    
     
     let topViewStackView = UIStackView()
     let btnCamera = UIButton()
@@ -82,6 +85,7 @@ final class LiveView: NSObject {
         bottomView.addSubview(viewMedia)
         bottomView.addSubview(buttonAreaStackView)
         viewMedia.addSubview(topViewStackView)
+        view.addSubview(buttonView)
         
         
         
@@ -104,6 +108,7 @@ final class LiveView: NSObject {
 //        topViewStackView.addArrangedSubview(lblZoom)
         topViewStackView.addArrangedSubview(viewZoom)
         viewZoom.addSubview(lblZoom)
+        buttonView.addSubview(btnStopCasting)
         
     }
 
@@ -119,6 +124,8 @@ final class LiveView: NSObject {
             make.height.width.equalTo(100.0)
         }
         
+        
+        
         lblZoom.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
@@ -131,6 +138,12 @@ final class LiveView: NSObject {
             make.top.left.right.equalToSuperview()
             make.bottom.equalTo(buttonAreaStackView.snp.top).offset(0)
             
+        }
+        buttonView.snp.makeConstraints { make in
+            make.left.equalTo(40.0)
+            make.bottom.equalToSuperview().offset(-20.0)
+            make.right.equalTo(-40.0)
+            make.height.equalTo(50.0)
         }
         
         
@@ -150,6 +163,11 @@ final class LiveView: NSObject {
         lblRecording.snp.makeConstraints { make in
             make.centerX.equalTo(cameraControlButton)
             make.top.equalTo(lblFilmingDevice.snp.bottom).offset(2)
+        }
+        
+        btnStopCasting.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            
         }
         lblRecordingTiming.snp.makeConstraints { make in
             make.centerX.equalTo(cameraControlButton)
@@ -216,6 +234,17 @@ final class LiveView: NSObject {
         lblZoom.font = UIFont.systemFont(ofSize: 10.0)
         
         viewZoom.backgroundColor = .clear
+        
+        buttonView.clipsToBounds = true
+        buttonView.backgroundColor = .green
+        buttonView.layer.cornerRadius = 25
+        
+        btnStopCasting.clipsToBounds = true
+        btnStopCasting.setTitle("Stop Casting", for: .normal)
+        btnStopCasting.backgroundColor = .red
+        btnStopCasting.setTitleColor(.white, for: .normal)
+        btnStopCasting.titleLabel?.font = UIFont(name: "argentum-sans.bold", size: 20.0)
+        btnStopCasting.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         
 //        previewLayer.backgroundColor = UIColor(red: 231/255, green: 10/255, blue: 150/255, alpha: 1.0).cgColor
         

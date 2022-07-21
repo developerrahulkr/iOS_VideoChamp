@@ -9,11 +9,10 @@ import UIKit
 
 class AvatarVC: UIViewController {
 
+    @IBOutlet var viewTableView: UIView!
     @IBOutlet weak var viewText: UIView!
     @IBOutlet weak var btnSubmit: UIButton!
-    @IBOutlet weak var tfName: UITextField!
-    @IBOutlet var viewTableView: UIView!
-    
+    @IBOutlet weak var tfName: UITextField!    
     
     @IBOutlet weak var lblUserName1: UILabel!
     @IBOutlet weak var lblUserName2: UILabel!
@@ -38,18 +37,17 @@ class AvatarVC: UIViewController {
     @IBOutlet weak var imgAvatar5: UIImageView!
     @IBOutlet weak var imgAvatar6: UIImageView!
     @IBOutlet weak var imgAvatar7: UIImageView!
+    
+    var gradient = CAGradientLayer()
     var isSelected = false
     let userViewModel = UserViewModel()
     var isUpdateProfile = false
     var userName = ""
     var shortName = ""
     var avatarKey = 0
-    
-    
-    
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         tfName.delegate = self
         if isUpdateProfile {
@@ -70,17 +68,11 @@ class AvatarVC: UIViewController {
             viewText.backgroundColor = .white
             tfName.text = ""
         }
-        
         changeAvatar()
-        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
+        
     }
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isPortrait {
-            AppUtility.lockOrientation(.portrait)
-        }else{
-            AppUtility.lockOrientation(.landscape)
-        }
-    }
+    
+    
     
     
 //    MARK: - Change Avatar
@@ -155,6 +147,18 @@ class AvatarVC: UIViewController {
         btnSubmit.layer.cornerRadius = btnSubmit.bounds.height/2
         btnSubmit.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         tfName.attributedPlaceholder = NSAttributedString(string: "Enter your name", attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray])
+        gradient.frame = view.frame
+        gradient.colors = [lightWhite, lightgrey]
+        view.layer.insertSublayer(gradient, at: 0)
+
+
+    }
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            AppUtility.lockOrientation(.portrait)
+        }else{
+            AppUtility.lockOrientation(.landscape)
+        }
     }
     
     @available(iOS, deprecated: 9.0)
@@ -277,9 +281,20 @@ extension AvatarVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 896.0
+        return 896.0 - 150
+    }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+            self.tableView.reloadData()
+        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+            self.tableView.reloadData()
+        }
     }
     
     
     
 }
+
+

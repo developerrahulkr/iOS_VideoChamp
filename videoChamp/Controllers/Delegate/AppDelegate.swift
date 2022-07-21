@@ -133,6 +133,7 @@ var window: UIWindow?
         }
     }
 
+
 }
 
 
@@ -160,9 +161,7 @@ extension AppDelegate : MessagingDelegate, UNUserNotificationCenterDelegate {
         let action2 = UNNotificationAction(identifier: "action2", title: "Action Second", options: [.foreground])
         let category = UNNotificationCategory(identifier: "actionCategory", actions: [action1,action2], intentIdentifiers: [], options: [])
         
-        UNUserNotificationCenter.current().setNotificationCategories([category])
-        
-        
+        UNUserNotificationCenter.current().setNotificationCategories([category])   
     }
     
     

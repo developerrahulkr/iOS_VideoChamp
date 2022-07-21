@@ -46,6 +46,12 @@ final class LiveViewController: UIViewController {
         }
         
     }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        DispatchQueue.main.async {
+            self.liveView.previewLayer.frame = self.view.bounds
+            print("Layer :: ::: : \(self.liveView.previewLayer.frame)")
+        }
+    }
 
 
     private func setNavBar() {
@@ -80,6 +86,7 @@ final class LiveViewController: UIViewController {
             AppUtility.lockOrientation(.landscape)
         }
     }
+    
     @objc func closeVC(){
         let controllers = self.navigationController!.viewControllers
         for controller in controllers {

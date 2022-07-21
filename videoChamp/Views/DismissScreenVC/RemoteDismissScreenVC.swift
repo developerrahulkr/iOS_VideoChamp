@@ -9,21 +9,23 @@ import UIKit
 
 class RemoteDismissScreenVC: UIViewController {
 
+    @IBOutlet weak var btnOK: UIButton!
+    @IBOutlet weak var lblText: UILabel!
+    
+    @IBOutlet weak var cardView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            self.dismiss(animated: true)
+        }
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLayoutSubviews() {
+        btnOK.layer.cornerRadius = btnOK.bounds.height/2
+        cardView.layer.cornerRadius = 15.0
     }
-    */
-
+    @IBAction func onClickedOKBtn(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
 }
