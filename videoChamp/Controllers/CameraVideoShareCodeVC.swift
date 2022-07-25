@@ -69,41 +69,44 @@ class CameraVideoShareCodeVC: UIViewController {
                                                                         connectionState: "true")) {
             [weak self] isSuccess,linkURL,urlCode, codeMessage, blockCode in
             guard let self = self else {return}
-            if isSuccess{
-//                self.generatedNumber = number
-                print("Deeplinking URL : \(linkURL)")
-                print("url Code : \(urlCode)")
-                self.urlLink = linkURL
-                self.generatedUrlCode = urlCode
-                if self.isCamera == "true" {
-                    self.varCamera = true
-                }else{
-                    self.varCamera = false
-                }
-                
-                self.staticLink = "\(self.staticLink)\(urlCode)"
-                self.CodeVerifyApi(number: self.number ?? "", userId: self.userID ?? "", isCamera: self.varCamera)
-                self.tableView.reloadData()
-                
-            }
-//            else if codeMessage == "code is already generated" && isSuccess {
-//                print("Deeplinking URL : \(linkURL)")
-//                print("url Code : \(urlCode)")
-//                self.urlLink = linkURL
-//
-//                self.staticLink = "\(self.staticLink)\(urlCode)"
-//                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
-//                self.generatedUrlCode = urlCode
-//                self.tableView.reloadData()
-//            }
-            else if codeMessage == "code Expire" && isSuccess{
-                self.loadData()
-            }else if isSuccess && blockCode == "10"{
+            if isSuccess && blockCode == "10"{
                 self.showExitAlert()
             
-            }else{
-                print("error")
+            }else {
+                if isSuccess{
+    //                self.generatedNumber = number
+                    print("Deeplinking URL : \(linkURL)")
+                    print("url Code : \(urlCode)")
+                    self.urlLink = linkURL
+                    self.generatedUrlCode = urlCode
+                    if self.isCamera == "true" {
+                        self.varCamera = true
+                    }else{
+                        self.varCamera = false
+                    }
+                    
+                    self.staticLink = "\(self.staticLink)\(urlCode)"
+                    self.CodeVerifyApi(number: self.number ?? "", userId: self.userID ?? "", isCamera: self.varCamera)
+                    self.tableView.reloadData()
+                    
+                }
+    //            else if codeMessage == "code is already generated" && isSuccess {
+    //                print("Deeplinking URL : \(linkURL)")
+    //                print("url Code : \(urlCode)")
+    //                self.urlLink = linkURL
+    //
+    //                self.staticLink = "\(self.staticLink)\(urlCode)"
+    //                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
+    //                self.generatedUrlCode = urlCode
+    //                self.tableView.reloadData()
+    //            }
+                else if codeMessage == "code Expire" && isSuccess{
+                    self.loadData()
+                }else{
+                    print("error")
+                }
             }
+            
         }
         
         

@@ -195,11 +195,10 @@ class HomeVC: UIViewController {
     
     
     func checkBlockAndActivateDate() {
-        homeVM.activateDateAPIData { isSuccess,isUnblock, Code  in
-            if isSuccess && isUnblock && Code == "1"{
-                
+        homeVM.activateDateAPIData { isSuccess, Code  in
+            if isSuccess && Code == "1"{
                 print("User is Unblock")
-            }else if isSuccess && !isUnblock && Code == "10"{
+            }else if isSuccess && Code == "10"{
                 self.showExitAlert()
             }else{
                 self.showAlert(alertMessage: "Is Success is no Working")
@@ -275,7 +274,7 @@ class HomeVC: UIViewController {
     
     @objc func shareScreen(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ShareVC") as! ShareVC
-        vc.headingText = "Share Application"
+        vc.headingText = "SHARE APPLICATION"
         self.navigationController?.pushViewController(vc, animated: true)
         print("shareScreen")
     }

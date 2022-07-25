@@ -132,14 +132,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LIC-tp-QZu">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avataar_Screen_BG" translatesAutoresizingMaskIntoConstraints="NO" id="LIC-tp-QZu">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="tintColor" red="0.92549020049999997" green="0.92549020049999997" blue="0.92549020049999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ixq-Z4-aUV">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexBackgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="fvG-WA-kOo" id="WwR-SJ-dpt"/>
                                     <outlet property="delegate" destination="fvG-WA-kOo" id="Jpr-oa-Kwn"/>
@@ -171,6 +171,7 @@
                         <outlet property="imgAvatar5" destination="VKX-CQ-rLG" id="qCW-8o-sde"/>
                         <outlet property="imgAvatar6" destination="9bD-Eu-ceZ" id="hQl-hS-d5R"/>
                         <outlet property="imgAvatar7" destination="XID-e6-qcO" id="Zp3-q8-zX0"/>
+                        <outlet property="imgBackground" destination="LIC-tp-QZu" id="ahJ-yq-dXE"/>
                         <outlet property="lblUserName1" destination="Aqa-Um-qGK" id="6M2-1h-ljx"/>
                         <outlet property="lblUserName2" destination="9gY-oc-iA8" id="oqK-TN-odK"/>
                         <outlet property="lblUserName3" destination="MJh-cw-l5t" id="IMI-Go-Sc7"/>
@@ -1936,6 +1937,7 @@ recipient is here</string>
         <image name="Home_screen_BG" width="375" height="812"/>
         <image name="Side_menu_bg" width="282" height="656.5"/>
         <image name="attatchment_icon" width="14.5" height="16.5"/>
+        <image name="avataar_Screen_BG" width="376" height="813"/>
         <image name="avatar1" width="147.5" height="147.5"/>
         <image name="avatar2" width="81.5" height="81.5"/>
         <image name="avatar3" width="81.5" height="81.5"/>

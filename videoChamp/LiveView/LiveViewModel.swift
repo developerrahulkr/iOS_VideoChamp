@@ -14,12 +14,9 @@ import AVFoundation
 import GSImageViewerController
 import Photos
 
-
-
-
 enum _CaptureState {
-        case idle, start, capturing, end
-    }
+    case idle, start, capturing, end
+}
 
 public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     //
@@ -64,7 +61,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
 //    MARK: - VideoOutPut
     
     var captureSession = AVCaptureSession()
-    var sessionOutput = AVCaptureStillImageOutput()
     var movieOutput = AVCaptureMovieFileOutput()
     var previewLayer = AVCaptureVideoPreviewLayer()
     private (set) var resultBuffer: CMSampleBuffer!
@@ -159,6 +155,14 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         
         if batterPercentage <= 20 {
             do {
+                let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                vc.modalPresentationStyle = .overFullScreen
+                vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                self.isDisconnect = false
+                vc.image = UIImage(named: "battery_icon")!
+                vc.titleText = "BATTERY ALERT"
+                vc.messageText = "Remote Device Battery is low"
+                UIApplication.topViewController()?.present(vc, animated: true)
                 try livePresenter.sendText(text: "low", sendMode: .unreliable)
             } catch let error {
                 print(error)
@@ -429,22 +433,36 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     
     @objc func captureFrames(_ sender: UIButton){
 //        liveSetupView.imageCapture.image = liveSetupView.imageView.image
-        
-//        savePic()
-        do {
-//            sendImage = liveSetupView.imageView.image ?? UIImage()
-            sender.setImage(UIImage(named: "camera_icon_yellow"), for: .normal)
-            liveSetupView.btnVideo.setImage(UIImage(named: "record_video_icon_white"), for: .normal)
-            liveSetupView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
-            liveSetupView.lblRecordingTiming.isHidden = true
-            liveSetupView.lblRecording.textColor = .white
-            liveSetupView.lblRecording.text = "CAPTURE"
-            sendString = "camera"
-            try livePresenter.sendText(text: sendString, sendMode: .unreliable)
+        if liveSetupView.cameraControlButton.image(for: .normal) == UIImage(named: "start_video_recording_icon") {
+            UIApplication.topViewController()?.showToast(message: "Video Captured!", font: .systemFont(ofSize: 16.0))
+//                    self.saveImageAlertVC()
+            sendString = "stopRecording"
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopRecording"), object: nil)
+            self.stopTimer()
+            do {
+                try livePresenter.sendText(text: sendString, sendMode: .unreliable)
+            }catch {
+                print(error.localizedDescription)
+            }
             
-        } catch let error {
-            print(error)
+        }else{
+            do {
+    //            sendImage = liveSetupView.imageView.image ?? UIImage()
+                sender.setImage(UIImage(named: "camera_icon_yellow"), for: .normal)
+                liveSetupView.btnVideo.setImage(UIImage(named: "record_video_icon_white"), for: .normal)
+                liveSetupView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
+                liveSetupView.lblRecordingTiming.isHidden = true
+                liveSetupView.lblRecording.textColor = .white
+                liveSetupView.lblRecording.text = "CAPTURE"
+                sendString = "camera"
+                try livePresenter.sendText(text: sendString, sendMode: .unreliable)
+                
+            } catch let error {
+                print(error)
+            }
         }
+//        savePic()
+
         
     }
     
@@ -504,7 +522,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         liveView.textSendButton.setTitleColor(onColor, for: .highlighted)
         liveView.imageView.isUserInteractionEnabled = false
         // others
-        liveView.imageView.contentMode = .scaleAspectFill
+        liveView.imageView.contentMode = .scaleAspectFit
         liveView.receivedTextLabel.adjustsFontSizeToFitWidth = true
         liveView.soundControlButton.layer.opacity = 0.5
         liveView.textSendButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -666,22 +684,10 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         sender.backgroundColor = data.color
     }
     
-    
-    
-//    MARK: - Send Video Streaming
-
+//  MARK: - Send Video Streaming
     @objc private func toggleSendVideoData(_ sender: UIButton) {
 //        #if !targetEnvironment(simulator)
         if sendString == "camera"{
-//            self.takePhoto()
-            
-//            if let _currentInput = self.capSession?.outputs.first {
-//                if _currentInput == photoOutput{
-//                    else{
-//
-//                    }
-//                }
-//            }
             liveSetupView.lblRecordingTiming.isHidden = true
             liveSetupView.lblRecording.textColor = .white
             liveSetupView.lblRecording.text = "CAPTURE"
@@ -695,10 +701,10 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     try livePresenter.sendText(text: sendString, sendMode: .unreliable)
                     sender.isUserInteractionEnabled = true
                 }
-                
+//
 //                sender.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
 //                self.saveImageAlertVC()
-                
+//
 //                let imageData = sendImage.pngData()
 //
 //                if ((imageData?.isEmpty) == nil) {
@@ -718,8 +724,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             } catch let error {
                 print(error)
             }
-
-
         }else if sendString == "captureImage" {
             liveSetupView.lblRecordingTiming.isHidden = true
             liveSetupView.lblRecording.textColor = .white
@@ -735,8 +739,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                print(error)
            }
         }else{
-            
-            
 //            if videochampManager.videochamp_sharedManager.redirectType == .remote{
 //                if sender.image(for: .normal) ==  UIImage(named: "stop_video_recording_icon")  {
 //
@@ -759,8 +761,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     try livePresenter.sendText(text: sendString, sendMode: .unreliable)
                     sender.setImage(UIImage(named: "start_video_recording_icon"), for: .normal)
                 }else{
-                    
-                    
 //                    movieOutput.stopRecording()
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 //                        if let _currentOutput = self.capSession?.outputs.first {
@@ -775,11 +775,9 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
 //                        self.sessionSetupSucceeds = true
 //                    }
 //                    self.saveImageAlertVC()
-                    
                     liveSetupView.lblRecordingTiming.isHidden = true
                     liveSetupView.lblRecording.textColor = .white
                     liveSetupView.lblRecording.text = "CAPTURE"
-//                    UIApplication.topViewController()?.showToast(message: "Video captured", font: .systemFont(ofSize: 16.0))
                     UIApplication.topViewController()?.showToast(message: "Video Captured!", font: .systemFont(ofSize: 16.0))
 //                    self.saveImageAlertVC()
                     sendString = "stopRecording"
@@ -871,60 +869,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
 
 //MARK: StartVideo Recording
 extension LiveViewModel {
-
-    private func configureVideoSession() {
-        if let currentOutput = capSession?.outputs.first {
-            capSession?.removeOutput(currentOutput)
-        }
-        setupVideoRecording()
-        sessionOutput.outputSettings = [AVVideoCodecKey : AVVideoCodecType.jpeg]
-        if ((capSession?.canAddOutput(sessionOutput)) != nil)
-        {
-            capSession?.addOutput(sessionOutput)
-
-            liveSetupView.previewLayer = AVCaptureVideoPreviewLayer(session: capSession!)
-            liveSetupView.previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            liveSetupView.previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-//            capView.layer.addSublayer(previewLayer)
-//            previewLayer.position = CGPoint(x: self.capView.frame.width / 2, y: self.capView.frame.height / 2)
-//            previewLayer.bounds = capView.frame
-        }
-        capSession?.addOutput(movieOutput)
-        capSession?.startRunning()
-        sessionSetupSucceeds = true
-        self.handleCaptureSession()
-    }
-    
-    
-    private func setupVideoRecording(){
-        let session = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
-        let devices = session.devices
-        guard let audioDevice = AVCaptureDevice.default(for: .audio) else { return }
-        for device in devices
-            {
-                if device.position == AVCaptureDevice.Position.back
-                {
-                    do{
-                        if let inputs = capSession?.inputs as? [AVCaptureDeviceInput] {
-                            for input in inputs {
-                                capSession?.removeInput(input)
-                            }
-                        }
-                        let input = try AVCaptureDeviceInput(device: device )
-                        let audioDeviceInput = try AVCaptureDeviceInput(device: audioDevice)
-                        if ((capSession?.canAddInput(input)) != nil){
-                            capSession?.addInput(input)
-                            capSession?.addInput(audioDeviceInput)
-                        }
-
-                    }
-                    catch{
-                        print("Error")
-                    }
-                }
-        }
-        
-    }
     func handleCaptureSession()
         {
             print("-----------Starting-----------")
@@ -937,8 +881,6 @@ extension LiveViewModel {
             let fileUrl = paths[0].appendingPathComponent(fileName)
             try? FileManager.default.removeItem(at: fileUrl)
 //            print(self.capSession?.outputs)
-            
-            
             _filename = UUID().uuidString
             let videoPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(_filename).mov")
             
@@ -1065,7 +1007,6 @@ extension LiveViewModel {
 
     
     public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-            print("FINISHED \(error )")
             // save video to camera roll
         guard _assetWriterInput?.isReadyForMoreMediaData == true, _assetWriter!.status == .completed else { return }
             if error == nil {
@@ -1156,6 +1097,8 @@ extension LiveViewModel {
                 imageOrientation = .up
             case .landscapeLeft:
                 imageOrientation = .down
+            @unknown default:
+                fatalError()
             }
 
             return UIImage(cgImage: cgImage, scale: 1, orientation: imageOrientation)

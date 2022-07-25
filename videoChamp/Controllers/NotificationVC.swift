@@ -92,14 +92,17 @@ extension NotificationVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.notificationViewModel.readNotificationData(notificationId: notificationViewModel.getNotificationDataSource[indexPath.row]._id!) { isSuccess, blockCode   in
-            if isSuccess {
-                self.notificationViewModel.getNotificationDataSource.removeAll()
-                self.loadData()
-            }else if isSuccess && blockCode == "10" {
+            if isSuccess && blockCode == "10" {
                 self.showExitAlert()
             }else{
-                print("Wrong to read")
+                if isSuccess {
+                    self.notificationViewModel.getNotificationDataSource.removeAll()
+                    self.loadData()
+                }else{
+                    print("Wrong to read")
+                }
             }
+            
         }
     }
     
@@ -117,15 +120,19 @@ extension NotificationVC : UITableViewDelegate, UITableViewDataSource {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
             self.notificationViewModel.deleteNotificationData(notificationId: self.notificationViewModel.getNotificationDataSource[indexPath.row]._id!) {
                 isDeleted, blockedCode  in
-                if isDeleted {
-                    self.notificationViewModel.getNotificationDataSource.remove(at: indexPath.row)
-                    self.notificationTableView.reloadData()
-                    completionHandler(true)
-                }else if(isDeleted && blockedCode == "10"){
+                
+                if(isDeleted && blockedCode == "10"){
                     self.showExitAlert()
-                }else{
-                    print("Wrong to Delete")
+                } else {
+                    if isDeleted {
+                        self.notificationViewModel.getNotificationDataSource.remove(at: indexPath.row)
+                        self.notificationTableView.reloadData()
+                        completionHandler(true)
+                    }else{
+                        print("Wrong to Delete")
+                    }
                 }
+                
             }
         }
         deleteAction.image = UIImage(named: "trash_icon")

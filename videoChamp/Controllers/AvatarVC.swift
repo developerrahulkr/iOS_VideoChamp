@@ -21,8 +21,8 @@ class AvatarVC: UIViewController {
     @IBOutlet weak var lblUserName5: UILabel!
     @IBOutlet weak var lblUserName6: UILabel!
     @IBOutlet weak var lblUserName7: UILabel!
-    
-    
+ 
+    @IBOutlet weak var imgBackground: UIImageView!
     @IBOutlet weak var topView1: UIView!
     @IBOutlet weak var topView2: UIView!
     @IBOutlet weak var topView3: UIView!
@@ -38,7 +38,6 @@ class AvatarVC: UIViewController {
     @IBOutlet weak var imgAvatar6: UIImageView!
     @IBOutlet weak var imgAvatar7: UIImageView!
     
-    var gradient = CAGradientLayer()
     var isSelected = false
     let userViewModel = UserViewModel()
     var isUpdateProfile = false
@@ -147,17 +146,13 @@ class AvatarVC: UIViewController {
         btnSubmit.layer.cornerRadius = btnSubmit.bounds.height/2
         btnSubmit.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
         tfName.attributedPlaceholder = NSAttributedString(string: "Enter your name", attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray])
-        gradient.frame = view.frame
-        gradient.colors = [lightWhite, lightgrey]
-        view.layer.insertSublayer(gradient, at: 0)
+        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
 
 
     }
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isPortrait {
-            AppUtility.lockOrientation(.portrait)
-        }else{
-            AppUtility.lockOrientation(.landscape)
+        DispatchQueue.main.async {
+            self.imgBackground.frame = self.view.bounds
         }
     }
     

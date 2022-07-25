@@ -14,7 +14,7 @@ let appName = "Video Champ"
 
 let kToken = ""
 var sendingRemoteMessage = """
-You are invited to become monitor.
+You are invited to become remote.
 
 Please click the below link:
 

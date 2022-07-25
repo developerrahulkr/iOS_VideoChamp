@@ -69,39 +69,34 @@ class RemoteControlVC: UIViewController {
         generateLinkVM.linkGenerated(cmGenerateLinkData: linkGenerated) {
             [weak self] isSuccess,linkURL,urlCode, codeMessage,blockedCode   in
             guard let self = self else {return}
-            if isSuccess{
-//                self.generatedNumber = number
-                print("Deeplinking URL : \(linkURL)")
-                print("url Code : \(urlCode)")
-                self.urlLink = linkURL
-                self.generatedUrlCode = urlCode
-                if self.isCamera == "true" {
-                    self.varCamera = true
-                }else{
-                    self.varCamera = false
-                }
-                
-                self.CodeVerifyApi(number: self.number ?? "", userId: self.userID ?? "", isCamera: self.varCamera)
-                self.staticLink = "\(self.staticLink)\(urlCode)"
-                self.tableView.reloadData()
-                
-            }
-//            else if codeMessage == "code is already generated" && isSuccess {
-//                print("Deeplinking URL : \(linkURL)")
-//                print("url Code : \(urlCode)")
-//                self.urlLink = linkURL
-//                self.generatedUrlCode = urlCode
-//                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
-//                self.staticLink = "\(self.staticLink)\(urlCode)"
-//                self.tableView.reloadData()
-//            }
-            else if codeMessage == "code Expire" && isSuccess{
-                self.loadData()
-            }else if isSuccess && blockedCode == "10" {
+            
+            if isSuccess && blockedCode == "10" {
                 self.showExitAlert()
             }else{
-                print("Error")
+                if isSuccess{
+    //                self.generatedNumber = number
+                    print("Deeplinking URL : \(linkURL)")
+                    print("url Code : \(urlCode)")
+                    self.urlLink = linkURL
+                    self.generatedUrlCode = urlCode
+                    if self.isCamera == "true" {
+                        self.varCamera = true
+                    }else{
+                        self.varCamera = false
+                    }
+                    
+                    self.CodeVerifyApi(number: self.number ?? "", userId: self.userID ?? "", isCamera: self.varCamera)
+                    self.staticLink = "\(self.staticLink)\(urlCode)"
+                    self.tableView.reloadData()
+                    
+                }
+                else if codeMessage == "code Expire" && isSuccess{
+                    self.loadData()
+                }else{
+                    print("Error")
+                }
             }
+            
         }
     }
     
@@ -158,7 +153,6 @@ class RemoteControlVC: UIViewController {
 
                         }
                     }else{
-                        self.showAlert(alertMessage: "Data is Not Found")
                         print("Data is Not Found.........")
                     }
                     
