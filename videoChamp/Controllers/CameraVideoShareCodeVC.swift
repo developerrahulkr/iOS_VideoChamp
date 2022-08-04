@@ -132,8 +132,7 @@ class CameraVideoShareCodeVC: UIViewController {
                         print("Already Advertise.........")
                     }else{
                         self.mcSessionViewModel.toogleAdvertising()
-                    }
-                    
+                    } 
                 }else{
                     self.mcSessionViewModel.toggleBrwosing()
                 }

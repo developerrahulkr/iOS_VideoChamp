@@ -36,6 +36,11 @@ class FeedbackViewModel : NSObject {
     
     func getFeedbackData(completionHandler : @escaping(Bool, Bool) -> ()) {
         UIApplication.topViewController()?.showActivityIndicator()
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         
         APIManager.shared.getFeedback { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
@@ -87,6 +92,11 @@ class FeedbackViewModel : NSObject {
         
         let parameter = ["title" : feedBackData.title ?? "", "desc" : feedBackData.desc ?? "", "email" : feedBackData.email ?? "", "image" : feedBackData.image] as [String : Any]
         UIApplication.topViewController()?.showActivityIndicator()
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.uploadPostData(imgData: imageData, parameter: parameter) { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if inDict == nil {
@@ -110,6 +120,11 @@ class FeedbackViewModel : NSObject {
     func getFeedbackListData(feedId : String, completionHandler : @escaping(Bool, String) -> ()) {
         UIApplication.topViewController()?.showActivityIndicator()
         
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.getFeedbackData(feedID: feedId) { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if dict == nil {

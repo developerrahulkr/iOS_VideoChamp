@@ -19,6 +19,7 @@ class FeedbackMsgImageCell: UITableViewCell {
 
     func updateData(inData : CMGetFeedbackServiceData) {
         lblTime.text = Utility.shared.timeFormatConvertor(string: inData.createdAt ?? "")
+        
         guard let url = URL(string: inData.image ?? "") else { return }
         
         if let imgdata = try? Data(contentsOf: url) {

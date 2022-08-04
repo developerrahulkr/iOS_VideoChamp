@@ -16,6 +16,11 @@ class UserViewModel : NSObject {
     func registerUser(userName : String, avatarType : String, deviceToken : String, completionHandler : @escaping(Bool, String) -> Void) {
         
         UIApplication.topViewController()?.showActivityIndicator()
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.getUser(userName: userName, avatarType: avatarType, deviceToken : deviceToken) { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
             
@@ -47,6 +52,11 @@ class UserViewModel : NSObject {
     
     func updateAvatar(updateAvatar : Int, completionHandler : @escaping(Bool, String) -> Void) {
         UIApplication.topViewController()?.hideActivityIndicator()
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.updateAvatar(avatarType: updateAvatar) { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
             

@@ -17,6 +17,11 @@ class GeneratedLinkViewModel {
     func linkGenerated(cmGenerateLinkData : CMGenerateLink, completionHandler : @escaping(Bool, String, String, String,String) -> Void){
         
         UIApplication.topViewController()?.showActivityIndicator()
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.generateLink(data: cmGenerateLinkData) { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if dict != nil {

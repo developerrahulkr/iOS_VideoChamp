@@ -384,5 +384,9 @@ class APIManager : NSObject {
         
     }
     
+    func isConnectedToInternet() ->Bool {
+        return NetworkReachabilityManager()!.isReachable
+    }
+    
     
 }

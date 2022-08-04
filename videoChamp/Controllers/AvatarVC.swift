@@ -37,6 +37,7 @@ class AvatarVC: UIViewController {
     @IBOutlet weak var imgAvatar5: UIImageView!
     @IBOutlet weak var imgAvatar6: UIImageView!
     @IBOutlet weak var imgAvatar7: UIImageView!
+    @IBOutlet weak var btnBack: UIButton!
     
     var isSelected = false
     let userViewModel = UserViewModel()
@@ -50,9 +51,18 @@ class AvatarVC: UIViewController {
         // Do any additional setup after loading the view.
         tfName.delegate = self
         if isUpdateProfile {
+            btnBack.isHidden = false
             tfName.isUserInteractionEnabled = false
             btnSubmit.setTitle("UPDATE", for: .normal)
             tfName.text = userName
+            img1.image = UserDefaults.standard.imageForKey(key: "avatarImage")
+            if let userSelectedColorData = UserDefaults.standard.object(forKey: "UserSelectedColor") as? Data {
+                if let userSelectedColor = NSKeyedUnarchiver.unarchiveObject(with:userSelectedColorData as Data) as? UIColor {
+                    print(userSelectedColor)
+                    lblUserName1.textColor = userSelectedColor
+                }
+            }
+            
             lblUserName1.text = shortName
             lblUserName2.text = shortName
             lblUserName3.text = shortName
@@ -63,6 +73,7 @@ class AvatarVC: UIViewController {
             viewText.backgroundColor = .lightGray
             
         }else{
+            btnBack.isHidden = true
             tfName.isUserInteractionEnabled = true
             viewText.backgroundColor = .white
             tfName.text = ""
@@ -94,6 +105,10 @@ class AvatarVC: UIViewController {
         
         let gesture6 = UITapGestureRecognizer(target: self, action: #selector(changeImage6))
         bottomView3.addGestureRecognizer(gesture6)
+    }
+    
+    @IBAction func onClickedBackBtn(_ sender: UIButton) {
+        dismiss(animated: true)
     }
     
     

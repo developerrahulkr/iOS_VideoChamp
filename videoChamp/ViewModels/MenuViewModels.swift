@@ -45,6 +45,11 @@ class MenuViewModels : NSObject {
     
     func activateDateAPIData(completionHandler : @escaping(Bool,String) -> Void) {
         UIApplication.topViewController()?.showActivityIndicator()
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.activateDate { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if dict == nil {

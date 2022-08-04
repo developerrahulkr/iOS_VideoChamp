@@ -145,17 +145,28 @@
                                     <outlet property="delegate" destination="fvG-WA-kOo" id="Jpr-oa-Kwn"/>
                                 </connections>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJn-cy-wKa">
+                                <rect key="frame" x="20" y="64" width="45" height="62"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="20" maxX="20" maxY="20"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="back_arrow"/>
+                                <connections>
+                                    <action selector="onClickedBackBtn:" destination="fvG-WA-kOo" eventType="touchUpInside" id="bcH-gQ-Gd4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zc7-ok-Cae"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="eJn-cy-wKa" firstAttribute="top" secondItem="zc7-ok-Cae" secondAttribute="top" constant="20" id="07r-4w-bV0"/>
                             <constraint firstAttribute="bottom" secondItem="LIC-tp-QZu" secondAttribute="bottom" id="5kf-so-Aw3"/>
                             <constraint firstItem="zc7-ok-Cae" firstAttribute="bottom" secondItem="ixq-Z4-aUV" secondAttribute="bottom" id="881-IR-iXT"/>
+                            <constraint firstItem="eJn-cy-wKa" firstAttribute="leading" secondItem="zc7-ok-Cae" secondAttribute="leading" constant="20" id="Bvy-U2-BiF"/>
                             <constraint firstItem="zc7-ok-Cae" firstAttribute="trailing" secondItem="ixq-Z4-aUV" secondAttribute="trailing" id="RPe-RH-07y"/>
                             <constraint firstItem="ixq-Z4-aUV" firstAttribute="leading" secondItem="zc7-ok-Cae" secondAttribute="leading" id="VTm-2h-aNV"/>
-                            <constraint firstItem="LIC-tp-QZu" firstAttribute="leading" secondItem="zc7-ok-Cae" secondAttribute="leading" id="Vmv-7a-tt6"/>
+                            <constraint firstItem="LIC-tp-QZu" firstAttribute="leading" secondItem="ubM-nk-ZHN" secondAttribute="leading" id="Vmv-7a-tt6"/>
                             <constraint firstItem="ixq-Z4-aUV" firstAttribute="top" secondItem="zc7-ok-Cae" secondAttribute="top" id="WN2-8N-ugi"/>
-                            <constraint firstItem="zc7-ok-Cae" firstAttribute="trailing" secondItem="LIC-tp-QZu" secondAttribute="trailing" id="ZiK-do-CQa"/>
+                            <constraint firstAttribute="trailing" secondItem="LIC-tp-QZu" secondAttribute="trailing" id="ZiK-do-CQa"/>
                             <constraint firstItem="LIC-tp-QZu" firstAttribute="top" secondItem="ubM-nk-ZHN" secondAttribute="top" id="dmG-HT-Xpc"/>
                         </constraints>
                     </view>
@@ -163,6 +174,7 @@
                         <outlet property="bottomView1" destination="x1X-pQ-0OE" id="qX2-Dd-vb7"/>
                         <outlet property="bottomView2" destination="bcf-Tu-gZE" id="wSf-yB-md4"/>
                         <outlet property="bottomView3" destination="MqK-05-pJi" id="wbA-Bg-2cK"/>
+                        <outlet property="btnBack" destination="eJn-cy-wKa" id="yCd-H4-Crm"/>
                         <outlet property="btnSubmit" destination="8FX-a6-RUh" id="hUJ-NK-NAS"/>
                         <outlet property="img1" destination="rbj-Hs-Yix" id="hgY-yl-7y5"/>
                         <outlet property="imgAvatar2" destination="a0g-0O-NtM" id="FtC-c8-i4p"/>
@@ -1780,6 +1792,9 @@ recipient is here</string>
                                                         <rect key="frame" x="198.5" y="0.0" width="99.5" height="59"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="ticktok"/>
+                                                        <connections>
+                                                            <action selector="onClickedTiktokBtn:" destination="Fqi-gt-SqG" eventType="touchUpInside" id="ZUX-gu-hsl"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

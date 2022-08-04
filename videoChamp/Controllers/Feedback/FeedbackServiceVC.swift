@@ -196,12 +196,12 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
             print("feedback Image : \(FeedbackVM.getFeedbackServiceDataSource[indexPath.row].image!)")
             cell2.cardView.layer.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
             cell2.cardView.roundRightChatCorner(cornerRadius: 16)
+            return cell2
         }else{
             if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].type == "incoming" && FeedbackVM.getFeedbackServiceDataSource[indexPath.row].message != nil{
                 cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
                 cell.lblMsg.textColor = .white
                 cell.cellView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
-                
                 cell.cellView.roundRightChatCorner(cornerRadius: 16)
                 
             }else{

@@ -22,17 +22,17 @@ class CMFeedBack : NSObject {
 class CMGetNotificationData : NSObject {
     var title : String?
     var desc : String?
-    var time : String?
+    var createdAt : String?
     var _id : String?
-    var status : String?
+    var isRead : String?
 //    var isSelected = "true"
-    init(title : String, desc : String, time : String, _id : String, status : String) {
+    init(title : String, desc : String, createdAt : String, _id : String, isRead : String) {
         super.init()
-        self.desc = desc
         self.title = title
-        self.time = time
+        self.desc = desc
+        self.createdAt = createdAt
         self._id = _id
-        self.status = status
+        self.isRead = isRead
     }
     
     override init(){

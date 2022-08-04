@@ -338,10 +338,7 @@ extension RemoteControlVC : UITableViewDataSource, UITableViewDelegate, VerifyCo
                 }else if isSuccess && verCode == "4" {
                     self.showAlert(alertMessage: message)
                 }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-                        self.mcSessionViewModel.toggleBrwosing()
-                    }
-                    
+                    self.mcSessionViewModel.toggleBrwosing()
                 }
                 
                 

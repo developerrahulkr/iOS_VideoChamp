@@ -15,7 +15,11 @@ class GenerateNumberViewModel : NSObject {
     
     func getGenerateNumber(completionHandler : @escaping(Bool, String, String) -> ()) {
         UIApplication.topViewController()?.showActivityIndicator()
-        
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.generateNumber { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
             
@@ -45,6 +49,12 @@ class GenerateNumberViewModel : NSObject {
     func verifyNumber(number : String,userID : String, isCamera : Bool, completionHandler : @escaping(Bool,String, String) -> Void){
         
         UIApplication.topViewController()?.showActivityIndicator()
+        
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.verifyCode(verCode: number, userId: userID, isCamera: isCamera) { dict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if dict == nil {
@@ -67,6 +77,11 @@ class GenerateNumberViewModel : NSObject {
     
     func termAndConditionsData(completionHandler : @escaping(Bool, String, String) -> Void) {
         UIApplication.topViewController()?.showActivityIndicator()
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         
         APIManager.shared.getTermAndCondition(type: 1) { dict in
             UIApplication.topViewController()?.hideActivityIndicator()

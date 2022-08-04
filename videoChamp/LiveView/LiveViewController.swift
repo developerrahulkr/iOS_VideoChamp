@@ -70,6 +70,7 @@ final class LiveViewController: UIViewController {
         
     }
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpChatViewModel()
@@ -89,6 +90,9 @@ final class LiveViewController: UIViewController {
     
     @objc func closeVC(){
         let controllers = self.navigationController!.viewControllers
+//        print("Browsing State : \(Utility.shared.sessionManager.needsBrowsing)")
+        Utility.shared.sessionManager.needsAdvertising.toggle()
+        Utility.shared.sessionManager.needsBrowsing.toggle()
         for controller in controllers {
             if controller is HomeVC {
                 self.navigationController?.popToViewController(controller, animated: true)
@@ -99,9 +103,16 @@ final class LiveViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("willDidDisappear method is Called.....")
+        liveViewModel.removeObserverBackground()
+    }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        print("Diddisapper method is Called.....")
+        liveViewModel.removeObserverBackground()
         
     }
 
@@ -116,7 +127,6 @@ final class LiveViewController: UIViewController {
     }
 
     deinit {
-        //print("deinit:LiveVC")
         NotificationCenter.default.removeObserver(self, name: .kCloseScreen, object: nil)
         NotificationCenter.default.removeObserver(self, name: .kPopToRoot, object: nil)
     }

@@ -24,6 +24,11 @@ class NotificationViewModel : NSObject {
     func getNotificationData(completionHandler : @escaping(Bool, Bool) -> ()){
         UIApplication.topViewController()?.showActivityIndicator()
         
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.getNotification { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if inDict == nil {
@@ -36,7 +41,7 @@ class NotificationViewModel : NSObject {
                 let notificationList = data?["notificationList"]!.arrayValue
                 if statusCode == "200"{
                     for dic in notificationList! {
-                        self.getNotificationDataSource.append(CMGetNotificationData(title: dic["title"].stringValue, desc: dic["description"].stringValue, time: dic["createdAt"].stringValue, _id: dic["_id"].stringValue, status: dic["status"].stringValue))
+                        self.getNotificationDataSource.append(CMGetNotificationData(title: dic["title"].stringValue, desc: dic["description"].stringValue, createdAt: dic["createdAt"].stringValue, _id: dic["_id"].stringValue, isRead: dic["isRead"].stringValue))
                         print("notification id : \(dic["_id"].stringValue)")
                         
                     }
@@ -57,6 +62,11 @@ class NotificationViewModel : NSObject {
     
     func readNotificationData(notificationId : String, completionHandler : @escaping(Bool, String) -> ()) {
         UIApplication.topViewController()?.showActivityIndicator()
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.readNotification(notificationId: notificationId) { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if inDict == nil {
@@ -85,6 +95,12 @@ class NotificationViewModel : NSObject {
     
     func deleteNotificationData(notificationId : String, completionHandler : @escaping(Bool, String) -> ()) {
         UIApplication.topViewController()?.showActivityIndicator()
+        
+        guard APIManager.shared.isConnectedToInternet() else {
+            UIApplication.topViewController()?.hideActivityIndicator()
+            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            return
+        }
         APIManager.shared.deleteNotification(notificationId: notificationId) { inDict in
             UIApplication.topViewController()?.hideActivityIndicator()
             if inDict == nil {

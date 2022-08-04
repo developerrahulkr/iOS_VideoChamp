@@ -37,8 +37,8 @@ class NotificationCell: UITableViewCell {
     func updateData(inData : CMGetNotificationData) {
         lblTitle.text = "Notification"
         lblMsg.text = inData.desc ?? ""
-        lblTime.text = Utility.shared.timeConvertor(string: inData.time ?? "")
-        if inData.status == "false" {
+        lblTime.text = Utility.shared.timeConvertor(string: inData.createdAt ?? "")
+        if inData.isRead == "true" {
             lblNotification.backgroundColor = .gray
         }else{
             lblNotification.backgroundColor = UIColor(red: 137/255, green: 192/255, blue: 31/255, alpha: 1)

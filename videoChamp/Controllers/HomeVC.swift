@@ -9,6 +9,7 @@ import UIKit
 //import MFrameWork
 import MultipeerFramework
 import MultipeerConnectivity
+import Alamofire
 
 
 enum ConnectionState {
@@ -190,7 +191,6 @@ class HomeVC: UIViewController {
                 lblShortName.textColor = userSelectedColor
             }
         }
-        
     }
     
     
@@ -239,19 +239,29 @@ class HomeVC: UIViewController {
     }
     
     @objc func funcCameraActivity(){
-        print("peer ids is : \(String(describing: self.peerIDs))")
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CameraVideoShareCodeVC") as! CameraVideoShareCodeVC
-        videochampManager.videochamp_sharedManager.redirectType = .camera
-//        vc.sessionManager = sessionManager
+        if !APIManager.shared.isConnectedToInternet() {
+            self.showAlert(alertMessage: "Internet is not Access.")
+        }else{
+            print("peer ids is : \(String(describing: self.peerIDs))")
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CameraVideoShareCodeVC") as! CameraVideoShareCodeVC
+            videochampManager.videochamp_sharedManager.redirectType = .camera
+    //        vc.sessionManager = sessionManager
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func funcRemoteActivity(){
+        if !APIManager.shared.isConnectedToInternet() {
+            self.showAlert(alertMessage: "Internet is not Access.")
+        }else {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
+            self.navigationController?.pushViewController(vc, animated: true)
+            videochampManager.videochamp_sharedManager.redirectType = .remote
+        }
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "RemoteControlVC") as! RemoteControlVC
-        self.navigationController?.pushViewController(vc, animated: true)
-        videochampManager.videochamp_sharedManager.redirectType = .remote
+        
     }
     
     @objc func notificationScreen(){

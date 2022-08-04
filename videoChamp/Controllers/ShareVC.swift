@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class ShareVC: UIViewController {
 
@@ -43,26 +44,33 @@ class ShareVC: UIViewController {
     
     
     @IBAction func onClickedWhatsAppBtn(_ sender: UIButton) {
-        openLink(urlLink: "https://api.whatsapp.com/")
+
+        openLink(urlLink: "https://api.whatsapp.com/", id: 310633997)
     }
     
     @IBAction func onClickedFacebookBtn(_ sender: UIButton) {
-        openLink(urlLink: "https://www.facebook.com/")
+        openLink(urlLink: "https://www.facebook.com/", id: 284882215)
     }
     
     @IBAction func onClickedInstagramBtn(_ sender: UIButton) {
-        openLink(urlLink: "https://api.instagram.com/")
+        openLink(urlLink: "https://api.instagram.com/", id: 389801252)
     }
     
     @IBAction func onClickedTwitter(_ sender: UIButton) {
-        openLink(urlLink: "https://www.twitter.com/")
+        openLink(urlLink: "https://www.twitter.com/", id: 333903271)
     }
     
     @IBAction func onClickedYoutubeBtn(_ sender: UIButton) {
-        openLink(urlLink: "https://www.youtube.com/")
+        openLink(urlLink: "https://www.youtube.com/", id: 544007664)
     }
+    @IBAction func onClickedTiktokBtn(_ sender: UIButton) {
+        openLink(urlLink: "https://www.tiktok.com/", id: 835599320)
+    }
+    
+    
+//    tiktok ID 835599320
 //    MARK: - Open App Link Func
-    func openLink(urlLink : String) {
+    func openLink(urlLink : String, id : Int) {
         let appURL = URL(string: "whatsapp://")!
         let application = UIApplication.shared
 
@@ -70,8 +78,9 @@ class ShareVC: UIViewController {
             application.open(appURL)
         } else {
             // if Instagram app is not installed, open URL inside Safari
-            let webURL = URL(string: urlLink)!
-            application.open(webURL)
+            let vc = SKStoreProductViewController()
+            vc.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier : NSNumber(value: id)], completionBlock: nil)
+            present(vc, animated: true)
         }
     }
     
