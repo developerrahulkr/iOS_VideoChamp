@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import GradientView
 
 class AvatarVC: UIViewController {
 
+    @IBOutlet var viewMain: GradientView!
     @IBOutlet var viewTableView: UIView!
     @IBOutlet weak var viewText: UIView!
     @IBOutlet weak var btnSubmit: UIButton!
@@ -45,9 +47,26 @@ class AvatarVC: UIViewController {
     var userName = ""
     var shortName = ""
     var avatarKey = 0
+    
+    
+  
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
+
+        DispatchQueue.main.async {
+            self.btnSubmit.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+
+        }
+       // textField.spellCheckingType = .no
+        if #available(iOS 9.0, *) {
+            let item = tfName.inputAssistantItem
+                item.leadingBarButtonGroups = [];
+                item.trailingBarButtonGroups = [];
+            }
+        
         // Do any additional setup after loading the view.
         tfName.delegate = self
         if isUpdateProfile {
@@ -83,7 +102,7 @@ class AvatarVC: UIViewController {
     }
     
     
-    
+  
     
 //    MARK: - Change Avatar
     
@@ -157,13 +176,12 @@ class AvatarVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        viewMain.colors = [UIColor.init(hexString: "#9C9B9B"),UIColor(hexString: "#C6C6C5")]
         viewText.layer.cornerRadius = viewText.bounds.height/2
         btnSubmit.layer.cornerRadius = btnSubmit.bounds.height/2
         btnSubmit.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
-        tfName.attributedPlaceholder = NSAttributedString(string: "Enter your name", attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray])
-        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
-
-
+        tfName.attributedPlaceholder = NSAttributedString(string: "Enter Your Username", attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray])
+       // self.gradientColor(topColor: lightWhite, bottomColor: lightgrey
     }
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         DispatchQueue.main.async {
@@ -205,12 +223,28 @@ class AvatarVC: UIViewController {
                         print("device Token : \(deviceToken ?? "")")
                         UserDefaults.standard.set("Register", forKey: "isUserRegister")
                         UserDefaults.standard.set(self.lblUserName1.textColor, forKey: "userTextColor")
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-                        vc.shortName = self.lblUserName1.text ?? ""
-                        vc.avatarImage = self.img1.image
                         
-                        if let navBar = UIApplication.getNavController() {
-                            navBar.pushViewController(vc, animated: true)
+                        if UIDevice.current.userInterfaceIdiom == .pad{
+                            
+                            let storyboard: UIStoryboard = UIStoryboard(name: "Storyboard", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                            vc.shortName = self.lblUserName1.text ?? ""
+                            vc.avatarImage = self.img1.image
+                            if let navBar = UIApplication.getNavController() {
+                                navBar.pushViewController(vc, animated: true)
+                            }
+                        }
+                        else
+                        {
+                            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                            
+                            vc.shortName = self.lblUserName1.text ?? ""
+                            vc.avatarImage = self.img1.image
+                            
+                            if let navBar = UIApplication.getNavController() {
+                                navBar.pushViewController(vc, animated: true)
+                            }
                         }
                         
                     }else if isSuccess && error_msg == "User name already exit"{
@@ -256,10 +290,17 @@ extension AvatarVC : UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    func textField(_ UsernameText: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+                if (string == " ") {
+                    return false
+                }
+                return true
+            }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let str = upperCase(textField: textField.text ?? "")
-        if str.count <= 2 {
+        if str.count <= 2 &&  str != ""  {
+           
             lblUserName1.text = str
             lblUserName2.text = str
             lblUserName3.text = str
@@ -270,11 +311,20 @@ extension AvatarVC : UITextFieldDelegate {
             
             
         }else{
+            let str = upperCase(textField: textField.text ?? "")
+            if str.count == 0 {
+                lblUserName1.text = "UN"
+                lblUserName2.text = "UN"
+                lblUserName3.text = "UN"
+                lblUserName4.text = "UN"
+                lblUserName5.text = "UN"
+                lblUserName6.text = "UN"
+                lblUserName7.text = "UN"
             
         } 
     }
 }
-
+}
 
 
 extension AvatarVC : UITableViewDelegate, UITableViewDataSource {
@@ -290,16 +340,31 @@ extension AvatarVC : UITableViewDelegate, UITableViewDataSource {
         return viewTableView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 896.0 - 150
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+    if UIDevice.current.userInterfaceIdiom == .pad
+    {
+        return 780
     }
+    else{
+        
+        return 700
+    }
+}
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
             self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.btnSubmit.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+
+            }
         }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
             self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.btnSubmit.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+
+            }
         }
     }
     

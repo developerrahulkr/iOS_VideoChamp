@@ -6,12 +6,15 @@
 //
 
 import UIKit
-
+import GradientView
 class FeedbackVC: UIViewController {
 
     @IBOutlet weak var lblFeedback: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var viewMain: GradientView!
+    @IBOutlet weak var viewTop: UIView!
+    @IBOutlet weak var btnFeedBack: UIButton!
     
     
     let feedbackVM = FeedbackViewModel()
@@ -19,14 +22,21 @@ class FeedbackVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        btnFeedBack.clipsToBounds = true
+        btnFeedBack.layer.cornerRadius = 22
+        
         tableView.register(UINib(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: "NotificationCell")
-//        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .refreshFeedbackData, object: nil)
+        DispatchQueue.main.async {
+            self.viewTop.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+            self.btnFeedBack.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+        }
         loadData()
     }
     
+    override func viewDidLayoutSubviews() {
+        viewMain.colors = [UIColor.init(hexString: "#9C9B9B"),UIColor(hexString: "#C6C6C5")]
+    }
     
     @objc func refreshData(){
         UIApplication.topViewController()?.showActivityIndicator()
@@ -86,7 +96,7 @@ extension FeedbackVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 100
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

@@ -13,7 +13,10 @@ class DismissAlertVC: UIViewController {
     @IBOutlet weak var btnOK: UIButton!
     @IBOutlet weak var btnNo: UIButton!
     @IBOutlet weak var btnCheck: UIButton!
+    
     var isBack : Bool = false
+    var poptohime = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +24,10 @@ class DismissAlertVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidLayoutSubviews() {
+        
         btnNo.layer.cornerRadius = btnNo.bounds.height / 2
         btnOK.layer.cornerRadius = btnOK.bounds.height / 2
-        cardView.layer.cornerRadius = 10.0
+        cardView.layer.cornerRadius = 25.0
     }
     
     @IBAction func onClickedCheckBtn(_ sender: UIButton) {
@@ -45,6 +49,14 @@ class DismissAlertVC: UIViewController {
         if self.isBack {
             self.dismiss(animated: true)
             NotificationCenter.default.post(name: .kCloseScreen, object: nil)
+        }
+        else{
+            if poptohime  == true {
+                self.dismiss(animated: true)
+                NotificationCenter.default.post(name: .home, object: nil)
+               
+            }
+            
         }
         
     }

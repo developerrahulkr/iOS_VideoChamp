@@ -7,11 +7,13 @@
 
 import UIKit
 import StoreKit
+import GradientView
 
 class ShareVC: UIViewController {
 
     @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var viewCenter: UIView!
+    @IBOutlet var viewMain: GradientView!
     
     var headingText = ""
     
@@ -34,8 +36,9 @@ class ShareVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        viewMain.colors = [UIColor.init(hexString: "#9C9B9B"),UIColor(hexString: "#C6C6C5")]
         viewCenter.layer.cornerRadius = 25.0
-        lblHeading.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
+        //lblHeading.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
     @IBAction func onClickedBackBtn(_ sender: UIButton) {

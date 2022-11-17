@@ -14,20 +14,24 @@ import UserNotifications
 import MultipeerConnectivity
 
 @main
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 var window: UIWindow?
+var restrictRotation:UIInterfaceOrientationMask = .portrait
 
     var orientationLock = UIInterfaceOrientationMask.all
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UIApplication.shared.isIdleTimerDisabled = true
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.resignFirstResponder()
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
-        
         registerForPushNotification()
+        
+      
 //        let notificationCenter = UNUserNotificationCenter.current()
 //        
 //        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { success, _ in
@@ -54,8 +58,17 @@ var window: UIWindow?
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print(url)
+       
+       
+        
+      
         let array = url.path.components(separatedBy: "/")
         let myPeerID = array[array.count-2]
+        let and = array[array.count-6]
+            
+
+            
+    //    NotificationCenter.default.post(name: .loader, object: nil)
 //        let myPeerID = MCPeerID(displayName: urlName)
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
@@ -66,7 +79,7 @@ var window: UIWindow?
             profileViewController.verified_Code = array[array.count-1]
             profileViewController.userID = array[array.count-7]
             profileViewController.isCamera = array[array.count-4]
-            
+            profileViewController.typeDevice = array[array.count-6]
             videochampManager.videochamp_sharedManager.redirectType  = .camera
         }else if array[array.count-4] == "true" {
 //            CMJoinLink(verifyNumber: array[array.count-1], userID: array[array.count-7])
@@ -75,6 +88,7 @@ var window: UIWindow?
             profileViewController.userID = array[array.count-7]
             print("Generated Code : \(array[array.count-1])")
             profileViewController.isCamera = array[array.count-4]
+            profileViewController.typeDevice = array[array.count-6]
             profileViewController.redirectType = .remote
             videochampManager.videochamp_sharedManager.redirectType  = .remote
         }else{
@@ -85,7 +99,9 @@ var window: UIWindow?
             navController.pushViewController(profileViewController, animated: true)
         }
         return true
-    }
+        }
+   
+    
     
 
     // MARK: - Core Data stack
@@ -234,3 +250,10 @@ struct AppUtility {
 }
 
 
+
+extension AppDelegate{
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask
+    {
+        return self.restrictRotation
+    }
+}

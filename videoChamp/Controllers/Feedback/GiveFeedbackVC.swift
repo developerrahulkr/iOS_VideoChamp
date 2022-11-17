@@ -6,13 +6,15 @@
 //
 
 import UIKit
-
+import GradientView
 
 class GiveFeedbackVC: UIViewController {
 
     @IBOutlet weak var lblGiveFeedback: UILabel!
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var viewMain: GradientView!
+    @IBOutlet weak var viewTop: UIView!
     
     
     let cellID = "GiveFeedbackCell"
@@ -28,10 +30,13 @@ class GiveFeedbackVC: UIViewController {
     var wordLimit = 100
     var selectImage : UIImage?
     var rightImage : UIImage?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         giveFeedbackViewModel.getSection()
         registerCell()
         self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
@@ -53,6 +58,8 @@ class GiveFeedbackVC: UIViewController {
     
     
     override func viewDidLayoutSubviews() {
+        viewTop.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+        viewMain.colors = [UIColor.init(hexString: "#9C9B9B"),UIColor(hexString: "#C6C6C5")]
         btnSubmit.layer.cornerRadius = btnSubmit.bounds.height / 2
     }
     
@@ -101,7 +108,7 @@ extension GiveFeedbackVC : UITableViewDelegate, UITableViewDataSource, FeedbackD
         if indexPath.section == 0  || indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID1, for: indexPath) as! GiveFeedbackCell1
             
-            cell.tfTitle.placeholder = (indexPath.section == 0) ? "Enter Title" : "Enter Email"
+            cell.tfTitle.placeholder = (indexPath.section == 0) ? "Enter Subject" : "Enter Email"
             cell.bottomConstraints.constant = (indexPath.section == 0) ? 10.0 : 10.0
             cell.callBack = {
                 val in

@@ -20,9 +20,9 @@ class CameraCodeCell: UITableViewCell {
         cardView.layer.cornerRadius = cardView.bounds.height/2
     }
 
-    func updateData(inData : CMCameraDeviceModel){
-        imgUser.image = UIImage(named: inData.imageIcon ?? "")
-        lblDesc.text = inData.name ?? ""
-    }
+//    func updateData(inData : CMCameraDeviceModel){
+//        imgUser.image = UIImage(named: inData.imageIcon ?? "")
+//        lblDesc.text = inData.name ?? ""
+//    }
     
 }

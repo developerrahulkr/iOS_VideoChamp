@@ -1,66 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="argentum-sans.medium.ttf">
+            <string>ArgentumSans-Medium</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CameraCodeCell" rowHeight="80" id="KGk-i7-Jjw" customClass="CameraCodeCell" customModule="videoChamp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="397" height="60"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CameraCodeCell" rowHeight="360" id="KGk-i7-Jjw" customClass="CameraCodeCell" customModule="videoChamp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="340"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="397" height="60"/>
+                <rect key="frame" x="0.0" y="0.0" width="419" height="340"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIb-q3-iIw">
-                        <rect key="frame" x="20" y="5" width="357" height="50"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lng-5z-fb2">
+                        <rect key="frame" x="10" y="10" width="399" height="320"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_user_icon" translatesAutoresizingMaskIntoConstraints="NO" id="63G-US-a9h">
-                                <rect key="frame" x="20" y="6.5" width="37.5" height="37.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37.5" id="JCp-ay-dlf"/>
-                                    <constraint firstAttribute="width" constant="37.5" id="yCb-ak-Hk3"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="camera_recording_icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5M-Er-Sev">
-                                <rect key="frame" x="77.5" y="16.5" width="153.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This device will be the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUb-o3-Ml5">
+                                <rect key="frame" x="30" y="20" width="339" height="28"/>
+                                <fontDescription key="fontDescription" name="ArgentumSans-Medium" family="Argentum Sans" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="ArgentumSans-Medium" family="Argentum Sans" pointSize="30"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="MONITOR &amp; REMOTE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7O-Hz-Xx1">
+                                <rect key="frame" x="30" y="53" width="339" height="108.5"/>
+                                <fontDescription key="fontDescription" name="ArgentumSans-Medium" family="Argentum Sans" pointSize="47"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="ArgentumSans-Medium" family="Argentum Sans" pointSize="55"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vV1-Wu-UMY">
+                                <rect key="frame" x="30" y="186.5" width="339" height="80"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="You are sending an invitation to the recipient requesting the invitee device to be the ">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="17" name="ArgentumSans-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="CAMERA">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ArgentumSans-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <attributedString key="attributedText">
+                                        <fragment content="You are sending an invitation to the recipient requesting the invitee device to be the">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="20" name="ArgentumSans-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="11" name="ArgentumSans-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="CAMERA">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="28" name="ArgentumSans-Medium"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="j5M-Er-Sev" firstAttribute="centerY" secondItem="63G-US-a9h" secondAttribute="centerY" id="XRU-NW-wMs"/>
-                            <constraint firstItem="j5M-Er-Sev" firstAttribute="leading" secondItem="63G-US-a9h" secondAttribute="trailing" constant="20" id="ffu-yD-ZBb"/>
-                            <constraint firstItem="63G-US-a9h" firstAttribute="centerY" secondItem="oIb-q3-iIw" secondAttribute="centerY" id="uCG-u6-TS2"/>
-                            <constraint firstItem="63G-US-a9h" firstAttribute="leading" secondItem="oIb-q3-iIw" secondAttribute="leading" constant="20" id="yTe-oP-Q9J"/>
+                            <constraint firstItem="vV1-Wu-UMY" firstAttribute="leading" secondItem="iUb-o3-Ml5" secondAttribute="leading" id="0Fw-wL-FU4"/>
+                            <constraint firstItem="U7O-Hz-Xx1" firstAttribute="centerX" secondItem="iUb-o3-Ml5" secondAttribute="centerX" id="EG8-cW-FnU"/>
+                            <constraint firstItem="iUb-o3-Ml5" firstAttribute="top" secondItem="lng-5z-fb2" secondAttribute="top" constant="20" id="Fhg-kP-J8b"/>
+                            <constraint firstItem="U7O-Hz-Xx1" firstAttribute="trailing" secondItem="iUb-o3-Ml5" secondAttribute="trailing" id="POj-G8-msX"/>
+                            <constraint firstAttribute="trailing" secondItem="iUb-o3-Ml5" secondAttribute="trailing" constant="30" id="Q5x-ve-A5w">
+                                <variation key="heightClass=regular-widthClass=regular" constant="150"/>
+                            </constraint>
+                            <constraint firstItem="vV1-Wu-UMY" firstAttribute="top" secondItem="U7O-Hz-Xx1" secondAttribute="bottom" constant="25" id="Qd0-RB-7b9"/>
+                            <constraint firstAttribute="bottom" secondItem="vV1-Wu-UMY" secondAttribute="bottom" constant="53.5" id="Wte-Yl-CKQ"/>
+                            <constraint firstItem="U7O-Hz-Xx1" firstAttribute="top" secondItem="iUb-o3-Ml5" secondAttribute="bottom" constant="5" id="fft-yP-2Lt"/>
+                            <constraint firstItem="U7O-Hz-Xx1" firstAttribute="leading" secondItem="iUb-o3-Ml5" secondAttribute="leading" id="kjl-Vn-Ybz"/>
+                            <constraint firstItem="iUb-o3-Ml5" firstAttribute="leading" secondItem="lng-5z-fb2" secondAttribute="leading" constant="30" id="lgg-ua-yl4">
+                                <variation key="heightClass=regular-widthClass=regular" constant="150"/>
+                            </constraint>
+                            <constraint firstItem="vV1-Wu-UMY" firstAttribute="centerX" secondItem="iUb-o3-Ml5" secondAttribute="centerX" id="wQ7-12-s5a"/>
+                            <constraint firstItem="vV1-Wu-UMY" firstAttribute="trailing" secondItem="iUb-o3-Ml5" secondAttribute="trailing" id="zuD-y9-hHy"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="oIb-q3-iIw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="0Gu-MT-MVS"/>
-                    <constraint firstAttribute="bottom" secondItem="oIb-q3-iIw" secondAttribute="bottom" constant="5" id="BNk-ms-oUy"/>
-                    <constraint firstItem="oIb-q3-iIw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="On4-2e-fvF"/>
-                    <constraint firstAttribute="trailing" secondItem="oIb-q3-iIw" secondAttribute="trailing" constant="20" id="R8i-0n-63h"/>
+                    <constraint firstAttribute="bottom" secondItem="lng-5z-fb2" secondAttribute="bottom" constant="10" id="GiC-PW-udK"/>
+                    <constraint firstItem="lng-5z-fb2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="R5x-ry-LRU"/>
+                    <constraint firstAttribute="trailing" secondItem="lng-5z-fb2" secondAttribute="trailing" constant="10" id="UML-Zf-aDc"/>
+                    <constraint firstItem="lng-5z-fb2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="wF9-HK-1iS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="cardView" destination="oIb-q3-iIw" id="ypM-do-08E"/>
-                <outlet property="imgUser" destination="63G-US-a9h" id="9E1-X8-9F0"/>
-                <outlet property="lblDesc" destination="j5M-Er-Sev" id="epb-Ur-0Pj"/>
+                <outlet property="cardView" destination="lng-5z-fb2" id="bn0-hF-uyA"/>
             </connections>
-            <point key="canvasLocation" x="231.15942028985509" y="111.16071428571428"/>
+            <point key="canvasLocation" x="247.10144927536234" y="204.91071428571428"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="camera_user_icon" width="37.5" height="37.5"/>
-    </resources>
 </document>

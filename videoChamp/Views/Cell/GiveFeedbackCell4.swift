@@ -18,7 +18,11 @@ class GiveFeedbackCell4: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        btnSubmit.layer.cornerRadius = btnSubmit.bounds.height/2
+        DispatchQueue.main.async {
+            self.btnSubmit.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+        }
+        
+        btnSubmit.layer.cornerRadius = 22
     }
 
     @IBAction func onClickedSubmitBtn(_ sender: UIButton) {

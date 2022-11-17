@@ -17,21 +17,38 @@ extension UIViewController {
     }
     
     func upperCase(textField : String) -> String{
-        let testString = textField
+        let testString = textField.trimmingCharacters(in: .whitespaces)
         let lowerCase = CharacterSet.lowercaseLetters
         let upperCase = CharacterSet.uppercaseLetters
         var str = ""
-
-        for currentCharacter in testString.unicodeScalars {
-            if lowerCase.contains(currentCharacter) {
-                
-            } else if upperCase.contains(currentCharacter) {
-                str = str + "\(currentCharacter)"
-            } else {
-            }
-            
+        if testString.count == 0 {
+            str =   ""
         }
-        return str
+        
+        else if  testString.count == 1 {
+            str =  String(testString.prefix(1))
+           
+        }
+        
+        else  {
+            str =     String(testString.prefix(2))
+            
+//            str =   testString.firstCapitalized
+//            str =   str.Capitalizedsec
+        }
+        
+        
+    
+//        for currentCharacter in testString.unicodeScalars {
+//            if lowerCase.contains(currentCharacter) {
+//
+//            } else if upperCase.contains(currentCharacter) {
+//                str = str + "\(currentCharacter)"
+//            } else {
+//            }
+//
+//        }
+        return str.uppercased()
     }
     
     
@@ -44,8 +61,10 @@ extension UIViewController {
     }
     
     func showExitAlert() {
-        let alert = UIAlertController(title: "VideoChamp", message: "User is blocked from Admin Side ", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+        
+        let alert = UIAlertController(title: "VideoChamp", message: "You are blocked from admin Please contact to admin", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "EXIT", style: .default) { _ in
+            
             exit(0)
         }
         alert.addAction(okAction)
@@ -128,3 +147,97 @@ extension String {
 }
 
 
+
+extension StringProtocol {
+    var firstUppercased: String { return prefix(1).uppercased() + dropFirst() }
+    var firstCapitalized: String { return prefix(1).capitalized + dropFirst() }
+        var Capitalizedsec: String { return prefix(2).capitalized + dropFirst()
+        
+    }
+}
+
+
+    extension String {
+        func removingWhitespaces() -> String {
+            return components(separatedBy: .whitespaces).joined()
+        }
+    }
+
+extension UIView{
+    func applyGradient(colorOne: UIColor, ColorTwo: UIColor) {
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [colorOne.cgColor, ColorTwo.cgColor]
+        gradient.locations = [0.0, 1.0]        
+        layer.insertSublayer(gradient, at: 0)
+    }
+    
+    func applyGradient2(frame: CGRect,colorOne: UIColor, ColorTwo: UIColor) {
+        let gradient = CAGradientLayer()
+        gradient.frame = frame
+        
+        gradient.colors = [colorOne.cgColor, ColorTwo.cgColor]
+        gradient.locations = [0.0, 1.0] 
+        layer.insertSublayer(gradient, at: 0)
+    }
+    func applyGradient1(colorOne: UIColor, ColorTwo: UIColor) {
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        
+        gradient.colors = [colorOne.cgColor, ColorTwo.cgColor]
+        gradient.locations = [-2.0, 1.2]
+        layer.insertSublayer(gradient, at: 0)
+    }
+    func applyGradientForInsta(colorOne: UIColor, ColorTwo: UIColor, ColorThree: UIColor)
+    {
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [colorOne.cgColor, ColorTwo.cgColor, ColorThree.cgColor]
+//        gradient.locations = [0.0,0.0,1.1]
+//        //gradient.startPoint = CGPoint(x: 0.3, y: 0.2)
+//        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+//        // gradient.endPoint = CGPoint(x: 0.4, y: 0.9)
+//        //        gradient.type = .axial
+//        gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+        // gradient.cornerRadius = 10
+        layer.insertSublayer(gradient, at: 0)
+        self.clipsToBounds = true
+        //self.layer.masksToBounds = false
+    }
+    
+    func applyGradial(colorOne: UIColor, ColorTwo: UIColor) {
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [colorOne.cgColor, ColorTwo.cgColor]
+        gradient.locations = [ 0.0, 0.9 ]
+//        gradient.startPoint = CGPoint(x: 0.5, y: 1.8)
+//        gradient.endPoint = CGPoint(x: 0, y: 1)
+        layer.insertSublayer(gradient, at: 0)
+    }
+    
+}
+
+
+
+
+public extension UIColor {
+
+  convenience init(hexString: String) {
+    let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+    var int = UInt64()
+    Scanner(string: hex).scanHexInt64(&int)
+    let a, r, g, b: UInt64
+    switch hex.count {
+    case 3:
+      (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+    case 6:
+      (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+    case 8:
+      (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+    default:
+      (a, r, g, b) = (1, 1, 1, 0)
+    }
+    self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+  }
+
+}

@@ -12,6 +12,7 @@ import MultipeerConnectivity
 import MultipeerFramework
 import AVFoundation
 
+
 final class LiveViewController: UIViewController {
     //models
     private var mcSessionManager: MCSessionManager!
@@ -25,7 +26,6 @@ final class LiveViewController: UIViewController {
     private let videoCompressionQuality:CGFloat = 0.1
     private let sessionPreset:AVCaptureSession.Preset = .low
     private var activeCamera: AVCaptureDevice?
-    
 
     private func setUpLiveViewPresenter() {
         
@@ -46,12 +46,6 @@ final class LiveViewController: UIViewController {
         }
         
     }
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        DispatchQueue.main.async {
-            self.liveView.previewLayer.frame = self.view.bounds
-            print("Layer :: ::: : \(self.liveView.previewLayer.frame)")
-        }
-    }
 
 
     private func setNavBar() {
@@ -67,25 +61,52 @@ final class LiveViewController: UIViewController {
     override func loadView() {
         setNavBar()
         setUpLiveViewPresenter()
-        
+       
+        //liveView.bottomView.isHidden = true
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //if videochampManager.videochamp_sharedManager.redirectType == .camera{
+            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
+        //}
+//        if UIScreen.main.bounds.width > UIScreen.main.bounds.height{
+//            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .landscape
+//
+//
+//        }else{
+//            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
+//
+//
+//        }
+        //(UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
         setUpChatViewModel()
         NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .kPopToRoot, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .Sessionexpire, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .kCloseScreen, object: nil)
         
     }
     
+
+    
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isPortrait {
-            AppUtility.lockOrientation(.portrait)
-        }else{
-            AppUtility.lockOrientation(.landscape)
-        }
+        
+            if UIDevice.current.orientation.isPortrait {
+                
+                AppUtility.lockOrientation(.portrait)
+            }else{
+                
+                //liveView.imag = .portrait
+//                liveView.imageView.translatesAutoresizingMaskIntoConstraints = true
+//                liveView.bottomView.snp.makeConstraints{ (make) in
+//                    make.bottom.equalToSuperview()
+//                }
+                AppUtility.lockOrientation(.landscape)
+            }
+           
+        
     }
     
     @objc func closeVC(){
@@ -93,14 +114,24 @@ final class LiveViewController: UIViewController {
 //        print("Browsing State : \(Utility.shared.sessionManager.needsBrowsing)")
         Utility.shared.sessionManager.needsAdvertising.toggle()
         Utility.shared.sessionManager.needsBrowsing.toggle()
+        liveViewModel.captureSession.stopRunning()
+      
         for controller in controllers {
-            if controller is HomeVC {
-                self.navigationController?.popToViewController(controller, animated: true)
-            }else{
-                self.navigationController?.popToRootViewController(animated: true)
+                if controller is HomeVC {
+                    self.navigationController?.popToViewController(controller, animated: true)
+                }else{
+                    if UIDevice.current.userInterfaceIdiom == .pad{
+                        let storyboard:UIStoryboard = UIStoryboard(name: "Storyboard", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                        self.navigationController?.popToViewController(vc, animated: true)
+                    }else{
+                        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                        self.navigationController?.popToViewController(vc, animated: true)
+                    }
+                   
+                }
             }
-        }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -129,7 +160,24 @@ final class LiveViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: .kCloseScreen, object: nil)
         NotificationCenter.default.removeObserver(self, name: .kPopToRoot, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .Sessionexpire, object: nil)
     }
     
 
+}
+
+extension UIImage {
+    func fixOrientation() -> UIImage {
+        if self.imageOrientation == UIImage.Orientation.up {
+            return self
+        }
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        if let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            return normalizedImage
+        } else {
+            return self
+        }
+    }
 }

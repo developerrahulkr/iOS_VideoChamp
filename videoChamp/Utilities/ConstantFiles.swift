@@ -10,7 +10,7 @@ import UIKit
 
 let kUserNAme = ""
 let kAvatarNAme = ""
-let appName = "Video Champ"
+let appName = "VideoChamp"
 
 let kToken = ""
 var sendingRemoteMessage = """

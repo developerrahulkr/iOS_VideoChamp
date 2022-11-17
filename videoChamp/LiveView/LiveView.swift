@@ -16,7 +16,6 @@ final class LiveView: NSObject {
     var view: UIView!
     private let toHiddenKeyboardGesture:UITapGestureRecognizer = .init()
     let imageView = UIImageView()
-    let receivedTextLabel = UILabel()
     let sendTextField = UITextField()
     let textSendButton = UIButton()
     let changeCameraButton = UIButton()
@@ -26,7 +25,7 @@ final class LiveView: NSObject {
     let viewMedia = UIView()
     let textAreaStackView = UIStackView()
     let viewCenterStackView = UIView()
-    let soundControlButton = UIButton()
+//    let soundControlButton = UIButton()
     let btnBack = UIButton()
     let btnClose = UIButton()
     let lblFilmingDevice = UILabel()
@@ -50,14 +49,14 @@ final class LiveView: NSObject {
     
 
     private func setUpSoundControlButton(margin: CGFloat) {
-        imageView.addSubview(soundControlButton)
-        soundControlButton.snp.makeConstraints { (make) in
-            make.height.equalToSuperview().multipliedBy(0.1)
-            make.width.equalToSuperview().multipliedBy(0.3)
-            make.trailing.equalToSuperview().offset(-margin)
-            make.bottom.equalToSuperview().offset(-margin)
-        }
-        soundControlButton.layoutIfNeeded()
+//        imageView.addSubview(soundControlButton)
+//        soundControlButton.snp.makeConstraints { (make) in
+//            make.height.equalToSuperview().multipliedBy(0.1)
+//            make.width.equalToSuperview().multipliedBy(0.3)
+//            make.trailing.equalToSuperview().offset(-margin)
+//            make.bottom.equalToSuperview().offset(-margin)
+//        }
+//        soundControlButton.layoutIfNeeded()
 //        soundControlButton.toRoundly(margin)
     }
 
@@ -73,6 +72,8 @@ final class LiveView: NSObject {
         self.view.addGestureRecognizer(toHiddenKeyboardGesture)
     }
 
+    
+    
     private func addViews() {
         view.addSubview(imageView)
         view.addSubview(textAreaStackView)
@@ -93,7 +94,6 @@ final class LiveView: NSObject {
 //        ViewTopStack.addSubview(topStackView)
         
         
-        textAreaStackView.addArrangedSubview(receivedTextLabel)
         textAreaStackView.addArrangedSubview(sendTextField)
         buttonAreaStackView.addArrangedSubview(textSendButton)
         buttonAreaStackView.addArrangedSubview(viewCenterStackView)
@@ -187,7 +187,7 @@ final class LiveView: NSObject {
             make.height.equalToSuperview()
         }
 
-        let baseWidth: CGFloat = view.bounds.width - (margin * 2)
+        //let baseWidth: CGFloat = view.bounds.width - (margin * 2)
 
 //        textAreaStackView.snp.makeConstraints { (make) in
 //            make.top.equalTo(imageView.snp.bottom).offset(margin)
@@ -198,16 +198,21 @@ final class LiveView: NSObject {
         
         bottomView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.equalTo(baseWidth)
-            make.height.equalToSuperview().multipliedBy(0.25)
+            //make.width.equalTo(baseWidth)
+//            if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+//                make.height.equalToSuperview().multipliedBy(0.4)
+//            }else{
+//                make.height.equalToSuperview().multipliedBy(0.25)
+//            }
             make.left.equalTo(imageView.snp.left)
             make.right.equalTo(imageView.snp.right)
+            make.height.equalTo(162.0)
             make.bottom.equalTo(imageView.snp.bottom).offset(-margin)
         }
 
         buttonAreaStackView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.width.equalTo(baseWidth)
+         //   make.width.equalTo(baseWidth)
 //            make.top.equalTo(imageView.snp.bottom).offset(-margin * 10)
             make.height.equalToSuperview().multipliedBy(0.65)
 //            make.bottom.equalTo(imageView.snp.bottom).offset(-margin)
@@ -217,7 +222,7 @@ final class LiveView: NSObject {
         }
 
         setUpViewProperties(margin: margin)
-        setUpSoundControlButton(margin: margin)
+//        setUpSoundControlButton(margin: margin)
         setUpSoundGesture()
         setUpKeyboardObserver()
 
@@ -230,7 +235,7 @@ final class LiveView: NSObject {
 
         previewLayer.frame = view.bounds
         view.backgroundColor = Colors.whiteFb
-        lblZoom.textColor = .white
+        lblZoom.textColor = .yellow
         lblZoom.font = UIFont.systemFont(ofSize: 10.0)
         
         viewZoom.backgroundColor = .clear
@@ -240,8 +245,9 @@ final class LiveView: NSObject {
         buttonView.layer.cornerRadius = 25
         
         btnStopCasting.clipsToBounds = true
-        btnStopCasting.setTitle("Stop Casting", for: .normal)
+        btnStopCasting.setTitle("END CONNECTION", for: .normal)
         btnStopCasting.backgroundColor = .red
+        btnStopCasting.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
         btnStopCasting.setTitleColor(.white, for: .normal)
         btnStopCasting.titleLabel?.font = UIFont(name: "argentum-sans.bold", size: 20.0)
         btnStopCasting.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
@@ -250,8 +256,8 @@ final class LiveView: NSObject {
         
         viewZoom.clipsToBounds = true
         viewZoom.layer.cornerRadius = 12
-        viewZoom.layer.borderColor = UIColor.white.cgColor
-        viewZoom.layer.borderWidth = 0.5
+        viewZoom.layer.borderColor = UIColor.yellow.cgColor
+        viewZoom.layer.borderWidth = 1.5
 //        imageCapture.layer.addSublayer(previewLayer)
         btnBack.setImage(UIImage(named: "back_arrow"), for: .normal)
         btnClose.setImage(UIImage(named: "close_icon"), for: .normal)

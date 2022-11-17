@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="argentum-sans.light.ttf">
-            <string>ArgentumSans-Light</string>
+        <array key="argentum-sans.regular.ttf">
+            <string>ArgentumSans-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -21,14 +21,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmr-Xt-Qzp">
-                    <rect key="frame" x="30" y="20" width="31.666666666666671" height="17.333333333333329"/>
-                    <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="15"/>
+                    <rect key="frame" x="30" y="20" width="37" height="18.666666666666671"/>
+                    <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="17"/>
                     <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOy-0h-IWz">
-                    <rect key="frame" x="656.33333333333337" y="20" width="31.666666666666629" height="17.333333333333329"/>
-                    <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="15"/>
+                    <rect key="frame" x="651" y="20" width="37" height="18.666666666666671"/>
+                    <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="17"/>
                     <color key="textColor" red="0.39215686274509803" green="0.38823529411764707" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>

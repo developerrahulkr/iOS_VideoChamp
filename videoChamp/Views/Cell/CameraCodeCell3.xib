@@ -1,106 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="argentum-sans.medium.ttf">
+            <string>ArgentumSans-Medium</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CameraCodeCell3" rowHeight="181" id="KGk-i7-Jjw" customClass="CameraCodeCell3" customModule="videoChamp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="540" height="188"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CameraCodeCell3" rowHeight="267" id="KGk-i7-Jjw" customClass="CameraCodeCell3" customModule="videoChamp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="274"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="540" height="188"/>
+                <rect key="frame" x="0.0" y="0.0" width="540" height="274"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LtR-yv-faH">
-                        <rect key="frame" x="20" y="15" width="500" height="158"/>
+                        <rect key="frame" x="20" y="15" width="500" height="244"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Helpful Tips" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTS-vv-C0n">
-                                <rect key="frame" x="32" y="13" width="77.5" height="22.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This device will be the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FV0-i3-2vL">
+                                <rect key="frame" x="30" y="20" width="440" height="28"/>
+                                <fontDescription key="fontDescription" name="ArgentumSans-Medium" family="Argentum Sans" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="ArgentumSans-Medium" family="Argentum Sans" pointSize="30"/>
+                                </variation>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4an-xt-oeh">
-                                <rect key="frame" x="36" y="51.5" width="5" height="5"/>
-                                <color key="backgroundColor" red="0.57647058823529407" green="0.75294117647058822" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="5" id="jbf-hT-Nvl"/>
-                                    <constraint firstAttribute="width" constant="5" id="qWL-rt-Cah"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiJ-uw-Jf3">
-                                <rect key="frame" x="51" y="42" width="429" height="24"/>
-                                <string key="text">Lorem ipsum euismod tincidunt ut laoreet dolore
-magna aliquam erat volutpat.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="CAMERA" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQV-YD-Hbe">
+                                <rect key="frame" x="30" y="53" width="440" height="36"/>
+                                <fontDescription key="fontDescription" name="ArgentumSans-Medium" family="Argentum Sans" pointSize="47"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="ArgentumSans-Medium" family="Argentum Sans" pointSize="55"/>
+                                </variation>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37w-it-q6J">
-                                <rect key="frame" x="36" y="88.5" width="5" height="5"/>
-                                <color key="backgroundColor" red="0.57647058819999997" green="0.75294117650000003" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="5" id="dBT-03-fgp"/>
-                                    <constraint firstAttribute="width" constant="5" id="t6t-dJ-TH2"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQd-59-Hhg">
-                                <rect key="frame" x="51" y="79" width="429" height="24"/>
-                                <string key="text">Lorem ipsum euismod tincidunt ut laoreet dolore
-magna aliquam erat volutpat.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsO-RO-wcL">
+                                <rect key="frame" x="30" y="114" width="440" height="81"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="You are sending an invitation to the recipient requesting the invitee device to be the ">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="17" name="ArgentumSans-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="MONITOR &amp; REMOTE">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ArgentumSans-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MXC-ZK-Lec">
-                                <rect key="frame" x="36" y="125.5" width="5" height="5"/>
-                                <color key="backgroundColor" red="0.57647058819999997" green="0.75294117650000003" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="5" id="ELY-mm-8cu"/>
-                                    <constraint firstAttribute="width" constant="5" id="h4i-BV-IGA"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzt-cj-b6t">
-                                <rect key="frame" x="51" y="116" width="429" height="24"/>
-                                <string key="text">Lorem ipsum euismod tincidunt ut laoreet dolore
-magna aliquam erat volutpat.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" red="0.38823529410000002" green="0.38823529410000002" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <attributedString key="attributedText">
+                                        <fragment content="You are sending an invitation to the recipient requesting the invitee device to be the">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="20" name="ArgentumSans-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="11" name="ArgentumSans-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="MONITOR &amp; REMOTE">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="28" name="ArgentumSans-Medium"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="MXC-ZK-Lec" firstAttribute="top" secondItem="37w-it-q6J" secondAttribute="bottom" constant="32" id="3m7-Gq-e0O"/>
-                            <constraint firstItem="PiJ-uw-Jf3" firstAttribute="centerY" secondItem="4an-xt-oeh" secondAttribute="centerY" id="IwV-TA-PSk"/>
-                            <constraint firstItem="37w-it-q6J" firstAttribute="top" secondItem="4an-xt-oeh" secondAttribute="bottom" constant="32" id="Me8-nI-FqS"/>
-                            <constraint firstItem="37w-it-q6J" firstAttribute="leading" secondItem="4an-xt-oeh" secondAttribute="leading" id="OcO-19-V9U"/>
-                            <constraint firstItem="MXC-ZK-Lec" firstAttribute="leading" secondItem="LtR-yv-faH" secondAttribute="leading" constant="36" id="Qq1-Qs-3QT"/>
-                            <constraint firstItem="EQd-59-Hhg" firstAttribute="centerY" secondItem="37w-it-q6J" secondAttribute="centerY" id="XTV-am-EaS"/>
-                            <constraint firstAttribute="trailing" secondItem="PiJ-uw-Jf3" secondAttribute="trailing" constant="20" id="YJ8-da-CPK"/>
-                            <constraint firstAttribute="trailing" secondItem="Jzt-cj-b6t" secondAttribute="trailing" constant="20" id="bLr-mI-ItQ"/>
-                            <constraint firstItem="PiJ-uw-Jf3" firstAttribute="leading" secondItem="4an-xt-oeh" secondAttribute="trailing" constant="10" id="bai-5M-ItD"/>
-                            <constraint firstItem="Jzt-cj-b6t" firstAttribute="leading" secondItem="MXC-ZK-Lec" secondAttribute="trailing" constant="10" id="c0R-7T-t3A"/>
-                            <constraint firstItem="WTS-vv-C0n" firstAttribute="leading" secondItem="LtR-yv-faH" secondAttribute="leading" constant="32" id="cgd-gl-LbV"/>
-                            <constraint firstAttribute="bottom" secondItem="Jzt-cj-b6t" secondAttribute="bottom" constant="18" id="cq0-CV-9ue"/>
-                            <constraint firstItem="4an-xt-oeh" firstAttribute="top" secondItem="WTS-vv-C0n" secondAttribute="bottom" constant="16" id="f4u-Ss-eTX"/>
-                            <constraint firstItem="Jzt-cj-b6t" firstAttribute="centerY" secondItem="MXC-ZK-Lec" secondAttribute="centerY" id="gi1-Ua-8KX"/>
-                            <constraint firstItem="4an-xt-oeh" firstAttribute="leading" secondItem="LtR-yv-faH" secondAttribute="leading" constant="36" id="heO-SU-Tcp"/>
-                            <constraint firstItem="EQd-59-Hhg" firstAttribute="leading" secondItem="37w-it-q6J" secondAttribute="trailing" constant="10" id="peo-hc-Vfv"/>
-                            <constraint firstItem="WTS-vv-C0n" firstAttribute="top" secondItem="LtR-yv-faH" secondAttribute="top" constant="13" id="xLp-8v-2Fe"/>
-                            <constraint firstAttribute="trailing" secondItem="EQd-59-Hhg" secondAttribute="trailing" constant="20" id="yKr-zH-ysp"/>
+                            <constraint firstItem="FV0-i3-2vL" firstAttribute="leading" secondItem="LtR-yv-faH" secondAttribute="leading" constant="30" id="1OA-q8-EXM">
+                                <variation key="heightClass=regular-widthClass=regular" constant="150"/>
+                            </constraint>
+                            <constraint firstItem="KQV-YD-Hbe" firstAttribute="centerX" secondItem="FV0-i3-2vL" secondAttribute="centerX" id="Iew-Gn-VSi"/>
+                            <constraint firstItem="bsO-RO-wcL" firstAttribute="top" secondItem="KQV-YD-Hbe" secondAttribute="bottom" constant="25" id="NKg-ZD-C0P"/>
+                            <constraint firstItem="KQV-YD-Hbe" firstAttribute="top" secondItem="FV0-i3-2vL" secondAttribute="bottom" constant="5" id="RkT-Ne-Q0A"/>
+                            <constraint firstItem="KQV-YD-Hbe" firstAttribute="leading" secondItem="FV0-i3-2vL" secondAttribute="leading" id="Wx5-hB-4E9"/>
+                            <constraint firstItem="bsO-RO-wcL" firstAttribute="leading" secondItem="FV0-i3-2vL" secondAttribute="leading" id="clq-gj-0Pe"/>
+                            <constraint firstItem="bsO-RO-wcL" firstAttribute="centerX" secondItem="FV0-i3-2vL" secondAttribute="centerX" id="dT3-Ot-pn0"/>
+                            <constraint firstAttribute="trailing" secondItem="FV0-i3-2vL" secondAttribute="trailing" constant="30" id="ecH-Gf-0cU">
+                                <variation key="heightClass=regular-widthClass=regular" constant="150"/>
+                            </constraint>
+                            <constraint firstItem="KQV-YD-Hbe" firstAttribute="trailing" secondItem="FV0-i3-2vL" secondAttribute="trailing" id="qQL-9w-G5i"/>
+                            <constraint firstItem="FV0-i3-2vL" firstAttribute="top" secondItem="LtR-yv-faH" secondAttribute="top" constant="20" id="qsl-Dq-6wa"/>
+                            <constraint firstAttribute="bottom" secondItem="bsO-RO-wcL" secondAttribute="bottom" constant="49" id="uFc-Zd-cha"/>
+                            <constraint firstItem="bsO-RO-wcL" firstAttribute="trailing" secondItem="FV0-i3-2vL" secondAttribute="trailing" id="xxQ-2j-Ofp"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="LtR-yv-faH" secondAttribute="bottom" constant="15" id="1qj-6p-56N"/>
-                    <constraint firstItem="LtR-yv-faH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="YSo-n6-5Cr"/>
+                    <constraint firstItem="LtR-yv-faH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="YSo-n6-5Cr">
+                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                    </constraint>
                     <constraint firstAttribute="trailing" secondItem="LtR-yv-faH" secondAttribute="trailing" constant="20" id="nn3-NB-6UK"/>
                     <constraint firstItem="LtR-yv-faH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="sce-5u-2W4"/>
                 </constraints>
@@ -109,15 +123,11 @@ magna aliquam erat volutpat.</string>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="cardView" destination="LtR-yv-faH" id="OBv-Qa-RYc"/>
-                <outlet property="lblHelpful" destination="WTS-vv-C0n" id="bTi-IJ-6uG"/>
-                <outlet property="lblText1" destination="PiJ-uw-Jf3" id="vBb-gm-xLu"/>
-                <outlet property="lblText2" destination="EQd-59-Hhg" id="HSt-IJ-R4b"/>
-                <outlet property="lblText3" destination="Jzt-cj-b6t" id="JRH-8j-kRe"/>
-                <outlet property="viewGreen1" destination="4an-xt-oeh" id="Xsq-7Q-iFq"/>
-                <outlet property="viewGreen2" destination="37w-it-q6J" id="MpL-ld-7St"/>
-                <outlet property="viewGreen3" destination="MXC-ZK-Lec" id="Idx-Nm-Dfh"/>
+                <outlet property="lblText1" destination="FV0-i3-2vL" id="4kx-ve-goa"/>
+                <outlet property="lblText2" destination="KQV-YD-Hbe" id="8Np-eY-PUA"/>
+                <outlet property="lblText3" destination="bsO-RO-wcL" id="PBi-vn-4IQ"/>
             </connections>
-            <point key="canvasLocation" x="297.10144927536237" y="114.84375"/>
+            <point key="canvasLocation" x="297.10144927536237" y="143.30357142857142"/>
         </tableViewCell>
     </objects>
 </document>

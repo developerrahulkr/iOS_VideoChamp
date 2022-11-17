@@ -25,7 +25,9 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     
     //
     private var targetPeerID: MCPeerID?
-    private var sendString = "SaveImage"
+    private var sendString = "captureImage"
+    
+    
     private var sendImage = UIImage()
     private var zooomImageString = ""
     private let sessionQueue = DispatchQueue(label: "com.hayao.MultipeerLiveKit.videodata-ouput-queue")
@@ -38,7 +40,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
    
     private var liveSetupView : LiveView!
 
-    private var zoom = 1.0
+    private var zoom = 0.5
     private var zoomText = 1
     public var capSession : AVCaptureSession?
     //    Photo Output
@@ -119,8 +121,10 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     func attachViews(liveView: LiveView) {
         attachButtonActions(liveView)
         attachDisplayData(liveView)
+        NotificationCenter.default.addObserver(self, selector: #selector(closeViewCs), name: .Sessionexpire, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeViewC), name: .kCloseScreen, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(disconnectVC), name: .kDisconnect, object: nil)
+     //   NotificationCenter.default.addObserver(self, selector: #selector(closeViewCs), name: .SessionExpiren, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appdidenterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         if (videochampManager.videochamp_sharedManager.redirectType == .camera)
         {
@@ -130,7 +134,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             
             do {
                 liveView.bottomView.isHidden = true
-                sendString = "startStreaming"
+                sendString = "captureImage"
                 
                 try livePresenter.sendText(text: sendString, sendMode: .unreliable)
             }catch {
@@ -139,15 +143,77 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             
             
         }else if (videochampManager.videochamp_sharedManager.redirectType == .remote) {
+            self.connectAlertVC()
             liveView.buttonView.isHidden = true
         }
         
         
         
+        
+        
 //        let data = publishBtnData[livePresenter.needsVideoRun]!
 //        capSession = livePresenter.cap
-//
+// print("totalDiskSpaceInBytes: \(UIDevice.current.totalDiskSpaceInBytes)")
+        print("freeDiskSpace: \(UIDevice.current.freeDiskSpaceInBytes)")
+        print("usedDiskSpace: \(UIDevice.current.usedDiskSpaceInBytes)")
 
+        DispatchQueue.main.async {
+            
+        
+        let storage = (Float(UIDevice.current.freeDiskSpaceInBytes)/Float(UIDevice.current.totalDiskSpaceInBytes))*100
+        
+        
+        
+        if storage <= 15 {
+            do {
+                let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                vc.modalPresentationStyle = .overFullScreen
+                vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                self.isDisconnect = false
+                vc.image = UIImage(named: "st")!
+                vc.titleText = "STORAGE ALERT"
+                vc.messageText = "Available storage capacity on CAMERA filming device is almost full"
+                UIApplication.topViewController()?.present(vc, animated: true)
+                try self.livePresenter.sendText(text: "lowstrorage", sendMode: .unreliable)
+            } catch let error {
+                print(error)
+            }
+        }
+        else if  storage <= 10 {
+            do {
+                let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                vc.modalPresentationStyle = .overFullScreen
+                vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                self.isDisconnect = false
+                vc.image = UIImage(named: "st")!
+                vc.titleText = "STORAGE ALERT"
+                vc.messageText = "Available storage capacity on CAMERA filming device is almost full"
+                UIApplication.topViewController()?.present(vc, animated: true)
+                try self.livePresenter.sendText(text: "lowstrorage", sendMode: .unreliable)
+            } catch let error {
+                print(error)
+            }
+        }
+        if storage <= 5 {
+            do {
+                let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                vc.modalPresentationStyle = .overFullScreen
+                vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                self.isDisconnect = false
+                vc.image = UIImage(named: "st")!
+                vc.titleText = "STORAGE ALERT"
+                vc.messageText = "Available storage capacity on CAMERA filming device is almost full"
+                UIApplication.topViewController()?.present(vc, animated: true)
+                try self.livePresenter.sendText(text: "lowstrorage", sendMode: .unreliable)
+            } catch let error {
+                print(error)
+            }
+        }
+        
+        else{
+            print("asdf asdfasd fasd fas dfasdf asdfas dfasdfasdf  \(storage)")
+        }
+        
         UIDevice.current.isBatteryMonitoringEnabled = true
         let batterPercentage = UIDevice.current.batteryLevel * 100
         
@@ -161,11 +227,44 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                 vc.titleText = "BATTERY ALERT"
                 vc.messageText = "Remote Device Battery is low"
                 UIApplication.topViewController()?.present(vc, animated: true)
-                try livePresenter.sendText(text: "low", sendMode: .unreliable)
+                try self.livePresenter.sendText(text: "low", sendMode: .unreliable)
             } catch let error {
                 print(error)
             }
-        }else{
+        }
+        else if  batterPercentage <= 10 {
+            do {
+                let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                vc.modalPresentationStyle = .overFullScreen
+                vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                self.isDisconnect = false
+                vc.image = UIImage(named: "battery_icon")!
+                vc.titleText = "BATTERY ALERT"
+                vc.messageText = "Remote Device Battery is low"
+                UIApplication.topViewController()?.present(vc, animated: true)
+                try self.livePresenter.sendText(text: "low", sendMode: .unreliable)
+            } catch let error {
+                print(error)
+            }
+        }
+    
+        if batterPercentage <= 5 {
+            do {
+                let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                vc.modalPresentationStyle = .overFullScreen
+                vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                self.isDisconnect = false
+                vc.image = UIImage(named: "battery_icon")!
+                vc.titleText = "BATTERY ALERT"
+                vc.messageText = "Remote Device Battery is low"
+                UIApplication.topViewController()?.present(vc, animated: true)
+                try self.livePresenter.sendText(text: "low", sendMode: .unreliable)
+            } catch let error {
+                print(error)
+            }
+        }
+        
+        else{
             print("asdf asdfasd fasd fas dfasdf asdfas dfasdfasdf  \(batterPercentage)")
         }
         
@@ -173,6 +272,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
 //            self.capSession = nil
             liveView.imageView.layer.sublayers = nil
             DispatchQueue.main.async {
+                
                 liveView.imageView.image = image
             }
         }, gotAudioData: {[weak self](audioData, fromPeerID) in
@@ -194,18 +294,18 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                 case "zoomIn" :
                     self.sendString = str ?? ""
 //                    liveView.imageView.contentMode = .scaleAspectFill
-                    
-                    
                     if self.zoomText >= 1 {
                         liveView.lblZoom.text = "\(self.zoomText)x"
                     }else{
                         liveView.lblZoom.text = "1x"
                     }
                     self.zoomInSession()
+                    
                 case "ZoomOut" :
 //                    liveView.imageView.contentMode = .scaleAspectFit
                     self.sendString = str ?? ""
-                    if self.zoomText > 0 {
+                    if self.zoomText > 1 {
+                        
                         liveView.lblZoom.text = "\(self.zoomText)x"
                         self.zoomOutSession()
                     }
@@ -220,6 +320,17 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     vc.titleText = "BATTERY ALERT"
                     vc.messageText = "Remote Device Battery is low"
                     UIApplication.topViewController()?.present(vc, animated: true)
+                    
+                case "lowstrorage":
+                    self.sendString = str ?? ""
+                    let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+                    vc.modalPresentationStyle = .overFullScreen
+                    vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                    self.isDisconnect = false
+                    vc.image = UIImage(named: "st")!
+                    vc.titleText = "STORAGE ALERT"
+                    vc.messageText = "Remote Device storage is low"
+                    UIApplication.topViewController()?.present(vc, animated: true)
                 case "close" :
                     self.sendString = str ?? ""
                     let vc = DisconnectCameraVC(nibName: "DisconnectCameraVC", bundle: nil)
@@ -230,10 +341,12 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     self.sendString = str ?? ""
                     print("send String is : \(self.sendString)")
                     liveView.lblRecording.textColor = .white
-                    liveView.lblRecording.text = "CAPTURE"
+                    liveView.lblFilmingDevice.text = "CAPTURE DEVICE"
+                    liveView.lblRecording.text = "PHOTO"
                     
                     if liveView.cameraControlButton.image(for: .normal) == UIImage(named: "start_video_recording_icon") {
-                        self.saveImageAlertVC()
+                        UIApplication.topViewController()?.showToast(message: "Vedio Captured!", font: .systemFont(ofSize: 12.0))
+                        //self.saveImageAlertVC()
                         
                     }else{
                         
@@ -248,7 +361,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     liveView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
                     if videochampManager.videochamp_sharedManager.redirectType == .camera {
                         self.connectAlertVC()
-                    }else {
+                    }else if  videochampManager.videochamp_sharedManager.redirectType == .remote {
                         self.connectAlertVC()
                     }
                 case "video":
@@ -261,21 +374,25 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     
                     liveView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
 //                    liveView.lblRecording.textColor = .red
-                    liveView.lblRecording.text = "CAPTURE"
+                    liveView.lblFilmingDevice.text = "FILMING DEVICE"
+                    liveView.lblRecording.text = "VIDEO"
 //                    liveView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
                     
                 case "stopRecording":
                     self.sendString = str ?? ""
                     if videochampManager.videochamp_sharedManager.redirectType == .camera {
-                        self.saveImageAlertVC()
-//                        UIApplication.topViewController()?.showToast(message: "Video Captured!", font: .systemFont(ofSize: 16.0))
+                     //   self.saveImageAlertVC()
+                     UIApplication.topViewController()?.showToast(message: "Media has been saved in your CAMERA device gallery", font: .systemFont(ofSize: 16.0))
                         liveView.lblRecording.textColor = .white
-                        liveView.lblRecording.text = "CAPTURE"
+                        liveView.lblFilmingDevice.text = "FILMING DEVICE"
+                        liveView.lblRecording.text = "VIDEO"
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopRecording"), object: nil)
                     }else{
                         liveView.lblRecording.textColor = .white
-                        liveView.lblRecording.text = "CAPTURE"
-                        UIApplication.topViewController()?.showToast(message: "Video captured", font: .systemFont(ofSize: 16.0))
+                        liveView.lblFilmingDevice.text = "FILMING DEVICE"
+                        liveView.lblRecording.text = "VIDEO"
+                       // self.saveImageAlertVC()
+                        UIApplication.topViewController()?.showToast(message: "Media has been saved in your CAMERA device gallery", font: .systemFont(ofSize: 16.0))
                         
                     }
                     liveView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
@@ -294,23 +411,31 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     liveView.btnVideo.setImage(UIImage(named: "video_recording_icon"), for: .normal)
                     liveView.cameraControlButton.setImage(UIImage(named: "start_video_recording_icon"), for: .normal)
                     liveView.lblRecording.textColor = .red
-                    liveView.lblRecording.text = "RECORDING"
+                    liveView.lblFilmingDevice.text = "FILMING DEVICE"
+                    liveView.lblRecording.text = "VIDEO"
                     
                 case "captureImage" :
                     self.sendString = str ?? ""
-                    if videochampManager.videochamp_sharedManager.redirectType == .camera {
-                        self.saveImageAlertVC()
-                        self.takePhoto()
-                    }else{
-                        UIApplication.topViewController()?.showToast(message: "Image Captured!", font: .systemFont(ofSize: 16.0))
-                        let image = UIImage(data: msg)
-                        print("Image is : \(image ?? UIImage())")
+                   // DispatchQueue.global(qos: .userInteractive).async {
+                        if videochampManager.videochamp_sharedManager.redirectType == .camera {
+                            UIApplication.topViewController()?.showToast(message: "Media has been saved in your CAMERA device gallery", font: .systemFont(ofSize: 16.0))
+                          //  self.saveImageAlertVC()
+                            self.takePhoto()
+                        }else{
+                           // self.saveImageAlertVC()
+                            UIApplication.topViewController()?.showToast(message: "Media has been saved in your CAMERA device gallery", font: .systemFont(ofSize: 16.0))
+                            let image = UIImage(data: msg)
+                            print("Image is : \(image ?? UIImage())")
 
-                    }
+                        }
+                    //}
                     
                 case "backgrongMode" :
 //                    self.saveImageAlertVC()
                     self.backgroundDismissAlert()
+                case "SessionExpire" :
+//                    self.saveImageAlertVC()
+                    self.dismissAlertexpireVC()
                 default :
                     break
 //                    UIImageWriteToSavedPhotosAlbum(image ?? UIImage(), nil, nil, nil)
@@ -319,7 +444,8 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             }
         })
         
-        checkCameraPermission()
+            self.checkCameraPermission()
+    }
     }
     
     func removeObserverBackground() {
@@ -364,7 +490,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         vc.modalPresentationStyle = .overFullScreen
         vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
         vc.image = UIImage(named: "success_icon")!
-        vc.titleText = "CONECTION SUCCESSFUL"
+        vc.titleText = "CONNECTION SUCCESSFUL"
         isDisconnect = false
         vc.messageText = "Established with Remote"
         UIApplication.topViewController()?.present(vc, animated: true)
@@ -382,9 +508,41 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         UIApplication.topViewController()?.present(vc, animated: true)
     }
     
+    func dismissAlertexpireVC(){
+        let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.btnColor = UIColor.init(hexString: "#39BB35")
+        vc.image = UIImage(named: "done")!
+        vc.titleText = "Session Completed"
+        vc.messageText = "Media has been saved on CAMERA filming device"
+        vc.btnOkText = "OK"
+        vc.dimsiss = 1
+        isDisconnect = true
+        UIApplication.topViewController()?.present(vc, animated: true)
+    }
+    func dismissAlertVCS(){
+        let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.btnColor = UIColor(red: 256/255, green: 9/255, blue: 19/255, alpha: 1)
+        vc.image = UIImage(named: "done")!
+        vc.dimsiss = 1
+        vc.titleText = "Session Completed"
+        vc.messageText = "Media has been saved on CAMERA filming device"
+        vc.btnOkText = "OK"
+        isDisconnect = true
+        UIApplication.topViewController()?.present(vc, animated: true)
+    }
+    
     @objc func closeViewC(){
         do {
             try livePresenter.sendText(text: "popToRoot", sendMode: .unreliable)
+        }catch let error {
+            print(error)
+        }
+    }
+    @objc func closeViewCs(){
+        do {
+            try livePresenter.sendText(text: "SessionExpire", sendMode: .unreliable)
         }catch let error {
             print(error)
         }
@@ -401,7 +559,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     }
 
     private func attachButtonActions(_ liveView: LiveView) {
-        liveView.soundControlButton.addTarget(self, action: #selector(toggleSouondMuteState(_:)), for: .touchUpInside)
+//        liveView.soundControlButton.addTarget(self, action: #selector(toggleSouondMuteState(_:)), for: .touchUpInside)
         liveView.changeCameraButton.addTarget(self, action: #selector(cameraToggle(_:)), for: .touchUpInside)
         liveView.cameraControlButton.addTarget(self, action: #selector(toggleSendVideoData(_:)), for: .touchUpInside)
         liveView.textSendButton.addTarget(self, action: #selector(zoomInImage(_:)), for: .touchUpInside)
@@ -411,6 +569,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         liveView.btnCamera.addTarget(self, action: #selector(captureFrames(_:)), for: .touchUpInside)
         liveView.btnVideo.addTarget(self, action: #selector(startRecording(_:)), for: .touchUpInside)
         liveView.btnStopCasting.addTarget(self, action: #selector(stopCasting(_:)), for: .touchUpInside)
+       // liveView.btnStopCasting.addTarget(self, action: #selector(closeVC(_:)), for: .touchUpInside)
 
     }
     
@@ -424,7 +583,8 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             sender.setImage(UIImage(named: "video_recording_icon"), for: .normal)
             sendString = "startRecording"
 //            liveSetupView.lblRecording.textColor = .red
-            liveSetupView.lblRecording.text = "Capture"
+            liveSetupView.lblFilmingDevice.text = "FILMING DEVICE"
+            liveSetupView.lblRecording.text = "VIDEO"
             liveSetupView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
             liveSetupView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
             sendString = "video"
@@ -439,7 +599,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     @objc func captureFrames(_ sender: UIButton){
 //        liveSetupView.imageCapture.image = liveSetupView.imageView.image
         if liveSetupView.cameraControlButton.image(for: .normal) == UIImage(named: "start_video_recording_icon") {
-            
+          //  self.saveImageAlertVC()
             UIApplication.topViewController()?.showToast(message: "Video Captured!", font: .systemFont(ofSize: 16.0))
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopRecording"), object: nil)
 //            self.stopTimer()
@@ -451,7 +611,8 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                 liveSetupView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
                 liveSetupView.lblRecordingTiming.isHidden = true
                 liveSetupView.lblRecording.textColor = .white
-                liveSetupView.lblRecording.text = "CAPTURE"
+                liveSetupView.lblFilmingDevice.text = "CAPTURE DEVICE"
+                liveSetupView.lblRecording.text = "PHOTO"
                 sendString = "camera"
                 try livePresenter.sendText(text: sendString, sendMode: .unreliable)
             } catch let error {
@@ -465,7 +626,8 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                 liveSetupView.cameraControlButton.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
                 liveSetupView.lblRecordingTiming.isHidden = true
                 liveSetupView.lblRecording.textColor = .white
-                liveSetupView.lblRecording.text = "CAPTURE"
+                liveSetupView.lblFilmingDevice.text = "CAPTURE DEVICE"
+                liveSetupView.lblRecording.text = "PHOTO"
                 sendString = "camera"
                 try livePresenter.sendText(text: sendString, sendMode: .unreliable)
                 
@@ -511,33 +673,34 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         liveView.cameraControlButton.setImage(UIImage(named: publishBtndata.title), for: .normal)
 //        liveView.changeCameraButton.setTitle(setUpCameraPositionLabel(), for: .normal)
         liveView.changeCameraButton.setImage(UIImage(named: "zoom_icon"), for: .normal)
-        liveView.soundControlButton.setTitle(soundBtnData.title, for: .normal)
+//        liveView.soundControlButton.setTitle(soundBtnData.title, for: .normal)
         liveView.textSendButton.setImage(UIImage(named: "zoom_in_icon"), for: .normal)
 //        liveView.sendTextField.placeholder = "text"
-        liveView.lblFilmingDevice.text = "FILMING DEVICE"
-        liveView.lblRecording.text = "Capture"
+        liveView.lblFilmingDevice.text = "CAPTURE DEVICE"
+        
+        liveView.lblRecording.text = "PHOTO"
         liveView.lblRecordingTiming.isHidden = true
         liveView.lblRecordingTiming.text = "00:00:00"
         
-        liveView.btnVideo.setImage(UIImage(named: "video_recording_icon"), for: .normal)
-        liveView.btnCamera.setImage(UIImage(named: "camera_change_icon"), for: .normal)
+        liveView.btnVideo.setImage(UIImage(named: "record_video_icon_white"), for: .normal)
+        liveView.btnCamera.setImage(UIImage(named: "camera_icon_yellow"), for: .normal)
         liveView.lblZoom.text = "1x"
         liveView.lblZoom.textAlignment = .center
         //colors
         liveView.imageCapture.isHidden = true
         liveView.imageView.backgroundColor = .black
-        liveView.receivedTextLabel.backgroundColor = .white
-        liveView.soundControlButton.backgroundColor = soundBtnData.color
-        liveView.soundControlButton.isHidden = true
+//        liveView.receivedTextLabel.backgroundColor = .white
+       // liveView.soundControlButton.backgroundColor = soundBtnData.color
+//        liveView.soundControlButton.isHidden = true
         liveView.sendTextField.backgroundColor = .white
         liveView.sendTextField.isHidden = true
         liveView.textSendButton.setTitleColor(onColor, for: .highlighted)
         liveView.imageView.isUserInteractionEnabled = false
         // others
         liveView.imageView.contentMode = .scaleAspectFill
-        liveView.receivedTextLabel.adjustsFontSizeToFitWidth = true
-        liveView.soundControlButton.layer.opacity = 0.5
-        liveView.textSendButton.titleLabel?.adjustsFontSizeToFitWidth = true
+//        liveView.receivedTextLabel.adjustsFontSizeToFitWidth = true
+//        liveView.soundControlButton.layer.opacity = 0.5
+//        liveView.textSendButton.titleLabel?.adjustsFontSizeToFitWidth = true
     
         
         
@@ -644,7 +807,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     
     
     func zoomInSession(){
-        if (zoom <= 4.0){
+        if (zoom <= 4.5){
             zoom += 0.5
             zoomText += 1
             if zoomText > 0 {
@@ -688,13 +851,13 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         }
     }
 
-    @objc private func toggleSouondMuteState(_ sender: UIButton) {
-        self.needsMute.toggle()
-
-        let data = setUpButtonLabel(buttonType: .sound)
-        sender.setTitle(data.title, for: .normal)
-        sender.backgroundColor = data.color
-    }
+//    @objc private func toggleSouondMuteState(_ sender: UIButton) {
+//        self.needsMute.toggle()
+//
+//        let data = setUpButtonLabel(buttonType: .sound)
+//        sender.setTitle(data.title, for: .normal)
+//        sender.backgroundColor = data.color
+//    }
     
 //  MARK: - Send Video Streaming
     @objc private func toggleSendVideoData(_ sender: UIButton) {
@@ -702,7 +865,8 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         if sendString == "camera"{
             liveSetupView.lblRecordingTiming.isHidden = true
             liveSetupView.lblRecording.textColor = .white
-            liveSetupView.lblRecording.text = "CAPTURE"
+            liveSetupView.lblFilmingDevice.text = "CAPTURE DEVICE"
+            liveSetupView.lblRecording.text = "PHOTO"
             do {
                 sendImage = liveSetupView.imageView.image ?? UIImage()
                 if sender.image(for: .normal) == UIImage(named: "stop_video_recording_icon") {
@@ -790,7 +954,9 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     liveSetupView.lblRecordingTiming.isHidden = true
                     liveSetupView.lblRecording.textColor = .white
                     liveSetupView.lblRecording.text = "CAPTURE"
-                    UIApplication.topViewController()?.showToast(message: "Video Captured!", font: .systemFont(ofSize: 16.0))
+                    
+                 //   self.saveImageAlertVC()
+                    UIApplication.topViewController()?.showToast(message: "Media has been saved in your CAMERA device gallery", font: .systemFont(ofSize: 16.0))
 //                    self.saveImageAlertVC()
                     sendString = "stopRecording"
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopRecording"), object: nil)
@@ -812,7 +978,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     @objc private func zoomInImage(_ sender : UIButton) {
         do {
             if zoomText > 0 {
-                liveSetupView.lblZoom.text = "\(zoomText)x"
+                
             }else{
                 liveSetupView.lblZoom.text = "1x"
             }
@@ -831,10 +997,10 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
 //    MARK: - Zoomm Out Image
     
     func zoomOutSession(){
-        if zoom > 0.1 {
+        if zoom > 0.5 {
             zoom -= 0.5
             zoomText -= 1
-            
+            liveSetupView.lblZoom.text = "\(zoomText)x"
             guard sessionSetupSucceeds,  let device = activeCamera else { return }
             let minAvailableZoomScale = device.minAvailableVideoZoomFactor
             let maxAvailableZoomScale = device.maxAvailableVideoZoomFactor
@@ -846,6 +1012,9 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             configCamera(device) { device in
                 device.videoZoomFactor = resolvedScale
             }
+        }
+        else{
+            
         }
         
     }
@@ -949,6 +1118,7 @@ extension LiveViewModel {
                     ],
                 ])
 
+            
             _assetWriterInput!.expectsMediaDataInRealTime = true
 
             if _assetWriter!.canAdd(_assetWriterInput!) {
@@ -1037,6 +1207,7 @@ extension LiveViewModel {
             }
         }
 }
+
 extension LiveViewModel {
     func takePhoto(_ completion: ((Photo) -> Void)? = nil) {
         guard sessionSetupSucceeds else { return }
@@ -1139,7 +1310,7 @@ private class PhotoCaptureProcessor: NSObject, AVCaptureFileOutputRecordingDeleg
 extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard error == nil else {
-            return
+                  return
         }
 
 //        self.handleCaptureSession()
@@ -1237,3 +1408,127 @@ extension LiveViewModel {
     }
 }
 
+
+
+//extension UIDevice {
+//
+//    func totalDiskSpaceInBytes() -> Int64 {
+//        do {
+//            guard let totalDiskSpaceInBytes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())[FileAttributeKey.systemSize] as? Int64 else {
+//                return 0
+//            }
+//            return totalDiskSpaceInBytes
+//        } catch {
+//            return 0
+//        }
+//    }
+//
+//    func freeDiskSpaceInBytes() -> Int64 {
+//        do {
+//            guard let totalDiskSpaceInBytes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())[FileAttributeKey.systemFreeSize] as? Int64 else {
+//                return 0
+//            }
+//            return totalDiskSpaceInBytes
+//        } catch {
+//            return 0
+//        }
+//    }
+//
+//    func usedDiskSpaceInBytes() -> Int64 {
+//        return totalDiskSpaceInBytes() - freeDiskSpaceInBytes()
+//    }
+//
+//    func totalDiskSpace() -> String {
+//        let diskSpaceInBytes = totalDiskSpaceInBytes()
+//        if diskSpaceInBytes > 0 {
+//            return ByteCountFormatter.string(fromByteCount: diskSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.binary)
+//        }
+//        return "The total disk space on this device is unknown"
+//    }
+//
+//    func freeDiskSpace() -> String {
+//        let freeSpaceInBytes = freeDiskSpaceInBytes()
+//        if freeSpaceInBytes > 0 {
+//            return ByteCountFormatter.string(fromByteCount: freeSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.binary)
+//        }
+//        return "The free disk space on this device is unknown"
+//    }
+//
+//    func usedDiskSpace() -> String {
+//        let usedSpaceInBytes = totalDiskSpaceInBytes() - freeDiskSpaceInBytes()
+//        if usedSpaceInBytes > 0 {
+//            return ByteCountFormatter.string(fromByteCount: usedSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.binary)
+//        }
+//        return "The used disk space on this device is unknown"
+//    }
+//
+//}
+
+extension UIDevice {
+    func MBFormatter(_ bytes: Int64) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = ByteCountFormatter.Units.useMB
+        formatter.countStyle = ByteCountFormatter.CountStyle.decimal
+        formatter.includesUnit = false
+        return formatter.string(fromByteCount: bytes) as String
+    }
+    
+    //MARK: Get String Value
+    var totalDiskSpaceInGB:String {
+       return ByteCountFormatter.string(fromByteCount: totalDiskSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.decimal)
+    }
+    
+    var freeDiskSpaceInGB:String {
+        return ByteCountFormatter.string(fromByteCount: freeDiskSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.decimal)
+    }
+    
+    var usedDiskSpaceInGB:String {
+        return ByteCountFormatter.string(fromByteCount: usedDiskSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.decimal)
+    }
+    
+    var totalDiskSpaceInMB:String {
+        return MBFormatter(totalDiskSpaceInBytes)
+    }
+    
+    var freeDiskSpaceInMB:String {
+        return MBFormatter(freeDiskSpaceInBytes)
+    }
+    
+    var usedDiskSpaceInMB:String {
+        return MBFormatter(usedDiskSpaceInBytes)
+    }
+    
+    //MARK: Get raw value
+    var totalDiskSpaceInBytes:Int64 {
+        guard let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory() as String),
+            let space = (systemAttributes[FileAttributeKey.systemSize] as? NSNumber)?.int64Value else { return 0 }
+        return space
+    }
+    
+    /*
+     Total available capacity in bytes for "Important" resources, including space expected to be cleared by purging non-essential and cached resources. "Important" means something that the user or application clearly expects to be present on the local system, but is ultimately replaceable. This would include items that the user has explicitly requested via the UI, and resources that an application requires in order to provide functionality.
+     Examples: A video that the user has explicitly requested to watch but has not yet finished watching or an audio file that the user has requested to download.
+     This value should not be used in determining if there is room for an irreplaceable resource. In the case of irreplaceable resources, always attempt to save the resource regardless of available capacity and handle failure as gracefully as possible.
+     */
+    var freeDiskSpaceInBytes:Int64 {
+        if #available(iOS 11.0, *) {
+            if let space = try? URL(fileURLWithPath: NSHomeDirectory() as String).resourceValues(forKeys: [URLResourceKey.volumeAvailableCapacityForImportantUsageKey]).volumeAvailableCapacityForImportantUsage {
+                return space ?? 0
+            } else {
+                return 0
+            }
+        } else {
+            if let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory() as String),
+            let freeSpace = (systemAttributes[FileAttributeKey.systemFreeSize] as? NSNumber)?.int64Value {
+                return freeSpace
+            } else {
+                return 0
+            }
+        }
+    }
+    
+    var usedDiskSpaceInBytes:Int64 {
+       return totalDiskSpaceInBytes - freeDiskSpaceInBytes
+    }
+
+}

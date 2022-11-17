@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import GradientView
 
 class NotificationVC: UIViewController {
 
+    @IBOutlet weak var viewMain: GradientView!
     @IBOutlet weak var lblNotification: UILabel!
     
+    @IBOutlet weak var viewTop: UIView!
     @IBOutlet weak var notificationTableView: UITableView!
     
     let cellID = "NotificationCell"
@@ -22,6 +25,7 @@ class NotificationVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         notificationTableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         loadData()
 //        self.gradientColor(topColor: lightWhite, bottomColor: lightgrey)
@@ -30,7 +34,12 @@ class NotificationVC: UIViewController {
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         notificationTableView.addSubview(refreshControl)
     }
+    override func viewWillLayoutSubviews() {
+        viewTop.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+        viewMain.colors = [UIColor.init(hexString: "#9C9B9B"),UIColor(hexString: "#C6C6C5")]
+    }
     
+
     @objc func refresh(_ sender: AnyObject) {
        // Code to refresh table view
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -61,8 +70,11 @@ class NotificationVC: UIViewController {
     }
     
     
-    override func viewDidLayoutSubviews() {
-        lblNotification.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
+    
+    @IBAction func btnRefresh(_ sender: Any) {
+        self.notificationViewModel.getNotificationDataSource.removeAll()
+        self.loadData()
+        self.refreshControl.endRefreshing()
     }
     
     @IBAction func onClickedBackBTn(_ sender: UIButton) {

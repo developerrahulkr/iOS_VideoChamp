@@ -26,7 +26,16 @@ class NotificationViewModel : NSObject {
         
         guard APIManager.shared.isConnectedToInternet() else {
             UIApplication.topViewController()?.hideActivityIndicator()
-            UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
+            let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+            vc.modalPresentationStyle = .overFullScreen
+            vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+                //self.isDisconnect = false
+            vc.btnOkText = "ENABLE"
+            vc.image = UIImage(named: "alert_icon")!
+            vc.titleText = "WIFI DISABLED"
+            vc.messageText = "Please enable WIFI"
+            UIApplication.topViewController()?.present(vc, animated: true)
+           // UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")
             return
         }
         APIManager.shared.getNotification { inDict in

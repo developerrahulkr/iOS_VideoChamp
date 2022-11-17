@@ -21,7 +21,9 @@ class AlertCameraVC: UIViewController {
     var messageText = ""
     var btnColor = UIColor()
     var btnOkText = "OK"
-    
+    var type = 0
+    var dimsiss = 0
+    //var name = "ENABLE"
     
     
     override func viewDidLoad() {
@@ -31,6 +33,7 @@ class AlertCameraVC: UIViewController {
         lblTitle.text = titleText
         lblMsg.text = messageText
         imgView.image = image
+        
         if btnOkText.isEmpty {
             
         }else{
@@ -38,7 +41,15 @@ class AlertCameraVC: UIViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-            self.dismiss(animated: true)
+            if self.dimsiss == 1{
+                print("dfghj")
+                
+            }
+            else{
+                
+                
+                self.dismiss(animated: true)
+            }
         }
         
         
@@ -46,12 +57,16 @@ class AlertCameraVC: UIViewController {
 
     override func viewDidLayoutSubviews() {
         btnOK.layer.cornerRadius = btnOK.bounds.height / 2
-        lblMsg.font = UIFont.systemFont(ofSize: 10.0, weight: .ultraLight)
-        lblTitle.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        viewAlert.layer.cornerRadius = 10.0
+//        lblMsg.font = UIFont.systemFont(ofSize: 10.0, weight: .ultraLight)
+//        lblTitle.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        viewAlert.layer.cornerRadius = 20.0
     }
     
     @IBAction func onClickedOKBtn(_ sender: UIButton) {
+        if type == 1 {
+            self.dismiss(animated: true)
+        }
+        else{
         if btnOkText.isEmpty {
             self.dismiss(animated: true)
         }else{
@@ -59,6 +74,7 @@ class AlertCameraVC: UIViewController {
             NotificationCenter.default.post(name: .kDisconnect, object: nil)
         }
         
+        }
         
         
     }

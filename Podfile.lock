@@ -92,34 +92,40 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - GradientView (2.3.4)
   - GSImageViewerController (1.6.3)
   - IQKeyboardManagerSwift (6.5.9)
+  - MBProgressHUD (1.2.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - NVActivityIndicatorView (5.1.1):
-    - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
+  - NVActivityIndicatorView/Extended (5.1.1):
+    - NVActivityIndicatorView/Base
   - ProgressHUD (13.6)
   - PromisesObjC (2.0.0)
   - SDWebImage (5.12.3):
     - SDWebImage/Core (= 5.12.3)
   - SDWebImage/Core (5.12.3)
   - SnapKit (5.0.1)
+  - SwiftyCam (4.0.0)
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - Firebase/Core
   - Firebase/Messaging
+  - GradientView
   - GSImageViewerController
   - IQKeyboardManagerSwift
-  - NVActivityIndicatorView
+  - MBProgressHUD (~> 1.2.0)
+  - NVActivityIndicatorView/Extended
   - ProgressHUD
   - SDWebImage
   - SnapKit (~> 5.0.0)
+  - SwiftyCam
   - SwiftyJSON
 
 SPEC REPOS:
@@ -134,14 +140,17 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - GradientView
     - GSImageViewerController
     - IQKeyboardManagerSwift
+    - MBProgressHUD
     - nanopb
     - NVActivityIndicatorView
     - ProgressHUD
     - PromisesObjC
     - SDWebImage
     - SnapKit
+    - SwiftyCam
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -155,16 +164,19 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: aa3cb422fab2b05d2efac543a5720d1a85b9dea5
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  GradientView: 61d79cc948bf66f9d453865794ace916c2ba0918
   GSImageViewerController: 20a257d7e3dd9ee171c2dfea659992eba2761839
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftyCam: 6e57914771d972fbe508e759dc9d0150a44a93fd
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 42d8cfa30293977d453d5483adc7cad5edddbd67
+PODFILE CHECKSUM: f66f75c37444100a845d08ee23abf8e6cec9346d
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

@@ -90,7 +90,9 @@ class APIManager : NSObject {
     func verifyCode(verCode : String, userId : String,isCamera : Bool, completionHandler : @escaping(_ dict : JSON?) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: Utility.shared.getUserAppToken())]
         let param = ["number" : verCode, "userId" : userId, "isCamera" :  isCamera ] as! [String : Any]
+        print(param)
         
+    
         AF.request(number_verify_url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).response {
             (response) in
             switch response.result {

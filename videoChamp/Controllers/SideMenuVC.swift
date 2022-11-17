@@ -11,20 +11,29 @@ class SideMenuVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var imageView: UIImageView!
     
     let menuViewModel = MenuViewModels()
     let cellID = "MenuCell"
     
     var indexPath1 : IndexPath?
+    var callback:(()->())?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+        DispatchQueue.main.async {
+           
+        }
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         
         menuViewModel.getData()
     }
     
+    override func viewDidLayoutSubviews() {
+        self.imageView.applyGradient1(colorOne: .init(hexString: "#9C9B9B"), ColorTwo: .init(hexString: "#C6C6C5"))
+    }
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isPortrait {
             AppUtility.lockOrientation(.portrait)
@@ -34,6 +43,7 @@ class SideMenuVC: UIViewController {
     }
 
     @IBAction func onClickedDismissBtn(_ sender: UIButton) {
+        self.callback?()
         dismiss(animated: false, completion: nil)
     }
 }
@@ -53,6 +63,7 @@ extension SideMenuVC : UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! MenuCell
         cell.updateData(inData: menuViewModel.dataSource[indexPath.row])
         indexPath1 = indexPath
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -72,18 +83,30 @@ extension SideMenuVC : UITableViewDelegate, UITableViewDataSource{
                 NotificationCenter.default.post(name: .kFeedback, object: nil)
             }
         }
-        
         if indexPath.row == 2 {
             self.dismiss(animated: false) {
-                NotificationCenter.default.post(name: .kTermsAndConditions, object: nil)
+                NotificationCenter.default.post(name: .kWelcome, object: nil)
             }
         }
         
         if indexPath.row == 3 {
             self.dismiss(animated: false) {
+                NotificationCenter.default.post(name: .kTermsAndConditions, object: nil)
+            }
+        }
+        
+        if indexPath.row ==  4{
+            self.dismiss(animated: false) {
+                NotificationCenter.default.post(name: .kPrivacyPolicy, object: nil)
+            }
+        }
+        
+        if indexPath.row == 5 {
+            self.dismiss(animated: false) {
                 NotificationCenter.default.post(name: .kShare, object: nil)
             }
         }
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

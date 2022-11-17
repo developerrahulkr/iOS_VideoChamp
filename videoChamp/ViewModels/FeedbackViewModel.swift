@@ -138,7 +138,9 @@ class FeedbackViewModel : NSObject {
                 let feedbackDetail = data!["feedbackDetail"]?.dictionary
                 print(feedbackDetail!["desc"]!.stringValue)
                 self.getFeedbackDescriptionDataSource.append(CMGetFeedbackDescriptionData(desc: feedbackDetail!["desc"]!.stringValue, createdAt: feedbackDetail!["createdAt"]!.stringValue))
+                
 //                self.getFeedbackServiceDataSource.append(CMGetFeedbackServiceData(message: "", type: "", createdAt: "", image: ""))
+                Request.shared.date = feedbackDetail?["createdAt"]!.stringValue
                 
                 if statusCode == "200" {
                     for dic in messageData {
@@ -156,4 +158,10 @@ class FeedbackViewModel : NSObject {
         }
     }
     
+}
+
+class Request{
+    static var shared = Request()
+    
+    var date: String?
 }

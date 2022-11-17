@@ -27,8 +27,6 @@ class GiveFeedbackCell2: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        lblCount.font = UIFont.systemFont(ofSize: 15.0, weight: .light)
-        lblHeader.font = UIFont.systemFont(ofSize: 15.0, weight: .light)
     }
 }
 

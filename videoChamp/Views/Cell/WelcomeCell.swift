@@ -10,7 +10,8 @@ import UIKit
 class WelcomeCell: UICollectionViewCell {
     
     @IBOutlet weak var lbl1TutorialPage: UILabel!
-    @IBOutlet weak var lbl2How: UILabel!
+  
+    @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var lbl3ToUse: UILabel!
 
     

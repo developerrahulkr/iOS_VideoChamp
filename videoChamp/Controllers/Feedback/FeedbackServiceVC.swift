@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 import SDWebImage
-
+import GradientView
 class FeedbackServiceVC: UIViewController {
     
     
@@ -18,6 +18,12 @@ class FeedbackServiceVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imgOpenCamera: UIImageView!
     @IBOutlet weak var imgAttatchmentIcon: UIImageView!
+    @IBOutlet weak var viewMain: GradientView!
+    @IBOutlet weak var viewTop: UIView!
+    @IBOutlet var viewHeader: UIView!
+    @IBOutlet weak var lblHeader: UILabel!
+    
+    
     let refreshControl = UIRefreshControl()
     var lblTitleText = ""
     let cellID = "FeedbackServiceCell"
@@ -25,26 +31,30 @@ class FeedbackServiceVC: UIViewController {
     var feed_id = ""
     let FeedbackVM = FeedbackViewModel()
     let feedbackMessageVM = FeedbackMessageViewModel()
+    
     @IBOutlet weak var onClickSendData: UIButton!
     @IBOutlet weak var tfSendData: UITextField!
     var selectImage : UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        
-        lblFeedbackTitle.text = lblTitleText
+        DispatchQueue.main.async {
+            self.viewTop.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+        }
+        lblFeedbackTitle.text = "CHAT ROOM"
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.register(UINib(nibName: cellID2, bundle: nil), forCellReuseIdentifier: cellID2)
         openCameraAndAttatchment()
         loadData()
         print("\(feed_id)")
-        
         refreshControl.attributedTitle = NSAttributedString(string: "refresh Data")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
+    }
+    override func viewWillLayoutSubviews() {
+        viewMain.colors = [UIColor.init(hexString: "#9C9B9B"),UIColor(hexString: "#C6C6C5")]
     }
     
     @objc func refresh(_ sender: AnyObject) {
@@ -52,7 +62,7 @@ class FeedbackServiceVC: UIViewController {
 //        loadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.FeedbackVM.getFeedbackServiceDataSource.removeAll()
-//            self.tableView.reloadData()
+            self.tableView.reloadData()
             self.loadData()
             self.refreshControl.endRefreshing()
         }
@@ -64,6 +74,8 @@ class FeedbackServiceVC: UIViewController {
         FeedbackVM.getFeedbackListData(feedId: feed_id) { isSuccess,blockCode  in
             
             if isSuccess {
+                let date = self.convertToDateForUTCFormatMyProfileNew(dateString: Request.shared.date ?? "")
+            self.lblHeader.text = date
                 self.tableView.reloadData()
             }else if isSuccess && blockCode == "10" {
                 self.showExitAlert()
@@ -171,9 +183,11 @@ class FeedbackServiceVC: UIViewController {
 //MARK: - UITableView Delegate and UIImagePickerView
 
 extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return FeedbackVM.getFeedbackServiceDataSource.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! FeedbackServiceCell
         let cell2 = tableView.dequeueReusableCell(withIdentifier:cellID2 , for: indexPath) as! FeedbackMsgImageCell
@@ -188,26 +202,27 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
             
             cell2.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
             print("feedback Image : \(FeedbackVM.getFeedbackServiceDataSource[indexPath.row].image!)")
-            cell2.cardView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
-            cell2.cardView.roundLeftChatCorner(cornerRadius: 16)
+            cell2.cardView.layer.backgroundColor = UIColor.init(hexString: "#DEDC00").cgColor
+            cell2.cardView.roundRightChatCorner(cornerRadius: 16)
             return cell2
         }else if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].type == "outgoing" && FeedbackVM.getFeedbackServiceDataSource[indexPath.row].message == "" {
             cell2.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
             print("feedback Image : \(FeedbackVM.getFeedbackServiceDataSource[indexPath.row].image!)")
-            cell2.cardView.layer.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
-            cell2.cardView.roundRightChatCorner(cornerRadius: 16)
+            cell2.cardView.layer.backgroundColor =  UIColor.init(hexString: "#F98100").cgColor
+            cell2.cardView.roundLeftChatCorner(cornerRadius: 16)
             return cell2
         }else{
             if FeedbackVM.getFeedbackServiceDataSource[indexPath.row].type == "incoming" && FeedbackVM.getFeedbackServiceDataSource[indexPath.row].message != nil{
                 cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
-                cell.lblMsg.textColor = .white
-                cell.cellView.layer.backgroundColor = UIColor(red: 253/255, green: 97/255, blue: 43/255, alpha: 1).cgColor
+                cell.lblMsg.textColor = .black
+                cell.cellView.layer.backgroundColor = UIColor.init(hexString: "#DEDC00").cgColor
                 cell.cellView.roundRightChatCorner(cornerRadius: 16)
                 
             }else{
-                cell.cellView.layer.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
+                cell.cellView.layer.backgroundColor = UIColor.init(hexString: "#F98100").cgColor
                 cell.updateData(inData: FeedbackVM.getFeedbackServiceDataSource[indexPath.row])
                 cell.lblMsg.textColor = .black
+                
                 cell.cellView.roundLeftChatCorner(cornerRadius: 16)
             }
         }
@@ -230,8 +245,11 @@ extension FeedbackServiceVC : UITableViewDelegate, UITableViewDataSource, UIImag
         }else{
             print("No Image")
         }
+        
     }
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+      return  viewHeader
+    }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
             self.tableView.reloadData()

@@ -56,6 +56,7 @@ class GenerateNumberViewModel : NSObject {
             return
         }
         APIManager.shared.verifyCode(verCode: number, userId: userID, isCamera: isCamera) { dict in
+            print(number,userID)
             UIApplication.topViewController()?.hideActivityIndicator()
             if dict == nil {
                 print("Directory is Empty")
@@ -67,6 +68,7 @@ class GenerateNumberViewModel : NSObject {
                     print(message)
                     completionHandler(true,message,code)
                 }else{
+                    
                     completionHandler(false, message, code)
                     print("Error Msg : \(message)")
                 }

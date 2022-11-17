@@ -13,16 +13,26 @@ pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
-pod 'NVActivityIndicatorView'
+pod 'NVActivityIndicatorView/Extended'
 pod 'SDWebImage'
 pod 'SnapKit', '~> 5.0.0'
+pod 'GradientView'
 pod 'GSImageViewerController'
+pod 'MBProgressHUD', '~> 1.2.0'
+pod 'SwiftyCam'
+
+
+target 'MultipeerFramework' do
+  pod 'SwiftyCam'
+
+end
+
 
   target 'videoChampTests' do
     inherit! :search_paths
     # Pods for testing
   end
-
+  
   target 'videoChampUITests' do
     # Pods for testing
   end

@@ -35,16 +35,21 @@ class MenuViewModels : NSObject {
         let data2 = CMModel(ids: uuid, name: "GIVE US A FEEDBACK", imageIcon: "feedback_icon", arrowIcon: "arrow_icon")
         dataSource.append(data2)
         
+        let data6 = CMModel(ids: uuid, name: "HOW TO", imageIcon: "howTO", arrowIcon: "arrow_icon")
+        dataSource.append(data6)
         let data3 = CMModel(ids: uuid, name: "TERMS & CONDITIONS", imageIcon: "t_and_c_icon", arrowIcon: "arrow_icon")
         dataSource.append(data3)
         
-        let data4 = CMModel(ids: uuid, name: "SHARE APPLICATION", imageIcon: "share_icon", arrowIcon: "arrow_icon")
+        let data5 = CMModel(ids: uuid, name: "PRIVACY & POLICY", imageIcon: "privacy", arrowIcon: "arrow_icon")
+        dataSource.append(data5)
+        
+        let data4 = CMModel(ids: uuid, name: "TELL FRIENDS", imageIcon: "share_icon", arrowIcon: "arrow_icon")
         dataSource.append(data4)
         
     }
     
     func activateDateAPIData(completionHandler : @escaping(Bool,String) -> Void) {
-        UIApplication.topViewController()?.showActivityIndicator()
+//        UIApplication.topViewController()?.showActivityIndicator()
         guard APIManager.shared.isConnectedToInternet() else {
             UIApplication.topViewController()?.hideActivityIndicator()
             UIApplication.topViewController()?.showAlert(alertMessage: "Internet is not Access.")

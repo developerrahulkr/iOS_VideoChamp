@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:videoChamp.xcodeproj">
+      location = "group:/Users/udit_rajput_mac/Documents/RipenApps_Git_Project/videochamp_ios/VideoChamp.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

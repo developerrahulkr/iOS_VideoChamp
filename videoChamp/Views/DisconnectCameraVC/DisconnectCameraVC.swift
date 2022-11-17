@@ -29,18 +29,21 @@ class DisconnectCameraVC: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        viewAlert.layer.cornerRadius = 15.0
+        viewAlert.layer.cornerRadius = 25
         btnYes.layer.cornerRadius = btnYes.bounds.height / 2
         btnNo.layer.cornerRadius = btnNo.bounds.height / 2
     }
     @IBAction func onClickedYesBtn(_ sender: UIButton) {
         
         if isBack {
+            
             self.dismiss(animated: true)
-            NotificationCenter.default.post(name: .kCloseScreen, object: nil)
+            NotificationCenter.default.post(name: .Sessionexpire, object: nil)
+//            NotificationCenter.default.post(name: .kCloseScreen, object: nil)
         }else{
             self.dismiss(animated: true)
-            NotificationCenter.default.post(name: .kCloseScreen, object: nil)
+            NotificationCenter.default.post(name: .Sessionexpire, object: nil)
+            //NotificationCenter.default.post(name: .kCloseScreen, object: nil)
         }
         
     }

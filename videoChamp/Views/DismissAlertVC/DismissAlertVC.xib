@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,9 +15,12 @@
         <array key="argentum-sans.regular.ttf">
             <string>ArgentumSans-Regular</string>
         </array>
+        <array key="argentum-sans.semibold.ttf">
+            <string>ArgentumSans-SemiBold</string>
+        </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DismissAlertVC" customModule="videoChamp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DismissAlertVC" customModule="VideoChamp" customModuleProvider="target">
             <connections>
                 <outlet property="btnCheck" destination="Ck9-7k-dCT" id="Xth-2c-uCC"/>
                 <outlet property="btnNo" destination="m2u-Xg-XtI" id="8Ff-0G-F1L"/>
@@ -32,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWq-SC-em8">
-                    <rect key="frame" x="88.5" y="288" width="237" height="320"/>
+                    <rect key="frame" x="88.5" y="313" width="237" height="270"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XE8-3B-viF">
                             <rect key="frame" x="207" y="16" width="10" height="22"/>
@@ -50,22 +53,22 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARE YOU SURE?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYZ-ox-AOb">
-                            <rect key="frame" x="58.5" y="153" width="120.5" height="17.5"/>
-                            <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="15"/>
+                            <rect key="frame" x="49" y="153" width="139.5" height="20"/>
+                            <fontDescription key="fontDescription" name="ArgentumSans-SemiBold" family="Argentum Sans" pointSize="17"/>
                             <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your remote connection will be disconnected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbD-TA-xyR">
-                            <rect key="frame" x="20" y="180.5" width="197" height="25.5"/>
+                            <rect key="frame" x="20" y="183" width="197" height="25.5"/>
                             <fontDescription key="fontDescription" name="ArgentumSans-Light" family="Argentum Sans" pointSize="11"/>
                             <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TIg-O5-8dO">
-                            <rect key="frame" x="16" y="220" width="205" height="40"/>
+                            <rect key="frame" x="16" y="222.5" width="205" height="35"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2u-Xg-XtI">
-                                    <rect key="frame" x="0.0" y="0.0" width="92.5" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="92.5" height="35"/>
                                     <color key="backgroundColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="14"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -77,11 +80,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTI-tW-XoH">
-                                    <rect key="frame" x="112.5" y="0.0" width="92.5" height="40"/>
-                                    <color key="backgroundColor" red="0.22352941179999999" green="0.73333333329999995" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <rect key="frame" x="112.5" y="0.0" width="92.5" height="35"/>
+                                    <color key="backgroundColor" red="0.57647058823529407" green="0.75294117647058822" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="ArgentumSans-Regular" family="Argentum Sans" pointSize="14"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="OK">
+                                    <state key="normal" title="YES">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
@@ -90,11 +93,11 @@
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="cYh-2R-tKr"/>
+                                <constraint firstAttribute="height" constant="35" id="cYh-2R-tKr"/>
                             </constraints>
                         </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ck9-7k-dCT">
-                            <rect key="frame" x="16" y="280" width="19.5" height="22"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ck9-7k-dCT">
+                            <rect key="frame" x="16" y="277.5" width="19.5" height="22"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="square" catalog="system"/>
@@ -102,8 +105,8 @@
                                 <action selector="onClickedCheckBtn:" destination="-1" eventType="touchUpInside" id="obz-jn-vXu"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not ask me again" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGw-d3-VB1">
-                            <rect key="frame" x="45.5" y="284" width="115" height="14.5"/>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not ask me again" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGw-d3-VB1">
+                            <rect key="frame" x="45.5" y="281.5" width="115" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -115,7 +118,7 @@
                         <constraint firstItem="gbD-TA-xyR" firstAttribute="top" secondItem="aYZ-ox-AOb" secondAttribute="bottom" constant="10" id="7S9-Mk-2GV"/>
                         <constraint firstAttribute="trailing" secondItem="TIg-O5-8dO" secondAttribute="trailing" constant="16" id="Bp1-C4-pj3"/>
                         <constraint firstItem="Ck9-7k-dCT" firstAttribute="leading" secondItem="TIg-O5-8dO" secondAttribute="leading" id="CHp-Z1-5wB"/>
-                        <constraint firstAttribute="height" constant="320" id="FLA-vP-48s"/>
+                        <constraint firstAttribute="height" constant="270" id="FLA-vP-48s"/>
                         <constraint firstItem="yhn-co-KW9" firstAttribute="centerX" secondItem="gWq-SC-em8" secondAttribute="centerX" id="IEI-7k-3C2"/>
                         <constraint firstAttribute="trailing" secondItem="XE8-3B-viF" secondAttribute="trailing" constant="20" id="JdT-oz-dPe"/>
                         <constraint firstItem="XGw-d3-VB1" firstAttribute="centerY" secondItem="Ck9-7k-dCT" secondAttribute="centerY" id="Oeu-IM-j6b"/>
@@ -134,7 +137,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23137254901960785" alpha="0.75085957845052087" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="gWq-SC-em8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="bUK-Q5-PGd"/>
                 <constraint firstItem="gWq-SC-em8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ouD-Xz-L0v"/>

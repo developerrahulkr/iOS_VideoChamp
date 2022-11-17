@@ -9,17 +9,23 @@ import UIKit
 //import MFrameWork
 import MultipeerFramework
 import MultipeerConnectivity
+import GradientView
 
 class CameraVideoShareCodeVC: UIViewController {
     
     @IBOutlet weak var lblShareCode: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lbl: UILabel!
+    @IBOutlet weak var viewTop: GradientView!
+    @IBOutlet weak var viewTblView: GradientView!
+    @IBOutlet weak var viewPopUP: UIView!
+    @IBOutlet weak var imgPopup: UIImageView!
     
     let cellID = "CameraCodeCell"
     let cellID2 = "CameraCodeCell2"
     let cellId3 = "CameraCodeCell3"
     
+    var typeDevice = "IOS"
     let cameraViewModel = CameraConnectViewModel()
     private var mcSessionViewModel : MCSessionViewModel!
     var staticLink = "http://videochamp/remote/"
@@ -32,7 +38,10 @@ class CameraVideoShareCodeVC: UIViewController {
     var myPeerID : String!
     var isCamera : String?
     let codeGenerateVM = GenerateNumberViewModel()
-//    let generateNumberVM = GenerateNumberViewModel()
+    var indicatorType = Int()
+    var time = Double()
+    
+    //    let generateNumberVM = GenerateNumberViewModel()
     
     private var peerTableViewModel = PeerTableViewModel()
     let generateLinkVM = GeneratedLinkViewModel()
@@ -40,14 +49,40 @@ class CameraVideoShareCodeVC: UIViewController {
     private let serviceType = "video-champ"
     private let displayName = UIDevice.current.name
     private let serviceProtocol:MCSessionManager.ServiceProtocol = .textAndVideo
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .all
 
-        // Do any additional setup after loading the view.
-        cameraViewModel.getCemaraData()
+         imgPopup.image = UIImage.gifImageWithName("timer")
+        
+        if indicatorType ==  1{
+            viewPopUP.isHidden = false
+            
+        }
+        else{
+            viewPopUP.isHidden = true
+            
+        }
+        // viewTop.colors = [UIColor(hexString: "#F9B200"),UIColor(hexString: "#E63B11")]
         registerCell()
-        print("user ID : \(self.userID ?? "")")
-        loadData()
+        if !typeDevice.contains("IOS") && !typeDevice.contains("") {
+            let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
+            vc.modalPresentationStyle = .overFullScreen
+            vc.btnColor = UIColor(red: 147/255, green: 192/255, blue: 31/255, alpha: 1)
+            vc.image = UIImage(named: "alert_icon")!
+            vc.titleText = "Cross Platform is not Supported"
+            vc.messageText = "Connect between Android and Ios is not supported."
+            vc.type = 1
+            UIApplication.topViewController()?.present(vc, animated: true)
+        }
+        else{
+            cameraViewModel.getCemaraData()
+            loadData()
+        }
+        
+        // Do any additional setup after loading the view.
+        
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -57,7 +92,8 @@ class CameraVideoShareCodeVC: UIViewController {
             AppUtility.lockOrientation(.landscape)
         }
     }
-
+    
+    
     func loadData(){
         
         NotificationCenter.default.addObserver(self, selector: #selector(closeScreen), name: .kCloseScreen, object: nil)
@@ -71,10 +107,10 @@ class CameraVideoShareCodeVC: UIViewController {
             guard let self = self else {return}
             if isSuccess && blockCode == "10"{
                 self.showExitAlert()
-            
+                
             }else {
                 if isSuccess{
-    //                self.generatedNumber = number
+                    //                self.generatedNumber = number
                     print("Deeplinking URL : \(linkURL)")
                     print("url Code : \(urlCode)")
                     self.urlLink = linkURL
@@ -85,21 +121,22 @@ class CameraVideoShareCodeVC: UIViewController {
                         self.varCamera = false
                     }
                     
-                    self.staticLink = "\(self.staticLink)\(urlCode)"
+                    
                     self.CodeVerifyApi(number: self.number ?? "", userId: self.userID ?? "", isCamera: self.varCamera)
+                    self.staticLink = "\(self.staticLink)\(urlCode)"
                     self.tableView.reloadData()
                     
                 }
-    //            else if codeMessage == "code is already generated" && isSuccess {
-    //                print("Deeplinking URL : \(linkURL)")
-    //                print("url Code : \(urlCode)")
-    //                self.urlLink = linkURL
-    //
-    //                self.staticLink = "\(self.staticLink)\(urlCode)"
-    //                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
-    //                self.generatedUrlCode = urlCode
-    //                self.tableView.reloadData()
-    //            }
+                //            else if codeMessage == "code is already generated" && isSuccess {
+                //                print("Deeplinking URL : \(linkURL)")
+                //                print("url Code : \(urlCode)")
+                //                self.urlLink = linkURL
+                //
+                //                self.staticLink = "\(self.staticLink)\(urlCode)"
+                //                self.CodeVerifyApi(number: urlCode, userId: self.userID ?? "")
+                //                self.generatedUrlCode = urlCode
+                //                self.tableView.reloadData()
+                //            }
                 else if codeMessage == "code Expire" && isSuccess{
                     self.loadData()
                 }else{
@@ -132,7 +169,7 @@ class CameraVideoShareCodeVC: UIViewController {
                         print("Already Advertise.........")
                     }else{
                         self.mcSessionViewModel.toogleAdvertising()
-                    } 
+                    }
                 }else{
                     self.mcSessionViewModel.toggleBrwosing()
                 }
@@ -146,23 +183,25 @@ class CameraVideoShareCodeVC: UIViewController {
     }
     
     
-
-    
     
     override func viewDidLayoutSubviews() {
         lbl.font = UIFont(name: "ArgentumSans-Bold", size: 31.0)
         lbl.font = UIFont.systemFont(ofSize: 31.0, weight: .regular)
-        self.gradientColor(topColor: topyellowColor, bottomColor: bottomYellowColor)
+        viewTblView.colors = [UIColor.init(hexString: "#F9B200") , UIColor.init(hexString: "#E63B11")]
+        //  viewTop.colors = [UIColor.init(hexString: "#F9B200") , UIColor.init(hexString: "#E63B11")]
+        //      viewTblView.applyGradient(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+        viewTop.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
+        //self.gradientColor(topColor: topyellowColor, bottomColor: bottomYellowColor)
         lblShareCode.font = UIFont.systemFont(ofSize: 17.0, weight: .bold)
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        if self.myPeerID == nil {
-//            self.mcSessionViewModel.toogleAdvertising()
-//        }else{
-//            self.mcSessionViewModel.toggleBrwosing()
-//        }
-//    }
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        if self.myPeerID == nil {
+    //            self.mcSessionViewModel.toogleAdvertising()
+    //        }else{
+    //            self.mcSessionViewModel.toggleBrwosing()
+    //        }
+    //    }
     
     
     func registerCell(){
@@ -170,10 +209,14 @@ class CameraVideoShareCodeVC: UIViewController {
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.register(UINib(nibName: cellId3, bundle: nil), forCellReuseIdentifier: cellId3)
         
-        
-        self.showActivityIndicator()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.hideActivityIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            //            if self.indicatorType == 1 {
+            //                Indicator.instance.hide()
+            //            }
+            //            else{
+            //                self.hideActivityIndicator()
+            //            }
+            // self.hideActivityIndicator()
             
             guard let decoded  = UserDefaults.standard.object(forKey: "MCPeerIDs") as? Data else {
                 return
@@ -193,10 +236,10 @@ class CameraVideoShareCodeVC: UIViewController {
                                                                             self.peerTableViewModel.foundCellData[i].peerID)
                         if sameNameIndexes.isEmpty {
                             Utility.shared.sessionManager.inviteTo(peerID: self.peerTableViewModel.foundCellData[i].peerID, timeout: self.timeout)
-            //                self.loadData()
+                            //                self.loadData()
                         } else {
                             Utility.shared.sessionManager.canselConectRequestTo(peerID: self.peerTableViewModel.foundCellData[i].peerID)
-
+                            
                         }
                     }else{
                         print("Data is Not Found.........")
@@ -210,6 +253,23 @@ class CameraVideoShareCodeVC: UIViewController {
     }
     
     
+    @IBAction func brnCancel(_ sender: Any) {
+        indicatorType = 0
+        viewPopUP.isHidden = true
+        let vc = DismissAlertVC(nibName: "DismissAlertVC", bundle: nil)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.isBack = true
+        vc.poptohime = false
+        present(vc, animated: true)
+
+    }
+    @IBAction func btnRemove(_ sender: Any) {
+        indicatorType = 0
+        tableView.reloadData()
+       
+        viewPopUP.isHidden = true
+        
+    }
     
     
     @IBAction func onClickedBackBtn(_ sender: UIButton) {
@@ -221,9 +281,11 @@ class CameraVideoShareCodeVC: UIViewController {
         let vc = DismissAlertVC(nibName: "DismissAlertVC", bundle: nil)
         vc.modalPresentationStyle = .overFullScreen
         vc.isBack = true
+        vc.poptohime = false
         present(vc, animated: true)
-//        self.navigationController?.popViewController(animated: true)
+        //        self.navigationController?.popViewController(animated: true)
     }
+    
     
     @IBAction func onClickedCloseBtn(_ sender: UIButton) {
         guard UserDefaults.standard.string(forKey: "isCheck") != "true"  else {
@@ -233,8 +295,9 @@ class CameraVideoShareCodeVC: UIViewController {
         let vc = DismissAlertVC(nibName: "DismissAlertVC", bundle: nil)
         vc.modalPresentationStyle = .overFullScreen
         vc.isBack = true
+        vc.poptohime = true
         present(vc, animated: true)
-//        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -247,29 +310,37 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if indicatorType == 1 {
+            return 1
+        }
+        else
+        {
+            return 2
+        }
     }
     
-  
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.section == 0 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CameraCodeCell
-//            cell.updateData(inData: cameraViewModel.cameraDataSource[indexPath.row])
-//            return cell
-//        }else
+        //        if indexPath.section == 0 {
+        //            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CameraCodeCell
+        //            cell.updateData(inData: cameraViewModel.cameraDataSource[indexPath.row])
+        //            return cell
+        //        }else
         if indexPath.section == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId3, for: indexPath) as! CameraCodeCell3
+            
+            
+
+            cell.selectionStyle = .none
+            return cell
+        }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! CameraCodeCell2
             cell.delegate = self
+            cell.selectionStyle = .none
             cell.lblCode.text = staticLink
             cell.btnShare.tag = indexPath.row
             cell.btnResend.tag = indexPath.row
-            return cell
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellId3, for: indexPath) as! CameraCodeCell3
-//            cell.delegate = self
-//            cell.btnShare.tag = indexPath.row
-//            cell.btnResend.tag = indexPath.row
             return cell
         }
         
@@ -281,13 +352,13 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            return 150
-//        }else
+        //        if indexPath.section == 0 {
+        //            return 150
+        //        }else
         if indexPath.section == 0{
-            return 170.0
+            return UITableView.automaticDimension
         }else{
-            return 165.0
+            return  UITableView.automaticDimension
         }
     }
     
@@ -298,34 +369,45 @@ extension CameraVideoShareCodeVC : UITableViewDelegate, UITableViewDataSource, C
     }
     
     func shareCode(tag: Int) {
-        if let encoded = urlLink.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
-            let url = URL(string: encoded)
-        {
-            print("original URL is : \(url)")
-            let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
-            self.present(sharesheetVC, animated: true)
-        }
-//        let url = urlLink.replacingOccurrences(of: " ", with: "_")
-////        let finalUrl1 = url.replacingOccurrences(of: "'", with: "_")
-////        let finalUrl1 = url.replacingOccurrences(of: "<", with: "&")
-//        let finalUrl = url.replacingOccurrences(of: "'", with: " ")
-//
-//
-//        guard let url = URL(string: finalUrl)
-//        else{
-//            return
-//        }
-//        let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
-//        self.present(sharesheetVC, animated: true)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "WaitingRoomVC") as! WaitingRoomVC
+        //vc.urlLink = urlLink
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+        
+        
+        //        if let encoded = urlLink.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+        //            let url = URL(string: encoded)
+        //        {
+        //            print("original URL is : \(url)")
+        //            let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
+        //            self.present(sharesheetVC, animated: true)
+        //        }
+        //        let url = urlLink.replacingOccurrences(of: " ", with: "_")
+        ////        let finalUrl1 = url.replacingOccurrences(of: "'", with: "_")
+        ////        let finalUrl1 = url.replacingOccurrences(of: "<", with: "&")
+        //        let finalUrl = url.replacingOccurrences(of: "'", with: " ")
+        //
+        //
+        //        guard let url = URL(string: finalUrl)
+        //        else{
+        //            return
+        //        }
+        //        let sharesheetVC = UIActivityViewController(activityItems: [sendingRemoteMessage,url], applicationActivities: nil)
+        //        self.present(sharesheetVC, animated: true)
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
-            self.tableView.reloadData()
-        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
-            self.tableView.reloadData()
-        }
-    }
+    //    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    //        if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.portrait) {
+    //            self.viewDidLoad()
+    //            self.viewWillAppear(true)
+    //            self.tableView.reloadData()
+    //        }else if AppUtility.lockOrientation(.all) == AppUtility.lockOrientation(.landscape) {
+    //            self.viewDidLoad()
+    //            self.viewWillAppear(true)
+    //            self.tableView.reloadData()
+    //        }
+    //}
     
     
     
@@ -352,3 +434,73 @@ extension CameraVideoShareCodeVC  {
 
 
 
+
+
+class RadialGradientLayer: CALayer {
+    
+    var center: CGPoint {
+        return CGPoint(x: bounds.width/2, y: bounds.height/(-0.7))
+    }
+    
+    var radius: CGFloat {
+        return (bounds.width + bounds.height)
+    }
+    
+    var colors: [UIColor] = [UIColor.black, UIColor.lightGray] {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    var cgColors: [CGColor] {
+        return colors.map({ (color) -> CGColor in
+            return color.cgColor
+        })
+    }
+    
+    override init() {
+        super.init()
+        needsDisplayOnBoundsChange = true
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init()
+    }
+    
+    override func draw(in ctx: CGContext) {
+        ctx.saveGState()
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let locations: [CGFloat] = [0.0, 1.0]
+        guard let gradient = CGGradient(colorsSpace: colorSpace, colors: cgColors as CFArray, locations: locations) else {
+            return
+        }
+        ctx.drawRadialGradient(gradient, startCenter: center, startRadius: 0.0, endCenter: center, endRadius: radius, options: CGGradientDrawingOptions(rawValue: 0))
+    }
+    
+}
+
+
+
+class RadialGradientView: UIView {
+    
+    private let gradientLayer = RadialGradientLayer()
+    
+    var colors: [UIColor] {
+        get {
+            
+            return gradientLayer.colors
+        }
+        set {
+            gradientLayer.colors = newValue
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if gradientLayer.superlayer == nil {
+            layer.insertSublayer(gradientLayer, at: 0)
+        }
+        gradientLayer.frame = bounds
+    }
+    
+}
