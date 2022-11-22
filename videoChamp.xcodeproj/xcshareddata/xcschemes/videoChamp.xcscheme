@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2C3625BF27BC077100EB4CD6"
-               BuildableName = "VideoChamp.app"
-               BlueprintName = "VideoChamp"
-               ReferencedContainer = "container:videoChamp.xcodeproj">
+               BuildableName = "videoChamp.app"
+               BlueprintName = "videoChamp"
+               ReferencedContainer = "container:VideoChamp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2C3625D827BC077600EB4CD6"
-               BuildableName = "VideoChampTests.xctest"
-               BlueprintName = "VideoChampTests"
-               ReferencedContainer = "container:videoChamp.xcodeproj">
+               BuildableName = "videoChampTests.xctest"
+               BlueprintName = "videoChampTests"
+               ReferencedContainer = "container:VideoChamp.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2C3625E227BC077600EB4CD6"
-               BuildableName = "VideoChampUITests.xctest"
-               BlueprintName = "VideoChampUITests"
-               ReferencedContainer = "container:videoChamp.xcodeproj">
+               BuildableName = "videoChampUITests.xctest"
+               BlueprintName = "videoChampUITests"
+               ReferencedContainer = "container:VideoChamp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2C3625BF27BC077100EB4CD6"
-            BuildableName = "VideoChamp.app"
-            BlueprintName = "VideoChamp"
-            ReferencedContainer = "container:videoChamp.xcodeproj">
+            BuildableName = "videoChamp.app"
+            BlueprintName = "videoChamp"
+            ReferencedContainer = "container:VideoChamp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -90,9 +90,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2C3625BF27BC077100EB4CD6"
-            BuildableName = "VideoChamp.app"
-            BlueprintName = "VideoChamp"
-            ReferencedContainer = "container:videoChamp.xcodeproj">
+            BuildableName = "videoChamp.app"
+            BlueprintName = "videoChamp"
+            ReferencedContainer = "container:VideoChamp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -269,7 +269,7 @@
 		2C319B4027C4C08B00AAB997 /* GiveFeedbackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedbackVC.swift; sourceTree = "<group>"; };
 		2C319B4227C4C5F600AAB997 /* FeedbackSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSectionCell.swift; sourceTree = "<group>"; };
 		2C319B4427C4C64500AAB997 /* FeedbackSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackSectionCell.xib; sourceTree = "<group>"; };
-		2C3625C027BC077100EB4CD6 /* VideoChamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoChamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C3625C027BC077100EB4CD6 /* videoChamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = videoChamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3625C327BC077100EB4CD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C3625C527BC077100EB4CD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2C3625C727BC077200EB4CD6 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
@@ -278,9 +278,9 @@
 		2C3625CF27BC077600EB4CD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C3625D227BC077600EB4CD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C3625D427BC077600EB4CD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2C3625D927BC077600EB4CD6 /* VideoChampTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoChampTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C3625D927BC077600EB4CD6 /* videoChampTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videoChampTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3625DD27BC077600EB4CD6 /* videoChampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videoChampTests.swift; sourceTree = "<group>"; };
-		2C3625E327BC077600EB4CD6 /* VideoChampUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoChampUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C3625E327BC077600EB4CD6 /* videoChampUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videoChampUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3625E727BC077600EB4CD6 /* videoChampUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videoChampUITests.swift; sourceTree = "<group>"; };
 		2C3625E927BC077600EB4CD6 /* videoChampUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videoChampUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2C3625F927BC0A1300EB4CD6 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
@@ -589,9 +589,9 @@
 		2C3625C127BC077100EB4CD6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2C3625C027BC077100EB4CD6 /* VideoChamp.app */,
-				2C3625D927BC077600EB4CD6 /* VideoChampTests.xctest */,
-				2C3625E327BC077600EB4CD6 /* VideoChampUITests.xctest */,
+				2C3625C027BC077100EB4CD6 /* videoChamp.app */,
+				2C3625D927BC077600EB4CD6 /* videoChampTests.xctest */,
+				2C3625E327BC077600EB4CD6 /* videoChampUITests.xctest */,
 				18F703F42851CB68001CADC1 /* MultipeerFramework.framework */,
 			);
 			name = Products;
@@ -889,9 +889,9 @@
 			productReference = 18F703F42851CB68001CADC1 /* MultipeerFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		2C3625BF27BC077100EB4CD6 /* VideoChamp */ = {
+		2C3625BF27BC077100EB4CD6 /* videoChamp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2C3625ED27BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "VideoChamp" */;
+			buildConfigurationList = 2C3625ED27BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "videoChamp" */;
 			buildPhases = (
 				0280553D20A018CF5560C3D1 /* [CP] Check Pods Manifest.lock */,
 				2C3625BC27BC077100EB4CD6 /* Sources */,
@@ -905,14 +905,14 @@
 			dependencies = (
 				18F703F92851CB68001CADC1 /* PBXTargetDependency */,
 			);
-			name = VideoChamp;
+			name = videoChamp;
 			productName = videoChamp;
-			productReference = 2C3625C027BC077100EB4CD6 /* VideoChamp.app */;
+			productReference = 2C3625C027BC077100EB4CD6 /* videoChamp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2C3625D827BC077600EB4CD6 /* VideoChampTests */ = {
+		2C3625D827BC077600EB4CD6 /* videoChampTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2C3625F027BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "VideoChampTests" */;
+			buildConfigurationList = 2C3625F027BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "videoChampTests" */;
 			buildPhases = (
 				C38960702F4D197830F8A9CF /* [CP] Check Pods Manifest.lock */,
 				2C3625D527BC077600EB4CD6 /* Sources */,
@@ -924,14 +924,14 @@
 			dependencies = (
 				2C3625DB27BC077600EB4CD6 /* PBXTargetDependency */,
 			);
-			name = VideoChampTests;
+			name = videoChampTests;
 			productName = videoChampTests;
-			productReference = 2C3625D927BC077600EB4CD6 /* VideoChampTests.xctest */;
+			productReference = 2C3625D927BC077600EB4CD6 /* videoChampTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2C3625E227BC077600EB4CD6 /* VideoChampUITests */ = {
+		2C3625E227BC077600EB4CD6 /* videoChampUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2C3625F327BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "VideoChampUITests" */;
+			buildConfigurationList = 2C3625F327BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "videoChampUITests" */;
 			buildPhases = (
 				59743BE3BA4EFA0704D6F28C /* [CP] Check Pods Manifest.lock */,
 				2C3625DF27BC077600EB4CD6 /* Sources */,
@@ -944,9 +944,9 @@
 			dependencies = (
 				2C3625E527BC077600EB4CD6 /* PBXTargetDependency */,
 			);
-			name = VideoChampUITests;
+			name = videoChampUITests;
 			productName = videoChampUITests;
-			productReference = 2C3625E327BC077600EB4CD6 /* VideoChampUITests.xctest */;
+			productReference = 2C3625E327BC077600EB4CD6 /* videoChampUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -978,7 +978,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2C3625BB27BC077100EB4CD6 /* Build configuration list for PBXProject "VideoChamp" */;
+			buildConfigurationList = 2C3625BB27BC077100EB4CD6 /* Build configuration list for PBXProject "videoChamp" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -991,9 +991,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2C3625BF27BC077100EB4CD6 /* VideoChamp */,
-				2C3625D827BC077600EB4CD6 /* VideoChampTests */,
-				2C3625E227BC077600EB4CD6 /* VideoChampUITests */,
+				2C3625BF27BC077100EB4CD6 /* videoChamp */,
+				2C3625D827BC077600EB4CD6 /* videoChampTests */,
+				2C3625E227BC077600EB4CD6 /* videoChampUITests */,
 				18F703F32851CB68001CADC1 /* MultipeerFramework */,
 			);
 		};
@@ -1346,12 +1346,12 @@
 		};
 		2C3625DB27BC077600EB4CD6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2C3625BF27BC077100EB4CD6 /* VideoChamp */;
+			target = 2C3625BF27BC077100EB4CD6 /* videoChamp */;
 			targetProxy = 2C3625DA27BC077600EB4CD6 /* PBXContainerItemProxy */;
 		};
 		2C3625E527BC077600EB4CD6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2C3625BF27BC077100EB4CD6 /* VideoChamp */;
+			target = 2C3625BF27BC077100EB4CD6 /* videoChamp */;
 			targetProxy = 2C3625E427BC077600EB4CD6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1669,7 +1669,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VideoChamp.app/VideoChamp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/videoChamp.app/videoChamp";
 			};
 			name = Debug;
 		};
@@ -1690,7 +1690,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VideoChamp.app/VideoChamp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/videoChamp.app/videoChamp";
 			};
 			name = Release;
 		};
@@ -1744,7 +1744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C3625BB27BC077100EB4CD6 /* Build configuration list for PBXProject "VideoChamp" */ = {
+		2C3625BB27BC077100EB4CD6 /* Build configuration list for PBXProject "videoChamp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C3625EB27BC077600EB4CD6 /* Debug */,
@@ -1753,7 +1753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C3625ED27BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "VideoChamp" */ = {
+		2C3625ED27BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "videoChamp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C3625EE27BC077600EB4CD6 /* Debug */,
@@ -1762,7 +1762,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C3625F027BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "VideoChampTests" */ = {
+		2C3625F027BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "videoChampTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C3625F127BC077600EB4CD6 /* Debug */,
@@ -1771,7 +1771,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C3625F327BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "VideoChampUITests" */ = {
+		2C3625F327BC077600EB4CD6 /* Build configuration list for PBXNativeTarget "videoChampUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C3625F427BC077600EB4CD6 /* Debug */,
