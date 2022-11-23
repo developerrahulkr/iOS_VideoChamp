@@ -50,7 +50,7 @@ class SplashVC: UIViewController {
         if videochampManager.videochamp_sharedManager.redirectType == .remote || videochampManager.videochamp_sharedManager.redirectType == .camera
         {
             
-            StartTimer(timer: 1.0)
+            StartTimer(timer: 4.0)
         }else{
             StartTimer(timer: 2.0)
         }

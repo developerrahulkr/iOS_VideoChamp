@@ -68,13 +68,12 @@ final class LiveViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //if videochampManager.videochamp_sharedManager.redirectType == .camera{
+        if videochampManager.videochamp_sharedManager.redirectType == .camera{
             (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
-        //}
+        }
+//
 //        if UIScreen.main.bounds.width > UIScreen.main.bounds.height{
 //            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .landscape
-//
-//
 //        }else{
 //            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
 //
@@ -93,18 +92,16 @@ final class LiveViewController: UIViewController {
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         
-            if UIDevice.current.orientation.isPortrait {
-                
-                AppUtility.lockOrientation(.portrait)
-            }else{
-                
-                //liveView.imag = .portrait
-//                liveView.imageView.translatesAutoresizingMaskIntoConstraints = true
-//                liveView.bottomView.snp.makeConstraints{ (make) in
-//                    make.bottom.equalToSuperview()
-//                }
-                AppUtility.lockOrientation(.landscape)
-            }
+//        if videochampManager.videochamp_sharedManager.redirectType == .remote {
+//            if UIDevice.current.orientation.isPortrait {
+//                AppUtility.lockOrientation(.portrait)
+//            }else{
+//
+//                AppUtility.lockOrientation(.landscape)
+//            }
+//        }else{
+//            AppUtility.lockOrientation(.landscape)
+//        }
            
         
     }
@@ -114,8 +111,6 @@ final class LiveViewController: UIViewController {
 //        print("Browsing State : \(Utility.shared.sessionManager.needsBrowsing)")
         Utility.shared.sessionManager.needsAdvertising.toggle()
         Utility.shared.sessionManager.needsBrowsing.toggle()
-        liveViewModel.captureSession.stopRunning()
-      
         for controller in controllers {
                 if controller is HomeVC {
                     self.navigationController?.popToViewController(controller, animated: true)
@@ -144,6 +139,8 @@ final class LiveViewController: UIViewController {
         super.viewDidDisappear(animated)
         print("Diddisapper method is Called.....")
         liveViewModel.removeObserverBackground()
+        liveViewModel.captureSession.stopRunning()
+        liveViewModel.capSession?.stopRunning()
         
     }
 
@@ -161,6 +158,9 @@ final class LiveViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .kCloseScreen, object: nil)
         NotificationCenter.default.removeObserver(self, name: .kPopToRoot, object: nil)
         NotificationCenter.default.removeObserver(self, name: .Sessionexpire, object: nil)
+        liveViewModel.captureSession.stopRunning()
+        liveViewModel.capSession?.stopRunning()
+        
     }
     
 

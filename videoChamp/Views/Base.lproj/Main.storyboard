@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nf4-iu-0sm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nf4-iu-0sm">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -873,7 +873,7 @@
                                 <fragment content="You will be leaving the VideoChamp App to share the invitation code. ">
                                     <attributes>
                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="18" name="ArgentumSans-Light"/>
+                                        <font key="NSFont" metaFont="system" size="18"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
@@ -887,7 +887,7 @@
                                     <string key="content"> After sharing the invitation code, you must return back to this Waiting Room page to await the recipient to accept invitation and connect both devices</string>
                                     <attributes>
                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="18" name="ArgentumSans-Light"/>
+                                        <font key="NSFont" metaFont="system" size="18"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
@@ -2415,14 +2415,14 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKR-5D-zTY">
-                            <rect key="frame" x="20" y="5" width="135.33333333333334" height="21"/>
+                            <rect key="frame" x="20" y="52" width="138.66666666666666" height="21"/>
                             <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="eaG-cP-tSa"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15-09-2022" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXf-X9-FFU">
-                            <rect key="frame" x="169.66666666666666" y="7" width="78.666666666666657" height="17"/>
+                            <rect key="frame" x="166.66666666666666" y="54" width="85" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="17" id="BgO-m1-dFJ"/>
                             </constraints>
@@ -2431,7 +2431,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7i-4q-gfO">
-                            <rect key="frame" x="262.66666666666669" y="15" width="135.33333333333331" height="1"/>
+                            <rect key="frame" x="259.66666666666669" y="62" width="138.33333333333331" height="1"/>
                             <color key="backgroundColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="2iO-Nm-dGT"/>
@@ -3486,7 +3486,7 @@
                                 <fragment content="You will be leaving the VideoChamp App to share the invitation code. ">
                                     <attributes>
                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="18" name="ArgentumSans-Light"/>
+                                        <font key="NSFont" metaFont="system" size="18"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
@@ -3500,7 +3500,7 @@
                                     <string key="content"> After sharing the invitation code, you must return back to this Waiting Room page to await the recipient to accept invitation and connect both devices</string>
                                     <attributes>
                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="18" name="ArgentumSans-Light"/>
+                                        <font key="NSFont" metaFont="system" size="18"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
@@ -3598,7 +3598,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2319" y="898"/>
+            <point key="canvasLocation" x="2295" y="1078"/>
         </scene>
         <!--Privacy PolicyVC-->
         <scene sceneID="mbB-2g-hdL">

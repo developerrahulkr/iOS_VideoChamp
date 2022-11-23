@@ -58,7 +58,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     private var activeCamera: AVCaptureDevice?
     var zoomScaleRange: ClosedRange<CGFloat> = 1...10
     var isDisconnect : Bool = false
-    
     var _captureState : _CaptureState = .idle
 //    MARK: - VideoOutPut
     
@@ -98,7 +97,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
          sessionPreset:AVCaptureSession.Preset = .medium) throws {
         
         self.targetPeerID = targetPeerID
-        
         super.init()
         self.mcSessionManager = mcSessionManager
         try livePresenter = LivePresenter.init(mcSessionManager: mcSessionManager,
@@ -135,7 +133,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             do {
                 liveView.bottomView.isHidden = true
                 sendString = "captureImage"
-                
                 try livePresenter.sendText(text: sendString, sendMode: .unreliable)
             }catch {
                 print(error.localizedDescription)
@@ -156,14 +153,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
 // print("totalDiskSpaceInBytes: \(UIDevice.current.totalDiskSpaceInBytes)")
         print("freeDiskSpace: \(UIDevice.current.freeDiskSpaceInBytes)")
         print("usedDiskSpace: \(UIDevice.current.usedDiskSpaceInBytes)")
-
-        DispatchQueue.main.async {
-            
-        
         let storage = (Float(UIDevice.current.freeDiskSpaceInBytes)/Float(UIDevice.current.totalDiskSpaceInBytes))*100
-        
-        
-        
         if storage <= 15 {
             do {
                 let vc = AlertCameraVC(nibName: "AlertCameraVC", bundle: nil)
@@ -272,12 +262,11 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
 //            self.capSession = nil
             liveView.imageView.layer.sublayers = nil
             DispatchQueue.main.async {
-                
                 liveView.imageView.image = image
             }
         }, gotAudioData: {[weak self](audioData, fromPeerID) in
             guard let weakSelf = self else {return}
-            if weakSelf.needsMute == false {
+            if weakSelf.needsMute == true{
                 do {
                     try weakSelf.livePresenter.playSound(audioData: audioData)
                 } catch let error {
@@ -289,7 +278,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
             DispatchQueue.main.async {
 //                let image = UIImage(data: msg)
                 let str = String.init(data: msg, encoding: .utf8)
-                
                 switch str {
                 case "zoomIn" :
                     self.sendString = str ?? ""
@@ -446,7 +434,6 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
         
             self.checkCameraPermission()
     }
-    }
     
     func removeObserverBackground() {
         NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -575,6 +562,9 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     
     @objc func stopCasting(_ sender : UIButton) {
         print("Stop Casting")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopRecording"), object: nil)
+        capSession?.stopRunning()
+        captureSession.stopRunning()
         disConectCameraVC()
     }
     
@@ -649,9 +639,11 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     
     
     @objc func backVC(_ sender: UIButton) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopRecording"), object: nil)
         disConectCameraVC()
     }
     @objc func closeVC(_ sender: UIButton){
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopRecording"), object: nil)
        disConectCameraVC()
     }
     

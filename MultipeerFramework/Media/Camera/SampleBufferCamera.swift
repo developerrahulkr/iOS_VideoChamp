@@ -20,6 +20,7 @@ class SampleBufferCamera: NSObject, VideoDataOutputDelegate, AVCaptureAudioDataO
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         if error == nil {
 
+        captureSession.stopRunning()
         UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, nil, nil, nil)
 
         }
@@ -244,8 +245,6 @@ extension SampleBufferCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
             let fileUrl = paths[0].appendingPathComponent("output.mov")
             try? FileManager.default.removeItem(at: fileUrl)
             movieOutput.startRecording(to: fileUrl, recordingDelegate: self as AVCaptureFileOutputRecordingDelegate)
-
-            
             VideoChampVideoDataOutput.shared_videoData._assetWriter = writer
             VideoChampVideoDataOutput.shared_videoData._assetWriterInput = input
             VideoChampVideoDataOutput.shared_videoData._captureState = .capturing
@@ -277,9 +276,8 @@ extension SampleBufferCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
             let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(VideoChampVideoDataOutput.shared_videoData._filename).mov")
             print("Final Url ::::::::::::::::::::::::::::::::::::::  \(url)")
             if movieOutput.isRecording {
-
             movieOutput.stopRecording()
-
+            captureSession.stopRunning()
             }
                 VideoChampVideoDataOutput.shared_videoData._assetWriterInput?.markAsFinished()
                 VideoChampVideoDataOutput.shared_videoData._assetWriter?.finishWriting { [weak self] in
@@ -292,11 +290,9 @@ extension SampleBufferCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!){
-        
         // save video to camera roll
-        
         if error == nil {
-            
+            captureSession.stopRunning()
             UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, nil, nil, nil)
             
         }
