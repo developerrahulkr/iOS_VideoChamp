@@ -108,25 +108,25 @@ final class LiveViewController: UIViewController {
     
     @objc func closeVC(){
         let controllers = self.navigationController!.viewControllers
-//        print("Browsing State : \(Utility.shared.sessionManager.needsBrowsing)")
+        //        print("Browsing State : \(Utility.shared.sessionManager.needsBrowsing)")
         Utility.shared.sessionManager.needsAdvertising.toggle()
         Utility.shared.sessionManager.needsBrowsing.toggle()
         for controller in controllers {
-                if controller is HomeVC {
-                    self.navigationController?.popToViewController(controller, animated: true)
+            if controller is HomeVC {
+                self.navigationController?.popToViewController(controller, animated: true)
+            }else{
+                if UIDevice.current.userInterfaceIdiom == .pad{
+                    let storyboard:UIStoryboard = UIStoryboard(name: "Storyboard", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                    self.navigationController?.popToViewController(vc, animated: true)
                 }else{
-                    if UIDevice.current.userInterfaceIdiom == .pad{
-                        let storyboard:UIStoryboard = UIStoryboard(name: "Storyboard", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-                        self.navigationController?.popToViewController(vc, animated: true)
-                    }else{
-                        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-                        self.navigationController?.popToViewController(vc, animated: true)
-                    }
-                   
+                    let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                    self.navigationController?.popToViewController(vc, animated: true)
                 }
+                
             }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -139,8 +139,8 @@ final class LiveViewController: UIViewController {
         super.viewDidDisappear(animated)
         print("Diddisapper method is Called.....")
         liveViewModel.removeObserverBackground()
-        liveViewModel.captureSession.stopRunning()
-        liveViewModel.capSession?.stopRunning()
+//        liveViewModel.captureSession.stopRunning()
+//        liveViewModel.capSession?.stopRunning()
         
     }
 

@@ -655,11 +655,10 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     }
 
     private func attachDisplayData(_ liveView: LiveView) {
-
         liveSetupView = liveView
         capSession = livePresenter.cap
         let publishBtndata = setUpButtonLabel(buttonType: .sendVideo)
-        let soundBtnData = setUpButtonLabel(buttonType: .sound)
+//        let soundBtnData = setUpButtonLabel(buttonType: .sound)
         // title
 //        liveView.cameraControlButton.setTitle(publishBtndata.title, for: .normal)
         liveView.cameraControlButton.setImage(UIImage(named: publishBtndata.title), for: .normal)
@@ -957,11 +956,9 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
                     try livePresenter.sendText(text: sendString, sendMode: .unreliable)
                     sender.setImage(UIImage(named: "stop_video_recording_icon"), for: .normal)
                 }
-                
             }catch let error {
                 print(error)
             }
-
         }
 //        sender.backgroundColor = data.color
 //        #endif

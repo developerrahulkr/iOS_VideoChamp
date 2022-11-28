@@ -19,7 +19,6 @@ class SampleBufferCamera: NSObject, VideoDataOutputDelegate, AVCaptureAudioDataO
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         if error == nil {
-
         captureSession.stopRunning()
         UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, nil, nil, nil)
 
@@ -67,12 +66,8 @@ class SampleBufferCamera: NSObject, VideoDataOutputDelegate, AVCaptureAudioDataO
     
     func captureSessionStart() -> AVCaptureSession? {
         guard captureSession.isRunning == false else {return AVCaptureSession()}
-        DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
             self.captureVideoDataOutput.setSampleBufferDelegate(self, queue: self.videoqueue)
-            //self.captureAudioDataOutput.setSampleBufferDelegate(self, queue: self.audioqueue)
-        }
-        //  self.captureAudioDataOutput.setSampleBufferDelegate(self, queue: self.queue)
         
         return captureSession
     }
@@ -232,8 +227,6 @@ extension SampleBufferCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
             input.mediaTimeScale = CMTimeScale(bitPattern: 600)
             input.expectsMediaDataInRealTime = true
             input.transform = CGAffineTransform(rotationAngle: .pi/2)
-            
-            
             if writer.canAdd(input) {
                 writer.add(input)
             }
@@ -257,7 +250,6 @@ extension SampleBufferCamera: AVCaptureVideoDataOutputSampleBufferDelegate {
             VideoChampVideoDataOutput.shared_videoData._adpater = adapter
             
         case .capturing:
-            
             print("capturing FUNC Call.............")
             if VideoChampVideoDataOutput.shared_videoData._assetWriterInput?.isReadyForMoreMediaData == true {
                 let time = CMTime(seconds: timestamp - VideoChampVideoDataOutput.shared_videoData._time, preferredTimescale: CMTimeScale(600))
