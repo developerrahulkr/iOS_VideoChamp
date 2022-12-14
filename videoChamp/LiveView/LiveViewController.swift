@@ -71,15 +71,6 @@ final class LiveViewController: UIViewController {
         if videochampManager.videochamp_sharedManager.redirectType == .camera{
             (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
         }
-//
-//        if UIScreen.main.bounds.width > UIScreen.main.bounds.height{
-//            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .landscape
-//        }else{
-//            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
-//
-//
-//        }
-        //(UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
         setUpChatViewModel()
         NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .kPopToRoot, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeVC), name: .Sessionexpire, object: nil)
@@ -164,20 +155,4 @@ final class LiveViewController: UIViewController {
     }
     
 
-}
-
-extension UIImage {
-    func fixOrientation() -> UIImage {
-        if self.imageOrientation == UIImage.Orientation.up {
-            return self
-        }
-        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
-        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
-        if let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() {
-            UIGraphicsEndImageContext()
-            return normalizedImage
-        } else {
-            return self
-        }
-    }
 }

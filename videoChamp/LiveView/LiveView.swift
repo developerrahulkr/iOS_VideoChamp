@@ -35,31 +35,14 @@ final class LiveView: NSObject {
     
     let buttonView = UIView()
     let btnStopCasting = UIButton()
-    
-    
     let topViewStackView = UIStackView()
     let btnCamera = UIButton()
     let btnVideo = UIButton()
     let viewZoom = UIView()
     let lblZoom = UILabel()
     
-    
     //    Video PReview
     var previewLayer = AVCaptureVideoPreviewLayer()
-    
-
-    private func setUpSoundControlButton(margin: CGFloat) {
-//        imageView.addSubview(soundControlButton)
-//        soundControlButton.snp.makeConstraints { (make) in
-//            make.height.equalToSuperview().multipliedBy(0.1)
-//            make.width.equalToSuperview().multipliedBy(0.3)
-//            make.trailing.equalToSuperview().offset(-margin)
-//            make.bottom.equalToSuperview().offset(-margin)
-//        }
-//        soundControlButton.layoutIfNeeded()
-//        soundControlButton.toRoundly(margin)
-    }
-
     @objc private func toHiddenKeyboard() {
         self.view.endEditing(true)
     }
@@ -72,8 +55,6 @@ final class LiveView: NSObject {
         self.view.addGestureRecognizer(toHiddenKeyboardGesture)
     }
 
-    
-    
     private func addViews() {
         view.addSubview(imageView)
         view.addSubview(textAreaStackView)
@@ -87,12 +68,8 @@ final class LiveView: NSObject {
         bottomView.addSubview(buttonAreaStackView)
         viewMedia.addSubview(topViewStackView)
         view.addSubview(buttonView)
-        
-        
-        
-        
+
 //        ViewTopStack.addSubview(topStackView)
-        
         
         textAreaStackView.addArrangedSubview(sendTextField)
         buttonAreaStackView.addArrangedSubview(textSendButton)
@@ -102,7 +79,6 @@ final class LiveView: NSObject {
         viewCenterStackView.addSubview(lblRecording)
         viewCenterStackView.addSubview(lblRecordingTiming)
         buttonAreaStackView.addArrangedSubview(changeCameraButton)
-        
         topViewStackView.addArrangedSubview(btnCamera)
         topViewStackView.addArrangedSubview(btnVideo)
 //        topViewStackView.addArrangedSubview(lblZoom)
@@ -114,8 +90,6 @@ final class LiveView: NSObject {
 
     func setUpViews(frame: CGRect, margin: CGFloat) -> UIView {
         view = .init(frame: frame)
-
-        
         addViews()
         
         imageCapture.snp.makeConstraints { make in
@@ -123,8 +97,6 @@ final class LiveView: NSObject {
             make.right.equalTo(20)
             make.height.width.equalTo(100.0)
         }
-        
-        
         
         lblZoom.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
@@ -187,32 +159,19 @@ final class LiveView: NSObject {
             make.height.equalToSuperview()
         }
 
-        //let baseWidth: CGFloat = view.bounds.width - (margin * 2)
-
-//        textAreaStackView.snp.makeConstraints { (make) in
-//            make.top.equalTo(imageView.snp.bottom).offset(margin)
-//            make.centerX.equalToSuperview()
-//            make.width.equalTo(baseWidth)
-//            make.height.equalToSuperview().multipliedBy(0.12)
-//        }
         
         bottomView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            //make.width.equalTo(baseWidth)
-//            if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
-//                make.height.equalToSuperview().multipliedBy(0.4)
-//            }else{
-//                make.height.equalToSuperview().multipliedBy(0.25)
-//            }
+//            make.width.equalTo()
+            make.height.equalToSuperview().multipliedBy(0.25)
             make.left.equalTo(imageView.snp.left)
             make.right.equalTo(imageView.snp.right)
-            make.height.equalTo(162.0)
             make.bottom.equalTo(imageView.snp.bottom).offset(-margin)
         }
 
         buttonAreaStackView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-         //   make.width.equalTo(baseWidth)
+//            make.width.equalTo(baseWidth)
 //            make.top.equalTo(imageView.snp.bottom).offset(-margin * 10)
             make.height.equalToSuperview().multipliedBy(0.65)
 //            make.bottom.equalTo(imageView.snp.bottom).offset(-margin)
@@ -235,7 +194,7 @@ final class LiveView: NSObject {
 
         previewLayer.frame = view.bounds
         view.backgroundColor = Colors.whiteFb
-        lblZoom.textColor = .yellow
+        lblZoom.textColor = .white
         lblZoom.font = UIFont.systemFont(ofSize: 10.0)
         
         viewZoom.backgroundColor = .clear
@@ -247,7 +206,6 @@ final class LiveView: NSObject {
         btnStopCasting.clipsToBounds = true
         btnStopCasting.setTitle("END CONNECTION", for: .normal)
         btnStopCasting.backgroundColor = .red
-        btnStopCasting.applyGradient1(colorOne: .init(hexString: "#F9B200"), ColorTwo: .init(hexString: "#E63B11"))
         btnStopCasting.setTitleColor(.white, for: .normal)
         btnStopCasting.titleLabel?.font = UIFont(name: "argentum-sans.bold", size: 20.0)
         btnStopCasting.titleLabel?.font = UIFont.systemFont(ofSize: 20.0)
@@ -256,8 +214,8 @@ final class LiveView: NSObject {
         
         viewZoom.clipsToBounds = true
         viewZoom.layer.cornerRadius = 12
-        viewZoom.layer.borderColor = UIColor.yellow.cgColor
-        viewZoom.layer.borderWidth = 1.5
+        viewZoom.layer.borderColor = UIColor.white.cgColor
+        viewZoom.layer.borderWidth = 0.5
 //        imageCapture.layer.addSublayer(previewLayer)
         btnBack.setImage(UIImage(named: "back_arrow"), for: .normal)
         btnClose.setImage(UIImage(named: "close_icon"), for: .normal)

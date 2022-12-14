@@ -27,7 +27,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     private var targetPeerID: MCPeerID?
     private var sendString = "captureImage"
     
-    
+
     private var sendImage = UIImage()
     private var zooomImageString = ""
     private let sessionQueue = DispatchQueue(label: "com.hayao.MultipeerLiveKit.videodata-ouput-queue")
