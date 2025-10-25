@@ -174,7 +174,7 @@ class RemoteControlVC: UIViewController {
         tableView.register(UINib(nibName: cellId3, bundle: nil), forCellReuseIdentifier: cellId3)
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0 ) {
             //            if self.indicatorType == 1 {
             //                Indicator.instance.hide()
             //            }

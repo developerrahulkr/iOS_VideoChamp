@@ -32,6 +32,7 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
     private var zooomImageString = ""
     private let sessionQueue = DispatchQueue(label: "com.hayao.MultipeerLiveKit.videodata-ouput-queue")
     private lazy var photoOutput = AVCapturePhotoOutput()
+    var sessionOutput = AVCaptureStillImageOutput()
     
     
     var timeMin = 0
@@ -1040,6 +1041,53 @@ public class LiveViewModel: NSObject, AVCaptureFileOutputRecordingDelegate  {
 
 //MARK: StartVideo Recording
 extension LiveViewModel {
+    
+    func startVideoRecording() {
+        let session = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
+        let devices = session.devices
+        guard let audioDevice = AVCaptureDevice.default(for: .audio) else { return }
+        for device in devices
+        {
+            if device.position == AVCaptureDevice.Position.back
+            {
+                do{
+//                    for input in capSession?.inputs {
+//                        capSession?.removeInput(input)
+//                    }
+                    let input = try AVCaptureDeviceInput(device: device )
+                    let audioDeviceInput = try AVCaptureDeviceInput(device: audioDevice)
+                    if ((capSession?.canAddInput(input)) != nil){
+                        capSession?.addInput(input)
+                        capSession?.addInput(audioDeviceInput)
+                        sessionOutput.outputSettings = [AVVideoCodecKey : AVVideoCodecType.jpeg]
+
+//                        if movieCaptureSession.canAddOutput(sessionOutput)
+//                        {
+//                            movieCaptureSession.addOutput(sessionOutput)
+//
+////                            previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+////                            previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+////                            previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+////                            capView.layer.addSublayer(previewLayer)
+////                            previewLayer.position = CGPoint(x: self.capView.frame.width / 2, y: self.capView.frame.height / 2)
+////                            previewLayer.bounds = capView.frame
+//                        }
+                        capSession?.addOutput(movieOutput)
+                        capSession?.startRunning()
+                        sessionSetupSucceeds = true
+                        self.handleCaptureSession()
+
+                    }
+
+                }
+                catch{
+                    print("Error")
+                }
+
+            }
+        }
+    }
+    
     func handleCaptureSession()
         {
             print("-----------Starting-----------")
@@ -1396,62 +1444,6 @@ extension LiveViewModel {
         liveSetupView.lblRecordingTiming.text = "00:00:00"
     }
 }
-
-
-
-//extension UIDevice {
-//
-//    func totalDiskSpaceInBytes() -> Int64 {
-//        do {
-//            guard let totalDiskSpaceInBytes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())[FileAttributeKey.systemSize] as? Int64 else {
-//                return 0
-//            }
-//            return totalDiskSpaceInBytes
-//        } catch {
-//            return 0
-//        }
-//    }
-//
-//    func freeDiskSpaceInBytes() -> Int64 {
-//        do {
-//            guard let totalDiskSpaceInBytes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())[FileAttributeKey.systemFreeSize] as? Int64 else {
-//                return 0
-//            }
-//            return totalDiskSpaceInBytes
-//        } catch {
-//            return 0
-//        }
-//    }
-//
-//    func usedDiskSpaceInBytes() -> Int64 {
-//        return totalDiskSpaceInBytes() - freeDiskSpaceInBytes()
-//    }
-//
-//    func totalDiskSpace() -> String {
-//        let diskSpaceInBytes = totalDiskSpaceInBytes()
-//        if diskSpaceInBytes > 0 {
-//            return ByteCountFormatter.string(fromByteCount: diskSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.binary)
-//        }
-//        return "The total disk space on this device is unknown"
-//    }
-//
-//    func freeDiskSpace() -> String {
-//        let freeSpaceInBytes = freeDiskSpaceInBytes()
-//        if freeSpaceInBytes > 0 {
-//            return ByteCountFormatter.string(fromByteCount: freeSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.binary)
-//        }
-//        return "The free disk space on this device is unknown"
-//    }
-//
-//    func usedDiskSpace() -> String {
-//        let usedSpaceInBytes = totalDiskSpaceInBytes() - freeDiskSpaceInBytes()
-//        if usedSpaceInBytes > 0 {
-//            return ByteCountFormatter.string(fromByteCount: usedSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.binary)
-//        }
-//        return "The used disk space on this device is unknown"
-//    }
-//
-//}
 
 extension UIDevice {
     func MBFormatter(_ bytes: Int64) -> String {

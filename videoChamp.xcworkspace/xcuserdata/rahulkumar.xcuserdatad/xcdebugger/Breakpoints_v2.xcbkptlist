@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "CBB9C4B8-8210-4270-B7F5-BCABB6155DF8"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "60AA6C03-DFDC-48F8-AA16-CE83D610F083"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultipeerFramework/Media/Camera/SampleBufferCamera.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "captureOutput(_:didOutput:from:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "60AA6C03-DFDC-48F8-AA16-CE83D610F083 - 346153b20fb07766"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.SampleBufferCamera.captureOutput(_: __C.AVCaptureOutput, didOutput: __C.CMSampleBufferRef, from: __C.AVCaptureConnection) -&gt; ()"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rahulkumar/Documents/Ripenapp%20Git%20Projects/Updated_VideoChamp/videochamp_ios/MultipeerFramework/Media/Camera/SampleBufferCamera.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "6467">
+               </Location>
+               <Location
+                  uuid = "60AA6C03-DFDC-48F8-AA16-CE83D610F083 - 346153b20fb07766"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.SampleBufferCamera.captureOutput(_: __C.AVCaptureOutput, didOutput: __C.CMSampleBufferRef, from: __C.AVCaptureConnection) -&gt; ()"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rahulkumar/Documents/Ripenapp%20Git%20Projects/Updated_VideoChamp/videochamp_ios/MultipeerFramework/Media/Camera/SampleBufferCamera.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "3176">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2586A986-C1A5-4830-A2BF-8DF4477702BB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultipeerFramework/Media/Camera/SampleBufferCamera.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "captureOutput(_:didOutput:from:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2586A986-C1A5-4830-A2BF-8DF4477702BB - 346153b20fb076c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.SampleBufferCamera.captureOutput(_: __C.AVCaptureOutput, didOutput: __C.CMSampleBufferRef, from: __C.AVCaptureConnection) -&gt; ()"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rahulkumar/Documents/Ripenapp%20Git%20Projects/Updated_VideoChamp/videochamp_ios/MultipeerFramework/Media/Camera/SampleBufferCamera.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "7422">
+               </Location>
+               <Location
+                  uuid = "2586A986-C1A5-4830-A2BF-8DF4477702BB - 346153b20fb076c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultipeerFramework.SampleBufferCamera.captureOutput(_: __C.AVCaptureOutput, didOutput: __C.CMSampleBufferRef, from: __C.AVCaptureConnection) -&gt; ()"
+                  moduleName = "MultipeerFramework"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rahulkumar/Documents/Ripenapp%20Git%20Projects/Updated_VideoChamp/videochamp_ios/MultipeerFramework/Media/Camera/SampleBufferCamera.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "3612">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
